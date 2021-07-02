@@ -19,23 +19,28 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = "Variables")
+	//Variables
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float Health;
 
-	UPROPERTY(EditAnywhere, Category = "Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float Stamina;
 
-	UFUNCTION(BlueprintCallable)
-	float GetHealth();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float HealthRegenPerSecond;
 
-	UFUNCTION(BlueprintCallable)
-	void SetHealth(float MHealth);
+	// Set to true if player is damaged
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	bool bDamaged;
 
-	UFUNCTION(BlueprintCallable)
-	float GetStamina();
+	//Variables hidden in Engine
+	float ElapsedDamageTime;
+	float HealthLastTick;
 
-	UFUNCTION(BlueprintCallable)
-	void SetStamina(float MStamina);
+
+	//Functions
+
 
 public:	
 	// Called every frame
@@ -43,5 +48,5 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 };

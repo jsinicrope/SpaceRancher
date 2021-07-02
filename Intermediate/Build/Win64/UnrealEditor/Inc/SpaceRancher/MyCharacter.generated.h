@@ -14,22 +14,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define SPACERANCHER_MyCharacter_generated_h
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_SPARSE_DATA
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_RPC_WRAPPERS \
- \
-	DECLARE_FUNCTION(execSetStamina); \
-	DECLARE_FUNCTION(execGetStamina); \
-	DECLARE_FUNCTION(execSetHealth); \
-	DECLARE_FUNCTION(execGetHealth);
-
-
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
- \
-	DECLARE_FUNCTION(execSetStamina); \
-	DECLARE_FUNCTION(execGetStamina); \
-	DECLARE_FUNCTION(execSetHealth); \
-	DECLARE_FUNCTION(execGetHealth);
-
-
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_RPC_WRAPPERS
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_RPC_WRAPPERS_NO_PURE_DECLS
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
@@ -74,7 +60,9 @@ public: \
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
-	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); }
+	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); } \
+	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
+	FORCEINLINE static uint32 __PPO__bDamaged() { return STRUCT_OFFSET(AMyCharacter, bDamaged); }
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_9_PROLOG

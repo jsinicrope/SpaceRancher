@@ -11,6 +11,7 @@ AMyCharacter::AMyCharacter()
 
 	Health = 100.0f;
 	Stamina = 100.0f;
+	HealthLastTick = 100.0f;
 
 }
 
@@ -26,6 +27,19 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds 
+	ElapsedDamageTime += DeltaTime;
+
+	if (HealthLastTick < Health)
+		ElapsedDamageTime = 0.0f;
+
+	HealthLastTick = Health;
+
+	if ((ElapsedDamageTime >= 3.0f) && (Health < 35.0f))
+	{
+		Health = fmin(100, Health + 0.2f);
+	}
+
 }
 
 // Called to bind functionality to input
@@ -35,22 +49,3 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
-float AMyCharacter::GetHealth()
-{
-	return Health;
-}
-
-void AMyCharacter::SetHealth(float MHealth)
-{
-	Health = MHealth;
-}
-
-float AMyCharacter::GetStamina()
-{
-	return Stamina;
-}
-
-void AMyCharacter::SetStamina(float MStamina)
-{
-	Stamina = MStamina;
-}
