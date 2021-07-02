@@ -19,6 +19,24 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	float Health;
+
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	float Stamina;
+
+	UFUNCTION(BlueprintCallable)
+	float GetHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void SetHealth(float MHealth);
+
+	UFUNCTION(BlueprintCallable)
+	float GetStamina();
+
+	UFUNCTION(BlueprintCallable)
+	void SetStamina(float MStamina);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

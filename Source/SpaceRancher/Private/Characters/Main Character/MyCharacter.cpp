@@ -9,6 +9,9 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Health = 100.0f;
+	Stamina = 100.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -32,3 +35,22 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
+float AMyCharacter::GetHealth()
+{
+	return Health;
+}
+
+void AMyCharacter::SetHealth(float MHealth)
+{
+	Health = MHealth;
+}
+
+float AMyCharacter::GetStamina()
+{
+	return Stamina;
+}
+
+void AMyCharacter::SetStamina(float MStamina)
+{
+	Stamina = MStamina;
+}
