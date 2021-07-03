@@ -1,0 +1,2 @@
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
+F:\SpaceRancher\Source\SpaceRancher\SpaceRancher.h

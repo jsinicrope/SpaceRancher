@@ -1,19 +1,14 @@
 {
 	"Targets": [
 		{
-			"Name": "UnrealHeaderTool",
-			"Path": "F:\\UE_5.0EA\\Engine\\Source\\Programs\\UnrealHeaderTool\\UnrealHeaderTool.Target.cs",
-			"Type": "Program"
-		},
-		{
-			"Name": "UnrealEditor",
-			"Path": "F:\\UE_5.0EA\\Engine\\Source\\UnrealEditor.Target.cs",
-			"Type": "Editor"
-		},
-		{
-			"Name": "UnrealGame",
-			"Path": "F:\\UE_5.0EA\\Engine\\Source\\UnrealGame.Target.cs",
+			"Name": "SpaceRancher",
+			"Path": "F:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
 			"Type": "Game"
+		},
+		{
+			"Name": "SpaceRancherEditor",
+			"Path": "F:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs",
+			"Type": "Editor"
 		}
 	]
 }

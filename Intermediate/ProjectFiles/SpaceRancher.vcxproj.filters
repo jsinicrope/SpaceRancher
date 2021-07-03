@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\SpaceRancher.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{E58B9673-EBBC-43A0-9E7A-088AEAB79144}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\SpaceRancher.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\SpaceRancherEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\README.md" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{17A70C12-A59A-4389-9506-06312380C920}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\SpaceRancher">
+      <UniqueIdentifier>{C79B3DB6-E301-42DE-8B59-07FA2D116613}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\SpaceRancher\SpaceRancher.Build.cs">
+      <Filter>Source\SpaceRancher</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\SpaceRancher\SpaceRancher.cpp">
+      <Filter>Source\SpaceRancher</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpaceRancher\SpaceRancher.h">
+      <Filter>Source\SpaceRancher</Filter>
+    </ClInclude>
+    <Filter Include="Source\SpaceRancher\Private">
+      <UniqueIdentifier>{E3F1A366-C76B-4137-B372-CC9AE1B66364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Private\Characters">
+      <UniqueIdentifier>{7BAD1E03-21C9-44EE-BCA6-94C620B85664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Private\Characters\Main Character">
+      <UniqueIdentifier>{8CE98D48-2192-4BEB-BA70-0FFADDD87B14}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Characters\Main Character\MyCharacter.cpp">
+      <Filter>Source\SpaceRancher\Private\Characters\Main Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\SpaceRancher\Public">
+      <UniqueIdentifier>{F2110AF4-B3F4-47E4-B4D6-B676D2F0381D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Public\Characters">
+      <UniqueIdentifier>{D5D1D836-3046-4C10-8F0E-1BE4A65E90D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Public\Characters\Main Character">
+      <UniqueIdentifier>{887457EA-11F2-4858-8CEA-D650A53C094D}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h">
+      <Filter>Source\SpaceRancher\Public\Characters\Main Character</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
