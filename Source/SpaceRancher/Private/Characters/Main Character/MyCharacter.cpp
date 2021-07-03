@@ -52,4 +52,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJumping);
 
+	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::AddControllerPitchInput);
+
 }
