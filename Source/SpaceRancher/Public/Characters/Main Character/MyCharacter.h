@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
+class UCharacterMovementComponent;
+
 UCLASS()
 class SPACERANCHER_API AMyCharacter : public ACharacter
 {
@@ -34,12 +36,40 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	bool bDamaged;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float WalkSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float SprintSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	bool bSprinting;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float StaminaLossRunning;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float StaminaBaseRegen;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float TimeToHealthRegen;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float TimeToStaminaRegen;
+
 	//Variables hidden in Engine
 	float ElapsedDamageTime;
+	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
+	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 
 
 	//Functions
+	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
+	void PlayerStartSprint();
+
+	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
+	void PlayerStopSprint();
 
 
 public:	

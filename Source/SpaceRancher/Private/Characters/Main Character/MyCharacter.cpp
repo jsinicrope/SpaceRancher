@@ -2,6 +2,7 @@
 
 
 #include "Characters/Main Character/MyCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -12,6 +13,14 @@ AMyCharacter::AMyCharacter()
 	Health = 100.0f;
 	Stamina = 100.0f;
 	HealthLastTick = 100.0f;
+	HealthRegenPerSecond = 10.0f;
+	WalkSpeed = 600.0f;
+	SprintSpeed = 1000.0f;
+	StaminaLossRunning = 50.0f;
+	StaminaBaseRegen = 20.0f;
+	TimeToHealthRegen = 3.0f;
+	TimeToStaminaRegen = 2.0f;
+	bSprinting = false;
 
 }
 
@@ -27,8 +36,10 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds
 	ElapsedDamageTime += DeltaTime;
+	ElapsedStaminaDrainTime += DeltaTime;
+
+	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds
 
 	{
 		if (HealthLastTick < Health)
@@ -36,10 +47,31 @@ void AMyCharacter::Tick(float DeltaTime)
 
 		HealthLastTick = Health;
 
-		if ((ElapsedDamageTime >= 3.0f) && (Health < 35.0f))
+		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < 35.0f))
 		{
-			Health = fmin(100, Health + 0.2f);
+			Health = fmin(100, Health + HealthRegenPerSecond * DeltaTime);
 		}
+	}
+
+	//Drain Stamina if Sprinting and not in Air
+	{
+		if (CharacterMovement->IsMovingOnGround())
+		{
+			if (bSprinting)
+			{
+				Stamina -= StaminaLossRunning * DeltaTime;
+				ElapsedStaminaDrainTime = 0.0f;
+			}
+
+			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
+				Stamina = fmin(100, Stamina + StaminaBaseRegen * DeltaTime);
+		}
+	}
+
+	//Stop Running if Stamina below 10
+	{
+		if (Stamina < 10)
+			PlayerStopSprint();
 	}
 
 }
@@ -52,7 +84,25 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJumping);
 
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::PlayerStartSprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
+
 	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::AddControllerPitchInput);
+	
+}
 
+void AMyCharacter::PlayerStartSprint()
+{
+	if ((Stamina > 10) && (CharacterMovement->IsMovingOnGround()))
+	{
+		CharacterMovement->MaxWalkSpeed = SprintSpeed;
+		bSprinting = true;
+	}
+}
+
+void AMyCharacter::PlayerStopSprint()
+{
+	CharacterMovement->MaxWalkSpeed = WalkSpeed;
+	bSprinting = false;
 }
