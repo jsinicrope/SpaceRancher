@@ -27,17 +27,19 @@ void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds 
+	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds
 	ElapsedDamageTime += DeltaTime;
 
-	if (HealthLastTick < Health)
-		ElapsedDamageTime = 0.0f;
-
-	HealthLastTick = Health;
-
-	if ((ElapsedDamageTime >= 3.0f) && (Health < 35.0f))
 	{
-		Health = fmin(100, Health + 0.2f);
+		if (HealthLastTick < Health)
+			ElapsedDamageTime = 0.0f;
+
+		HealthLastTick = Health;
+
+		if ((ElapsedDamageTime >= 3.0f) && (Health < 35.0f))
+		{
+			Health = fmin(100, Health + 0.2f);
+		}
 	}
 
 }
@@ -47,5 +49,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-}
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJumping);
 
+}
