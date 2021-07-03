@@ -7,3 +7,6 @@ Saved/Logs/SpaceRancher-backup-2021.06.30-12.46.16.log
 *.log
 *.log
 Saved/Config/CrashReportClient/UECC-Windows-00DDE8154F65DF011660478B315C3113/CrashReportClient.ini
+.vs/SpaceRancher/v16/Browse.VC.db
+Intermediate/Build/Win64/SpaceRancherEditor/Development/Engine/SharedPCH.Engine.ShadowErrors.h.pch
+.vs/SpaceRancher/v16/ipch/AutoPCH/fc464bb1064545d/MYCHARACTER.ipch

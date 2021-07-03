@@ -63,6 +63,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float TimeToStaminaRegen;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	bool bCanHarvest;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	bool bItemInRange;
+
 	//Variables hidden in Engine
 	float ElapsedDamageTime;
 	float ElapsedStaminaDrainTime;
