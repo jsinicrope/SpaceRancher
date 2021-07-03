@@ -24,6 +24,12 @@ protected:
 	//Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float BaseTurnAtRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float BaseLookUpAtRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -70,6 +76,11 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStopSprint();
+
+	void MoveForward(float Value);
+	void MoveRight(float Value);
+	void LookUpAtRate(float Value);
+	void TurnAtRate(float Value);
 
 
 public:	

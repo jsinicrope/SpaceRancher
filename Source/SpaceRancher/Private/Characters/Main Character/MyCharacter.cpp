@@ -20,6 +20,8 @@ AMyCharacter::AMyCharacter()
 	StaminaBaseRegen = 20.0f;
 	TimeToHealthRegen = 3.0f;
 	TimeToStaminaRegen = 2.0f;
+	BaseTurnAtRate = 45.0f;
+	BaseLookUpAtRate = 45.0f;
 	bSprinting = false;
 
 }
@@ -87,9 +89,48 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::PlayerStartSprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
+	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
+
 	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
+	PlayerInputComponent->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
 	
+}
+
+void AMyCharacter::MoveForward(float Value)
+{
+	if ((Controller) && (Value != 0.0f))
+	{
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void AMyCharacter::MoveRight(float Value)
+{
+	if ((Controller) && (Value != 0.0f))
+	{
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void AMyCharacter::LookUpAtRate(float Value)
+{
+	AddControllerPitchInput(Value * BaseLookUpAtRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AMyCharacter::TurnAtRate(float Value)
+{
+	AddControllerYawInput(Value * BaseTurnAtRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AMyCharacter::PlayerStartSprint()
