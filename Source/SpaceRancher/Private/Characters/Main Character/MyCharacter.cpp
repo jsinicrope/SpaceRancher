@@ -73,7 +73,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	//Stop Running if Stamina below 10
 	{
-		if (Stamina < 10)
+		if (Stamina <= 0)
 			PlayerStopSprint();
 	}
 
