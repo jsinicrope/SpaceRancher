@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\SpaceRancher.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{E58B9673-EBBC-43A0-9E7A-088AEAB79144}</UniqueIdentifier>
+      <UniqueIdentifier>{CBB9F9E3-C1F0-43C7-893F-8EA713FC4BA9}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\SpaceRancher.Target.cs">
       <Filter>Source</Filter>
@@ -14,7 +14,7 @@
     <None Include="..\..\.gitignore" />
     <None Include="..\..\README.md" />
     <Filter Include="Config">
-      <UniqueIdentifier>{17A70C12-A59A-4389-9506-06312380C920}</UniqueIdentifier>
+      <UniqueIdentifier>{D1CBC454-DDE6-4058-A87C-898A1E5F99B3}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -32,7 +32,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\SpaceRancher">
-      <UniqueIdentifier>{C79B3DB6-E301-42DE-8B59-07FA2D116613}</UniqueIdentifier>
+      <UniqueIdentifier>{E52DE370-65C2-4996-AFFF-26D56854B88C}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\SpaceRancher\SpaceRancher.Build.cs">
       <Filter>Source\SpaceRancher</Filter>
@@ -44,25 +44,43 @@
       <Filter>Source\SpaceRancher</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Private">
-      <UniqueIdentifier>{E3F1A366-C76B-4137-B372-CC9AE1B66364}</UniqueIdentifier>
+      <UniqueIdentifier>{0C1AB660-5D84-4BDB-905A-3396A542AE22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\SpaceRancher\Private\AI">
+      <UniqueIdentifier>{CBABC07C-4214-4067-90DF-9A9B6663F8AB}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\GetRunAwayFromPlayerPoint.cpp">
+      <Filter>Source\SpaceRancher\Private\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\NPC_Controller.cpp">
+      <Filter>Source\SpaceRancher\Private\AI</Filter>
+    </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Characters">
-      <UniqueIdentifier>{7BAD1E03-21C9-44EE-BCA6-94C620B85664}</UniqueIdentifier>
+      <UniqueIdentifier>{31B8D7DE-ACE0-467F-96EF-54868FF057D3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Private\Characters\Main Character">
-      <UniqueIdentifier>{8CE98D48-2192-4BEB-BA70-0FFADDD87B14}</UniqueIdentifier>
+      <UniqueIdentifier>{9C01571C-5C5E-44AA-A4C4-E9BA7ED31264}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Characters\Main Character\MyCharacter.cpp">
       <Filter>Source\SpaceRancher\Private\Characters\Main Character</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Public">
-      <UniqueIdentifier>{F2110AF4-B3F4-47E4-B4D6-B676D2F0381D}</UniqueIdentifier>
+      <UniqueIdentifier>{A35FC99D-57E8-4A95-851F-93F06EC82620}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\SpaceRancher\Public\AI">
+      <UniqueIdentifier>{741BB5C0-0737-4F55-848E-BF74E44D4013}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\GetRunAwayFromPlayerPoint.h">
+      <Filter>Source\SpaceRancher\Public\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\NPC_Controller.h">
+      <Filter>Source\SpaceRancher\Public\AI</Filter>
+    </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Characters">
-      <UniqueIdentifier>{D5D1D836-3046-4C10-8F0E-1BE4A65E90D3}</UniqueIdentifier>
+      <UniqueIdentifier>{AFAD6824-FD7D-4741-9A79-EF4DC02577F0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Public\Characters\Main Character">
-      <UniqueIdentifier>{887457EA-11F2-4858-8CEA-D650A53C094D}</UniqueIdentifier>
+      <UniqueIdentifier>{C9D91B9F-EBA1-4EB5-A657-BCD23F9BB39C}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h">
       <Filter>Source\SpaceRancher\Public\Characters\Main Character</Filter>
