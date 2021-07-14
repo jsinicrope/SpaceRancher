@@ -7,9 +7,13 @@
 /IGNORE:4221
 /NODEFAULTLIB
 "F:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\GetRunAwayFromPlayerPoint.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\NPC_Controller.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\MyCharacter.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\GetRunAwayFromPlayerPoint.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\MyCharacter.gen.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\NPC_Controller.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.init.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Default.rc2.res"
 /OUT:"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\UnrealEditor-SpaceRancher-0010.lib"

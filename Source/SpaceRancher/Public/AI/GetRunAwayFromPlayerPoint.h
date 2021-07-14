@@ -14,8 +14,25 @@ UCLASS()
 class SPACERANCHER_API UGetRunAwayFromPlayerPoint : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
-public:
-	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
+public:
+	UGetRunAwayFromPlayerPoint();
+
+	inline virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+protected:
+	UFUNCTION(BlueprintCallable)
+	FVector GetRunAwayPoint(FVector Entity, FVector Player, float fMinNewDistanceFactor);
+
+	UPROPERTY(EditAnywhere)
+	float MaxRadius = 5000.0f;
+
+	UPROPERTY(EditAnywhere)
+	float NewDistanceFactor;
+
+	UPROPERTY(EditAnywhere)
+	FBlackboardKeySelector TargetVector;
+
+private:
+	float MinNewDistanceFactor;
 };
