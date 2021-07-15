@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 	FBlackboardKeySelector TargetVector;
 
+	UPROPERTY(EditAnywhere)
+	float RunAwaySpeed;
+
 private:
 	float MinNewDistanceFactor;
 };

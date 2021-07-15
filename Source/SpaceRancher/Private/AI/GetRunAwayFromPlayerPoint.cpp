@@ -7,11 +7,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "NavigationSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Character.h"
 
 UGetRunAwayFromPlayerPoint::UGetRunAwayFromPlayerPoint()
 {
 	MaxRadius = 5000.0f;
-	NewDistanceFactor = 1.5f;
+	NewDistanceFactor = 1.2f;
+	RunAwaySpeed = 450.0f;
 }
 
 EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -27,6 +29,9 @@ EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeCompone
 	FVector TargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, MinNewDistanceFactor);
 
 	Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, TargetPosition);
+
+	ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
 
 	return EBTNodeResult::Succeeded;
 	
