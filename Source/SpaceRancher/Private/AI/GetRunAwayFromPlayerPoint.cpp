@@ -28,22 +28,42 @@ EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeCompone
 	FVector PlayerPosition = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	FVector TargetPosition = Blackboard->GetValueAsVector(TargetVector.SelectedKeyName);
 
-	if ((PlayerPosition - TargetPosition).Size() <= 50.0f)
+	if (Blackboard->GetValueAsBool(HasPosition.SelectedKeyName))
 	{
-		FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, MinNewDistanceFactor);
+		float Current_Distance = sqrt(pow((TargetPosition.X - EntityPosition.X), 2.0f) + pow((TargetPosition.Y - EntityPosition.Y), 2.0f));
+
+		if (Current_Distance <= 10.0f)
+		{
+			FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, NewDistanceFactor);
+
+			Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
+
+			ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+			EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
+		}
+
+		AAIController* EntityController = Cast<AAIController>(ControlledPawn->GetController());
+		EntityController->MoveToLocation(TargetPosition);
+
+		return EBTNodeResult::Succeeded;
+	}
+
+	else
+	{
+		FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, NewDistanceFactor);
 
 		Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
 
 		ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
 		EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
+
+		AAIController* EntityController = Cast<AAIController>(ControlledPawn->GetController());
+		EntityController->MoveToLocation(NewTargetPosition);
+
+		Blackboard->SetValueAsBool(HasPosition.SelectedKeyName, true);
+
+		return EBTNodeResult::Succeeded;
 	}
-
-	FVector CurrentTargetPosition = Blackboard->GetValueAsVector(TargetVector.SelectedKeyName);
-
-	AAIController* EntityController = Cast<AAIController>(ControlledPawn->GetController());
-	EntityController->MoveToLocation(CurrentTargetPosition);
-
-	return EBTNodeResult::Succeeded;
 	
 }
 

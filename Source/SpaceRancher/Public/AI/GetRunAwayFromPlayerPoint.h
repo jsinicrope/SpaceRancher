@@ -34,7 +34,7 @@ protected:
 	FBlackboardKeySelector TargetVector;
 
 	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector BBReachedNewPosition;
+	FBlackboardKeySelector HasPosition;
 
 	UPROPERTY(EditAnywhere)
 	float RunAwaySpeed;
