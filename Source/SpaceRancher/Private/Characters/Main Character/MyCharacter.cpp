@@ -3,6 +3,8 @@
 
 #include "Characters/Main Character/MyCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "DrawDebugHelpers.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -22,6 +24,7 @@ AMyCharacter::AMyCharacter()
 	TimeToStaminaRegen = 2.0f;
 	BaseTurnAtRate = 45.0f;
 	BaseLookUpAtRate = 45.0f;
+	InteractDistance = 250.0f;
 	bSprinting = false;
 
 }
@@ -30,6 +33,14 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TArray<UCameraComponent*> comps;
+
+	this->GetComponents(comps);
+	for (auto Camera : comps)
+	{
+		PlayerCamera = Camera;
+	}
 	
 }
 
@@ -90,6 +101,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::PlayerStartSprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
+	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::Interact);
+
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
 
@@ -98,6 +111,38 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
 	
+}
+
+void AMyCharacter::Interact()
+{
+	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	FHitResult OutHit(ForceInit);
+
+	//ADD: Get Camera forward Vector instead of player forward vector
+	//PlayerCamera->GetForwardVector();
+
+	FVector Start = PlayerCamera->GetComponentLocation();
+	FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
+
+	ECollisionChannel Channel = ECC_Visibility;
+
+	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+
+	if (OutHit.GetActor())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
+
+		DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
+
+		DrawDebugLine(GetWorld(), Start, OutHit.Location, FColor::Red, false, 1.0f, false, 12.3333f);
+	}
 }
 
 void AMyCharacter::MoveForward(float Value)

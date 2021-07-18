@@ -69,12 +69,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	bool bItemInRange;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float InteractDistance;
+
 	//Variables hidden in Engine
 	float ElapsedDamageTime;
 	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
-
+	class UCameraComponent* PlayerCamera;
 
 	//Functions
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
@@ -82,6 +85,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStopSprint();
+
+	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
+	void Interact();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

@@ -16,12 +16,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_14_SPARSE_DATA
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_14_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint);
 
@@ -83,7 +85,8 @@ public: \
 	FORCEINLINE static uint32 __PPO__TimeToHealthRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen); } \
 	FORCEINLINE static uint32 __PPO__TimeToStaminaRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToStaminaRegen); } \
 	FORCEINLINE static uint32 __PPO__bCanHarvest() { return STRUCT_OFFSET(AMyCharacter, bCanHarvest); } \
-	FORCEINLINE static uint32 __PPO__bItemInRange() { return STRUCT_OFFSET(AMyCharacter, bItemInRange); }
+	FORCEINLINE static uint32 __PPO__bItemInRange() { return STRUCT_OFFSET(AMyCharacter, bItemInRange); } \
+	FORCEINLINE static uint32 __PPO__InteractDistance() { return STRUCT_OFFSET(AMyCharacter, InteractDistance); }
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_11_PROLOG

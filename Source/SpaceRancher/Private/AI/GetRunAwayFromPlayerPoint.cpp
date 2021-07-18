@@ -32,7 +32,7 @@ EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeCompone
 	{
 		float Current_Distance = sqrt(pow((TargetPosition.X - EntityPosition.X), 2.0f) + pow((TargetPosition.Y - EntityPosition.Y), 2.0f));
 
-		if (Current_Distance <= 10.0f)
+		if (Current_Distance <= 50.0f)
 		{
 			FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, NewDistanceFactor);
 
