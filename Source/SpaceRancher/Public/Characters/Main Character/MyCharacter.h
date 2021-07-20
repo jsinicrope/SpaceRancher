@@ -4,18 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interactables/InteractInterface.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
 
 UCLASS()
-class SPACERANCHER_API AMyCharacter : public ACharacter
+class SPACERANCHER_API AMyCharacter : public ACharacter, public IInteractInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
 	AMyCharacter();
+
+	void Interact_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -87,7 +90,7 @@ protected:
 	void PlayerStopSprint();
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
-	void Interact();
+	void PlayerInteract();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

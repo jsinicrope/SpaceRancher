@@ -48,7 +48,7 @@ void AMyCharacter::BeginPlay()
 void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	ElapsedDamageTime += DeltaTime;
 	ElapsedStaminaDrainTime += DeltaTime;
 
@@ -101,7 +101,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::PlayerStartSprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
-	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::Interact);
+	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
@@ -113,16 +113,18 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	
 }
 
-void AMyCharacter::Interact()
+void AMyCharacter::Interact_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Player Character Interact_Implemented received"));
+}
+
+void AMyCharacter::PlayerInteract()
 {
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
 	TraceParams.bReturnPhysicalMaterial = false;
 
 	FHitResult OutHit(ForceInit);
-
-	//ADD: Get Camera forward Vector instead of player forward vector
-	//PlayerCamera->GetForwardVector();
 
 	FVector Start = PlayerCamera->GetComponentLocation();
 	FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
@@ -133,10 +135,20 @@ void AMyCharacter::Interact()
 
 	if (OutHit.GetActor())
 	{
+		auto Actor = OutHit.GetActor();
+
 		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
 
 		DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
+
+		if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
+			//Cast<IInteractInterface>(Actor)->Interact();	//Use this to call C++ only Implementation
+			IInteractInterface::Execute_Interact(Actor);
+		}
 	}
+
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));

@@ -6,6 +6,8 @@ F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMov
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\RootMotionSource.generated.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\Character.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Interactables/InteractInterface.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InteractInterface.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementComponent.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\AI/Navigation/NavigationAvoidanceTypes.h
