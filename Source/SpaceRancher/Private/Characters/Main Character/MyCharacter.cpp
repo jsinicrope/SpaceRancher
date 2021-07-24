@@ -27,6 +27,11 @@ AMyCharacter::AMyCharacter()
 	InteractDistance = 250.0f;
 	bSprinting = false;
 
+	static ConstructorHelpers::FClassFinder<UUserWidget> InteractPopUpClassFinder(TEXT("/Game/HUDs/InteractPopUp.InteractPopUp"));
+	if (InteractPopUpClassFinder.Succeeded())
+	{
+		InteractPopUpClass = InteractPopUpClassFinder.Class;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -41,7 +46,11 @@ void AMyCharacter::BeginPlay()
 	{
 		PlayerCamera = Camera;
 	}
-	
+
+	if (InteractPopUpClass)
+	{
+		InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
+	}
 }
 
 // Called every frame
@@ -81,13 +90,52 @@ void AMyCharacter::Tick(float DeltaTime)
 		}
 	}
 
-
 	//Stop Running if Stamina below 10
 	{
 		if (Stamina <= 0)
 			PlayerStopSprint();
 	}
 
+	//Call Pop Up for Interaction if Interactable actor is hit
+	{
+		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+		TraceParams.bTraceComplex = true;
+		TraceParams.bReturnPhysicalMaterial = false;
+
+		FHitResult OutHit(ForceInit);
+
+		FVector Start = PlayerCamera->GetComponentLocation();
+		FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
+
+		ECollisionChannel Channel = ECC_Visibility;
+
+		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+
+		if (OutHit.GetActor())
+		{
+			if (OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+			{
+				if (!InteractPopUp->IsInViewport())
+				{
+					InteractPopUp->AddToViewport();
+				}
+			}
+			else
+			{
+				if (InteractPopUp->IsInViewport())
+				{
+					InteractPopUp->RemoveFromViewport();
+				}
+			}
+		}
+		else
+		{
+			if (InteractPopUp->IsInViewport())
+			{
+				InteractPopUp->RemoveFromViewport();
+			}
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -137,13 +185,13 @@ void AMyCharacter::PlayerInteract()
 	{
 		auto Actor = OutHit.GetActor();
 
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
+		//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
 
-		DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
+		//DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
 
 		if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
 			//Cast<IInteractInterface>(Actor)->Interact();	//Use this to call C++ only Implementation
 			IInteractInterface::Execute_Interact(Actor);
 		}
@@ -151,9 +199,9 @@ void AMyCharacter::PlayerInteract()
 
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
+		//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
 
-		DrawDebugLine(GetWorld(), Start, OutHit.Location, FColor::Red, false, 1.0f, false, 12.3333f);
+		DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 12.3333f);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interactables/InteractInterface.h"
+#include "Blueprint/UserWidget.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -74,6 +75,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float InteractDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	TSubclassOf<class UUserWidget> InteractPopUpClass;
+
+	UPROPERTY(VisibleAnywhere)
+	class UUserWidget* InteractPopUp;
 
 	//Variables hidden in Engine
 	float ElapsedDamageTime;
