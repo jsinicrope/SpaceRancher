@@ -67,7 +67,7 @@ void AMyCharacter::BeginPlay()
 
 	FVector ViewLocation;
 	FRotator ViewAngle;
-	GetWorld()->GetFirstPlayerController()->GetActorEyesViewPoint(ViewLocation, ViewAngle);
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(ViewLocation, ViewAngle);
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	RespawnViewDirection = FRotator(ViewAngle.Pitch, ViewAngle.Yaw, ViewAngle.Roll);
 }
@@ -174,12 +174,7 @@ void AMyCharacter::Tick(float DeltaTime)
 			//9.81 average gravity acceleration; should be same in engine
 			float FallSpeed = 9.81 * FallingTime;
 
-			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("-------------------------"));
-			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::SanitizeFloat(FallingTime));
-
 			FallingTime = 0.0f;
-
-			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::SanitizeFloat(FallSpeed));
 
 			if (FallSpeed >= MinFallDamageVelocity)
 			{
