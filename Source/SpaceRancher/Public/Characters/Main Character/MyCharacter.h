@@ -37,6 +37,12 @@ protected:
 	float Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float maxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float maxStamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float Stamina;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -68,6 +74,15 @@ protected:
 	float TimeToStaminaRegen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float FallingTime;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float FallDamageFactor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	float MinFallDamageVelocity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	bool bCanHarvest;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -75,6 +90,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float InteractDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	FVector RespawnPoint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	FRotator RespawnViewDirection;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	TSubclassOf<class UUserWidget> InteractPopUpClass;
@@ -86,6 +107,7 @@ protected:
 	float ElapsedDamageTime;
 	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
+	FVector JumpStartPoint;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 	class UCameraComponent* PlayerCamera;
 
@@ -99,11 +121,13 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerInteract();
 
+	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
+	void KillPlayer();
+
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void LookUpAtRate(float Value);
 	void TurnAtRate(float Value);
-
 
 public:	
 	// Called every frame
@@ -111,5 +135,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
 };

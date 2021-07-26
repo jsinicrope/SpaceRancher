@@ -12,26 +12,39 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//Health
 	Health = 100.0f;
-	Stamina = 100.0f;
 	HealthLastTick = 100.0f;
 	HealthRegenPerSecond = 10.0f;
-	WalkSpeed = 600.0f;
-	SprintSpeed = 1000.0f;
+	TimeToHealthRegen = 3.0f;
+	maxHealth = 100.0f;
+
+	//Stamina
+	Stamina = 100.0f;
 	StaminaLossRunning = 50.0f;
 	StaminaBaseRegen = 20.0f;
-	TimeToHealthRegen = 3.0f;
 	TimeToStaminaRegen = 2.0f;
+	maxStamina = 100.0f;
+
+	//Movement
+	WalkSpeed = 600.0f;
+	SprintSpeed = 1000.0f;
+	FallingTime = 0.0f;
+	FallDamageFactor = 6.0f;
+	MinFallDamageVelocity = 5.0f;
+
 	BaseTurnAtRate = 45.0f;
 	BaseLookUpAtRate = 45.0f;
-	InteractDistance = 250.0f;
-	bSprinting = false;
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> InteractPopUpClassFinder(TEXT("/Game/HUDs/InteractPopUp.InteractPopUp"));
-	if (InteractPopUpClassFinder.Succeeded())
-	{
-		InteractPopUpClass = InteractPopUpClassFinder.Class;
-	}
+	//Interaction
+	InteractDistance = 250.0f;
+
+	//Death
+	RespawnPoint = FVector(0, 0, 0);
+	RespawnViewDirection = FRotator(0, 0, 0);
+
+	//Runtime
+	bSprinting = false;
 }
 
 // Called when the game starts or when spawned
@@ -51,6 +64,12 @@ void AMyCharacter::BeginPlay()
 	{
 		InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
 	}
+
+	FVector ViewLocation;
+	FRotator ViewAngle;
+	GetWorld()->GetFirstPlayerController()->GetActorEyesViewPoint(ViewLocation, ViewAngle);
+	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	RespawnViewDirection = FRotator(ViewAngle.Pitch, ViewAngle.Yaw, ViewAngle.Roll);
 }
 
 // Called every frame
@@ -136,6 +155,46 @@ void AMyCharacter::Tick(float DeltaTime)
 			}
 		}
 	}
+
+	// Check for Fall Damage
+	{
+		if (CharacterMovement->IsFalling())
+		{
+			if (CharacterMovement->GetLastUpdateVelocity().Z < 0.0f)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Falling"));
+				FallingTime += DeltaTime;
+			}
+		}
+
+		if (!CharacterMovement->IsFalling() && FallingTime > 0.0f)
+		{
+			//Calculate Landing Velocity
+			// 2 * acceleration * delta time = velocity
+			//9.81 average gravity acceleration; should be same in engine
+			float FallSpeed = 9.81 * FallingTime;
+
+			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("-------------------------"));
+			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::SanitizeFloat(FallingTime));
+
+			FallingTime = 0.0f;
+
+			GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::SanitizeFloat(FallSpeed));
+
+			if (FallSpeed >= MinFallDamageVelocity)
+			{
+				Health -= (FallSpeed - MinFallDamageVelocity) * FallDamageFactor;
+			}
+		}
+	}
+
+	//Kill Player if Health 0
+	{
+		if (Health <= 0.0f)
+		{
+			KillPlayer();
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -203,6 +262,15 @@ void AMyCharacter::PlayerInteract()
 
 		DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 12.3333f);
 	}
+}
+
+void AMyCharacter::KillPlayer()
+{
+	// Add correct Rotation
+	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
+	CharacterMovement->StopActiveMovement();
+	Health = maxHealth;
+	Stamina = maxStamina;
 }
 
 void AMyCharacter::MoveForward(float Value)

@@ -54,6 +54,7 @@
 "F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Development\InputCore\UnrealEditor-InputCore.lib"
 "F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Development\GameplayTasks\UnrealEditor-GameplayTasks.lib"
 "F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Development\NavigationSystem\UnrealEditor-NavigationSystem.lib"
+"F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Development\UMG\UnrealEditor-UMG.lib"
 "delayimp.lib"
 "wininet.lib"
 "rpcrt4.lib"
