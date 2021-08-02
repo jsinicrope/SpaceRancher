@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Interactables/InteractInterface.h"
 #include "Blueprint/UserWidget.h"
+#include "World/MainGameInstance.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -103,12 +104,17 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	class UUserWidget* InteractPopUp;
 
+	UPROPERTY(BlueprintReadOnly)
+	UMainGameInstance* GameInstance;
+
 	//Variables hidden in Engine
 	float ElapsedDamageTime;
 	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
 	FVector JumpStartPoint;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
+
+	UPROPERTY()
 	class UCameraComponent* PlayerCamera;
 
 	//Functions
@@ -123,6 +129,12 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void KillPlayer();
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	void LoadGame();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

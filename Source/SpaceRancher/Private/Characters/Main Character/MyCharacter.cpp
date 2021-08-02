@@ -52,6 +52,9 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	LoadGame();
+
 	TArray<UCameraComponent*> comps;
 
 	this->GetComponents(comps);
@@ -70,6 +73,7 @@ void AMyCharacter::BeginPlay()
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(ViewLocation, ViewAngle);
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	RespawnViewDirection = FRotator(ViewAngle.Pitch, ViewAngle.Yaw, ViewAngle.Roll);
+
 }
 
 // Called every frame
@@ -162,7 +166,6 @@ void AMyCharacter::Tick(float DeltaTime)
 		{
 			if (CharacterMovement->GetLastUpdateVelocity().Z < 0.0f)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Falling"));
 				FallingTime += DeltaTime;
 			}
 		}
@@ -204,6 +207,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
+	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
+	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
@@ -266,6 +271,29 @@ void AMyCharacter::KillPlayer()
 	CharacterMovement->StopActiveMovement();
 	Health = maxHealth;
 	Stamina = maxStamina;
+}
+
+void AMyCharacter::SaveGame()
+{
+	UMainSaveGame* Savedata = GameInstance->SaveGameData;
+	Savedata->Health = Health;
+	Savedata->Stamina = Stamina;
+	Savedata->CurrentPosition = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	UGameplayStatics::SaveGameToSlot(Savedata, GameInstance->SaveSlotName, 0);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Saved!"));
+}
+
+void AMyCharacter::LoadGame()
+{
+	if (UGameplayStatics::DoesSaveGameExist(GameInstance->SaveSlotName, 0))
+	{
+		UMainSaveGame* Savedata = GameInstance->SaveGameData;
+		Health = Savedata->Health;
+		Stamina = Savedata->Stamina;
+		RespawnPoint = Savedata->CurrentPosition;
+		GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Loaded!"));
+	}
 }
 
 void AMyCharacter::MoveForward(float Value)
