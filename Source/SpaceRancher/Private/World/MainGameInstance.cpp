@@ -7,14 +7,18 @@ void UMainGameInstance::Init()
 {
 	Super::Init();
 
-	if (UGameplayStatics::DoesSaveGameExist(SaveSlotName, 0))
+	FString CurrentMapName = GetWorld()->GetMapName();
+	FString SlotName = SaveSlotName + CurrentMapName;
+	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, SlotName);
+
+	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
-		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, 0));
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Save Game Loaded from File!"));
+		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Save Game Loaded from File!"));
 	}
 	else
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("New Save Game created!"));
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("New Save Game created!"));
 	}
 }

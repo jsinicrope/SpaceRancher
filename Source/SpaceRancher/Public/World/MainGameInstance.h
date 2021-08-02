@@ -23,5 +23,5 @@ public:
 	UMainSaveGame* SaveGameData;
 
 	UPROPERTY(EditAnywhere)
-	FString SaveSlotName = FString(TEXT("PlayerSaveGame"));;
+	FString SaveSlotName = FString(TEXT("PlayerSaveGame"));
 };

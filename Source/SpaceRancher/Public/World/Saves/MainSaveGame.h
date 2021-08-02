@@ -22,5 +22,20 @@ public:
 	float Stamina;
 
 	UPROPERTY()
+	float PlayerFallingTime;
+
+	UPROPERTY()
+	float PlayerElapsedDamageTime;
+
+	UPROPERTY()
+	float PlayerElapsedStaminaDrainTime;
+
+	UPROPERTY()
+	float PlayerHealthLastTick;
+
+	UPROPERTY()
+	FVector PlayerJumpStartPoint;
+
+	UPROPERTY()
 	FVector CurrentPosition;
 };
