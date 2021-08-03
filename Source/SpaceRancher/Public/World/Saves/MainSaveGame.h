@@ -22,6 +22,9 @@ public:
 	float Stamina;
 
 	UPROPERTY()
+	float IngameTime;
+
+	UPROPERTY()
 	float PlayerFallingTime;
 
 	UPROPERTY()

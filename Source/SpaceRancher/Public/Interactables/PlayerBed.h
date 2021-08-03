@@ -5,9 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Interactables/InteractInterface.h"
-
 #include "Characters/Main Character/MyCharacter.h"
-
 #include "PlayerBed.generated.h"
 
 UCLASS()
@@ -28,8 +26,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Sleep")
 	float WakeUpTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
+	bool bTimeAcceleration;
+
+	UPROPERTY()
+	float TimeToAccelerate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
+	float TimeAcceleration;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintReadOnly)
+	UMainGameInstance* GameInstance;
 };

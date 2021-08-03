@@ -284,6 +284,7 @@ void AMyCharacter::SaveGame()
 	Savedata->PlayerElapsedStaminaDrainTime = ElapsedStaminaDrainTime;
 	Savedata->PlayerHealthLastTick = HealthLastTick;
 	Savedata->PlayerJumpStartPoint = JumpStartPoint;
+	Savedata->IngameTime = GameInstance->PlayerIngameTime;
 
 	FString CurrentMapName = GetWorld()->GetMapName();
 	FString SlotName = GameInstance->SaveSlotName + CurrentMapName;
@@ -298,9 +299,6 @@ void AMyCharacter::LoadGame()
 	FString CurrentMapName = GetWorld()->GetMapName();
 	FString SlotName = GameInstance->SaveSlotName + CurrentMapName;
 
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("LoadGame()"));
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, SlotName);
-
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		UMainSaveGame* Savedata = GameInstance->SaveGameData;
@@ -312,6 +310,8 @@ void AMyCharacter::LoadGame()
 		ElapsedStaminaDrainTime = Savedata->PlayerElapsedStaminaDrainTime;
 		HealthLastTick = Savedata->PlayerHealthLastTick;
 		JumpStartPoint = Savedata->PlayerJumpStartPoint;
+		GameInstance->PlayerIngameTime = Savedata->IngameTime;
+
 		GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
 	}
