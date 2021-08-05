@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"F:\\SpaceRancher\\Source\\SpaceRancher\\SpaceRancher.Build.cs",
-		"F:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
-		"F:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs"
+		"C:\\Users\\User\\Documents\\GitHub\\SpaceRancher\\Source\\SpaceRancher\\SpaceRancher.Build.cs",
+		"C:\\Users\\User\\Documents\\GitHub\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
+		"C:\\Users\\User\\Documents\\GitHub\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs"
 	],
 	"EngineVersion": "5.0.0"
 }
