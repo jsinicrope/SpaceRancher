@@ -84,8 +84,7 @@ void AMyCharacter::Tick(float DeltaTime)
 	ElapsedDamageTime += DeltaTime;
 	ElapsedStaminaDrainTime += DeltaTime;
 
-	// Heal Player slowly up to 35 HP if no damage was received in the last 3 seconds
-
+	// Heal Player slowly up to 35 HP if no damage was received in the last 'TimeToHealthRegen' seconds
 	{
 		if (HealthLastTick < Health)
 			ElapsedDamageTime = 0.0f;
@@ -98,7 +97,7 @@ void AMyCharacter::Tick(float DeltaTime)
 		}
 	}
 
-	//Drain Stamina if Sprinting and not in Air
+	//Drain Stamina if Sprinting and not in Air after 'TimeToStaminaRegen'
 	{
 		if (CharacterMovement->IsMovingOnGround())
 		{
