@@ -15,6 +15,8 @@ class SPACERANCHER_API UMainSaveGame : public USaveGame
 	GENERATED_BODY()
 	
 public:
+	UMainSaveGame();
+
 	UPROPERTY()
 	float Health;
 

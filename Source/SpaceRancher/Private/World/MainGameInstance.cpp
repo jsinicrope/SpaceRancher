@@ -10,9 +10,10 @@ void UMainGameInstance::Init()
 
 	Super::Init();
 
-	FString CurrentMapName = GetWorld()->GetMapName();
-	FString SlotName = SaveSlotName + CurrentMapName;
+	if (SaveName.IsEmpty())
+		SaveName = GetWorld()->GetMapName();
 
+	FString SlotName = SaveSlotName + SaveName;
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
@@ -38,8 +39,10 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 
 bool UMainGameInstance::GetSaveGame()
 {
-	FString CurrentMapName = GetWorld()->GetMapName();
-	FString SlotName = SaveSlotName + CurrentMapName;
+	if (SaveName.IsEmpty())
+		SaveName = GetWorld()->GetMapName();
+
+	FString SlotName = SaveSlotName + SaveName;
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
@@ -52,8 +55,10 @@ bool UMainGameInstance::GetSaveGame()
 	}
 }
 
-UMainSaveGame* UMainGameInstance::NewSave()
+void UMainGameInstance::NewSave(FString OldSave)
 {
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
-	return SaveGameData;
+
+	FString SlotName = SaveSlotName + OldSave;
+	UGameplayStatics::DeleteGameInSlot(SlotName, 0);
 }

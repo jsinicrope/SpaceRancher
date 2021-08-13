@@ -12,6 +12,8 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	SaveGameName = FString("MainGame");
+
 	//Health
 	Health = 100.0f;
 	HealthLastTick = 100.0f;
@@ -286,36 +288,36 @@ void AMyCharacter::SaveGame()
 	Savedata->PlayerJumpStartPoint = JumpStartPoint;
 	Savedata->IngameTime = GameInstance->PlayerIngameTime;
 
-	FString CurrentMapName = GetWorld()->GetMapName();
-	FString SlotName = GameInstance->SaveSlotName + CurrentMapName;
+	FString SlotName = GameInstance->SaveSlotName + GameInstance->SaveName;
 
 	UGameplayStatics::SaveGameToSlot(Savedata, SlotName, 0);
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Saved!"));
 }
 
 void AMyCharacter::LoadGame()
-{	
+{
+	if (!(SaveGameName.IsEmpty()))
+		GameInstance->SaveName = SaveGameName;
+		if (GameInstance->GetSaveGame())
+		{
+			UMainSaveGame* Savedata = GameInstance->SaveGameData;
+			Health = Savedata->Health;
+			Stamina = Savedata->Stamina;
+			RespawnPoint = Savedata->CurrentPosition;
+			FallingTime = Savedata->PlayerFallingTime;
+			ElapsedDamageTime = Savedata->PlayerElapsedDamageTime;
+			ElapsedStaminaDrainTime = Savedata->PlayerElapsedStaminaDrainTime;
+			HealthLastTick = Savedata->PlayerHealthLastTick;
+			JumpStartPoint = Savedata->PlayerJumpStartPoint;
+			GameInstance->PlayerIngameTime = Savedata->IngameTime;
 
-	FString CurrentMapName = GetWorld()->GetMapName();
-	FString SlotName = GameInstance->SaveSlotName + CurrentMapName;
-
-	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
-	{
-		GameInstance->GetSaveGame();
-		UMainSaveGame* Savedata = GameInstance->SaveGameData;
-		Health = Savedata->Health;
-		Stamina = Savedata->Stamina;
-		RespawnPoint = Savedata->CurrentPosition;
-		FallingTime = Savedata->PlayerFallingTime;
-		ElapsedDamageTime = Savedata->PlayerElapsedDamageTime;
-		ElapsedStaminaDrainTime = Savedata->PlayerElapsedStaminaDrainTime;
-		HealthLastTick = Savedata->PlayerHealthLastTick;
-		JumpStartPoint = Savedata->PlayerJumpStartPoint;
-		GameInstance->PlayerIngameTime = Savedata->IngameTime;
-
-		GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
-	}
+			GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No Save Game found"));
+		}
 }
 
 void AMyCharacter::MoveForward(float Value)

@@ -22,6 +22,9 @@ public:
 
 	void Interact_Implementation() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SaveGame)
+	FString	SaveGameName;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

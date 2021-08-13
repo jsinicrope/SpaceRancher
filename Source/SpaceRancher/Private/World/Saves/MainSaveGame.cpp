@@ -2,3 +2,8 @@
 
 
 #include "World/Saves/MainSaveGame.h"
+
+UMainSaveGame::UMainSaveGame()
+{
+	Health = 100.0f;
+}

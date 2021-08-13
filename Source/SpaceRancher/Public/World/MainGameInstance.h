@@ -47,11 +47,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	FString SaveSlotName = FString(TEXT("PlayerSaveGame"));
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SaveName;
+
 
 	//Functions
 	UFUNCTION()
 	bool GetSaveGame();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-	UMainSaveGame* NewSave();
+	void NewSave(FString OldSave);
 };
