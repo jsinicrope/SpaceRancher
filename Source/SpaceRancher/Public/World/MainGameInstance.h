@@ -38,9 +38,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float InitialStartGameTime = 15.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Difficulty;
+
 	UPROPERTY(EditAnywhere)
 	UMainSaveGame* SaveGameData;
 
 	UPROPERTY(EditAnywhere)
 	FString SaveSlotName = FString(TEXT("PlayerSaveGame"));
+
+	UFUNCTION()
+	bool GetSaveGame();
 };

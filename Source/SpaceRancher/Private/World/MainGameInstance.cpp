@@ -35,3 +35,19 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 	}
 	return true;
 }
+
+bool UMainGameInstance::GetSaveGame()
+{
+	FString CurrentMapName = GetWorld()->GetMapName();
+	FString SlotName = SaveSlotName + CurrentMapName;
+	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
+	{
+		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
+		return true;
+	}
+	else
+	{
+		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
+		return false;
+	}
+}

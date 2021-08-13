@@ -274,6 +274,7 @@ void AMyCharacter::KillPlayer()
 
 void AMyCharacter::SaveGame()
 {
+	GameInstance->GetSaveGame();
 	UMainSaveGame* Savedata = GameInstance->SaveGameData;
 	Savedata->Health = Health;
 	Savedata->Stamina = Stamina;
@@ -300,6 +301,7 @@ void AMyCharacter::LoadGame()
 
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
+		GameInstance->GetSaveGame();
 		UMainSaveGame* Savedata = GameInstance->SaveGameData;
 		Health = Savedata->Health;
 		Stamina = Savedata->Stamina;
