@@ -9,6 +9,8 @@
 "F:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\GetRunAwayFromPlayerPoint.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\NPC_Controller.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Zebos.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\ZebosController.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\MyCharacter.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\InteractInterface.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\PlayerBed.cpp.obj"
@@ -23,6 +25,8 @@
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\NPC_Controller.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\PlayerBed.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.init.gen.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Zebos.gen.cpp.obj"
+"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\ZebosController.gen.cpp.obj"
 "F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Default.rc2.res"
 /OUT:"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\UnrealEditor-SpaceRancher-0006.lib"
 /INCLUDE:IMPLEMENT_MODULE_SpaceRancher

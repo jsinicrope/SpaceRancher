@@ -10,6 +10,7 @@ APlayerBed::APlayerBed()
 	PrimaryActorTick.bCanEverTick = true;
 
 	WakeUpTime = 10.0f;
+	AllowSleepTime = 23.0f;
 	TimeAcceleration = 750.0f;
 }
 
@@ -44,8 +45,16 @@ void APlayerBed::Tick(float DeltaTime)
 
 void APlayerBed::Interact_Implementation()
 {
-	TimeToAccelerate = (30.0f + WakeUpTime) - GameInstance->PlayerIngameTime;
-	GameInstance->TimeScale = TimeAcceleration;
-	bTimeAcceleration = true;
-	this->SetActorTickEnabled(true);
+	if ((GameInstance->PlayerIngameTime >= AllowSleepTime) || (GameInstance->PlayerIngameTime < WakeUpTime))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Sleeping"));
+		TimeToAccelerate = (30.0f + WakeUpTime) - GameInstance->PlayerIngameTime;
+		GameInstance->TimeScale = TimeAcceleration;
+		bTimeAcceleration = true;
+		this->SetActorTickEnabled(true);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Can't sleep! Too early"));
+	}
 }

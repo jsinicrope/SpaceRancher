@@ -51,3 +51,9 @@ bool UMainGameInstance::GetSaveGame()
 		return false;
 	}
 }
+
+UMainSaveGame* UMainGameInstance::NewSave()
+{
+	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
+	return SaveGameData;
+}

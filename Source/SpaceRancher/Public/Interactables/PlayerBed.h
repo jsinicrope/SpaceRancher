@@ -23,8 +23,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Sleep")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
 	float WakeUpTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
+	float AllowSleepTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
 	bool bTimeAcceleration;
