@@ -21,5 +21,5 @@ struct FItem_Struct
 	UTexture2D* Thumbnail;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector2D ItemSize;
+	int ItemSize = 1;
 };

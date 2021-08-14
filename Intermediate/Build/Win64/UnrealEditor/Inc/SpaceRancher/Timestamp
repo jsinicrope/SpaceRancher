@@ -5,7 +5,7 @@ F:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\ZebosController
 F:\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h
 F:\SpaceRancher\Source\SpaceRancher\Public\Interactables\InteractInterface.h
 F:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlayerBed.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Struct.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Base.h
 F:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\MainSaveGame.h
 F:\SpaceRancher\Source\SpaceRancher\Public\World\MainGameInstance.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Base.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Struct.h
