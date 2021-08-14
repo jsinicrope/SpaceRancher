@@ -7,6 +7,7 @@
 #include "Interactables/InteractInterface.h"
 #include "Blueprint/UserWidget.h"
 #include "World/MainGameInstance.h"
+#include "Inventory_System/InventoryComponent.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;

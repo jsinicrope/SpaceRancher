@@ -30,10 +30,10 @@ public:
 	UInventoryComponent();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Rows;
+	int Rows = 5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Columns;
+	int Columns = 5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array;
