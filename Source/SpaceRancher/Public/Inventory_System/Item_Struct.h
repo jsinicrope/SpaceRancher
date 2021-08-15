@@ -4,15 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Engine/Texture2D.h"
+#include "Engine/DataTable.h"
 #include "Item_Struct.generated.h"
 
-/**
- * 
- */
+
 USTRUCT(BlueprintType)
-struct FItem_Struct
+struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 {
-	GENERATED_BODY()
+	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Name;
@@ -21,5 +20,16 @@ struct FItem_Struct
 	UTexture2D* Thumbnail;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int ItemSize = 1;
+	int ItemSize;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsValidItem;
+
+	FItem_Struct()
+	{
+		Name = FString("None");
+		ItemSize = 1;
+		Thumbnail = NULL;
+		bIsValidItem = false;
+	}
 };

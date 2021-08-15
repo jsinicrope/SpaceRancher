@@ -7,6 +7,9 @@
 #include "Interactables/InteractInterface.h"
 #include "Blueprint/UserWidget.h"
 #include "World/MainGameInstance.h"
+#include "Inventory_System/InventoryComponent.h"
+#include "Engine/EngineTypes.h"
+#include "Inventory_System/ItemPickUpWidget.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -101,21 +104,38 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	FRotator RespawnViewDirection;
 
+	//Widgets
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	TSubclassOf<class UUserWidget> InteractPopUpClass;
 
 	UPROPERTY(VisibleAnywhere)
 	class UUserWidget* InteractPopUp;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	class UItemPickUpWidget* ItemPickUpWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	class UUserWidget* WidgetToRemove;
+
+
 	UPROPERTY(BlueprintReadOnly)
 	UMainGameInstance* GameInstance;
 
-	//Variables hidden in Engine
+	//Variables hidden in Editor
 	float ElapsedDamageTime;
 	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
 	FVector JumpStartPoint;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
+
+	UPROPERTY()
+	FTimerHandle TimerHandler;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
+	class UInventoryComponent* InventoryArray;
 
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;
@@ -138,6 +158,15 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void LoadGame();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool AddItemToInventory(FItem_Struct Item_Struct);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItemFromInventory(int column, int row);
+
+	UFUNCTION(BlueprintCallable, Category = "UI")
+	void RemoveWidgetFromViewport();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
