@@ -48,6 +48,7 @@ AMyCharacter::AMyCharacter()
 	//Runtime
 	bSprinting = false;
 
+	InventoryArray = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
 	AddOwnedComponent(InventoryArray);
 	
 }

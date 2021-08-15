@@ -15,6 +15,7 @@ UInventoryComponent::UInventoryComponent()
 
 	FItemRows Inventory_Row(Rows);
 	Inventory_Array_Columns.Init(Inventory_Row, Columns);
+
 }
 
 
@@ -25,12 +26,39 @@ void UInventoryComponent::BeginPlay()
 
 }
 
+bool UInventoryComponent::AddItem(FItem_Struct Item_Struct)
+{
+	//Loop over inventory slots
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			if (!Inventory_Array_Columns[i].Row_Items[j].bIsValidItem)
+			{
+				Inventory_Array_Columns[i].Row_Items[j] = Item_Struct;
+
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item added to Inventory"));
+				return true;
+			}
+		}
+
+	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item doesn't fit in Inventory"));
+	return false;
+}
+
 
 // Called every frame
 void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+}
+
+FItem_Struct UInventoryComponent::RemoveItem(int row, int column)
+{
+	return Inventory_Array_Columns[column].Row_Items[row];
 }
 
 FItemRows::FItemRows(int rows)

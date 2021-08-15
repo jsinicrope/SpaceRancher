@@ -117,10 +117,12 @@ F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.gen
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
 F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Base.h
 F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Struct.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h

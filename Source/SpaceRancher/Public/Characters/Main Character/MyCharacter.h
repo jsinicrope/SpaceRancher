@@ -119,7 +119,7 @@ protected:
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
-	class UInventoryComponent* InventoryArray = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
+	class UInventoryComponent* InventoryArray;
 
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;
@@ -154,6 +154,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	
 };

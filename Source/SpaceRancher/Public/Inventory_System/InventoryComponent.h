@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Inventory_System/Item_Struct.h"
+#include "Inventory_System/Item_Base.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -37,6 +37,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool AddItem(FItem_Struct Item_Struct);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItem(int row, int column);
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

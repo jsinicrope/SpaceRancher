@@ -30,6 +30,6 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 		Name = FString("None");
 		ItemSize = 1;
 		Thumbnail = NULL;
-		bIsValidItem = 0;
+		bIsValidItem = false;
 	}
 };

@@ -16,8 +16,6 @@ public:
 	// Sets default values for this actor's properties
 	AItem_Base();
 
-protected:
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	struct FItem_Struct Main_Item_Structure;
+	FItem_Struct Main_Item_Structure;
 };
