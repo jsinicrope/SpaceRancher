@@ -22,10 +22,14 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int ItemSize;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsValidItem;
+
 	FItem_Struct()
 	{
 		Name = FString("None");
 		ItemSize = 1;
 		Thumbnail = NULL;
+		bIsValidItem = 0;
 	}
 };

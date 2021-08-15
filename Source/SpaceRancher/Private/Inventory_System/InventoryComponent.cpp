@@ -10,6 +10,11 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
+	Rows = 5;
+	Columns = 5;
+
+	FItemRows Inventory_Row(Rows);
+	Inventory_Array_Columns.Init(Inventory_Row, Columns);
 }
 
 
@@ -17,9 +22,6 @@ UInventoryComponent::UInventoryComponent()
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	FItemRows Inventory_Row(Rows);
-	Inventory_Array.Init(Inventory_Row, Columns);
 
 }
 
@@ -34,5 +36,5 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 FItemRows::FItemRows(int rows)
 {
 	FItem_Struct Item;
-	Items.Init(Item, rows);
+	Row_Items.Init(Item, rows);
 }

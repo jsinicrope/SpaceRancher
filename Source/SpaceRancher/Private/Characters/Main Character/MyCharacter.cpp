@@ -48,8 +48,8 @@ AMyCharacter::AMyCharacter()
 	//Runtime
 	bSprinting = false;
 
-	UInventoryComponent* Inventory_Array = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
-	AddOwnedComponent(Inventory_Array);
+	AddOwnedComponent(InventoryArray);
+	
 }
 
 // Called when the game starts or when spawned

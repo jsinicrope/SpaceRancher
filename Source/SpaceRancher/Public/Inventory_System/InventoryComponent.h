@@ -14,13 +14,13 @@ struct FItemRows
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FItem_Struct> Items;
+	TArray<FItem_Struct> Row_Items;
 
 	FItemRows(int rows = 5);
 };
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SPACERANCHER_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -30,19 +30,17 @@ public:
 	UInventoryComponent();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Rows = 5;
+	int Rows;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Columns = 5;
+	int Columns;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TArray<FItemRows> Inventory_Array;
+	TArray<FItemRows> Inventory_Array_Columns;
 
-protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };
