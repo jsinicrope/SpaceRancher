@@ -48,7 +48,6 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct)
 	return false;
 }
 
-
 // Called every frame
 void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {

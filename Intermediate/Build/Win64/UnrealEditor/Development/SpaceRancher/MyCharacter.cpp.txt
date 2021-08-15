@@ -123,6 +123,13 @@ F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.ge
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/ItemPickUpWidget.h
+F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Image.h
+F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\Slate/SlateTextureAtlasInterface.h
+F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SlateTextureAtlasInterface.generated.h
+F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
+F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Image.generated.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemPickUpWidget.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementComponent.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\AI/Navigation/NavigationAvoidanceTypes.h

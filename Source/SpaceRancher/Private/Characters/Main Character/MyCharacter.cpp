@@ -74,6 +74,11 @@ void AMyCharacter::BeginPlay()
 		InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
 	}
 
+	if (ItemPickUpWidgetClass)
+	{
+		ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
+	}
+
 	FVector ViewLocation;
 	FRotator ViewAngle;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(ViewLocation, ViewAngle);
@@ -371,4 +376,36 @@ void AMyCharacter::PlayerStopSprint()
 {
 	CharacterMovement->MaxWalkSpeed = WalkSpeed;
 	bSprinting = false;
+}
+
+bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
+{
+	bool bAddSuccessfull = InventoryArray->AddItem(Item_Struct);
+
+	if (bAddSuccessfull)
+	{
+		ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
+
+		if (ItemPickUpWidget->IsInViewport())
+			ItemPickUpWidget->RemoveFromViewport();
+
+		ItemPickUpWidget->AddToViewport();
+		WidgetToRemove = ItemPickUpWidget;
+		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
+	}
+	return bAddSuccessfull;
+}
+
+FItem_Struct AMyCharacter::RemoveItemFromInventory(int column, int row)
+{
+	FItem_Struct Item = InventoryArray->RemoveItem(row, column);
+	return Item;
+}
+
+void AMyCharacter::RemoveWidgetFromViewport()
+{
+	GetWorldTimerManager().ClearTimer(TimerHandler);
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Removing Widget"));
+
+	WidgetToRemove->RemoveFromViewport();
 }
