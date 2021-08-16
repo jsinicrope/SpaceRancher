@@ -1,257 +1,135 @@
-<<<<<<< HEAD
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Source\SpaceRancher/Public/Characters/Main Character/MyCharacter.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementReplication.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMovementReplication.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\RootMotionSource.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\Character.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Source\SpaceRancher\Public\Interactables/InteractInterface.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InteractInterface.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\SlateWrapperTypes.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Widget.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Visual.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Visual.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetTransform.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetNavigation.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\SlateCore\Public\Types/NavigationMetaData.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetNavigation.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Widget.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/NamedSlotInterface.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\NamedSlotInterface.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Slate\Public\Widgets/Layout/Anchors.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Slate\Anchors.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimation.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequence.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSignedObject.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSignedObject.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrack.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSection.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFwd.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequenceID.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceID.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\KeyParams.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScene.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSpawnable.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSpawnable.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneBinding.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBinding.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScenePossessable.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScenePossessable.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneObjectBindingID.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneObjectBindingID.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFrameMigration.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneFrameMigration.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTimeController.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScene.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/Blending/MovieSceneBlendType.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBlendType.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneCompletionMode.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneCompletionMode.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Generators/MovieSceneEasingFunction.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneEasingFunction.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationCustomVersion.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityBuilder.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityIDs.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemTypes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityManager.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/InlineValue.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieScenePlayback.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSequenceTransform.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AllOf.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeTransform.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeTransform.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeWarping.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeWarping.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceTransform.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactoryTypes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeHandler.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeInfo.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentDebug.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AnyOf.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/NoneOf.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/Common.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentRegistry.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactory.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemDirectedGraph.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/GeneratedTypeName.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSection.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Compilation/MovieSceneSegmentCompiler.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSegment.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Core\Public\UObject/SequencerObjectVersion.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSegment.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrackEvaluationField.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationTree.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrackEvaluationField.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrack.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequence.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimationBinding.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimationBinding.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimation.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetBlueprintGeneratedClass.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Binding/DynamicPropertyPath.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyPathHelpers.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyTypeCompatibility.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\PropertyPath\PropertyPathHelpers.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\DynamicPropertyPath.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UserWidget.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\KismetSystemLibrary.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DialogueTypes.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStaticsTypes.generated.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStatics.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
-C:\Program Files\Epic Games\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h
-=======
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
-F:\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
-F:\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
-F:\SpaceRancher\Source\SpaceRancher/Public/Characters/Main Character/MyCharacter.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementReplication.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMovementReplication.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\RootMotionSource.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\Character.generated.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Interactables/InteractInterface.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InteractInterface.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\SlateWrapperTypes.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Widget.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Visual.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Visual.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetTransform.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetNavigation.h
-F:\UE_5.0EA\Engine\Source\Runtime\SlateCore\Public\Types/NavigationMetaData.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetNavigation.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Widget.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/NamedSlotInterface.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\NamedSlotInterface.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\Slate\Public\Widgets/Layout/Anchors.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Slate\Anchors.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimation.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequence.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSignedObject.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSignedObject.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrack.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSection.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFwd.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequenceID.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceID.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\KeyParams.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScene.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSpawnable.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSpawnable.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneBinding.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBinding.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScenePossessable.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScenePossessable.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneObjectBindingID.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneObjectBindingID.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFrameMigration.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneFrameMigration.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTimeController.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScene.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/Blending/MovieSceneBlendType.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBlendType.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneCompletionMode.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneCompletionMode.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Generators/MovieSceneEasingFunction.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneEasingFunction.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationCustomVersion.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityBuilder.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityIDs.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemTypes.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityManager.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/InlineValue.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieScenePlayback.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSequenceTransform.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AllOf.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeTransform.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeTransform.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeWarping.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeWarping.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceTransform.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactoryTypes.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeHandler.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeInfo.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentDebug.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AnyOf.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/NoneOf.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/Common.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentRegistry.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactory.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemDirectedGraph.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/GeneratedTypeName.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSection.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Compilation/MovieSceneSegmentCompiler.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSegment.h
-F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\UObject/SequencerObjectVersion.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSegment.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrackEvaluationField.h
-F:\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationTree.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrackEvaluationField.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrack.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequence.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimationBinding.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimationBinding.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimation.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetBlueprintGeneratedClass.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Binding/DynamicPropertyPath.h
-F:\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyPathHelpers.h
-F:\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyTypeCompatibility.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\PropertyPath\PropertyPathHelpers.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\DynamicPropertyPath.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UserWidget.generated.h
-F:\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
-F:\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\KismetSystemLibrary.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DialogueTypes.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStaticsTypes.generated.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStatics.generated.h
-F:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Base.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Struct.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
-F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/ItemPickUpWidget.h
-F:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Image.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\Slate/SlateTextureAtlasInterface.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SlateTextureAtlasInterface.generated.h
-F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
-F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Image.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemPickUpWidget.generated.h
-F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h
->>>>>>> Inventory_System
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher/Public/Characters/Main Character/MyCharacter.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/Character.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementReplication.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMovementReplication.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\RootMotionSource.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\Character.generated.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables/InteractInterface.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InteractInterface.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\SlateWrapperTypes.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Widget.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Visual.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Visual.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetTransform.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetNavigation.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\SlateCore\Public\Types/NavigationMetaData.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetNavigation.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Widget.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/NamedSlotInterface.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\NamedSlotInterface.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Slate\Public\Widgets/Layout/Anchors.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Slate\Anchors.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimation.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequence.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSignedObject.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSignedObject.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrack.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSection.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFwd.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequenceID.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceID.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\KeyParams.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScene.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneSpawnable.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSpawnable.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneBinding.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBinding.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieScenePossessable.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScenePossessable.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneObjectBindingID.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneObjectBindingID.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneFrameMigration.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneFrameMigration.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTimeController.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieScene.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/Blending/MovieSceneBlendType.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneBlendType.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneCompletionMode.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneCompletionMode.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Generators/MovieSceneEasingFunction.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneEasingFunction.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationCustomVersion.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityBuilder.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityIDs.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemTypes.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityManager.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/InlineValue.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieScenePlayback.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSequenceTransform.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AllOf.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeTransform.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeTransform.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation\MovieSceneTimeWarping.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTimeWarping.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequenceTransform.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactoryTypes.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeHandler.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentTypeInfo.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentDebug.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/AnyOf.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/NoneOf.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Algo/Common.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneComponentRegistry.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntityFactory.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\EntitySystem/MovieSceneEntitySystemDirectedGraph.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\Misc/GeneratedTypeName.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSection.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Compilation/MovieSceneSegmentCompiler.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneSegment.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Core\Public\UObject/SequencerObjectVersion.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSegment.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\MovieSceneTrackEvaluationField.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\MovieScene\Public\Evaluation/MovieSceneEvaluationTree.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrackEvaluationField.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneTrack.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\MovieScene\MovieSceneSequence.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimationBinding.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimationBinding.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetAnimation.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetBlueprintGeneratedClass.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Binding/DynamicPropertyPath.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyPathHelpers.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\PropertyPath\Public\PropertyTypeCompatibility.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\PropertyPath\PropertyPathHelpers.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\DynamicPropertyPath.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UserWidget.generated.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\KismetSystemLibrary.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DialogueTypes.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStaticsTypes.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStatics.generated.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Base.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Struct.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/ItemPickUpWidget.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Image.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Public\Slate/SlateTextureAtlasInterface.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SlateTextureAtlasInterface.generated.h
+F:\EpicGames\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
+F:\EpicGames\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Image.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemPickUpWidget.generated.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h

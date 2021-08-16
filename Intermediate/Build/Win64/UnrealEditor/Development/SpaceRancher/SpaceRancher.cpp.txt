@@ -1,2 +1,2 @@
-C:\Users\User\Documents\GitHub\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
-C:\Users\User\Documents\GitHub\SpaceRancher\Source\SpaceRancher\SpaceRancher.h
+F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h
+F:\Space Rancher\SpaceRancher\Source\SpaceRancher\SpaceRancher.h
