@@ -408,6 +408,12 @@ FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct Item)
 	return RemovedItem;
 }
 
+FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
+{
+	FItem_Struct RemovedItem = InventoryArray->RemoveItemByName(ItemName);
+	return RemovedItem;
+}
+
 void AMyCharacter::RemoveWidgetFromViewport()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandler);

@@ -35,7 +35,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Columns;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -46,6 +46,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItem(FItem_Struct Item);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItemByName(FString ItemName);
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

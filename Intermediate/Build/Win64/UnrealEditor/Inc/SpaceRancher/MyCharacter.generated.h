@@ -18,6 +18,7 @@ struct FItem_Struct;
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \
@@ -32,6 +33,7 @@ struct FItem_Struct;
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \

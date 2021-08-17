@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Inventory_System/InventoryComponent.h"
 
 
@@ -73,11 +72,30 @@ FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int row, int column)
 FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
 {
 	FItem_Struct EmptyItem;
-	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	for (int i = Inventory_Array_Columns.Num()-1; i >= 0; i--)
 	{
-		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		for (int j = Inventory_Array_Columns[i].Row_Items.Num()-1; j >= 0; j--)
 		{
 			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(Item.Name))
+			{
+				FItem_Struct NewItem = Inventory_Array_Columns[i].Row_Items[j];
+				Inventory_Array_Columns[i].Row_Items[j] = EmptyItem;
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item removed from Inventory"));
+				return NewItem;
+			}
+		}
+	}
+	return EmptyItem;
+}
+
+FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
+{
+	FItem_Struct EmptyItem;
+	for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)
+	{
+		for (int j = Inventory_Array_Columns[i].Row_Items.Num() - 1; j >= 0; j--)
+		{
+			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(ItemName))
 			{
 				FItem_Struct NewItem = Inventory_Array_Columns[i].Row_Items[j];
 				Inventory_Array_Columns[i].Row_Items[j] = EmptyItem;

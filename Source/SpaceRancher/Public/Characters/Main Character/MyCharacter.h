@@ -169,6 +169,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromInventory(FItem_Struct Item);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItemFromInventoryByName(FString ItemName);
+
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();
 
