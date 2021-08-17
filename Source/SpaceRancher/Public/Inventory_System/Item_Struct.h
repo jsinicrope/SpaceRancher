@@ -19,7 +19,7 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* Thumbnail;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int ItemSize;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

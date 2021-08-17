@@ -79,9 +79,10 @@ FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
 		{
 			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(Item.Name))
 			{
-				FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
+				FItem_Struct NewItem = Inventory_Array_Columns[i].Row_Items[j];
 				Inventory_Array_Columns[i].Row_Items[j] = EmptyItem;
-				return Item;
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item removed from Inventory"));
+				return NewItem;
 			}
 		}
 	}
