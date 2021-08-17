@@ -39,10 +39,13 @@ public:
 	TArray<FItemRows> Inventory_Array_Columns;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItem(FItem_Struct Item_Struct);
+	bool AddItem(FItem_Struct Item_Struct, int row = 0, int column = 0);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItem(int row, int column);
+	FItem_Struct RemoveItemClosestPosition(int row, int column);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItem(FItem_Struct Item);
 
 	// Called when the game starts
 	virtual void BeginPlay() override;

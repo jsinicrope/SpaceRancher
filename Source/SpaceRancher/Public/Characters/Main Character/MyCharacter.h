@@ -10,6 +10,7 @@
 #include "Inventory_System/InventoryComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Inventory_System/ItemPickUpWidget.h"
+#include "TimerManager.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -163,7 +164,10 @@ protected:
 	bool AddItemToInventory(FItem_Struct Item_Struct);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventory(int column, int row);
+	FItem_Struct RemoveItemFromInventoryClosestPosition(int column, int row);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItemFromInventory(FItem_Struct Item);
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();

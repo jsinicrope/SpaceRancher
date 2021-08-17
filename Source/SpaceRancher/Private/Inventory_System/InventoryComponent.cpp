@@ -3,6 +3,14 @@
 
 #include "Inventory_System/InventoryComponent.h"
 
+
+FItemRows::FItemRows(int rows)
+{
+	FItem_Struct Item;
+	Row_Items.Init(Item, rows);
+}
+
+
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
 {
@@ -18,7 +26,6 @@ UInventoryComponent::UInventoryComponent()
 
 }
 
-
 // Called when the game starts
 void UInventoryComponent::BeginPlay()
 {
@@ -26,12 +33,18 @@ void UInventoryComponent::BeginPlay()
 
 }
 
-bool UInventoryComponent::AddItem(FItem_Struct Item_Struct)
+// Called every frame
+void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	//Loop over inventory slots
-	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+}
+
+bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
+{
+	for (int i = column; i < Inventory_Array_Columns.Num(); i++)
 	{
-		for (int j = 0; Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		for (int j = row; Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
 			if (!Inventory_Array_Columns[i].Row_Items[j].bIsValidItem)
 			{
@@ -48,20 +61,29 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct)
 	return false;
 }
 
-// Called every frame
-void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int row, int column)
+{
+	FItem_Struct Item = Inventory_Array_Columns[column].Row_Items[row];
+	FItem_Struct EmptyItem;
+	Inventory_Array_Columns[column].Row_Items[row] = EmptyItem;
+	return Item;
 }
 
-FItem_Struct UInventoryComponent::RemoveItem(int row, int column)
+FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
 {
-	return Inventory_Array_Columns[column].Row_Items[row];
-}
-
-FItemRows::FItemRows(int rows)
-{
-	FItem_Struct Item;
-	Row_Items.Init(Item, rows);
+	FItem_Struct EmptyItem;
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(Item.Name))
+			{
+				FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
+				Inventory_Array_Columns[i].Row_Items[j] = EmptyItem;
+				return Item;
+			}
+		}
+	}
+	return EmptyItem;
 }

@@ -1,6 +1,6 @@
-"F:\Space Rancher\SpaceRancher\Source\SpaceRancher\SpaceRancher.cpp"
+F:\SpaceRancher\Source\SpaceRancher\SpaceRancher.cpp
 /I .
-/I "F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Private"
+/I F:\SpaceRancher\Source\SpaceRancher\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\Engine
 /I Runtime
 /I Runtime\Engine\Classes
@@ -232,9 +232,9 @@
 /I Runtime\ClothingSystemRuntimeInterface\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController
 /I Developer\AnimationDataController\Public
-/I "F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher"
-/I "F:\Space Rancher\SpaceRancher\Source"
-/I "F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public"
+/I F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher
+/I F:\SpaceRancher\Source
+/I F:\SpaceRancher\Source\SpaceRancher\Public
 /I ThirdParty\PhysX3\PxShared\include
 /I ThirdParty\PhysX3\PxShared\include\cudamanager
 /I ThirdParty\PhysX3\PxShared\include\filebuf
@@ -246,17 +246,17 @@
 /I ThirdParty\PhysX3\PhysX_3.4\Include\common
 /I ThirdParty\PhysX3\PhysX_3.4\Include\extensions
 /I ThirdParty\PhysX3\PhysX_3.4\Include\geometry
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
-/FI"F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h"
-/Yu"F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"F:\Space Rancher\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.cpp.obj"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
+/FI"F:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h"
+/Yu"F:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"F:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.cpp.obj"
 /Zc:inline
 /nologo
 /Oi

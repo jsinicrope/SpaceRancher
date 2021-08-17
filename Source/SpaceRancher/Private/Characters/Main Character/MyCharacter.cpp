@@ -396,10 +396,16 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 	return bAddSuccessfull;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventory(int column, int row)
+FItem_Struct AMyCharacter::RemoveItemFromInventoryClosestPosition(int column, int row)
 {
-	FItem_Struct Item = InventoryArray->RemoveItem(row, column);
+	FItem_Struct Item = InventoryArray->RemoveItemClosestPosition(row, column);
 	return Item;
+}
+
+FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct Item)
+{
+	FItem_Struct RemovedItem = InventoryArray->RemoveItem(Item);
+	return RemovedItem;
 }
 
 void AMyCharacter::RemoveWidgetFromViewport()
