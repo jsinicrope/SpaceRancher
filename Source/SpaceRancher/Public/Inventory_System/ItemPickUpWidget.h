@@ -7,9 +7,7 @@
 #include "Components/Image.h"
 #include "ItemPickUpWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class SPACERANCHER_API UItemPickUpWidget : public UUserWidget
 {
