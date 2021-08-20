@@ -136,7 +136,7 @@ protected:
 	FTimerHandle TimerHandler;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
-	class UInventoryComponent* InventoryArray;
+	class UInventoryComponent* InventoryComp;
 
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;
@@ -171,6 +171,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromInventoryByName(FString ItemName);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void ToggleInventory();
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();

@@ -6,10 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
-#include "Components/Button.h"
 #include "Components/GridPanel.h"
 #include "Inventory_System/Item_Base.h"
-#include "Inventory_System/InventoryComponent.h"
 #include "InventoryWindow.generated.h"
 
 
@@ -18,17 +16,34 @@ class SPACERANCHER_API UInventoryWindow : public UUserWidget
 {
 	GENERATED_BODY()
 
-protected:
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UTextBlock* InventoryTitle = NULL;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* ButtonClose = NULL;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UGridPanel* InventoryGrid = NULL;
+public:
+	virtual void NativeConstruct();
 
 	UPROPERTY(BlueprintReadWrite)
-	UInventoryComponent* Inventory;
+	class UInventoryComponent* Inventory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetUpInventory();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void UpdateInventory();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetVariables(UInventoryComponent* InventoryComp, TSubclassOf<UUserWidget> InventorySlotWidgetClassIn);
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UInventorySlotWidget* InventorySlotWidget;
+
+	UPROPERTY()
+	FItem_Struct InventoryItem;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UTextBlock* InventoryTitle;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UGridPanel* InventoryGrid;
 };

@@ -5,9 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Image.h"
-#include "Components/SizeBox.h"
-#include "Components/Border.h"
-#include "Components/Overlay.h"
+#include "Components/TextBlock.h"
 #include "Inventory_System/Item_Base.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "InventorySlotWidget.generated.h"
@@ -19,6 +17,10 @@ class SPACERANCHER_API UInventorySlotWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	virtual void NativeConstruct();
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UTextBlock* TextBlock = NULL;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* ImageThumbnail = NULL;

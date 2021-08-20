@@ -18,6 +18,7 @@ struct FItem_Struct;
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
@@ -33,6 +34,7 @@ struct FItem_Struct;
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
@@ -120,7 +122,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__TimerHandler() { return STRUCT_OFFSET(AMyCharacter, TimerHandler); } \
-	FORCEINLINE static uint32 __PPO__InventoryArray() { return STRUCT_OFFSET(AMyCharacter, InventoryArray); } \
+	FORCEINLINE static uint32 __PPO__InventoryComp() { return STRUCT_OFFSET(AMyCharacter, InventoryComp); } \
 	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); }
 
 

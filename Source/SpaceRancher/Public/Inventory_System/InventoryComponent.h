@@ -35,8 +35,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Columns;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int ItemSlots;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FText InventoryName;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bInventoryOpen = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> InventoryWindowClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItem(FItem_Struct Item_Struct, int row = 0, int column = 0);
@@ -50,9 +65,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemByName(FString ItemName);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void ToggleInventory();
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UInventoryWindow* InventoryWindow;
 };

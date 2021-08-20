@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Inventory_System/InventoryComponent.h"
+#include "Inventory_System/InventoryWindow.h"
+#include "Blueprint/UserWidget.h"
 
 
 FItemRows::FItemRows(int rows)
@@ -30,6 +32,12 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (InventoryWindowClass)
+	{
+		InventoryWindow = CreateWidget<UInventoryWindow>(GetWorld(), InventoryWindowClass);
+		InventoryWindow->SetVariables(this, InventorySlotWidgetClass);
+		InventoryWindow->SetUpInventory();
+	}
 }
 
 // Called every frame
@@ -106,3 +114,19 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 	}
 	return EmptyItem;
 }
+
+void UInventoryComponent::ToggleInventory()
+{
+	if (!bInventoryOpen)
+	{
+		InventoryWindow->UpdateInventory();
+		InventoryWindow->AddToViewport();
+		bInventoryOpen = true;
+	}
+	else
+	{
+		InventoryWindow->RemoveFromViewport();
+		bInventoryOpen = false;
+	}
+}
+	

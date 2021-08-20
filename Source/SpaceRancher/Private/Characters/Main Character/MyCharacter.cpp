@@ -48,8 +48,8 @@ AMyCharacter::AMyCharacter()
 	//Runtime
 	bSprinting = false;
 
-	InventoryArray = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
-	AddOwnedComponent(InventoryArray);
+	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
+	AddOwnedComponent(InventoryComp);
 	
 }
 
@@ -217,6 +217,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
+	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
@@ -380,7 +381,7 @@ void AMyCharacter::PlayerStopSprint()
 
 bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 {
-	bool bAddSuccessfull = InventoryArray->AddItem(Item_Struct);
+	bool bAddSuccessfull = InventoryComp->AddItem(Item_Struct);
 
 	if (bAddSuccessfull)
 	{
@@ -398,20 +399,25 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 
 FItem_Struct AMyCharacter::RemoveItemFromInventoryClosestPosition(int column, int row)
 {
-	FItem_Struct Item = InventoryArray->RemoveItemClosestPosition(row, column);
+	FItem_Struct Item = InventoryComp->RemoveItemClosestPosition(row, column);
 	return Item;
 }
 
 FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct Item)
 {
-	FItem_Struct RemovedItem = InventoryArray->RemoveItem(Item);
+	FItem_Struct RemovedItem = InventoryComp->RemoveItem(Item);
 	return RemovedItem;
 }
 
 FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
 {
-	FItem_Struct RemovedItem = InventoryArray->RemoveItemByName(ItemName);
+	FItem_Struct RemovedItem = InventoryComp->RemoveItemByName(ItemName);
 	return RemovedItem;
+}
+
+void AMyCharacter::ToggleInventory()
+{
+	InventoryComp->ToggleInventory();
 }
 
 void AMyCharacter::RemoveWidgetFromViewport()

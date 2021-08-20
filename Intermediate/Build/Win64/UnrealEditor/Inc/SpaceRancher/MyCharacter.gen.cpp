@@ -36,6 +36,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->RemoveWidgetFromViewport();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execToggleInventory)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ToggleInventory();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execRemoveItemFromInventoryByName)
 	{
 		P_GET_PROPERTY(FStrProperty,Z_Param_ItemName);
@@ -126,6 +133,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "RemoveItemFromInventoryClosestPosition", &AMyCharacter::execRemoveItemFromInventoryClosestPosition },
 			{ "RemoveWidgetFromViewport", &AMyCharacter::execRemoveWidgetFromViewport },
 			{ "SaveGame", &AMyCharacter::execSaveGame },
+			{ "ToggleInventory", &AMyCharacter::execToggleInventory },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -449,6 +457,29 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Inventory" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "ToggleInventory", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_ToggleInventory()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_ToggleInventory_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_AMyCharacter_NoRegister()
 	{
 		return AMyCharacter::StaticClass();
@@ -589,9 +620,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_TimerHandler;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_InventoryArray_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InventoryComp_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryArray;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InventoryComp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerCamera_MetaData[];
 #endif
@@ -617,6 +648,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition, "RemoveItemFromInventoryClosestPosition" }, // 678283112
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveWidgetFromViewport, "RemoveWidgetFromViewport" }, // 2121599325
 		{ &Z_Construct_UFunction_AMyCharacter_SaveGame, "SaveGame" }, // 2554044716
+		{ &Z_Construct_UFunction_AMyCharacter_ToggleInventory, "ToggleInventory" }, // 3813030173
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::Class_MetaDataParams[] = {
@@ -867,13 +899,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimerHandler = { "TimerHandler", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, TimerHandler), Z_Construct_UScriptStruct_FTimerHandle, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimerHandler_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimerHandler_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryArray_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryComp_MetaData[] = {
 		{ "Category", "Inventory" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryArray = { "InventoryArray", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, InventoryArray), Z_Construct_UClass_UInventoryComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryArray_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryArray_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryComp = { "InventoryComp", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, InventoryComp), Z_Construct_UClass_UInventoryComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryComp_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_PlayerCamera_MetaData[] = {
 		{ "EditInline", "true" },
@@ -913,7 +945,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_WidgetToRemove,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_GameInstance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimerHandler,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryArray,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_InventoryComp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_PlayerCamera,
 	};
 		const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_AMyCharacter_Statics::InterfaceParams[] = {
@@ -946,7 +978,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 1310251891);
+	IMPLEMENT_CLASS(AMyCharacter, 3983583440);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();
