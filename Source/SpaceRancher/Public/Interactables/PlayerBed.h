@@ -29,7 +29,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
 	float AllowSleepTime;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Sleep")
 	bool bTimeAcceleration;
 
 	UPROPERTY()

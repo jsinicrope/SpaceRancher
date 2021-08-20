@@ -150,3 +150,5 @@ F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMov
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DrawDebugHelpers.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Camera/CameraComponent.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CameraComponent.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\UI/Clock.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Clock.generated.h

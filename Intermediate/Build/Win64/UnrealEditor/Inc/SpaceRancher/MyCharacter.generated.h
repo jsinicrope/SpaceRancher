@@ -120,6 +120,8 @@ public: \
 	FORCEINLINE static uint32 __PPO__ItemPickUpWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidgetClass); } \
 	FORCEINLINE static uint32 __PPO__ItemPickUpWidget() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidget); } \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
+	FORCEINLINE static uint32 __PPO__ClockWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ClockWidgetClass); } \
+	FORCEINLINE static uint32 __PPO__ClockWidget() { return STRUCT_OFFSET(AMyCharacter, ClockWidget); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__TimerHandler() { return STRUCT_OFFSET(AMyCharacter, TimerHandler); } \
 	FORCEINLINE static uint32 __PPO__InventoryComp() { return STRUCT_OFFSET(AMyCharacter, InventoryComp); } \

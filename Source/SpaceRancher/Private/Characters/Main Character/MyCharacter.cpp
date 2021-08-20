@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
+#include "UI/Clock.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -77,6 +78,12 @@ void AMyCharacter::BeginPlay()
 	if (ItemPickUpWidgetClass)
 	{
 		ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
+	}
+
+	if (ClockWidgetClass)
+	{
+		ClockWidget = CreateWidget<UClock>(GetWorld(), ClockWidgetClass);
+		ClockWidget->AddToViewport();
 	}
 
 	FVector ViewLocation;
@@ -203,6 +210,9 @@ void AMyCharacter::Tick(float DeltaTime)
 			KillPlayer();
 		}
 	}
+
+	//Update Clock Widget
+	ClockWidget->UpdateClock();
 }
 
 // Called to bind functionality to input

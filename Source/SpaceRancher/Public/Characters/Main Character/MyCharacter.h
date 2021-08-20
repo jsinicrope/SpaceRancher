@@ -115,12 +115,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	class UItemPickUpWidget* ItemPickUpWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	class UUserWidget* WidgetToRemove;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Clock")
+	TSubclassOf<class UUserWidget> ClockWidgetClass;
+
+	UPROPERTY(VisibleAnywhere)
+	class UClock* ClockWidget;
 
 	UPROPERTY(BlueprintReadOnly)
 	UMainGameInstance* GameInstance;
