@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "Inventory_System/InventoryComponent.h"
 #include "MainSaveGame.generated.h"
 
 /**
@@ -43,4 +44,7 @@ public:
 
 	UPROPERTY()
 	FVector CurrentPosition;
+
+	UPROPERTY()
+	TArray<FItemRows> Player_Inventory_Array_Columns;
 };

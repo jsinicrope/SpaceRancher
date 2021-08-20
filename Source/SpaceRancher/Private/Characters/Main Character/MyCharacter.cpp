@@ -307,6 +307,7 @@ void AMyCharacter::SaveGame()
 	Savedata->PlayerHealthLastTick = HealthLastTick;
 	Savedata->PlayerJumpStartPoint = JumpStartPoint;
 	Savedata->IngameTime = GameInstance->PlayerIngameTime;
+	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 
 	FString SlotName = GameInstance->SaveSlotName + GameInstance->SaveName;
 
@@ -330,6 +331,7 @@ void AMyCharacter::LoadGame()
 			HealthLastTick = Savedata->PlayerHealthLastTick;
 			JumpStartPoint = Savedata->PlayerJumpStartPoint;
 			GameInstance->PlayerIngameTime = Savedata->IngameTime;
+			InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
 
 			GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
 			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
