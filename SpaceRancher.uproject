@@ -59,6 +59,14 @@
 		{
 			"Name": "AndroidDeviceProfileSelector",
 			"Enabled": false
+		},
+		{
+			"Name": "SteamVR",
+			"Enabled": false,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Linux"
+			]
 		}
 	]
 }

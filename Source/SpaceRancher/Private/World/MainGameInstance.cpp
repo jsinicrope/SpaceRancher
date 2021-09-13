@@ -28,11 +28,14 @@ void UMainGameInstance::Init()
 
 bool UMainGameInstance::Tick(float DeltaSeconds)
 {
-	PlayerIngameTime += (DeltaSeconds / 60.0f) * TimeScale;
-
-	if (PlayerIngameTime >= 30.0f)
+	if (!UGameplayStatics::IsGamePaused(GetWorld()))
 	{
-		PlayerIngameTime -= 30.0f;
+		PlayerIngameTime += (DeltaSeconds / 60.0f) * TimeScale;
+
+		if (PlayerIngameTime >= 30.0f)
+		{
+			PlayerIngameTime -= 30.0f;
+		}
 	}
 	return true;
 }
