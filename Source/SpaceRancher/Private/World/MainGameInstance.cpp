@@ -31,6 +31,7 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 	if (!UGameplayStatics::IsGamePaused(GetWorld()))
 	{
 		PlayerIngameTime += (DeltaSeconds / 60.0f) * TimeScale;
+		RealTimeMinutes += (DeltaSeconds / 60.0f) * TimeScale;
 
 		if (PlayerIngameTime >= 30.0f)
 		{

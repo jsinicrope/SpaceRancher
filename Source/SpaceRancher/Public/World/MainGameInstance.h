@@ -37,6 +37,9 @@ public:
 	float InitialStartGameTime = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float RealTimeMinutes = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Difficulty;
 
 	UPROPERTY(EditAnywhere)

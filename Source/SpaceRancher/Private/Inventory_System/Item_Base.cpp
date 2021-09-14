@@ -10,5 +10,4 @@ AItem_Base::AItem_Base()
 	PrimaryActorTick.bCanEverTick = false;
 
 	Main_Item_Structure.bIsValidItem = true;
-
 }
