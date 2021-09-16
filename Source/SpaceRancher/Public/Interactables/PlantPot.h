@@ -27,21 +27,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
-	class TSubclassOf<APlant> Plant;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Planter|Content")
-	class APlant* MainPlant;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter")
 	float Width = 236.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter")
 	float Length = 236.0f;
-
-	//Cast property to used Plant Class for use
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
-	TArray<AActor*> PlantedPlants;
 
 	UFUNCTION(BlueprintCallable, Category = "Planter")
 	FVector GetRandomPlantSpawnPoint();
@@ -51,4 +41,18 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Planter")
 	void DestroyAllPlants();
+
+	UFUNCTION(BlueprintCallable, Category = "Planter|Planting")
+	bool SetNewPlant(class TSubclassOf<APlant> NewPlant, bool bSpawnPlants = false, int AmountOfPlants = 20);
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
+	class TSubclassOf<APlant> Plant;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Planter|Content")
+	class APlant* MainPlant;
+
+	//Cast property to used Plant Class for use
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
+	TArray<AActor*> PlantedPlants;
 };

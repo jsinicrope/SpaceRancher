@@ -3,13 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Inventory_System/Item_Base.h"
 #include "Interactables/InteractInterface.h"
 #include "Plant.generated.h"
 
 UCLASS()
-class SPACERANCHER_API APlant : public AActor, public IInteractInterface
+class SPACERANCHER_API APlant : public AItem_Base
 {
 	GENERATED_BODY()
 	
@@ -34,14 +33,23 @@ public:
 	int GrowState = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
-	float RealTimePerStage = 3.0f;
+	float TimePerStage = 0.15f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
-	int GrowthStages = 2;
+	int GrowthStages = 3;
 
 	/**The time the plant has spent in its current stage in minutes*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	float PlantStateAgeMinutes = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	float GrowFactor = 1.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	int MinHarvestableState = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	int MaxHarvestableState = GrowthStages;
 
 	UPROPERTY()
 	float GameInstanceTimeStart = 0.0f;
@@ -53,13 +61,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
-	AItem_Base* Item;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
+	FVector PlantScale;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Plant|Growth")
-	bool SwitchState();
+	virtual bool GrowPlant();
+
+	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
+	bool PickupPlant();
 };

@@ -24,6 +24,12 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 	void Interact_Implementation() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SaveGame)
@@ -146,6 +152,7 @@ protected:
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;
 
+public:
 	//Functions
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStartSprint();
@@ -187,11 +194,4 @@ protected:
 	void MoveRight(float Value);
 	void LookUpAtRate(float Value);
 	void TurnAtRate(float Value);
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };

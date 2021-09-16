@@ -29,12 +29,12 @@ void APlantPot::BeginPlay()
 void APlantPot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void APlantPot::Interact_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Planter"));
+	DestroyAllPlants();
 }
 
 FVector APlantPot::GetRandomPlantSpawnPoint()
@@ -70,7 +70,7 @@ void APlantPot::SpawnPlants(int AmountOfPlants)
 {
 	if (Plant)
 	{
-		for (int i = 0; i <= AmountOfPlants; i++)
+		for (int i = 0; i < AmountOfPlants; i++)
 		{
 			FVector SpawnPoint = GetRandomPlantSpawnPoint();
 			FActorSpawnParameters SpawnInfo;
@@ -86,6 +86,27 @@ void APlantPot::DestroyAllPlants()
 {
 	for (int i = 0; i < PlantedPlants.Num(); i++)
 	{
-		GetWorld()->DestroyActor(PlantedPlants[i]);
+		Cast<APlant>(PlantedPlants[i])->CollectItem(false);
 	}
+	PlantedPlants.Empty();
+	MainPlant = nullptr;
+}
+
+bool APlantPot::SetNewPlant(class TSubclassOf<APlant> NewPlant, bool bSpawnPlants, int AmountOfPlants)
+{
+	if (MainPlant == nullptr)
+	{
+		Plant = NewPlant;
+		MainPlant = Cast<APlant>(Plant);
+		Width -= MainPlant->BottomStemThickness;
+		Length -= MainPlant->BottomStemThickness;
+
+		if (bSpawnPlants)
+		{
+			SpawnPlants(AmountOfPlants);
+		}
+
+		return true;
+	}
+	return false;
 }
