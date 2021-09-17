@@ -33,7 +33,7 @@ public:
 	int GrowState = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
-	float TimePerStage = 0.15f;
+	float TimePerStage = 3.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int GrowthStages = 3;
@@ -62,7 +62,7 @@ public:
 	float BottomStemThickness = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
-	FVector PlantScale;
+	FVector PlantScale = FVector(1);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;

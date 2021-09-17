@@ -27,6 +27,13 @@ void APlant::BeginPlay()
 	PlantScale = this->GetActorScale3D();
 	PlantScale[2] = PlantScale[2] * 0.3f;
 	this->SetActorScale3D(PlantScale * 0.3f);
+
+	int SetGrowState = GrowState;
+	GrowState = 0;
+	for (int i = 0; i < SetGrowState; i++)
+	{
+		GrowPlant();
+	}
 }
 
 // Called every frame

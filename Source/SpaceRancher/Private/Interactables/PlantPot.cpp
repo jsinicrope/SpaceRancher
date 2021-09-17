@@ -22,7 +22,7 @@ APlantPot::APlantPot()
 void APlantPot::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnPlants(20);
+	SpawnPlants(PlantsToSpawn);
 }
 
 // Called every frame

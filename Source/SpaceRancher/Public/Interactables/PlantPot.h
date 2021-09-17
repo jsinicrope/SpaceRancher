@@ -33,6 +33,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter")
 	float Length = 236.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Planting")
+	int PlantsToSpawn = 20;
+
 	UFUNCTION(BlueprintCallable, Category = "Planter")
 	FVector GetRandomPlantSpawnPoint();
 
