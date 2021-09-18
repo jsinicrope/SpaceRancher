@@ -3,7 +3,8 @@
 #include "Inventory_System/InventoryComponent.h"
 #include "Inventory_System/InventoryWindow.h"
 #include "Blueprint/UserWidget.h"
-
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Characters/Main Character/CppPlayerController.h"
 
 FItemRows::FItemRows(int rows)
 {
@@ -19,11 +20,9 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	Rows = 5;
-	Columns = 5;
-
-	FItemRows Inventory_Row(Rows);
-	Inventory_Array_Columns.Init(Inventory_Row, Columns);
+	Rows = 5; //Length of column
+	Columns = 5; //Length of row
+	ItemSlots = 25;
 
 }
 
@@ -32,19 +31,26 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
+
+	int RemainingItemSlots = ItemSlots;
+	for (int i = 0; i < Columns; i++)
+	{
+		if (RemainingItemSlots > 0)
+		{
+			int SlotsPerColumn = FMath::Min(Columns, RemainingItemSlots);
+			FItemRows Inventory_Row(SlotsPerColumn);
+			Inventory_Array_Columns.Add(Inventory_Row);
+			RemainingItemSlots -= Columns;
+		}
+	}
+
 	if (InventoryWindowClass)
 	{
 		InventoryWindow = CreateWidget<UInventoryWindow>(GetWorld(), InventoryWindowClass);
 		InventoryWindow->SetVariables(this, InventorySlotWidgetClass);
 		InventoryWindow->SetUpInventory();
 	}
-}
-
-// Called every frame
-void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 }
 
 bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
@@ -122,11 +128,15 @@ void UInventoryComponent::ToggleInventory()
 		InventoryWindow->UpdateInventory();
 		InventoryWindow->AddToViewport();
 		bInventoryOpen = true;
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
+		PC->bShowMouseCursor = true;
 	}
 	else
 	{
 		InventoryWindow->RemoveFromViewport();
 		bInventoryOpen = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		PC->bShowMouseCursor = false;
 	}
 }
 	

@@ -36,7 +36,7 @@ void AItem_Base::Interact_Implementation()
 
 bool AItem_Base::CollectItem(bool bAddToInventory)
 {
-	bool ItemAdded;
+	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)
 	{
 		ItemAdded = PC->AddItemToInventory(Main_Item_Structure);

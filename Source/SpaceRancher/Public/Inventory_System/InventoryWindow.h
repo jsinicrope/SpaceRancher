@@ -10,7 +10,6 @@
 #include "Inventory_System/Item_Base.h"
 #include "InventoryWindow.generated.h"
 
-
 UCLASS()
 class SPACERANCHER_API UInventoryWindow : public UUserWidget
 {

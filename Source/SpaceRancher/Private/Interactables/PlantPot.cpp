@@ -1,14 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Interactables/PlantPot.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Inventory_System/InventoryComponent.h"
 
 // Sets default values
 APlantPot::APlantPot()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	if (Plant)
 	{
@@ -16,6 +16,8 @@ APlantPot::APlantPot()
 		Width -= MainPlant->BottomStemThickness;
 		Length -= MainPlant->BottomStemThickness;
 	}
+
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -34,7 +36,7 @@ void APlantPot::Tick(float DeltaTime)
 void APlantPot::Interact_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Planter"));
-	DestroyAllPlants();
+	Inventory->ToggleInventory();
 }
 
 FVector APlantPot::GetRandomPlantSpawnPoint()

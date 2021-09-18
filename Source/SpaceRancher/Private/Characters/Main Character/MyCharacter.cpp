@@ -2,6 +2,7 @@
 
 
 #include "Characters/Main Character/MyCharacter.h"
+#include "Characters/Main Character/CppPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -61,6 +62,9 @@ void AMyCharacter::BeginPlay()
 
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	LoadGame();
+
+	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
+	PC->InventoryComp = InventoryComp;
 
 	TArray<UCameraComponent*> comps;
 
@@ -227,7 +231,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
-	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 

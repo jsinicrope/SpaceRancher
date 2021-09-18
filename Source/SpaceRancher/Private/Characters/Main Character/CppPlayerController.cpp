@@ -1,0 +1,30 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "Characters/Main Character/CppPlayerController.h"
+#include "Inventory_System/InventoryComponent.h"
+#include "Characters/Main Character/MyCharacter.h"
+
+ACppPlayerController::ACppPlayerController(const FObjectInitializer& ObjectInitializer) :Super(ObjectInitializer)
+{
+	PlayerCharacter = Cast<AMyCharacter>(GetPawn());
+}
+
+void ACppPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	check(InputComponent);
+
+	if (InputComponent != NULL)
+	{
+		InputComponent->BindAction("Inventory", IE_Released, this, &ACppPlayerController::ToggleInventory);
+	}
+}
+
+void ACppPlayerController::ToggleInventory()
+{
+	if (InventoryComp)
+	{
+		InventoryComp->ToggleInventory();
+	}
+}

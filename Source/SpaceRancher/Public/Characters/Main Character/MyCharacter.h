@@ -141,6 +141,7 @@ protected:
 	float ElapsedStaminaDrainTime;
 	float HealthLastTick;
 	FVector JumpStartPoint;
+	class ACppPlayerController* PC;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 
 	UPROPERTY()

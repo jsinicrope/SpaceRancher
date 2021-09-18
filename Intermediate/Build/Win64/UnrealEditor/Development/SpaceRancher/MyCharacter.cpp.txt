@@ -131,6 +131,8 @@ F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\Image.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemPickUpWidget.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\Characters/Main Character/CppPlayerController.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\CppPlayerController.generated.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/CharacterMovementComponent.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\AI/Navigation/NavigationAvoidanceTypes.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\NavigationAvoidanceTypes.generated.h

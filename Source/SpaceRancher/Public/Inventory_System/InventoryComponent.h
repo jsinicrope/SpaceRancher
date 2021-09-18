@@ -7,7 +7,6 @@
 #include "Inventory_System/Item_Base.h"
 #include "InventoryComponent.generated.h"
 
-
 USTRUCT(BlueprintType)
 struct FItemRows
 {
@@ -30,10 +29,10 @@ public:
 	UInventoryComponent();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Rows;
+	int Columns;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Columns;
+	int Rows;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int ItemSlots;
@@ -53,6 +52,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 
+	UPROPERTY(VisibleAnywhere)
+	class ACppPlayerController* PC;
+
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItem(FItem_Struct Item_Struct, int row = 0, int column = 0);
 
@@ -70,9 +72,6 @@ public:
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
