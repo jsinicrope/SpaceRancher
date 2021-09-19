@@ -2,7 +2,6 @@
 
 #include "Interactables/PlantPot.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Inventory_System/InventoryComponent.h"
 
 // Sets default values
 APlantPot::APlantPot()
@@ -16,8 +15,6 @@ APlantPot::APlantPot()
 		Width -= MainPlant->BottomStemThickness;
 		Length -= MainPlant->BottomStemThickness;
 	}
-
-	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -36,7 +33,7 @@ void APlantPot::Tick(float DeltaTime)
 void APlantPot::Interact_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Planter"));
-	Inventory->ToggleInventory();
+	DestroyAllPlants();
 }
 
 FVector APlantPot::GetRandomPlantSpawnPoint()

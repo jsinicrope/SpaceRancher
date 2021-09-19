@@ -93,3 +93,9 @@ bool APlant::PickupPlant()
 	}
 	return false;
 }
+
+bool APlant::WaterPlant()
+{
+	GrowPlant();
+	return true;
+}

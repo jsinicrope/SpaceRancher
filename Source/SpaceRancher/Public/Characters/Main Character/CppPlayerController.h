@@ -18,9 +18,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BLueprintReadWrite)
 	class AMyCharacter* PlayerCharacter;
-	UPROPERTY(EditAnywhere, BLueprintReadWrite)
-	class UInventoryComponent* InventoryComp;
-
-	UFUNCTION(BlueprintCallable)
-	void ToggleInventory();
 };

@@ -15,16 +15,7 @@ void ACppPlayerController::SetupInputComponent()
 
 	check(InputComponent);
 
-	if (InputComponent != NULL)
-	{
-		InputComponent->BindAction("Inventory", IE_Released, this, &ACppPlayerController::ToggleInventory);
-	}
-}
-
-void ACppPlayerController::ToggleInventory()
-{
-	if (InventoryComp)
-	{
-		InventoryComp->ToggleInventory();
-	}
+	//if (InputComponent != NULL)
+	//{
+	//}
 }

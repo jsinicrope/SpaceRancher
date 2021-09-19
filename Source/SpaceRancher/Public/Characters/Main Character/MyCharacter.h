@@ -96,14 +96,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float MinFallDamageVelocity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	bool bCanHarvest;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	bool bItemInRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	float InteractDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
+	bool bInteractableInRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	FVector RespawnPoint;
@@ -120,6 +123,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	bool bInventoryOpen;
 
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	class UItemPickUpWidget* ItemPickUpWidget;
@@ -190,6 +196,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();
+
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	bool CheckForInteractables();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

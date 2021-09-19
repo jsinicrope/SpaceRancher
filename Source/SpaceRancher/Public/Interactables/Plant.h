@@ -73,4 +73,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
 	bool PickupPlant();
+
+	UFUNCTION(BlueprintCallable, Category = "Plant|Growth")
+	bool WaterPlant();
 };

@@ -64,7 +64,6 @@ void AMyCharacter::BeginPlay()
 	LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
-	PC->InventoryComp = InventoryComp;
 
 	TArray<UCameraComponent*> comps;
 
@@ -142,34 +141,12 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	//Call Pop Up for Interaction if Interactable actor is hit
 	{
-		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
-		TraceParams.bTraceComplex = true;
-		TraceParams.bReturnPhysicalMaterial = false;
-
-		FHitResult OutHit(ForceInit);
-
-		FVector Start = PlayerCamera->GetComponentLocation();
-		FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
-
-		ECollisionChannel Channel = ECC_Visibility;
-
-		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-
-		if (OutHit.GetActor())
+		bInteractableInRange = CheckForInteractables();
+		if (bInteractableInRange)
 		{
-			if (OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+			if (!InteractPopUp->IsInViewport())
 			{
-				if (!InteractPopUp->IsInViewport())
-				{
-					InteractPopUp->AddToViewport();
-				}
-			}
-			else
-			{
-				if (InteractPopUp->IsInViewport())
-				{
-					InteractPopUp->RemoveFromViewport();
-				}
+				InteractPopUp->AddToViewport();
 			}
 		}
 		else
@@ -231,6 +208,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
+	InputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
@@ -251,40 +229,47 @@ void AMyCharacter::Interact_Implementation()
 
 void AMyCharacter::PlayerInteract()
 {
-	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
-	TraceParams.bTraceComplex = true;
-	TraceParams.bReturnPhysicalMaterial = false;
-
-	FHitResult OutHit(ForceInit);
-
-	FVector Start = PlayerCamera->GetComponentLocation();
-	FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
-
-	ECollisionChannel Channel = ECC_Visibility;
-
-	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-
-	if (OutHit.GetActor())
+	if (!bInventoryOpen)
 	{
-		auto Actor = OutHit.GetActor();
+		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+		TraceParams.bTraceComplex = true;
+		TraceParams.bReturnPhysicalMaterial = false;
 
-		//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
+		FHitResult OutHit(ForceInit);
 
-		//DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
+		FVector Start = PlayerCamera->GetComponentLocation();
+		FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
 
-		if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+		ECollisionChannel Channel = ECC_Visibility;
+
+		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+
+		if (OutHit.GetActor())
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
-			//Cast<IInteractInterface>(Actor)->Interact();	//Use this to call C++ only Implementation
-			IInteractInterface::Execute_Interact(Actor);
+			auto Actor = OutHit.GetActor();
+
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
+
+			//DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
+
+			if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
+			{
+				//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
+				//Cast<IInteractInterface>(Actor)->Interact();	//Use this to call C++ only Implementation
+				IInteractInterface::Execute_Interact(Actor);
+			}
+		}
+
+		else
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
+
+			DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 12.3333f);
 		}
 	}
-
 	else
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
-
-		DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 12.3333f);
+		ToggleInventory();
 	}
 }
 
@@ -433,6 +418,7 @@ FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
 void AMyCharacter::ToggleInventory()
 {
 	InventoryComp->ToggleInventory();
+	bInventoryOpen = InventoryComp->bInventoryOpen;
 }
 
 void AMyCharacter::RemoveWidgetFromViewport()
@@ -441,4 +427,26 @@ void AMyCharacter::RemoveWidgetFromViewport()
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Removing Widget"));
 
 	WidgetToRemove->RemoveFromViewport();
+}
+
+bool AMyCharacter::CheckForInteractables()
+{
+	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	FHitResult OutHit(ForceInit);
+
+	FVector Start = PlayerCamera->GetComponentLocation();
+	FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
+
+	ECollisionChannel Channel = ECC_Visibility;
+
+	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+
+	if (OutHit.GetActor())
+	{
+		return OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass());
+	}
+	return false;
 }

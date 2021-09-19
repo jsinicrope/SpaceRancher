@@ -55,9 +55,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Planter|Content")
 	class APlant* MainPlant;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Planter|Content")
-	class UInventoryComponent* Inventory;
-
 	//Cast property to used Plant Class for use
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
 	TArray<AActor*> PlantedPlants;

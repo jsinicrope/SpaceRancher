@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xE7F699A5,
+				0xD153624F,
 				0xD652A438,
 				METADATA_PARAMS(nullptr, 0)
 			};
