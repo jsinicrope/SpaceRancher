@@ -23,5 +23,8 @@ public:
 	TArray<FItemRows> Player_Inventory_Array_Columns;
 
 	UPROPERTY()
-	FActorRecord Data;
+	FActorRecord PlayerCharacterData;
+
+	UPROPERTY()
+	TArray<FActorRecord> Data;
 };

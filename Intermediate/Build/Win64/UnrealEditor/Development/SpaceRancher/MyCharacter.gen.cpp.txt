@@ -121,6 +121,8 @@ F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
 F:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/Saveable.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Saveable.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
 F:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/ActorRecord.h

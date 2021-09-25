@@ -36,6 +36,11 @@ void APlantPot::Interact_Implementation()
 	DestroyAllPlants();
 }
 
+void APlantPot::LoadActor_Implementation()
+{
+
+}
+
 FVector APlantPot::GetRandomPlantSpawnPoint()
 {
 

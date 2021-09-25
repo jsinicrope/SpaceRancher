@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Inventory_System/Item_Base.h"
 #include "Interactables/InteractInterface.h"
+#include "World/Saves/Saveable.h"
 #include "Plant.generated.h"
 
 UCLASS()
@@ -17,6 +18,7 @@ public:
 	APlant();
 
 	void Interact_Implementation() override;
+	virtual void LoadActor_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -51,7 +53,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int MaxHarvestableState = GrowthStages;
 
-	UPROPERTY()
+	UPROPERTY(SaveGame)
 	float GameInstanceTimeStart = 0.0f;
 
 	/**

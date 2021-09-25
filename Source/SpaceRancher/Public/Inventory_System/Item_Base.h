@@ -6,10 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "Inventory_System/Item_Struct.h"
 #include "Interactables/InteractInterface.h"
+#include "World/Saves/Saveable.h"
 #include "Item_Base.generated.h"
 
 UCLASS()
-class SPACERANCHER_API AItem_Base : public AActor, public IInteractInterface
+class SPACERANCHER_API AItem_Base : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	

@@ -40,10 +40,10 @@ public:
 	int Difficulty;
 
 	UPROPERTY(EditAnywhere)
-	UMainSaveGame* SaveGameData;
+	UMainSaveGame* SaveGameData = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
-	FString SaveName = FString("SmartSave");
+	FString SaveName = FString("MainGame");
 
 	//Functions
 	UFUNCTION()

@@ -15,8 +15,6 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	SaveGameName = FString("MainGame");
-
 	//Health
 	Health = 100.0f;
 	HealthLastTick = 100.0f;
@@ -62,7 +60,6 @@ void AMyCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	GameInstance->SaveName = SaveGameName;
 	GameInstance->LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
@@ -206,7 +203,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AMyCharacter::PlayerStopSprint);
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
-	InputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
+	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
@@ -217,7 +214,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
-	
 }
 
 void AMyCharacter::Interact_Implementation()
@@ -283,54 +279,36 @@ void AMyCharacter::KillPlayer()
 void AMyCharacter::SaveGame()
 {
 	GameInstance->SaveGame();
-	UMainSaveGame* Savedata = GameInstance->SaveGameData;
-
-	CurrentVelocity = CharacterMovement->Velocity;
-
-	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
-	
-	FString SlotName = GameInstance->SaveName;
-	
-	//Serialize
-	//FActorRecord ActorRecord(this);
-	//FMemoryWriter MemoryWriter(ActorRecord.Data);
-	//FActorSaveArchive Ar(MemoryWriter, false);
-	//Serialize(Ar);
-
-	//Savedata->Data = ActorRecord;
-	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(ActorRecord.Data.Num()));
-
-	UGameplayStatics::SaveGameToSlot(Savedata, SlotName, 0);
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Saved!"));
 }
 
 void AMyCharacter::LoadGame()
 {
-	if (!(SaveGameName.IsEmpty()))
-		GameInstance->SaveName = SaveGameName;
+	GameInstance->LoadGame();
+}
 
-	if (GameInstance->LoadGame())
-	{
-		UMainSaveGame* Savedata = GameInstance->SaveGameData;
-		InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
+void AMyCharacter::SavePlayerCharacter()
+{
+	UMainSaveGame* Savedata = GameInstance->SaveGameData;
+	CurrentVelocity = CharacterMovement->Velocity;
+	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
+}
 
-		//De-Serialize
-		FActorRecord ActorRecord = Savedata->Data;
-		FMemoryReader MemoryReader(ActorRecord.Data);
-		FActorSaveArchive Ar(MemoryReader, false);
-		Serialize(Ar);
+void AMyCharacter::LoadPlayerCharacter()
+{
+	UMainSaveGame* Savedata = GameInstance->SaveGameData;
+	InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
 
-		const FVector SpawnLocation = ActorRecord.Transform.GetLocation();
-		const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
-		GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
-		GetWorld()->GetFirstPlayerController()->SetControlRotation(SpawnRotation);
-		CharacterMovement->Velocity = CurrentVelocity;
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No Save Game found"));
-	}
+	//De-Serialize
+	FActorRecord ActorRecord = Savedata->PlayerCharacterData;
+	FMemoryReader MemoryReader(ActorRecord.Data);
+	FActorSaveArchive Ar(MemoryReader, false);
+	Serialize(Ar);
+
+	const FVector SpawnLocation = ActorRecord.Transform.GetLocation();
+	const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
+	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
+	GetWorld()->GetFirstPlayerController()->SetControlRotation(SpawnRotation);
+	CharacterMovement->Velocity = CurrentVelocity;
 }
 
 void AMyCharacter::MoveForward(float Value)

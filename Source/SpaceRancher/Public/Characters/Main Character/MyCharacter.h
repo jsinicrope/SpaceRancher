@@ -32,9 +32,6 @@ public:
 
 	void Interact_Implementation() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
-	FString	SaveGameName;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -189,6 +186,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void LoadGame();
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	void SavePlayerCharacter();
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	void LoadPlayerCharacter();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItemToInventory(FItem_Struct Item_Struct);

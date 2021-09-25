@@ -22,9 +22,8 @@ void APlant::BeginPlay()
 	Super::BeginPlay();
 	
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
-	
 	GameInstanceTimeStart = GameInstance->RealTimeMinutes;
-	PlantScale = this->GetActorScale3D();
+
 	PlantScale[2] = PlantScale[2] * 0.3f;
 	this->SetActorScale3D(PlantScale * 0.3f);
 
@@ -55,6 +54,19 @@ void APlant::Interact_Implementation()
 	PickupPlant();
 }
 
+void APlant::LoadActor_Implementation()
+{
+	PlantScale[2] = PlantScale[2] * 0.3f;
+	this->SetActorScale3D(PlantScale * 0.3f);
+
+	int SetGrowState = GrowState;
+	GrowState = 0;
+	for (int i = 0; i < SetGrowState; i++)
+	{
+		GrowPlant();
+	}
+}
+
 bool APlant::GrowPlant()
 {
 	if (GrowState < GrowthStages)
@@ -65,14 +77,12 @@ bool APlant::GrowPlant()
 
 		if (GrowState == 1)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Plant reached Stage ") + FString::FromInt(GrowState));
 			PlantScale[2] = PlantScale[2] * 3;
 			PlantScale = PlantScale * GrowFactor;
 			this->SetActorScale3D(PlantScale);
 		}
 		else
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Plant reached Stage ") + FString::FromInt(GrowState));
 			PlantScale = PlantScale * GrowFactor;
 			this->SetActorScale3D(PlantScale);
 		}

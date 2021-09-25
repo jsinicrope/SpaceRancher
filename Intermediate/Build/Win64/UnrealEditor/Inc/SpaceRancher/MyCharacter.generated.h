@@ -24,6 +24,8 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \
+	DECLARE_FUNCTION(execLoadPlayerCharacter); \
+	DECLARE_FUNCTION(execSavePlayerCharacter); \
 	DECLARE_FUNCTION(execLoadGame); \
 	DECLARE_FUNCTION(execSaveGame); \
 	DECLARE_FUNCTION(execKillPlayer); \
@@ -41,6 +43,8 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \
+	DECLARE_FUNCTION(execLoadPlayerCharacter); \
+	DECLARE_FUNCTION(execSavePlayerCharacter); \
 	DECLARE_FUNCTION(execLoadGame); \
 	DECLARE_FUNCTION(execSaveGame); \
 	DECLARE_FUNCTION(execKillPlayer); \

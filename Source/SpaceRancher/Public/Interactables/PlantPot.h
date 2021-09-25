@@ -6,10 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "Interactables/Plant.h"
 #include "Interactables/InteractInterface.h"
+#include "World/Saves/Saveable.h"
 #include "PlantPot.generated.h"
 
 UCLASS()
-class SPACERANCHER_API APlantPot : public AActor, public IInteractInterface
+class SPACERANCHER_API APlantPot : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	
@@ -18,6 +19,7 @@ public:
 	APlantPot();
 
 	void Interact_Implementation() override;
+	void LoadActor_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
