@@ -32,7 +32,7 @@ public:
 
 	void Interact_Implementation() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SaveGame)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SaveGame")
 	FString	SaveGameName;
 
 protected:
@@ -47,7 +47,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float BaseLookUpAtRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -56,7 +56,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float maxStamina;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float Stamina;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -81,13 +81,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float StaminaBaseRegen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float TimeToHealthRegen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float TimeToStaminaRegen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float FallingTime;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
@@ -108,10 +108,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	bool bInteractableInRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	FVector RespawnPoint;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	FRotator RespawnViewDirection;
 
 	//Widgets
@@ -143,15 +143,23 @@ protected:
 	UMainGameInstance* GameInstance;
 
 	//Variables hidden in Editor
-	float ElapsedDamageTime;
-	float ElapsedStaminaDrainTime;
-	float HealthLastTick;
-	FVector JumpStartPoint;
 	class ACppPlayerController* PC;
 	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 
-	UPROPERTY()
+	UPROPERTY(SaveGame)
 	FTimerHandle TimerHandler;
+
+	UPROPERTY(SaveGame)
+	float ElapsedDamageTime;
+
+	UPROPERTY(SaveGame)
+	float ElapsedStaminaDrainTime;
+
+	UPROPERTY(SaveGame)
+	float HealthLastTick;
+
+	UPROPERTY(SaveGame)
+	FVector JumpStartPoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
 	class UInventoryComponent* InventoryComp;

@@ -128,7 +128,7 @@ void UInventoryComponent::ToggleInventory()
 		InventoryWindow->UpdateInventory();
 		InventoryWindow->AddToViewport();
 		bInventoryOpen = true;
-		UWidgetBlueprintLibrary::SetInputMode_GameAndUI(PC);
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
 		PC->bShowMouseCursor = true;
 	}
 	else

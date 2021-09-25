@@ -1,12 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Characters/Main Character/MyCharacter.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "UI/Clock.h"
+#include "World/Saves/ActorRecord.h"
+#include "World/Saves/ActorSaveArchive.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -286,18 +287,21 @@ void AMyCharacter::SaveGame()
 {
 	GameInstance->GetSaveGame();
 	UMainSaveGame* Savedata = GameInstance->SaveGameData;
-	Savedata->Health = Health;
-	Savedata->Stamina = Stamina;
-	Savedata->CurrentPosition = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	Savedata->PlayerFallingTime = FallingTime;
-	Savedata->PlayerElapsedDamageTime = ElapsedDamageTime;
-	Savedata->PlayerElapsedStaminaDrainTime = ElapsedStaminaDrainTime;
-	Savedata->PlayerHealthLastTick = HealthLastTick;
-	Savedata->PlayerJumpStartPoint = JumpStartPoint;
+
 	Savedata->IngameTime = GameInstance->PlayerIngameTime;
 	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
-
+	
 	FString SlotName = GameInstance->SaveSlotName + GameInstance->SaveName;
+
+	//Serialize
+	FActorRecord ActorRecord(this);
+	FMemoryWriter MemoryWriter(ActorRecord.Data);
+	FActorSaveArchive Ar(MemoryWriter, false);
+	Serialize(Ar);
+	//End
+
+	Savedata->Data = ActorRecord;
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(ActorRecord.Data.Num()));
 
 	UGameplayStatics::SaveGameToSlot(Savedata, SlotName, 0);
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Saved!"));
@@ -310,18 +314,17 @@ void AMyCharacter::LoadGame()
 		if (GameInstance->GetSaveGame())
 		{
 			UMainSaveGame* Savedata = GameInstance->SaveGameData;
-			Health = Savedata->Health;
-			Stamina = Savedata->Stamina;
-			RespawnPoint = Savedata->CurrentPosition;
-			FallingTime = Savedata->PlayerFallingTime;
-			ElapsedDamageTime = Savedata->PlayerElapsedDamageTime;
-			ElapsedStaminaDrainTime = Savedata->PlayerElapsedStaminaDrainTime;
-			HealthLastTick = Savedata->PlayerHealthLastTick;
-			JumpStartPoint = Savedata->PlayerJumpStartPoint;
 			GameInstance->PlayerIngameTime = Savedata->IngameTime;
 			InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
 
-			GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
+			//De-Serialize
+			FActorRecord ActorRecord = Savedata->Data;
+			FMemoryReader MemoryReader(ActorRecord.Data);
+			FActorSaveArchive Ar(MemoryReader, false);
+			Serialize(Ar);
+			//End
+
+			GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(ActorRecord.Transform.GetLocation(), RespawnViewDirection, false, true);
 			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
 		}
 		else

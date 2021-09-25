@@ -128,6 +128,10 @@ public: \
 	FORCEINLINE static uint32 __PPO__ClockWidget() { return STRUCT_OFFSET(AMyCharacter, ClockWidget); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__TimerHandler() { return STRUCT_OFFSET(AMyCharacter, TimerHandler); } \
+	FORCEINLINE static uint32 __PPO__ElapsedDamageTime() { return STRUCT_OFFSET(AMyCharacter, ElapsedDamageTime); } \
+	FORCEINLINE static uint32 __PPO__ElapsedStaminaDrainTime() { return STRUCT_OFFSET(AMyCharacter, ElapsedStaminaDrainTime); } \
+	FORCEINLINE static uint32 __PPO__HealthLastTick() { return STRUCT_OFFSET(AMyCharacter, HealthLastTick); } \
+	FORCEINLINE static uint32 __PPO__JumpStartPoint() { return STRUCT_OFFSET(AMyCharacter, JumpStartPoint); } \
 	FORCEINLINE static uint32 __PPO__InventoryComp() { return STRUCT_OFFSET(AMyCharacter, InventoryComp); } \
 	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); }
 

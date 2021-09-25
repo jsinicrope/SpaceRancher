@@ -5,11 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
 #include "Inventory_System/InventoryComponent.h"
+#include "World/Saves/ActorRecord.h"
 #include "MainSaveGame.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPACERANCHER_API UMainSaveGame : public USaveGame
 {
@@ -19,32 +17,11 @@ public:
 	UMainSaveGame();
 
 	UPROPERTY()
-	float Health;
-
-	UPROPERTY()
-	float Stamina;
-
-	UPROPERTY()
 	float IngameTime;
 
 	UPROPERTY()
-	float PlayerFallingTime;
-
-	UPROPERTY()
-	float PlayerElapsedDamageTime;
-
-	UPROPERTY()
-	float PlayerElapsedStaminaDrainTime;
-
-	UPROPERTY()
-	float PlayerHealthLastTick;
-
-	UPROPERTY()
-	FVector PlayerJumpStartPoint;
-
-	UPROPERTY()
-	FVector CurrentPosition;
-
-	UPROPERTY()
 	TArray<FItemRows> Player_Inventory_Array_Columns;
+
+	UPROPERTY()
+	FActorRecord Data;
 };

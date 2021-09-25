@@ -121,6 +121,8 @@ F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.ge
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Struct.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventoryComponent.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/ActorRecord.h
+F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ActorRecord.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
 F:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/ItemPickUpWidget.h
@@ -154,3 +156,6 @@ F:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Camera/CameraComponent.h
 F:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CameraComponent.generated.h
 F:\SpaceRancher\Source\SpaceRancher\Public\UI/Clock.h
 F:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Clock.generated.h
+F:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/ActorSaveArchive.h
+F:\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\Serialization/ObjectAndNameAsStringProxyArchive.h
+F:\UE_5.0EA\Engine\Source\Runtime\Core\Public\Serialization/NameAsStringProxyArchive.h
