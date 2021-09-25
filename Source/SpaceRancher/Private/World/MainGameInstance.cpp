@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "World/MainGameInstance.h"
+#include "Characters/Main Character/MyCharacter.h"
+#include "World/Saves/ActorSaveArchive.h"
 
 void UMainGameInstance::Init()
 {
@@ -13,7 +14,7 @@ void UMainGameInstance::Init()
 	if (SaveName.IsEmpty())
 		SaveName = GetWorld()->GetMapName();
 
-	FString SlotName = SaveSlotName + SaveName;
+	FString SlotName = SaveName;
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
@@ -46,7 +47,7 @@ bool UMainGameInstance::GetSaveGame()
 	if (SaveName.IsEmpty())
 		SaveName = GetWorld()->GetMapName();
 
-	FString SlotName = SaveSlotName + SaveName;
+	FString SlotName = SaveName;
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
@@ -63,6 +64,32 @@ void UMainGameInstance::NewSave(FString OldSave)
 {
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
 
-	FString SlotName = SaveSlotName + OldSave;
+	FString SlotName = OldSave;
 	UGameplayStatics::DeleteGameInSlot(SlotName, 0);
+}
+
+void UMainGameInstance::SaveGame()
+{
+	GetSaveGame();
+	SaveGameData->IngameTime = PlayerIngameTime;
+
+	AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	//Serialize
+	FActorRecord ActorRecord(PCharacter);
+	FMemoryWriter MemoryWriter(ActorRecord.Data);
+	FActorSaveArchive Ar(MemoryWriter, false);
+	PCharacter->Serialize(Ar);
+
+	SaveGameData->Data = ActorRecord;
+}
+
+bool UMainGameInstance::LoadGame()
+{
+	if (GetSaveGame())
+	{
+		PlayerIngameTime = SaveGameData->IngameTime;
+		return true;
+	}
+	return false;
 }

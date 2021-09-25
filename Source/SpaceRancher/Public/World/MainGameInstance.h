@@ -9,9 +9,6 @@
 #include "Delegates/IDelegateInstance.h"
 #include "MainGameInstance.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPACERANCHER_API UMainGameInstance : public UGameInstance
 {
@@ -24,7 +21,7 @@ public:
 
 	FDelegateHandle TickDelegateHandle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	float PlayerIngameTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -36,26 +33,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float InitialStartGameTime = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	float RealTimeMinutes = 0.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	int Difficulty;
 
 	UPROPERTY(EditAnywhere)
 	UMainSaveGame* SaveGameData;
 
-	UPROPERTY(EditAnywhere)
-	FString SaveSlotName = FString(TEXT("PlayerSaveGame"));
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString SaveName;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
+	FString SaveName = FString("SmartSave");
 
 	//Functions
 	UFUNCTION()
 	bool GetSaveGame();
 
-	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	UFUNCTION(BlueprintCallable, Category = "Saving")
 	void NewSave(FString OldSave);
+
+	UFUNCTION(BlueprintCallable, Category = "Saving")
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable, Category = "Saving")
+	bool LoadGame();
 };

@@ -105,6 +105,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__WalkSpeed() { return STRUCT_OFFSET(AMyCharacter, WalkSpeed); } \
 	FORCEINLINE static uint32 __PPO__SprintSpeed() { return STRUCT_OFFSET(AMyCharacter, SprintSpeed); } \
 	FORCEINLINE static uint32 __PPO__bSprinting() { return STRUCT_OFFSET(AMyCharacter, bSprinting); } \
+	FORCEINLINE static uint32 __PPO__CurrentVelocity() { return STRUCT_OFFSET(AMyCharacter, CurrentVelocity); } \
 	FORCEINLINE static uint32 __PPO__StaminaLossRunning() { return STRUCT_OFFSET(AMyCharacter, StaminaLossRunning); } \
 	FORCEINLINE static uint32 __PPO__StaminaBaseRegen() { return STRUCT_OFFSET(AMyCharacter, StaminaBaseRegen); } \
 	FORCEINLINE static uint32 __PPO__TimeToHealthRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen); } \

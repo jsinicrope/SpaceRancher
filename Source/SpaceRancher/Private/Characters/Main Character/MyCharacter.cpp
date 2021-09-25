@@ -62,7 +62,8 @@ void AMyCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	LoadGame();
+	GameInstance->SaveName = SaveGameName;
+	GameInstance->LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
@@ -90,12 +91,8 @@ void AMyCharacter::BeginPlay()
 		ClockWidget->AddToViewport();
 	}
 
-	FVector ViewLocation;
-	FRotator ViewAngle;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(ViewLocation, ViewAngle);
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	RespawnViewDirection = FRotator(ViewAngle.Pitch, ViewAngle.Yaw, ViewAngle.Roll);
-
+	RespawnViewDirection = GetControlRotation();
 }
 
 // Called every frame
@@ -285,23 +282,23 @@ void AMyCharacter::KillPlayer()
 
 void AMyCharacter::SaveGame()
 {
-	GameInstance->GetSaveGame();
+	GameInstance->SaveGame();
 	UMainSaveGame* Savedata = GameInstance->SaveGameData;
 
-	Savedata->IngameTime = GameInstance->PlayerIngameTime;
+	CurrentVelocity = CharacterMovement->Velocity;
+
 	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 	
-	FString SlotName = GameInstance->SaveSlotName + GameInstance->SaveName;
-
+	FString SlotName = GameInstance->SaveName;
+	
 	//Serialize
-	FActorRecord ActorRecord(this);
-	FMemoryWriter MemoryWriter(ActorRecord.Data);
-	FActorSaveArchive Ar(MemoryWriter, false);
-	Serialize(Ar);
-	//End
+	//FActorRecord ActorRecord(this);
+	//FMemoryWriter MemoryWriter(ActorRecord.Data);
+	//FActorSaveArchive Ar(MemoryWriter, false);
+	//Serialize(Ar);
 
-	Savedata->Data = ActorRecord;
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(ActorRecord.Data.Num()));
+	//Savedata->Data = ActorRecord;
+	//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(ActorRecord.Data.Num()));
 
 	UGameplayStatics::SaveGameToSlot(Savedata, SlotName, 0);
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Saved!"));
@@ -311,26 +308,29 @@ void AMyCharacter::LoadGame()
 {
 	if (!(SaveGameName.IsEmpty()))
 		GameInstance->SaveName = SaveGameName;
-		if (GameInstance->GetSaveGame())
-		{
-			UMainSaveGame* Savedata = GameInstance->SaveGameData;
-			GameInstance->PlayerIngameTime = Savedata->IngameTime;
-			InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
 
-			//De-Serialize
-			FActorRecord ActorRecord = Savedata->Data;
-			FMemoryReader MemoryReader(ActorRecord.Data);
-			FActorSaveArchive Ar(MemoryReader, false);
-			Serialize(Ar);
-			//End
+	if (GameInstance->LoadGame())
+	{
+		UMainSaveGame* Savedata = GameInstance->SaveGameData;
+		InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
 
-			GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(ActorRecord.Transform.GetLocation(), RespawnViewDirection, false, true);
-			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No Save Game found"));
-		}
+		//De-Serialize
+		FActorRecord ActorRecord = Savedata->Data;
+		FMemoryReader MemoryReader(ActorRecord.Data);
+		FActorSaveArchive Ar(MemoryReader, false);
+		Serialize(Ar);
+
+		const FVector SpawnLocation = ActorRecord.Transform.GetLocation();
+		const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
+		GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
+		GetWorld()->GetFirstPlayerController()->SetControlRotation(SpawnRotation);
+		CharacterMovement->Velocity = CurrentVelocity;
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Game Loaded!"));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No Save Game found"));
+	}
 }
 
 void AMyCharacter::MoveForward(float Value)

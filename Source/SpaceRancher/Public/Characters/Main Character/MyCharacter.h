@@ -75,6 +75,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	bool bSprinting;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	FVector CurrentVelocity;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float StaminaLossRunning;
 
