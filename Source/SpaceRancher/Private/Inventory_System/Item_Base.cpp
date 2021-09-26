@@ -41,7 +41,7 @@ bool AItem_Base::CollectItem(bool bAddToInventory)
 	{
 		ItemAdded = PC->AddItemToInventory(Main_Item_Structure);
 	}
-	if (ItemAdded)
+	if (ItemAdded || !bAddToInventory)
 	{
 		this->Destroy();
 		return true;

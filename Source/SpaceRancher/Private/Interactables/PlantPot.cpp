@@ -38,7 +38,7 @@ void APlantPot::Interact_Implementation()
 
 void APlantPot::LoadActor_Implementation()
 {
-
+	
 }
 
 FVector APlantPot::GetRandomPlantSpawnPoint()
