@@ -24,7 +24,6 @@ void APlant::BeginPlay()
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
 	GameInstanceTimeStart = GameInstance->RealTimeMinutes;
 
-	PlantScale[2] = PlantScale[2] * 0.3f;
 	this->SetActorScale3D(PlantScale * 0.3f);
 
 	int SetGrowState = GrowState;
@@ -33,6 +32,7 @@ void APlant::BeginPlay()
 	{
 		GrowPlant();
 	}
+	
 }
 
 // Called every frame
@@ -56,15 +56,7 @@ void APlant::Interact_Implementation()
 
 void APlant::LoadActor_Implementation()
 {
-	PlantScale[2] = PlantScale[2] * 0.3f;
-	this->SetActorScale3D(PlantScale * 0.3f);
 
-	int SetGrowState = GrowState;
-	GrowState = 0;
-	for (int i = 0; i < SetGrowState; i++)
-	{
-		GrowPlant();
-	}
 }
 
 bool APlant::GrowPlant()
@@ -75,17 +67,7 @@ bool APlant::GrowPlant()
 		PlantStateAgeMinutes = 0.0f;
 		GameInstanceTimeStart = GameInstance->RealTimeMinutes;
 
-		if (GrowState == 1)
-		{
-			PlantScale[2] = PlantScale[2] * 3;
-			PlantScale = PlantScale * GrowFactor;
-			this->SetActorScale3D(PlantScale);
-		}
-		else
-		{
-			PlantScale = PlantScale * GrowFactor;
-			this->SetActorScale3D(PlantScale);
-		}
+		this->SetActorScale3D(PlantScale * GrowFactor * GrowState);
 
 		return true;
 	}

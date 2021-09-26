@@ -31,7 +31,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
 	bool bCanBeHarvested = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Growth")
 	int GrowState = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
@@ -41,7 +41,7 @@ public:
 	int GrowthStages = 3;
 
 	/**The time the plant has spent in its current stage in minutes*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Growth")
 	float PlantStateAgeMinutes = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
@@ -63,7 +63,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Properties")
 	FVector PlantScale = FVector(1);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

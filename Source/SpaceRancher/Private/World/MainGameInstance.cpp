@@ -78,10 +78,10 @@ void UMainGameInstance::SaveGame()
 
 	for (int i = 0; i < Actors.Num(); i++)
 	{
-
 		FActorRecord ActorRecord(Actors[i]);
-		FMemoryWriter MemoryWriter(ActorRecord.Data);
+		FMemoryWriter MemoryWriter(ActorRecord.Data, true);
 		FActorSaveArchive Ar(MemoryWriter, false);
+		MemoryWriter.SetIsSaving(true);
 		Actors[i]->Serialize(Ar);
 		SaveGameData->Data.Add(ActorRecord);
 		ISaveable::Execute_SaveActor(Actors[i]);
@@ -104,11 +104,14 @@ bool UMainGameInstance::LoadGame()
 		//De-Serialize Actors
 		TArray<AActor*> Actors;
 		UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), Actors);
-
+		
 		for (int i = 0; i < Actors.Num(); i++)
 		{
+			Actors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
+
 			FMemoryReader MemoryReader(SaveGameData->Data[i].Data);
 			FActorSaveArchive Ar(MemoryReader, false);
+			MemoryReader.SetIsLoading(true);
 			Actors[i]->Serialize(Ar);
 			ISaveable::Execute_LoadActor(Actors[i]);
 		}
