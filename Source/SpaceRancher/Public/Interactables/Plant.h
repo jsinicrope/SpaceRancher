@@ -53,9 +53,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int MaxHarvestableState = GrowthStages;
 
-	UPROPERTY(SaveGame)
-	float GameInstanceTimeStart = 0.0f;
-
 	/**
 	* The thickness/radius of the bottom part of the stem
 	* This is used when spawning it
@@ -63,8 +60,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
-	FVector PlantScale = FVector(1);
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* StaticMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	TArray<UStaticMesh*> StateMeshes;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;

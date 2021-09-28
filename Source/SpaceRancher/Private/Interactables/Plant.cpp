@@ -11,9 +11,16 @@ APlant::APlant()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+
 	GrowState = 0;
-	GameInstanceTimeStart = 0.0f;
 	bIsCollectible = bCanBeHarvested;
+	PlantStateAgeMinutes = 0.0f;
+
+	if (StateMeshes.Num() > 0)
+	{
+		StaticMesh->SetStaticMesh(StateMeshes[0]);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -22,17 +29,11 @@ void APlant::BeginPlay()
 	Super::BeginPlay();
 	
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
-	GameInstanceTimeStart = GameInstance->RealTimeMinutes;
 
-	this->SetActorScale3D(PlantScale * 0.3f);
-
-	int SetGrowState = GrowState;
-	GrowState = 0;
-	for (int i = 0; i < SetGrowState; i++)
+	if (StateMeshes.Num() > GrowState)
 	{
-		GrowPlant();
+		StaticMesh->SetStaticMesh(StateMeshes[GrowState]);
 	}
-	
 }
 
 // Called every frame
@@ -40,7 +41,7 @@ void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PlantStateAgeMinutes = GameInstance->RealTimeMinutes - GameInstanceTimeStart;
+	PlantStateAgeMinutes += DeltaTime;
 
 	if (PlantStateAgeMinutes >= TimePerStage)
 	{
@@ -65,10 +66,11 @@ bool APlant::GrowPlant()
 	{
 		GrowState++;
 		PlantStateAgeMinutes = 0.0f;
-		GameInstanceTimeStart = GameInstance->RealTimeMinutes;
 
-		this->SetActorScale3D(PlantScale * GrowFactor * GrowState);
-
+		if (StateMeshes.Num() > GrowState)
+		{
+			StaticMesh->SetStaticMesh(StateMeshes[GrowState]);
+		}
 		return true;
 	}
 	else
