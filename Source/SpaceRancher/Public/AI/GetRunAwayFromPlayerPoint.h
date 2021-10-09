@@ -7,9 +7,6 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GetRunAwayFromPlayerPoint.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPACERANCHER_API UGetRunAwayFromPlayerPoint : public UBTTaskNode
 {
@@ -22,25 +19,20 @@ public:
 
 protected:
 	UFUNCTION(BlueprintCallable)
-	FVector GetRunAwayPoint(FVector Entity, FVector Player, float fMinNewDistanceFactor);
-
-	UPROPERTY(EditAnywhere)
-	float MaxRadius = 5000.0f;
-
-	UPROPERTY(EditAnywhere)
-	float NewDistanceFactor;
+	FVector GetRunAwayPoint(APawn* Entity);
 
 	UPROPERTY(EditAnywhere)
 	FBlackboardKeySelector TargetVector;
 
 	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector HasPosition;
+	float RunAwaySpeed = 450.0f;
 
 	UPROPERTY(EditAnywhere)
-	float RunAwaySpeed;
+	float MinNewDistance = 500.0f;
 
-	bool bReachedNewPosition;
+	UPROPERTY(EditAnywhere)
+	float MaxNewDistance = 1000.0f;
 
-private:
-	float MinNewDistanceFactor;
+	UPROPERTY(EditAnywhere)
+	float DirectionalNoiseDeg = 35.0f;
 };

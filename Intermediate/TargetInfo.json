@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "SpaceRancher",
-			"Path": "F:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
+			"Path": "E:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "SpaceRancherEditor",
-			"Path": "F:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs",
+			"Path": "E:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]

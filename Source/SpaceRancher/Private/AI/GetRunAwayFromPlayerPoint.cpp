@@ -8,91 +8,57 @@
 #include "NavigationSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Character.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UGetRunAwayFromPlayerPoint::UGetRunAwayFromPlayerPoint()
 {
-	MaxRadius = 5000.0f;
-	NewDistanceFactor = 1.2f;
-	RunAwaySpeed = 450.0f;
-	bReachedNewPosition = false;
+
 }
 
 EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Started Custom Script"));
 	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
 
 	auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
 
-	FVector EntityPosition = ControlledPawn->GetActorLocation();
-	FVector PlayerPosition = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	FVector TargetPosition = Blackboard->GetValueAsVector(TargetVector.SelectedKeyName);
+	FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(ControlledPawn);
 
-	if (Blackboard->GetValueAsBool(HasPosition.SelectedKeyName))
-	{
-		float Current_Distance = sqrt(pow((TargetPosition.X - EntityPosition.X), 2.0f) + pow((TargetPosition.Y - EntityPosition.Y), 2.0f));
+	Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
 
-		if (Current_Distance <= 50.0f)
-		{
-			FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, NewDistanceFactor);
+	ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
 
-			Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
-
-			ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
-			EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
-		}
-
-		AAIController* EntityController = Cast<AAIController>(ControlledPawn->GetController());
-		EntityController->MoveToLocation(TargetPosition);
-
-		return EBTNodeResult::Succeeded;
-	}
-
-	else
-	{
-		FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(EntityPosition, PlayerPosition, NewDistanceFactor);
-
-		Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
-
-		ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
-		EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
-
-		AAIController* EntityController = Cast<AAIController>(ControlledPawn->GetController());
-		EntityController->MoveToLocation(NewTargetPosition);
-
-		Blackboard->SetValueAsBool(HasPosition.SelectedKeyName, true);
-
-		return EBTNodeResult::Succeeded;
-	}
-	
+	return EBTNodeResult::Succeeded;
 }
 
-FVector UGetRunAwayFromPlayerPoint::GetRunAwayPoint(FVector Entity, FVector Player, float fMaxNewDistanceFactor)
+FVector UGetRunAwayFromPlayerPoint::GetRunAwayPoint(APawn* Entity)
 {
 	UNavigationSystemV1* NavSys = UNavigationSystemV1::GetCurrent(GetWorld());
-
 	if (!NavSys)
-		return FVector();
-
-	FNavLocation Result;
-
-	float Current_Distance = sqrt(pow((Entity.X - Player.X), 2.0f) + pow((Entity.Y - Player.Y), 2.0f));
-
-	if (NavSys->GetRandomReachablePointInRadius(Entity, (Current_Distance * fMaxNewDistanceFactor * 2), Result))
 	{
-		FVector NewPosition = Result.Location;
-
-		float NewDistance = sqrt(pow((NewPosition.X - Player.X), 2.0f) + pow((NewPosition.Y - Player.Y), 2.0f));
-
-		if (NewDistance >= (Current_Distance * fMaxNewDistanceFactor))
-		{
-			return NewPosition;
-		}
-		else
-		{
-			fMaxNewDistanceFactor += 0.01f;
-			return GetRunAwayPoint(Entity, Player, fMaxNewDistanceFactor);
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("No Nav mesh found"));
+		return FVector();
 	}
-	return FVector();
+
+	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	FVector EntityLocation = Entity->GetActorLocation();
+	float XLocationDelta = PlayerLocation.X - EntityLocation.X;
+	float YLocationDelta = PlayerLocation.Y - EntityLocation.Y;
+	// Get rotation from radians
+	float Rotation = FMath::RadiansToDegrees(FMath::Atan2(YLocationDelta, XLocationDelta)) - (180.0f + FMath::RandRange(-DirectionalNoiseDeg, DirectionalNoiseDeg));
+
+	// Add noise for more random run dirction
+	float NewRunDirction = Rotation;
+	FRotator RunDirection(0, Rotation, 0);
+	float RunAwayDistance = FMath::RandRange(MinNewDistance, MaxNewDistance);
+	FVector NewLocation = UKismetMathLibrary::GetForwardVector(RunDirection) * RunAwayDistance;
+
+	// Debuging line
+	FVector Start = EntityLocation;
+
+	FVector ReprLocation = NewLocation;
+	ReprLocation.Z = EntityLocation.Z;
+
+	UKismetSystemLibrary::DrawDebugLine(GetWorld(), Start, ReprLocation, FColor::Blue, 1.0f, 12.3333f);
+	return NewLocation;
 }

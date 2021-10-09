@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\SpaceRancher.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{F3DED03B-F4DC-432C-8AFB-1EFFDC9A8C6D}</UniqueIdentifier>
+      <UniqueIdentifier>{E08DD757-C8F2-44ED-8EB6-3CC1052DD520}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\SpaceRancher.Target.cs">
       <Filter>Source</Filter>
@@ -15,7 +15,7 @@
     <None Include="..\..\README.md" />
     <None Include="..\..\SpaceRancher.uproject - Shortcut.lnk" />
     <Filter Include="Config">
-      <UniqueIdentifier>{5562EBE4-D01C-41AE-BD9A-1D587B156ECA}</UniqueIdentifier>
+      <UniqueIdentifier>{76639111-EC3A-4641-8B0E-1A44453666E8}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -33,7 +33,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\SpaceRancher">
-      <UniqueIdentifier>{B74D6BBD-65AD-48F0-98F2-B51B45C70E73}</UniqueIdentifier>
+      <UniqueIdentifier>{3C61CD68-5672-4A92-BDE3-4713956082B1}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\SpaceRancher\SpaceRancher.Build.cs">
       <Filter>Source\SpaceRancher</Filter>
@@ -45,10 +45,10 @@
       <Filter>Source\SpaceRancher</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Private">
-      <UniqueIdentifier>{6C3C67B0-D715-43AC-AA1D-318D2953C481}</UniqueIdentifier>
+      <UniqueIdentifier>{8D336452-E88B-4AD1-85F0-F70BECB3CFE7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Private\AI">
-      <UniqueIdentifier>{A8D87897-A96C-4869-BB63-A66A58F46D8A}</UniqueIdentifier>
+      <UniqueIdentifier>{3F7741DA-B6F9-4836-A033-7F919A0AA3C3}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\GetRunAwayFromPlayerPoint.cpp">
       <Filter>Source\SpaceRancher\Private\AI</Filter>
@@ -57,10 +57,10 @@
       <Filter>Source\SpaceRancher\Private\AI</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Characters">
-      <UniqueIdentifier>{07B86A76-21E1-4BC3-AD6F-6B6E704D89EA}</UniqueIdentifier>
+      <UniqueIdentifier>{9895E7FD-75E9-4B0A-8814-EC666DB6616B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Private\Characters\Companions">
-      <UniqueIdentifier>{7E1DAEAC-2DFE-4F3B-B061-246404B5BC67}</UniqueIdentifier>
+      <UniqueIdentifier>{1569919C-8B92-4202-B7C4-0B85876177D5}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Characters\Companions\Zebos.cpp">
       <Filter>Source\SpaceRancher\Private\Characters\Companions</Filter>
@@ -69,7 +69,7 @@
       <Filter>Source\SpaceRancher\Private\Characters\Companions</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Characters\Main Character">
-      <UniqueIdentifier>{E1B2A78E-7906-4302-89BB-7EAF057B11F4}</UniqueIdentifier>
+      <UniqueIdentifier>{380FE1F3-6454-48AC-801D-B6CBCE3408EB}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Characters\Main Character\CppPlayerController.cpp">
       <Filter>Source\SpaceRancher\Private\Characters\Main Character</Filter>
@@ -78,7 +78,7 @@
       <Filter>Source\SpaceRancher\Private\Characters\Main Character</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Interactables">
-      <UniqueIdentifier>{CCC0002B-EE9D-45AD-B586-E80147ED5131}</UniqueIdentifier>
+      <UniqueIdentifier>{B6E73F50-3E44-4CBE-8CA5-79E8E4FEFE3B}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\InteractInterface.cpp">
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
@@ -96,7 +96,7 @@
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Inventory_System">
-      <UniqueIdentifier>{7C152DC9-0EF3-4DA9-9814-8047BE4B80E4}</UniqueIdentifier>
+      <UniqueIdentifier>{D5EBE679-CDDF-46E2-A4B7-21AF72EA4AC1}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Inventory_System\InventoryComponent.cpp">
       <Filter>Source\SpaceRancher\Private\Inventory_System</Filter>
@@ -114,7 +114,7 @@
       <Filter>Source\SpaceRancher\Private\Inventory_System</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\UI">
-      <UniqueIdentifier>{E8FDA79C-252B-4ABC-A54D-967E53AE85C4}</UniqueIdentifier>
+      <UniqueIdentifier>{1BBBFB66-CA8D-4269-BCF8-0AC220683DBC}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\Clock.cpp">
       <Filter>Source\SpaceRancher\Private\UI</Filter>
@@ -123,13 +123,13 @@
       <Filter>Source\SpaceRancher\Private\UI</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\World">
-      <UniqueIdentifier>{F9E64E75-89EC-448C-A472-15CE7DAC6944}</UniqueIdentifier>
+      <UniqueIdentifier>{8FFDABCD-DF1D-493F-AC2D-24D4985DC337}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameInstance.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\World\Saves">
-      <UniqueIdentifier>{FB840554-8FD0-414C-9C5E-4618393F5BC1}</UniqueIdentifier>
+      <UniqueIdentifier>{D9E87029-C49F-4781-B630-A199F11C49AB}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\Saves\ActorRecord.cpp">
       <Filter>Source\SpaceRancher\Private\World\Saves</Filter>
@@ -144,10 +144,10 @@
       <Filter>Source\SpaceRancher\Private\World\Saves</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Public">
-      <UniqueIdentifier>{E63B1967-147D-40BD-93D2-D5130FAABA66}</UniqueIdentifier>
+      <UniqueIdentifier>{F3955862-B1D9-4126-86FA-FC7E6D764938}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Public\AI">
-      <UniqueIdentifier>{F0DB0A4E-5181-4F9E-851E-00E5B49E5B51}</UniqueIdentifier>
+      <UniqueIdentifier>{3BD545C2-6B97-4603-AE4F-C142FB546BB2}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\GetRunAwayFromPlayerPoint.h">
       <Filter>Source\SpaceRancher\Public\AI</Filter>
@@ -156,10 +156,10 @@
       <Filter>Source\SpaceRancher\Public\AI</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Characters">
-      <UniqueIdentifier>{E65AC601-5AF4-4613-AFBF-3A7196E69AA0}</UniqueIdentifier>
+      <UniqueIdentifier>{33734376-A83F-404F-9CD2-144C04CFB63B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\SpaceRancher\Public\Characters\Companions">
-      <UniqueIdentifier>{836C0F39-B8CF-40A5-907D-5D25049E75F7}</UniqueIdentifier>
+      <UniqueIdentifier>{C0B437B0-9ED0-49F6-821E-1B5C340E4071}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Characters\Companions\Zebos.h">
       <Filter>Source\SpaceRancher\Public\Characters\Companions</Filter>
@@ -168,7 +168,7 @@
       <Filter>Source\SpaceRancher\Public\Characters\Companions</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Characters\Main Character">
-      <UniqueIdentifier>{A920801A-23AB-48C5-B84D-EAE454B5476F}</UniqueIdentifier>
+      <UniqueIdentifier>{E31E9227-23B5-42B4-B3CF-8C153D7AD87E}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Characters\Main Character\CppPlayerController.h">
       <Filter>Source\SpaceRancher\Public\Characters\Main Character</Filter>
@@ -177,7 +177,7 @@
       <Filter>Source\SpaceRancher\Public\Characters\Main Character</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Interactables">
-      <UniqueIdentifier>{E6CBC5AA-A499-4645-AE77-F24E3955C9DD}</UniqueIdentifier>
+      <UniqueIdentifier>{ACCAB961-0CB8-4101-85EB-4744269DA19E}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\InteractInterface.h">
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
@@ -195,7 +195,7 @@
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Inventory_System">
-      <UniqueIdentifier>{C380F400-44AD-40B9-9CFF-3F2E607BEE86}</UniqueIdentifier>
+      <UniqueIdentifier>{ADC7BD4C-8842-43EF-8D07-70B452A7E663}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\InventoryComponent.h">
       <Filter>Source\SpaceRancher\Public\Inventory_System</Filter>
@@ -216,7 +216,7 @@
       <Filter>Source\SpaceRancher\Public\Inventory_System</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\UI">
-      <UniqueIdentifier>{33698D40-A12D-41C1-B4F3-4FCFBE9D14AA}</UniqueIdentifier>
+      <UniqueIdentifier>{465E4A71-0855-4DA0-8230-1B762703187D}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\Clock.h">
       <Filter>Source\SpaceRancher\Public\UI</Filter>
@@ -225,13 +225,13 @@
       <Filter>Source\SpaceRancher\Public\UI</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\World">
-      <UniqueIdentifier>{5C1045EB-FDA1-4AED-BC8F-8E8F61134016}</UniqueIdentifier>
+      <UniqueIdentifier>{66AB0B44-4964-4841-970B-6DC93F827923}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameInstance.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\World\Saves">
-      <UniqueIdentifier>{48B47F4D-82E1-425E-87E0-00B6F189C52D}</UniqueIdentifier>
+      <UniqueIdentifier>{D1A36472-990B-40C1-85B0-B42290CC6032}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\Saves\ActorRecord.h">
       <Filter>Source\SpaceRancher\Public\World\Saves</Filter>
