@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Perception/AIPerceptionTypes.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "NPC_Controller.generated.h"
 
 UCLASS()
@@ -22,4 +24,23 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
     class UAIPerceptionComponent* AIPerceptionComponent = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AISightRadius = 3000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AISightAge = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AILosesSightRadius = AISightRadius + 500.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AIFieldOfView = 40.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UAISenseConfig_Sight* SightConfig;
+	
+
+	UFUNCTION()
+	void OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus);
 };

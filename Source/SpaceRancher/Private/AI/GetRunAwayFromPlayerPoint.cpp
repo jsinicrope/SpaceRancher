@@ -19,13 +19,13 @@ EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeCompone
 {
 	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
 
-	auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
+	const auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
 
-	FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(ControlledPawn);
+	const FVector NewTargetPosition = UGetRunAwayFromPlayerPoint::GetRunAwayPoint(ControlledPawn);
 
 	Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
 
-	ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
 	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
 
 	return EBTNodeResult::Succeeded;
@@ -40,21 +40,20 @@ FVector UGetRunAwayFromPlayerPoint::GetRunAwayPoint(APawn* Entity)
 		return FVector();
 	}
 
-	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	FVector EntityLocation = Entity->GetActorLocation();
-	float XLocationDelta = PlayerLocation.X - EntityLocation.X;
-	float YLocationDelta = PlayerLocation.Y - EntityLocation.Y;
+	const FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	const FVector EntityLocation = Entity->GetActorLocation();
+	const float XLocationDelta = PlayerLocation.X - EntityLocation.X;
+	const float YLocationDelta = PlayerLocation.Y - EntityLocation.Y;
 	// Get rotation from radians
-	float Rotation = FMath::RadiansToDegrees(FMath::Atan2(YLocationDelta, XLocationDelta)) - (180.0f + FMath::RandRange(-DirectionalNoiseDeg, DirectionalNoiseDeg));
+	const float Rotation = FMath::RadiansToDegrees(FMath::Atan2(YLocationDelta, XLocationDelta)) - (180.0f + FMath::RandRange(-DirectionalNoiseDeg, DirectionalNoiseDeg));
 
-	// Add noise for more random run dirction
-	float NewRunDirction = Rotation;
-	FRotator RunDirection(0, Rotation, 0);
-	float RunAwayDistance = FMath::RandRange(MinNewDistance, MaxNewDistance);
-	FVector NewLocation = UKismetMathLibrary::GetForwardVector(RunDirection) * RunAwayDistance;
+	// Add noise for more random run direction
+	const FRotator RunDirection(0, Rotation, 0);
+	const float RunAwayDistance = FMath::RandRange(MinNewDistance, MaxNewDistance);
+	const FVector NewLocation = UKismetMathLibrary::GetForwardVector(RunDirection) * RunAwayDistance;
 
-	// Debuging line
-	FVector Start = EntityLocation;
+	// Debugging line
+	const FVector Start = EntityLocation;
 
 	FVector ReprLocation = NewLocation;
 	ReprLocation.Z = EntityLocation.Z;
