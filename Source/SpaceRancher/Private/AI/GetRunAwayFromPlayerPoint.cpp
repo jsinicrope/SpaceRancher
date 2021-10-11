@@ -27,7 +27,7 @@ EBTNodeResult::Type UGetRunAwayFromPlayerPoint::ExecuteTask(UBehaviorTreeCompone
 
 	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
 	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
-
+	
 	return EBTNodeResult::Succeeded;
 }
 
@@ -57,7 +57,7 @@ FVector UGetRunAwayFromPlayerPoint::GetRunAwayPoint(APawn* Entity)
 
 	FVector ReprLocation = NewLocation;
 	ReprLocation.Z = EntityLocation.Z;
-
+	
 	UKismetSystemLibrary::DrawDebugLine(GetWorld(), Start, ReprLocation, FColor::Blue, 1.0f, 12.3333f);
 	return NewLocation;
 }

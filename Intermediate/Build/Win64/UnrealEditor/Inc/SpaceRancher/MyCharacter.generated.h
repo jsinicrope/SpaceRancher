@@ -14,8 +14,8 @@ struct FItem_Struct;
 #endif
 #define SPACERANCHER_MyCharacter_generated_h
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_SPARSE_DATA
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_SPARSE_DATA
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execCheckForInteractables); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
@@ -28,13 +28,16 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execSavePlayerCharacter); \
 	DECLARE_FUNCTION(execLoadGame); \
 	DECLARE_FUNCTION(execSaveGame); \
+	DECLARE_FUNCTION(execbIsPlayerDead); \
+	DECLARE_FUNCTION(execRespawnPlayer); \
 	DECLARE_FUNCTION(execKillPlayer); \
+	DECLARE_FUNCTION(execDamagePlayer); \
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint);
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execCheckForInteractables); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
@@ -47,13 +50,16 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execSavePlayerCharacter); \
 	DECLARE_FUNCTION(execLoadGame); \
 	DECLARE_FUNCTION(execSaveGame); \
+	DECLARE_FUNCTION(execbIsPlayerDead); \
+	DECLARE_FUNCTION(execRespawnPlayer); \
 	DECLARE_FUNCTION(execKillPlayer); \
+	DECLARE_FUNCTION(execDamagePlayer); \
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint);
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_INCLASS_NO_PURE_DECLS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
 	friend struct Z_Construct_UClass_AMyCharacter_Statics; \
@@ -63,7 +69,7 @@ public: \
 	virtual UObject* _getUObject() const override { return const_cast<AMyCharacter*>(this); }
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_INCLASS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_INCLASS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
 	friend struct Z_Construct_UClass_AMyCharacter_Statics; \
@@ -73,7 +79,7 @@ public: \
 	virtual UObject* _getUObject() const override { return const_cast<AMyCharacter*>(this); }
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_STANDARD_CONSTRUCTORS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMyCharacter(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMyCharacter) \
@@ -86,7 +92,7 @@ private: \
 public:
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_ENHANCED_CONSTRUCTORS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMyCharacter(AMyCharacter&&); \
@@ -97,11 +103,12 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMyCharacter)
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_PRIVATE_PROPERTY_OFFSET \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__BaseTurnAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseTurnAtRate); } \
 	FORCEINLINE static uint32 __PPO__BaseLookUpAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseLookUpAtRate); } \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
 	FORCEINLINE static uint32 __PPO__maxHealth() { return STRUCT_OFFSET(AMyCharacter, maxHealth); } \
+	FORCEINLINE static uint32 __PPO__bPlayerDead() { return STRUCT_OFFSET(AMyCharacter, bPlayerDead); } \
 	FORCEINLINE static uint32 __PPO__maxStamina() { return STRUCT_OFFSET(AMyCharacter, maxStamina); } \
 	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); } \
 	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
@@ -132,6 +139,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__ClockWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ClockWidgetClass); } \
 	FORCEINLINE static uint32 __PPO__ClockWidget() { return STRUCT_OFFSET(AMyCharacter, ClockWidget); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
+	FORCEINLINE static uint32 __PPO__PC() { return STRUCT_OFFSET(AMyCharacter, PC); } \
 	FORCEINLINE static uint32 __PPO__TimerHandler() { return STRUCT_OFFSET(AMyCharacter, TimerHandler); } \
 	FORCEINLINE static uint32 __PPO__ElapsedDamageTime() { return STRUCT_OFFSET(AMyCharacter, ElapsedDamageTime); } \
 	FORCEINLINE static uint32 __PPO__ElapsedStaminaDrainTime() { return STRUCT_OFFSET(AMyCharacter, ElapsedStaminaDrainTime); } \
@@ -141,27 +149,27 @@ public: \
 	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); }
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_PROLOG
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_GENERATED_BODY_LEGACY \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_17_PROLOG
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_PRIVATE_PROPERTY_OFFSET \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_SPARSE_DATA \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_INCLASS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_STANDARD_CONSTRUCTORS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_PRIVATE_PROPERTY_OFFSET \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_SPARSE_DATA \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_RPC_WRAPPERS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_INCLASS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_GENERATED_BODY \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_PRIVATE_PROPERTY_OFFSET \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_SPARSE_DATA \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_INCLASS_NO_PURE_DECLS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_21_ENHANCED_CONSTRUCTORS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_PRIVATE_PROPERTY_OFFSET \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_SPARSE_DATA \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_INCLASS_NO_PURE_DECLS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

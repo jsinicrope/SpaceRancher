@@ -10,7 +10,6 @@
 #include "Inventory_System/InventoryComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Inventory_System/ItemPickUpWidget.h"
-#include "TimerManager.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -49,6 +48,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float maxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	bool bPlayerDead = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float maxStamina;
@@ -130,7 +132,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	class UItemPickUpWidget* ItemPickUpWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY()
 	class UUserWidget* WidgetToRemove;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Clock")
@@ -143,8 +145,8 @@ protected:
 	UMainGameInstance* GameInstance;
 
 	//Variables hidden in Editor
+	UPROPERTY()
 	class ACppPlayerController* PC;
-	class UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 
 	UPROPERTY(SaveGame)
 	FTimerHandle TimerHandler;
@@ -178,8 +180,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerInteract();
 
-	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
+	UFUNCTION(BlueprintCallable, Category="Health")
+	void DamagePlayer(float Damage);
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
 	void KillPlayer();
+
+	UFUNCTION(BlueprintCallable, Category="Spawn")
+	void RespawnPlayer();
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	bool bIsPlayerDead();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void SaveGame();
@@ -218,4 +229,5 @@ public:
 	void MoveRight(float Value);
 	void LookUpAtRate(float Value);
 	void TurnAtRate(float Value);
+	
 };

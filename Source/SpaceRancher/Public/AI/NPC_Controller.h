@@ -26,13 +26,13 @@ public:
     class UAIPerceptionComponent* AIPerceptionComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AISightRadius = 3000.0f;
+	float AISightRadius = 1500.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AISightAge = 10.0f;
+	float AISightAge = 5.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AILosesSightRadius = AISightRadius + 500.0f;
+	float AILosesSightRadius = AISightRadius + 250.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AIFieldOfView = 40.0f;

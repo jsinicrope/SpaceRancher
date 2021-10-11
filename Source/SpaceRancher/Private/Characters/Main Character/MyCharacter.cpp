@@ -115,7 +115,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	//Drain Stamina if Sprinting and not in Air after 'TimeToStaminaRegen'
 	{
-		if (CharacterMovement->IsMovingOnGround())
+		if (GetCharacterMovement()->IsMovingOnGround())
 		{
 			if (bSprinting)
 			{
@@ -155,15 +155,15 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	// Check for Fall Damage
 	{
-		if (CharacterMovement->IsFalling())
+		if (GetCharacterMovement()->IsFalling())
 		{
-			if (CharacterMovement->GetLastUpdateVelocity().Z < 0.0f)
+			if (GetCharacterMovement()->GetLastUpdateVelocity().Z < 0.0f)
 			{
 				FallingTime += DeltaTime;
 			}
 		}
 
-		if (!CharacterMovement->IsFalling() && FallingTime > 0.0f)
+		if (!GetCharacterMovement()->IsFalling() && FallingTime > 0.0f)
 		{
 			//Calculate Landing Velocity
 			// 2 * acceleration * delta time = velocity
@@ -184,6 +184,10 @@ void AMyCharacter::Tick(float DeltaTime)
 		if (Health <= 0.0f)
 		{
 			KillPlayer();
+		}
+		else
+		{
+			bPlayerDead = false;
 		}
 	}
 
@@ -269,11 +273,39 @@ void AMyCharacter::PlayerInteract()
 
 void AMyCharacter::KillPlayer()
 {
-	// Add correct Rotation
+	bPlayerDead = true;
+
+	RespawnPlayer();
+}
+
+void AMyCharacter::RespawnPlayer()
+{
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
-	CharacterMovement->StopActiveMovement();
+	GetCharacterMovement()->StopActiveMovement();
 	Health = maxHealth;
 	Stamina = maxStamina;
+
+	bPlayerDead = false;
+}
+
+void AMyCharacter::DamagePlayer(float Damage)
+{
+	Health = FMath::Max(Health - Damage, 0.0f);
+
+	if (Health <= 0.0f)
+	{
+		KillPlayer();
+	}
+}
+
+bool AMyCharacter::bIsPlayerDead()
+{
+	if (Health <= 0.0f)
+	{
+		return true;
+	}
+	return false;
+	//return bPlayerDead;
 }
 
 void AMyCharacter::SaveGame()
@@ -289,7 +321,7 @@ void AMyCharacter::LoadGame()
 void AMyCharacter::SavePlayerCharacter()
 {
 	UMainSaveGame* Savedata = GameInstance->SaveGameData;
-	CurrentVelocity = CharacterMovement->Velocity;
+	CurrentVelocity = GetCharacterMovement()->Velocity;
 	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 }
 
@@ -308,7 +340,7 @@ void AMyCharacter::LoadPlayerCharacter()
 	const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
 	GetWorld()->GetFirstPlayerController()->SetControlRotation(SpawnRotation);
-	CharacterMovement->Velocity = CurrentVelocity;
+	GetCharacterMovement()->Velocity = CurrentVelocity;
 }
 
 void AMyCharacter::MoveForward(float Value)
@@ -347,16 +379,16 @@ void AMyCharacter::TurnAtRate(float Value)
 
 void AMyCharacter::PlayerStartSprint()
 {
-	if ((Stamina > 10) && (CharacterMovement->IsMovingOnGround()))
+	if ((Stamina > 10) && (GetCharacterMovement()->IsMovingOnGround()))
 	{
-		CharacterMovement->MaxWalkSpeed = SprintSpeed;
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 		bSprinting = true;
 	}
 }
 
 void AMyCharacter::PlayerStopSprint()
 {
-	CharacterMovement->MaxWalkSpeed = WalkSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	bSprinting = false;
 }
 
