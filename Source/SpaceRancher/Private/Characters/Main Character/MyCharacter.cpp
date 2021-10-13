@@ -15,21 +15,21 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//Health
+	// Health
 	Health = 100.0f;
 	HealthLastTick = 100.0f;
 	HealthRegenPerSecond = 10.0f;
 	TimeToHealthRegen = 3.0f;
 	maxHealth = 100.0f;
 
-	//Stamina
+	// Stamina
 	Stamina = 100.0f;
 	StaminaLossRunning = 50.0f;
-	StaminaBaseRegen = 20.0f;
+	StaminaRegenPerSecond = 20.0f;
 	TimeToStaminaRegen = 2.0f;
 	maxStamina = 100.0f;
 
-	//Movement
+	// Movement
 	WalkSpeed = 600.0f;
 	SprintSpeed = 1000.0f;
 	FallingTime = 0.0f;
@@ -39,14 +39,14 @@ AMyCharacter::AMyCharacter()
 	BaseTurnAtRate = 45.0f;
 	BaseLookUpAtRate = 45.0f;
 
-	//Interaction
+	// Interaction
 	InteractDistance = 250.0f;
 
-	//Death
+	// Death
 	RespawnPoint = FVector(0, 0, 0);
 	RespawnViewDirection = FRotator(0, 0, 0);
 
-	//Runtime
+	// Runtime
 	bSprinting = false;
 
 	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
@@ -67,7 +67,7 @@ void AMyCharacter::BeginPlay()
 	TArray<UCameraComponent*> comps;
 
 	this->GetComponents(comps);
-	for (auto Camera : comps)
+	for (UCameraComponent* Camera : comps)
 	{
 		PlayerCamera = Camera;
 	}
@@ -107,13 +107,13 @@ void AMyCharacter::Tick(float DeltaTime)
 
 		HealthLastTick = Health;
 
-		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < 35.0f))
+		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratedHealth))
 		{
-			Health = fmin(100, Health + HealthRegenPerSecond * DeltaTime);
+			Health = fmin(maxHealth, Health + HealthRegenPerSecond * DeltaTime);
 		}
 	}
 
-	//Drain Stamina if Sprinting and not in Air after 'TimeToStaminaRegen'
+	// Drain Stamina if Sprinting and not in Air after 'TimeToStaminaRegen'
 	{
 		if (GetCharacterMovement()->IsMovingOnGround())
 		{
@@ -122,13 +122,12 @@ void AMyCharacter::Tick(float DeltaTime)
 				Stamina -= StaminaLossRunning * DeltaTime;
 				ElapsedStaminaDrainTime = 0.0f;
 			}
-
+	// Regen Stamina
 			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
-				Stamina = fmin(100, Stamina + StaminaBaseRegen * DeltaTime);
+				Stamina = fmin(maxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
 		}
 	}
 
-	//Stop Running if Stamina below 10
 	{
 		if (Stamina <= 0)
 			PlayerStopSprint();
@@ -136,7 +135,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	//Call Pop Up for Interaction if Interactable actor is hit
 	{
-		bInteractableInRange = CheckForInteractables();
+		bInteractableInRange = CheckForInteractable();
 		if (bInteractableInRange)
 		{
 			if (!InteractPopUp->IsInViewport())
@@ -165,10 +164,10 @@ void AMyCharacter::Tick(float DeltaTime)
 
 		if (!GetCharacterMovement()->IsFalling() && FallingTime > 0.0f)
 		{
-			//Calculate Landing Velocity
+			// Calculate Landing Velocity
 			// 2 * acceleration * delta time = velocity
-			//9.81 average gravity acceleration; should be same in engine
-			float FallSpeed = 9.81 * FallingTime;
+			// 9.81 average gravity acceleration; should be same in engine
+			const float FallSpeed = 9.81 * FallingTime;
 
 			FallingTime = 0.0f;
 
@@ -179,7 +178,7 @@ void AMyCharacter::Tick(float DeltaTime)
 		}
 	}
 
-	//Kill Player if Health 0
+	// Kill Player if Health 0
 	{
 		if (Health <= 0.0f)
 		{
@@ -191,7 +190,7 @@ void AMyCharacter::Tick(float DeltaTime)
 		}
 	}
 
-	//Update Clock Widget
+	// Update Clock Widget
 	ClockWidget->UpdateClock();
 }
 
@@ -262,7 +261,7 @@ void AMyCharacter::PlayerInteract()
 		{
 			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
 
-			DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 12.3333f);
+			DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 10.0f);
 		}
 	}
 	else
@@ -300,12 +299,7 @@ void AMyCharacter::DamagePlayer(float Damage)
 
 bool AMyCharacter::bIsPlayerDead()
 {
-	if (Health <= 0.0f)
-	{
-		return true;
-	}
-	return false;
-	//return bPlayerDead;
+	return bPlayerDead;
 }
 
 void AMyCharacter::SaveGame()
@@ -320,18 +314,18 @@ void AMyCharacter::LoadGame()
 
 void AMyCharacter::SavePlayerCharacter()
 {
-	UMainSaveGame* Savedata = GameInstance->SaveGameData;
+	UMainSaveGame* SaveData = GameInstance->SaveGameData;
 	CurrentVelocity = GetCharacterMovement()->Velocity;
-	Savedata->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
+	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 }
 
 void AMyCharacter::LoadPlayerCharacter()
 {
-	UMainSaveGame* Savedata = GameInstance->SaveGameData;
-	InventoryComp->Inventory_Array_Columns = Savedata->Player_Inventory_Array_Columns;
+	UMainSaveGame* SaveData = GameInstance->SaveGameData;
+	InventoryComp->Inventory_Array_Columns = SaveData->Player_Inventory_Array_Columns;
 
-	//De-Serialize
-	FActorRecord ActorRecord = Savedata->PlayerCharacterData;
+	// De-Serialize
+	FActorRecord ActorRecord = SaveData->PlayerCharacterData;
 	FMemoryReader MemoryReader(ActorRecord.Data);
 	FActorSaveArchive Ar(MemoryReader, false);
 	Serialize(Ar);
@@ -394,9 +388,9 @@ void AMyCharacter::PlayerStopSprint()
 
 bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 {
-	bool bAddSuccessfull = InventoryComp->AddItem(Item_Struct);
+	const bool bAddSuccessful = InventoryComp->AddItem(Item_Struct);
 
-	if (bAddSuccessfull)
+	if (bAddSuccessful)
 	{
 		ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
 
@@ -407,7 +401,7 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 		WidgetToRemove = ItemPickUpWidget;
 		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
 	}
-	return bAddSuccessfull;
+	return bAddSuccessful;
 }
 
 FItem_Struct AMyCharacter::RemoveItemFromInventoryClosestPosition(int column, int row)
@@ -442,7 +436,7 @@ void AMyCharacter::RemoveWidgetFromViewport()
 	WidgetToRemove->RemoveFromViewport();
 }
 
-bool AMyCharacter::CheckForInteractables()
+bool AMyCharacter::CheckForInteractable()
 {
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;

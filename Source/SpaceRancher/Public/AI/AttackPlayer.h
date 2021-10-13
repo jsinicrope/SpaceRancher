@@ -29,6 +29,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RunSpeed = 450.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bFailOnLowHealth = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin="0", ClampMax="1", EditCondition="bFailOnLowHealth"))
+	float PercentLowHealth;
 	
 private:
 	UPROPERTY()

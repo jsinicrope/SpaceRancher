@@ -6,6 +6,7 @@
 #include "Characters/Main Character/MyCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Actor.h"
+#include "AI/NPC.h"
 
 UAttackPlayer::UAttackPlayer(const FObjectInitializer& objectInitializer)  : Super(objectInitializer)
 {
@@ -45,6 +46,19 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 			}
 		}
 	}
+
+	if (bFailOnLowHealth)
+	{
+		ANPC* Entity = Cast<ANPC>(EntityController->GetPawn());
+
+		const float EntityHealth = Entity->GetHealth();
+		
+		if (EntityHealth <= EntityHealth * PercentLowHealth)
+		{
+			return EBTNodeResult::Failed;
+		}
+	}
+	
 	return EBTNodeResult::InProgress;
 }
 

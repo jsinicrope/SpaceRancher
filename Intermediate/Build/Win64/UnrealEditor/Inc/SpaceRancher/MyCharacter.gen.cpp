@@ -31,11 +31,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	SPACERANCHER_API UClass* Z_Construct_UClass_UInteractInterface_NoRegister();
 // End Cross Module References
-	DEFINE_FUNCTION(AMyCharacter::execCheckForInteractables)
+	DEFINE_FUNCTION(AMyCharacter::execCheckForInteractable)
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=P_THIS->CheckForInteractables();
+		*(bool*)Z_Param__Result=P_THIS->CheckForInteractable();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execRemoveWidgetFromViewport)
@@ -169,7 +169,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AddItemToInventory", &AMyCharacter::execAddItemToInventory },
 			{ "bIsPlayerDead", &AMyCharacter::execbIsPlayerDead },
-			{ "CheckForInteractables", &AMyCharacter::execCheckForInteractables },
+			{ "CheckForInteractable", &AMyCharacter::execCheckForInteractable },
 			{ "DamagePlayer", &AMyCharacter::execDamagePlayer },
 			{ "KillPlayer", &AMyCharacter::execKillPlayer },
 			{ "LoadGame", &AMyCharacter::execLoadGame },
@@ -268,9 +268,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics
+	struct Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics
 	{
-		struct MyCharacter_eventCheckForInteractables_Parms
+		struct MyCharacter_eventCheckForInteractable_Parms
 		{
 			bool ReturnValue;
 		};
@@ -282,27 +282,27 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	void Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	void Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
-		((MyCharacter_eventCheckForInteractables_Parms*)Obj)->ReturnValue = 1;
+		((MyCharacter_eventCheckForInteractable_Parms*)Obj)->ReturnValue = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MyCharacter_eventCheckForInteractables_Parms), &Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::NewProp_ReturnValue,
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MyCharacter_eventCheckForInteractable_Parms), &Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Interaction" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "CheckForInteractables", nullptr, nullptr, sizeof(MyCharacter_eventCheckForInteractables_Parms), Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_AMyCharacter_CheckForInteractables()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "CheckForInteractable", nullptr, nullptr, sizeof(MyCharacter_eventCheckForInteractable_Parms), Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_CheckForInteractable()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_CheckForInteractables_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -737,6 +737,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_maxHealth;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxRegeneratedHealth_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxRegeneratedHealth;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bPlayerDead_MetaData[];
 #endif
 		static void NewProp_bPlayerDead_SetBit(void* Obj);
@@ -780,9 +784,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_StaminaLossRunning;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_StaminaBaseRegen_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_StaminaRegenPerSecond_MetaData[];
 #endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_StaminaBaseRegen;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_StaminaRegenPerSecond;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_TimeToHealthRegen_MetaData[];
 #endif
@@ -911,7 +915,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMyCharacter_AddItemToInventory, "AddItemToInventory" }, // 4074940771
 		{ &Z_Construct_UFunction_AMyCharacter_bIsPlayerDead, "bIsPlayerDead" }, // 3633481977
-		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractables, "CheckForInteractables" }, // 1131799279
+		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 1476590731
 		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1072611392
 		{ &Z_Construct_UFunction_AMyCharacter_KillPlayer, "KillPlayer" }, // 286801584
 		{ &Z_Construct_UFunction_AMyCharacter_LoadGame, "LoadGame" }, // 472659649
@@ -953,18 +957,25 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_BaseLookUpAtRate = { "BaseLookUpAtRate", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, BaseLookUpAtRate), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_BaseLookUpAtRate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_BaseLookUpAtRate_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_Health_MetaData[] = {
-		{ "Category", "Custom Variables" },
+		{ "Category", "Health" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0020080001000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, Health), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_Health_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_Health_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxHealth_MetaData[] = {
-		{ "Category", "Custom Variables" },
+		{ "Category", "Health" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxHealth = { "maxHealth", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, maxHealth), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxHealth_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxHealth_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxRegeneratedHealth_MetaData[] = {
+		{ "Category", "Health" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxRegeneratedHealth = { "MaxRegeneratedHealth", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, MaxRegeneratedHealth), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxRegeneratedHealth_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxRegeneratedHealth_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPlayerDead_MetaData[] = {
 		{ "Category", "Health" },
@@ -992,7 +1003,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_Stamina = { "Stamina", nullptr, (EPropertyFlags)0x0020080001000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, Stamina), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_Stamina_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_Stamina_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_HealthRegenPerSecond_MetaData[] = {
-		{ "Category", "Custom Variables" },
+		{ "Category", "Health" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
@@ -1050,22 +1061,22 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaLossRunning = { "StaminaLossRunning", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, StaminaLossRunning), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaLossRunning_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaLossRunning_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaBaseRegen_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaRegenPerSecond_MetaData[] = {
 		{ "Category", "Custom Variables" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaBaseRegen = { "StaminaBaseRegen", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, StaminaBaseRegen), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaBaseRegen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaBaseRegen_MetaData)) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaRegenPerSecond = { "StaminaRegenPerSecond", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, StaminaRegenPerSecond), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaRegenPerSecond_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaRegenPerSecond_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToHealthRegen_MetaData[] = {
-		{ "Category", "Custom Variables" },
+		{ "Category", "Health" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToHealthRegen = { "TimeToHealthRegen", nullptr, (EPropertyFlags)0x0020080001000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToHealthRegen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToHealthRegen_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToStaminaRegen_MetaData[] = {
-		{ "Category", "Custom Variables" },
+		{ "Category", "Health" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
@@ -1275,6 +1286,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_BaseLookUpAtRate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_Health,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxHealth,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxRegeneratedHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bPlayerDead,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_maxStamina,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_Stamina,
@@ -1285,7 +1297,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bSprinting,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_CurrentVelocity,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaLossRunning,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaBaseRegen,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_StaminaRegenPerSecond,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToHealthRegen,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_TimeToStaminaRegen,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_FallingTime,
@@ -1345,7 +1357,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 3694738808);
+	IMPLEMENT_CLASS(AMyCharacter, 815088597);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

@@ -29,7 +29,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void Interact_Implementation() override;
+	virtual void Interact_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,11 +43,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
 	float BaseLookUpAtRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float Health;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float maxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
+	float MaxRegeneratedHealth;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	bool bPlayerDead = false;
@@ -58,7 +61,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
 	float Stamina;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float HealthRegenPerSecond;
 
 	// Set to true if player is damaged
@@ -81,12 +84,12 @@ protected:
 	float StaminaLossRunning;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
-	float StaminaBaseRegen;
+	float StaminaRegenPerSecond;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToHealthRegen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToStaminaRegen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
@@ -223,11 +226,10 @@ public:
 	void RemoveWidgetFromViewport();
 
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
-	bool CheckForInteractables();
+	bool CheckForInteractable();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void LookUpAtRate(float Value);
 	void TurnAtRate(float Value);
-	
 };
