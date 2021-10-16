@@ -14,8 +14,4 @@ void ACppPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	check(InputComponent);
-
-	//if (InputComponent != NULL)
-	//{
-	//}
 }

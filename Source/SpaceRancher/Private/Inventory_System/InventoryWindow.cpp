@@ -3,7 +3,8 @@
 #include "Inventory_System/InventoryWindow.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "Inventory_System/InventorySlotWidget.h"
-#include "Components/GridSlot.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Characters/Main Character/CppPlayerController.h"
 
 void UInventoryWindow::NativeConstruct()
 {
@@ -12,6 +13,9 @@ void UInventoryWindow::NativeConstruct()
 	//Initialize Pointers to Widget settings in Editor
 	InventoryTitle = Cast<UTextBlock>(GetWidgetFromName(FName("InventoryTitle")));
 	InventoryGrid = Cast<UGridPanel>(GetWidgetFromName(FName("InventoryGrid")));
+	CloseInventoryButton = Cast<UButton>(GetWidgetFromName(FName("CloseInventoryButton")));
+
+	CloseInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::CloseWindow);
 }
 
 void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclassOf<UUserWidget> InventorySlotWidgetClassIn)
@@ -20,8 +24,32 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 	InventorySlotWidgetClass = InventorySlotWidgetClassIn;
 }
 
+void UInventoryWindow::ShowWindow()
+{
+	this->AddToViewport();
+	bWindowOpen = true;
+}
+
+void UInventoryWindow::CloseWindow()
+{
+	this->RemoveFromViewport();
+	bWindowOpen = false;
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	PC->bShowMouseCursor = false;
+}
+
+void UInventoryWindow::CloseInventory()
+{
+	PC->bShowMouseCursor = true;
+	this->RemoveFromViewport();
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	bWindowOpen = false;
+}
+
 void UInventoryWindow::SetUpInventory()
 {
+	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
+	
 	InventoryTitle->SetText(Inventory->InventoryName);
 	int SlotIndex = 0;
 

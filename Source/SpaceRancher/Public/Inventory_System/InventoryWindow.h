@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "Components/GridPanel.h"
 #include "Inventory_System/Item_Base.h"
+#include "Components/Button.h"
 #include "InventoryWindow.generated.h"
 
 UCLASS()
@@ -24,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 
+	UPROPERTY()
+	bool bWindowOpen = false;
+
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SetUpInventory();
 
@@ -32,6 +36,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SetVariables(UInventoryComponent* InventoryComp, TSubclassOf<UUserWidget> InventorySlotWidgetClassIn);
+
+	UFUNCTION()
+	void ShowWindow();
+
+	UFUNCTION()
+	void CloseWindow();
+
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -45,4 +56,14 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UGridPanel* InventoryGrid;
+
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
+	UButton* CloseInventoryButton;
+
+	UPROPERTY()
+	class ACppPlayerController* PC;
+
+	UFUNCTION()
+	void CloseInventory();
+
 };

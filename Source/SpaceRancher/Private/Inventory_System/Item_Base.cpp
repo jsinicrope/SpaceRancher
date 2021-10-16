@@ -46,8 +46,5 @@ bool AItem_Base::CollectItem(bool bAddToInventory)
 		this->Destroy();
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }

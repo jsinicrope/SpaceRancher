@@ -226,6 +226,7 @@ void AMyCharacter::Interact_Implementation()
 
 void AMyCharacter::PlayerInteract()
 {
+	bInventoryOpen = InventoryComp->GetInventoryOpen();
 	if (!bInventoryOpen)
 	{
 		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);

@@ -27,7 +27,7 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 
 	FItem_Struct()
 	{
-		Name = FString("None");
+		Name = FString("zzz");
 		ItemSize = 1;
 		Thumbnail = NULL;
 		bIsValidItem = false;

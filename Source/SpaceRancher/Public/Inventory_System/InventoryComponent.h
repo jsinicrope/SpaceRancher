@@ -28,19 +28,19 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Columns;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Row"))
+	int Columns = 5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Column"))
+	int Rows = 4;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Rows;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int ItemSlots;
+	int ItemSlots = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FText InventoryName;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryOpen)
 	bool bInventoryOpen = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, Category = "Inventory")
@@ -52,7 +52,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY()
 	class ACppPlayerController* PC;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -70,10 +70,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
 
+	UFUNCTION(BlueprintGetter)
+	bool GetInventoryOpen();
+
+	UFUNCTION()
+	bool SortInventory();
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UInventoryWindow* InventoryWindow;
+
+	UPROPERTY()
+	TArray<FItem_Struct> Items;
 };

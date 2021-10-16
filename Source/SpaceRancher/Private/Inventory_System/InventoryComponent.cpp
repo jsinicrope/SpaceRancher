@@ -19,11 +19,6 @@ UInventoryComponent::UInventoryComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-	Rows = 5; //Length of column
-	Columns = 5; //Length of row
-	ItemSlots = 25;
-
 }
 
 // Called when the game starts
@@ -57,7 +52,7 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
 {
 	for (int i = column; i < Inventory_Array_Columns.Num(); i++)
 	{
-		for (int j = row; Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		for (int j = row; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
 			if (!Inventory_Array_Columns[i].Row_Items[j].bIsValidItem)
 			{
@@ -67,13 +62,11 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
 				return true;
 			}
 		}
-
 	}
 
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item doesn't fit in Inventory"));
 	return false;
 }
-
 
 FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int row, int column)
 {
@@ -86,9 +79,9 @@ FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int row, int column)
 FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
 {
 	FItem_Struct EmptyItem;
-	for (int i = Inventory_Array_Columns.Num()-1; i >= 0; i--)
+	for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)
 	{
-		for (int j = Inventory_Array_Columns[i].Row_Items.Num()-1; j >= 0; j--)
+		for (int j = Inventory_Array_Columns[i].Row_Items.Num() - 1; j >= 0; j--)
 		{
 			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(Item.Name))
 			{
@@ -123,20 +116,68 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 
 void UInventoryComponent::ToggleInventory()
 {
+	bInventoryOpen = InventoryWindow->bWindowOpen;
 	if (!bInventoryOpen)
 	{
+		SortInventory();
 		InventoryWindow->UpdateInventory();
-		InventoryWindow->AddToViewport();
-		bInventoryOpen = true;
+		InventoryWindow->ShowWindow();
 		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
 		PC->bShowMouseCursor = true;
 	}
 	else
 	{
-		InventoryWindow->RemoveFromViewport();
-		bInventoryOpen = false;
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
-		PC->bShowMouseCursor = false;
+		InventoryWindow->CloseWindow();
 	}
+	bInventoryOpen = InventoryWindow->bWindowOpen;
 }
+
+bool UInventoryComponent::GetInventoryOpen()
+{
+	bInventoryOpen = InventoryWindow->bWindowOpen;
+	return bInventoryOpen;
+}
+
+bool UInventoryComponent::SortInventory()
+{
+	// Move Inventory to 2D for easier modification
+	// Store values as pointers
+	Items.Empty();
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			Items.Add(Inventory_Array_Columns[i].Row_Items[j]);
+		}
+	}
+
+	// Bubble Sort Inventory
+	for (int i = 0; i < Items.Num() - 1; i++)
+	{
+		for (int j = 0; j < Items.Num() - 1 - i; j++)
+		{
+			FItem_Struct CurrentItem = Items[j];
+			FItem_Struct NextItem = Items[j + 1];
+		
+			if (NextItem.Name < CurrentItem.Name)
+			{
+				Items[j] = NextItem;
+				Items[j + 1] = CurrentItem;
+			}
+		}
+	}
 	
+	// Move Inventory from 2D back to it's intended shape
+	// Read pointer values to inventory
+	int index = 0;
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			Inventory_Array_Columns[i].Row_Items[j] = Items[index];
+			index++;
+		}
+	}
+	
+	return true;
+}
