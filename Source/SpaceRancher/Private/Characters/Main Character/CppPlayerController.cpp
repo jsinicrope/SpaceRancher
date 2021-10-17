@@ -15,3 +15,8 @@ void ACppPlayerController::SetupInputComponent()
 
 	check(InputComponent);
 }
+
+void ACppPlayerController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}

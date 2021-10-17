@@ -28,32 +28,26 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Row"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Row"), Category = "Inventory")
 	int Columns = 5;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Column"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Column"), Category = "Inventory")
 	int Rows = 4;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int ItemSlots = 20;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	FText InventoryName;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryOpen)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
 	bool bInventoryOpen = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UUserWidget> InventoryWindowClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
-
-	UPROPERTY()
-	class ACppPlayerController* PC;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory", AdvancedDisplay)
+	FVector2D WidgetPosition = FVector2D(700, 200);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItem(FItem_Struct Item_Struct, int row = 0, int column = 0);
@@ -80,9 +74,18 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TSubclassOf<UUserWidget> InventoryWindowClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category = "Inventory")
 	class UInventoryWindow* InventoryWindow;
 
 	UPROPERTY()
 	TArray<FItem_Struct> Items;
+
+	UPROPERTY()
+	class ACppPlayerController* PC;
 };

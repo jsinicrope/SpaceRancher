@@ -16,6 +16,8 @@ public:
 
 	virtual void SetupInputComponent() override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(EditAnywhere, BLueprintReadWrite)
 	class AMyCharacter* PlayerCharacter;
 };
