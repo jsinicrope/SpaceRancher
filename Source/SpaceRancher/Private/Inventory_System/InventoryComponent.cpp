@@ -152,21 +152,7 @@ bool UInventoryComponent::SortInventory()
 		}
 	}
 
-	// Bubble Sort Inventory
-	for (int i = 0; i < Items.Num() - 1; i++)
-	{
-		for (int j = 0; j < Items.Num() - 1 - i; j++)
-		{
-			FItem_Struct CurrentItem = Items[j];
-			FItem_Struct NextItem = Items[j + 1];
-		
-			if (NextItem.Name < CurrentItem.Name)
-			{
-				Items[j] = NextItem;
-				Items[j + 1] = CurrentItem;
-			}
-		}
-	}
+	Algo::SortBy(Items, &FItem_Struct::Name);
 	
 	// Move Inventory from 2D back to it's intended shape
 	// Read pointer values to inventory
