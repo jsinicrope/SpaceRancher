@@ -129,9 +129,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	bool bInventoryOpen;
-
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	class UItemPickUpWidget* ItemPickUpWidget;
 
@@ -150,7 +147,7 @@ protected:
 	//Variables hidden in Editor
 	UPROPERTY()
 	class ACppPlayerController* PC;
-
+	
 	UPROPERTY(SaveGame)
 	FTimerHandle TimerHandler;
 
@@ -168,6 +165,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
 	class UInventoryComponent* InventoryComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	bool bInventoryOpen;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="HUD")
+	class UHUDSetting* MainHUD;
 
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;

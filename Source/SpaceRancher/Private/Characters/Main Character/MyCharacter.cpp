@@ -8,6 +8,7 @@
 #include "UI/Clock.h"
 #include "World/Saves/ActorRecord.h"
 #include "World/Saves/ActorSaveArchive.h"
+#include "UI/HUDSetting.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -51,7 +52,9 @@ AMyCharacter::AMyCharacter()
 
 	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
 	AddOwnedComponent(InventoryComp);
-	
+
+	MainHUD = CreateDefaultSubobject<UHUDSetting>(TEXT("HUD Settings"));
+	AddOwnedComponent(MainHUD);
 }
 
 // Called when the game starts or when spawned
@@ -71,23 +74,7 @@ void AMyCharacter::BeginPlay()
 	{
 		PlayerCamera = Camera;
 	}
-
-	if (InteractPopUpClass)
-	{
-		InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
-	}
-
-	if (ItemPickUpWidgetClass)
-	{
-		ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
-	}
-
-	if (ClockWidgetClass)
-	{
-		ClockWidget = CreateWidget<UClock>(GetWorld(), ClockWidgetClass);
-		ClockWidget->AddToViewport();
-	}
-
+	
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	RespawnViewDirection = GetControlRotation();
 }
@@ -138,16 +125,16 @@ void AMyCharacter::Tick(float DeltaTime)
 		bInteractableInRange = CheckForInteractable();
 		if (bInteractableInRange)
 		{
-			if (!InteractPopUp->IsInViewport())
+			if (!MainHUD->InteractPopUp->IsInViewport())
 			{
-				InteractPopUp->AddToViewport();
+				MainHUD->InteractPopUp->AddToViewport();
 			}
 		}
 		else
 		{
-			if (InteractPopUp->IsInViewport())
+			if (MainHUD->InteractPopUp->IsInViewport())
 			{
-				InteractPopUp->RemoveFromViewport();
+				MainHUD->InteractPopUp->RemoveFromViewport();
 			}
 		}
 	}
@@ -191,7 +178,7 @@ void AMyCharacter::Tick(float DeltaTime)
 	}
 
 	// Update Clock Widget
-	ClockWidget->UpdateClock();
+	MainHUD->ClockWidget->UpdateClock();
 }
 
 // Called to bind functionality to input
@@ -393,13 +380,13 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 
 	if (bAddSuccessful)
 	{
-		ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
+		MainHUD->ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
 
-		if (ItemPickUpWidget->IsInViewport())
-			ItemPickUpWidget->RemoveFromViewport();
+		if (MainHUD->ItemPickUpWidget->IsInViewport())
+			MainHUD->ItemPickUpWidget->RemoveFromViewport();
 
-		ItemPickUpWidget->AddToViewport();
-		WidgetToRemove = ItemPickUpWidget;
+		MainHUD->ItemPickUpWidget->AddToViewport();
+		WidgetToRemove = MainHUD->ItemPickUpWidget;
 		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
 	}
 	return bAddSuccessful;

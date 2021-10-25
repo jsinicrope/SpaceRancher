@@ -17,8 +17,9 @@ class SPACERANCHER_API UInventoryWindow : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	virtual void NativeConstruct();
+	virtual void NativeOnInitialized() override;
 
+	
 	UPROPERTY(BlueprintReadWrite)
 	class UInventoryComponent* Inventory;
 

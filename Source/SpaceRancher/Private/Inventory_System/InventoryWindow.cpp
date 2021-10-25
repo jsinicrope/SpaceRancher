@@ -6,15 +6,17 @@
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/CppPlayerController.h"
 
-void UInventoryWindow::NativeConstruct()
+// Only called once 
+void UInventoryWindow::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	Super::NativeOnInitialized();
 
 	//Initialize Pointers to Widget settings in Editor
 	InventoryTitle = Cast<UTextBlock>(GetWidgetFromName(FName("InventoryTitle")));
 	InventoryGrid = Cast<UGridPanel>(GetWidgetFromName(FName("InventoryGrid")));
 	CloseInventoryButton = Cast<UButton>(GetWidgetFromName(FName("CloseInventoryButton")));
 
+	//Function gets called everytime widget is added to viewport
 	CloseInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::CloseWindow);
 }
 

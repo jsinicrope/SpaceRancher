@@ -5,9 +5,9 @@
 #include "Components/TextBlock.h"
 #include "World/MainGameInstance.h"
 
-void UClock::NativeConstruct()
+void UClock::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	Super::NativeOnInitialized();
 
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
 	TextBlockTime = Cast<UTextBlock>(GetWidgetFromName(FName("TextBlockTime")));

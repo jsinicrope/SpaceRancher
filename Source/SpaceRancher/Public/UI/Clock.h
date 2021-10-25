@@ -15,7 +15,7 @@ class SPACERANCHER_API UClock : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	virtual void NativeConstruct();
+	virtual void NativeOnInitialized() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Time")
 	void UpdateClock();

@@ -5,7 +5,7 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 
-void UNeededItemPopUp::NativeConstruct()
+void UNeededItemPopUp::NativeOnInitialized()
 {
 	ItemImage = Cast<UImage>(GetWidgetFromName(FName("ItemImage")));
 	AmountText = Cast<UTextBlock>(GetWidgetFromName(FName("AmountText")));

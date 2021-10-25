@@ -6,16 +6,13 @@
 #include "Blueprint/UserWidget.h"
 #include "NeededItemPopUp.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPACERANCHER_API UNeededItemPopUp : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
-	virtual void NativeConstruct();
+	virtual void NativeOnInitialized() override;
 
 	UPROPERTY(BlueprintReadwrite, meta=(BindWidget))
 	class UImage* ItemImage;
