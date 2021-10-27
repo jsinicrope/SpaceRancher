@@ -17,8 +17,9 @@ public:
 	// Sets default values for this actor's properties
 	APlant();
 
-	void Interact_Implementation() override;
+	virtual void Interact_Implementation() override;
 	virtual void LoadActor_Implementation() override;
+	virtual void SaveActor_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,7 +32,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
 	bool bCanBeHarvested = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Growth")
 	int GrowState = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")

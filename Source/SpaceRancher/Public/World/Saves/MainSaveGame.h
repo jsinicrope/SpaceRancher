@@ -17,7 +17,7 @@ public:
 	UMainSaveGame();
 
 	UPROPERTY()
-	float IngameTime;
+	float InGameTime;
 
 	UPROPERTY()
 	TArray<FItemRows> Player_Inventory_Array_Columns;

@@ -9,6 +9,7 @@
 #include "World/Saves/ActorRecord.h"
 #include "World/Saves/ActorSaveArchive.h"
 #include "UI/HUDSetting.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -305,6 +306,12 @@ void AMyCharacter::SavePlayerCharacter()
 	UMainSaveGame* SaveData = GameInstance->SaveGameData;
 	CurrentVelocity = GetCharacterMovement()->Velocity;
 	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
+
+	FActorRecord PlayerRecord(this);
+	FMemoryWriter MemoryWriterPlayer(PlayerRecord.Data, true);
+	FActorSaveArchive PlayerAr(MemoryWriterPlayer, false);
+	Serialize(PlayerAr);
+	GameInstance->SaveGameData->PlayerCharacterData = PlayerRecord;
 }
 
 void AMyCharacter::LoadPlayerCharacter()
@@ -317,7 +324,7 @@ void AMyCharacter::LoadPlayerCharacter()
 	FMemoryReader MemoryReader(ActorRecord.Data);
 	FActorSaveArchive Ar(MemoryReader, false);
 	Serialize(Ar);
-
+	
 	const FVector SpawnLocation = ActorRecord.Transform.GetLocation();
 	const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);

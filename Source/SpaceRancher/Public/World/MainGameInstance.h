@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
-#include "Kismet/GameplayStatics.h"
 #include "World/Saves/MainSaveGame.h"
 #include "Delegates/IDelegateInstance.h"
 #include "MainGameInstance.generated.h"
@@ -22,7 +21,7 @@ public:
 	FDelegateHandle TickDelegateHandle;
 
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
-	float PlayerIngameTime;
+	float PlayerInGameTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float TimeScale = 1.0f;
@@ -57,4 +56,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Saving")
 	bool LoadGame();
+	
+private:
+	UPROPERTY()
+	TArray<AActor*> SaveActors;
 };

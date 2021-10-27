@@ -2,6 +2,7 @@
 
 
 #include "Interactables/PlayerBed.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APlayerBed::APlayerBed()
@@ -45,10 +46,10 @@ void APlayerBed::Tick(float DeltaTime)
 
 void APlayerBed::Interact_Implementation()
 {
-	if ((GameInstance->PlayerIngameTime >= AllowSleepTime) || (GameInstance->PlayerIngameTime < WakeUpTime))
+	if ((GameInstance->PlayerInGameTime >= AllowSleepTime) || (GameInstance->PlayerInGameTime < WakeUpTime))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Sleeping"));
-		TimeToAccelerate = (30.0f + WakeUpTime) - GameInstance->PlayerIngameTime;
+		TimeToAccelerate = (30.0f + WakeUpTime) - GameInstance->PlayerInGameTime;
 		GameInstance->TimeScale = TimeAcceleration;
 		bTimeAcceleration = true;
 		this->SetActorTickEnabled(true);

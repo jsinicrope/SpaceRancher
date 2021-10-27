@@ -2,7 +2,6 @@
 
 
 #include "Inventory_System/Item_Base.h"
-#include "Kismet/KismetSystemLibrary.h"
 #include "Characters/Main Character/MyCharacter.h"
 
 // Sets default values
@@ -23,14 +22,12 @@ void AItem_Base::BeginPlay()
 
 void AItem_Base::Interact_Implementation()
 {
-	if (bIsCollectible)
+	if (!CollectItem(true))
 	{
-		PC->AddItemToInventory(Main_Item_Structure);
-	}
-	else
-	{
-		FString ObjectName = UKismetSystemLibrary::GetObjectName(this);
+		
+		const FString ObjectName = GetName();
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("No interaction implemented for interacted item: ") + ObjectName);
+		UE_LOG(LogTemp, Warning, TEXT("No interaction implemented for interacted item: %s"), *ObjectName);
 	}
 }
 

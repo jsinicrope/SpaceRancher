@@ -4,5 +4,5 @@
 
 UMainSaveGame::UMainSaveGame()
 {
-	IngameTime = 10.0f;
+	InGameTime = 10.0f;
 }

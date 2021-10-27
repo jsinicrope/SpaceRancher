@@ -15,7 +15,7 @@ void UClock::NativeOnInitialized()
 
 void UClock::UpdateClock()
 {
-	ClockTimeTotalMinutes = (int)(GameInstance->PlayerIngameTime * GameInstance->RealToGameTimeFactor);
+	ClockTimeTotalMinutes = (int)(GameInstance->PlayerInGameTime * GameInstance->RealToGameTimeFactor);
 	ClockTimeMinutes = ClockTimeTotalMinutes % 60;
 	ClockTimeHour = ClockTimeTotalMinutes / 60;
 

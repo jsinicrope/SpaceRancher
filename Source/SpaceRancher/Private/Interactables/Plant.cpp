@@ -42,7 +42,6 @@ void APlant::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	PlantStateAgeMinutes += DeltaTime;
-
 	if (PlantStateAgeMinutes >= TimePerStage)
 	{
 		GrowPlant();
@@ -57,7 +56,12 @@ void APlant::Interact_Implementation()
 
 void APlant::LoadActor_Implementation()
 {
+	
+}
 
+void APlant::SaveActor_Implementation()
+{
+	
 }
 
 bool APlant::GrowPlant()
@@ -66,7 +70,7 @@ bool APlant::GrowPlant()
 	{
 		GrowState++;
 		PlantStateAgeMinutes = 0.0f;
-
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Plant grew"));
 		if (StateMeshes.Num() > GrowState)
 		{
 			StaticMesh->SetStaticMesh(StateMeshes[GrowState]);

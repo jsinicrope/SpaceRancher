@@ -102,15 +102,6 @@ E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\DynamicProperty
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UserWidget.generated.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
-E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
-E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
-E:\UE_5.0EA\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\KismetSystemLibrary.generated.h
-E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DialogueTypes.generated.h
-E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Kismet\GameplayStaticsTypes.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStaticsTypes.generated.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\GameplayStatics.generated.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h

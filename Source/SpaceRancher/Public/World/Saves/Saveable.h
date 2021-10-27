@@ -18,7 +18,13 @@ class ISaveable
 public:
 	UFUNCTION(BlueprintNativeEvent)
 	void SaveActor();
-
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void PreSaveActor();
+	
 	UFUNCTION(BlueprintNativeEvent)
 	void LoadActor();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void PreLoadActor();
 };

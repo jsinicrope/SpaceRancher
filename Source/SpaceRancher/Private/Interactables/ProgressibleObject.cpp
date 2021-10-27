@@ -5,7 +5,6 @@
 #include "UI/NeededItemPopUp.h"
 #include "Engine/Texture2D.h"
 #include "Components/Image.h"
-#include "Components/TextBlock.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -36,9 +35,14 @@ void AProgressibleObject::BeginPlay()
 
 void AProgressibleObject::Interact_Implementation()
 {
+	if (RequiredAmount == 0)
+	{
+		AdvanceStage();
+	}
+	
 	for (int i = 0; i < RequiredAmount; i++)
 	{
-		FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(ItemName);
+		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(ItemName);
 		if (AcquiredItem.bIsValidItem)
 		{
 			RequiredAmount--;
@@ -54,6 +58,26 @@ void AProgressibleObject::Interact_Implementation()
 			GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressibleObject::HideWidget, 2.0f, false, 2.0f);
 		}
 	}
+}
+
+void AProgressibleObject::PreLoadActor_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+}
+
+void AProgressibleObject::LoadActor_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+}
+
+void AProgressibleObject::PreSaveActor_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+}
+
+void AProgressibleObject::SaveActor_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
 }
 
 void AProgressibleObject::SetWidget(UTexture2D* ItemTexture, FString NameOfItem, int ItemAmount)

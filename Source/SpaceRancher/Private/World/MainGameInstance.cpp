@@ -8,26 +8,25 @@
 
 void UMainGameInstance::Init()
 {
-
 	TickDelegateHandle = FTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateUObject(this, &UMainGameInstance::Tick));
 
 	Super::Init();
 
 	GetSaveGame();
 
-	PlayerIngameTime = InitialStartGameTime;
+	PlayerInGameTime = InitialStartGameTime;
 }
 
 bool UMainGameInstance::Tick(float DeltaSeconds)
 {
 	if (!UGameplayStatics::IsGamePaused(GetWorld()))
 	{
-		PlayerIngameTime += (DeltaSeconds / 60.0f) * TimeScale;
+		PlayerInGameTime += (DeltaSeconds / 60.0f) * TimeScale;
 		RealTimeMinutes += (DeltaSeconds / 60.0f) * TimeScale;
 
-		if (PlayerIngameTime >= 30.0f)
+		if (PlayerInGameTime >= 30.0f)
 		{
-			PlayerIngameTime -= 30.0f;
+			PlayerInGameTime -= 30.0f;
 		}
 	}
 	return true;
@@ -59,33 +58,32 @@ void UMainGameInstance::NewSave(FString OldSave)
 void UMainGameInstance::SaveGame()
 {
 	GetSaveGame();
-	SaveGameData->IngameTime = PlayerIngameTime;
+	// Prepare for saving by emptying the old Serialized Data
+	SaveGameData->Data.Empty();
+	
+	SaveGameData->InGameTime = PlayerInGameTime;
 
 	//Save, then serialize PlayerCharacter
-	AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	PCharacter->SavePlayerCharacter();
+	SaveActors.Empty();
+	
+	UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), SaveActors);
 
-	FActorRecord PlayerRecord(PCharacter);
-	FMemoryWriter MemoryWriterPlayer(PlayerRecord.Data);
-	FActorSaveArchive PlayerAr(MemoryWriterPlayer, false);
-	PCharacter->Serialize(PlayerAr);
-	SaveGameData->PlayerCharacterData = PlayerRecord;
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Savable Actors Found: ") + FString::FromInt(SaveActors.Num()));
 
-	TArray<AActor*> Actors;
-	UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), Actors);
-
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Saveable Actors Found: ") + FString::FromInt(Actors.Num()));
-
-	for (int i = 0; i < Actors.Num(); i++)
+	for (int i = 0; i < SaveActors.Num(); i++)
 	{
-		FActorRecord ActorRecord(Actors[i]);
+		ISaveable::Execute_PreSaveActor(SaveActors[i]);
+		FActorRecord ActorRecord(SaveActors[i]);
 		FMemoryWriter MemoryWriter(ActorRecord.Data, true);
 		FActorSaveArchive Ar(MemoryWriter, false);
 		MemoryWriter.SetIsSaving(true);
-		Actors[i]->Serialize(Ar);
+		SaveActors[i]->Serialize(Ar);
 		SaveGameData->Data.Add(ActorRecord);
-		ISaveable::Execute_SaveActor(Actors[i]);
+		ISaveable::Execute_SaveActor(SaveActors[i]);
 	}
+
+	AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	PCharacter->SavePlayerCharacter();
 
 	FString SlotName = SaveName;
 	if (UGameplayStatics::SaveGameToSlot(SaveGameData, SlotName, 0))
@@ -99,21 +97,30 @@ bool UMainGameInstance::LoadGame()
 		AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 		PCharacter->LoadPlayerCharacter();
 
-		PlayerIngameTime = SaveGameData->IngameTime;
+		PlayerInGameTime = SaveGameData->InGameTime;
 
 		//De-Serialize Actors
-		TArray<AActor*> Actors;
-		UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), Actors);
+		SaveActors.Empty();
+		UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), SaveActors);
 		
-		for (int i = 0; i < Actors.Num(); i++)
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(SaveActors.Num()));
+		
+		for (int i = 0; i < SaveActors.Num(); i++)
 		{
-			Actors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
-
-			FMemoryReader MemoryReader(SaveGameData->Data[i].Data);
-			FActorSaveArchive Ar(MemoryReader, false);
-			MemoryReader.SetIsLoading(true);
-			Actors[i]->Serialize(Ar);
-			ISaveable::Execute_LoadActor(Actors[i]);
+			if (SaveGameData->Data[i].Name == SaveActors[i]->GetName())
+			{
+				ISaveable::Execute_PreLoadActor(SaveActors[i]);
+				SaveActors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
+				FMemoryReader MemoryReader(SaveGameData->Data[i].Data, true);
+				FActorSaveArchive Ar(MemoryReader, false);
+				MemoryReader.SetIsLoading(true);
+				SaveActors[i]->Serialize(Ar);
+				ISaveable::Execute_LoadActor(SaveActors[i]);
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor deleted"));
+			}
 		}
 
 		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Loaded!"));
