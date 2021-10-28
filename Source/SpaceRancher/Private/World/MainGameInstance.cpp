@@ -105,21 +105,21 @@ bool UMainGameInstance::LoadGame()
 		
 		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(SaveActors.Num()));
 		
-		for (int i = 0; i < SaveActors.Num(); i++)
+		for (int i = 0; i < SaveGameData->Data.Num(); i++)
 		{
-			if (SaveGameData->Data[i].Name == SaveActors[i]->GetName())
+			for (int j = i; j < SaveActors.Num(); j++)
 			{
-				ISaveable::Execute_PreLoadActor(SaveActors[i]);
-				SaveActors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
-				FMemoryReader MemoryReader(SaveGameData->Data[i].Data, true);
-				FActorSaveArchive Ar(MemoryReader, false);
-				MemoryReader.SetIsLoading(true);
-				SaveActors[i]->Serialize(Ar);
-				ISaveable::Execute_LoadActor(SaveActors[i]);
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor deleted"));
+				if (SaveGameData->Data[i].Name == SaveActors[j]->GetName())
+				{
+					ISaveable::Execute_PreLoadActor(SaveActors[i]);
+					SaveActors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
+					FMemoryReader MemoryReader(SaveGameData->Data[i].Data, true);
+					FActorSaveArchive Ar(MemoryReader, false);
+					MemoryReader.SetIsLoading(true);
+					SaveActors[i]->Serialize(Ar);
+					ISaveable::Execute_LoadActor(SaveActors[i]);
+					break;
+				}
 			}
 		}
 

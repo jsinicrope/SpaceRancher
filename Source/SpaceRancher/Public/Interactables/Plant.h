@@ -35,8 +35,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Growth")
 	int GrowState = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
-	float TimePerStage = 3.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="MinutesPerStage"), Category = "Plant|Growth")
+	float TimePerStage= 3.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int GrowthStages = 3;

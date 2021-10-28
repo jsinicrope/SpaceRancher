@@ -9,13 +9,13 @@
 #include "ProgressibleObject.generated.h"
 
 UCLASS()
-class SPACERANCHER_API AProgressibleObject : public AActor, public IInteractInterface, public ISaveable
+class SPACERANCHER_API AProgressableObject : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProgressibleObject();
+	AProgressableObject();
 
 	virtual void Interact_Implementation() override;
 	virtual void LoadActor_Implementation() override;
@@ -28,7 +28,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame)
 	int RequiredAmount = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

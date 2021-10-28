@@ -9,14 +9,14 @@
 #include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
-AProgressibleObject::AProgressibleObject()
+AProgressableObject::AProgressableObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 }
 
 // Called when the game starts or when spawned
-void AProgressibleObject::BeginPlay()
+void AProgressableObject::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -33,7 +33,7 @@ void AProgressibleObject::BeginPlay()
 	}
 }
 
-void AProgressibleObject::Interact_Implementation()
+void AProgressableObject::Interact_Implementation()
 {
 	if (RequiredAmount == 0)
 	{
@@ -55,32 +55,32 @@ void AProgressibleObject::Interact_Implementation()
 		{
 			SetWidget(ItemThumbnail, ItemName, RequiredAmount);
 			ShowWidget();
-			GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressibleObject::HideWidget, 2.0f, false, 2.0f);
+			GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressableObject::HideWidget, 2.0f, false, 2.0f);
 		}
 	}
 }
 
-void AProgressibleObject::PreLoadActor_Implementation()
+void AProgressableObject::PreLoadActor_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+	
 }
 
-void AProgressibleObject::LoadActor_Implementation()
+void AProgressableObject::LoadActor_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+	
 }
 
-void AProgressibleObject::PreSaveActor_Implementation()
+void AProgressableObject::PreSaveActor_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+	
 }
 
-void AProgressibleObject::SaveActor_Implementation()
+void AProgressableObject::SaveActor_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(Stage));
+	
 }
 
-void AProgressibleObject::SetWidget(UTexture2D* ItemTexture, FString NameOfItem, int ItemAmount)
+void AProgressableObject::SetWidget(UTexture2D* ItemTexture, FString NameOfItem, int ItemAmount)
 {
 	ItemThumbnail = ItemTexture;
 	ItemName = NameOfItem;
@@ -94,7 +94,7 @@ void AProgressibleObject::SetWidget(UTexture2D* ItemTexture, FString NameOfItem,
 	NeededItemWidget->SetTextAmount(ItemAmount, NameOfItem);
 }
 
-bool AProgressibleObject::ShowWidget()
+bool AProgressableObject::ShowWidget()
 {
 	if (!NeededItemWidget->IsInViewport())
 	{
@@ -104,13 +104,13 @@ bool AProgressibleObject::ShowWidget()
 	return false;
 }
 
-void AProgressibleObject::HideWidget()
+void AProgressableObject::HideWidget()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandler);
 	NeededItemWidget->RemoveFromViewport();
 }
 
-bool AProgressibleObject::AdvanceStage_Implementation()
+bool AProgressableObject::AdvanceStage_Implementation()
 {
 	if (Stage < Stages)
 	{

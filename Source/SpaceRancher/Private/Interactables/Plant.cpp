@@ -42,7 +42,7 @@ void APlant::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	PlantStateAgeMinutes += DeltaTime;
-	if (PlantStateAgeMinutes >= TimePerStage)
+	if (PlantStateAgeMinutes >= TimePerStage * 60.0f)
 	{
 		GrowPlant();
 	}
