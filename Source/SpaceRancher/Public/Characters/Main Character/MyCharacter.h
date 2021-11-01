@@ -37,17 +37,17 @@ protected:
 
 	//Variables
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Custom Variables")
 	float BaseTurnAtRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
 	float BaseLookUpAtRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetHealth, Category="Health")
 	float Health;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	float maxHealth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxHealth, Category="Health")
+	float MaxHealth;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float MaxRegeneratedHealth;
@@ -55,35 +55,35 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	bool bPlayerDead = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
-	float maxStamina;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxStamina, Category="Stamina")
+	float MaxStamina;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetStamina, Category="Stamina")
 	float Stamina;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float HealthRegenPerSecond;
 
 	// Set to true if player is damaged
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	bool bDamaged;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float WalkSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float SprintSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	bool bSprinting;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Movement")
 	FVector CurrentVelocity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
 	float StaminaLossRunning;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
 	float StaminaRegenPerSecond;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
@@ -92,13 +92,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToStaminaRegen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Movement")
 	float FallingTime;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float FallDamageFactor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float MinFallDamageVelocity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
@@ -113,14 +113,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	bool bInteractableInRange;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Respawn")
 	FVector RespawnPoint;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Respawn")
 	FRotator RespawnViewDirection;
 
 	//Widgets
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Variables")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Interaction")
 	TSubclassOf<class UUserWidget> InteractPopUpClass;
 
 	UPROPERTY(VisibleAnywhere)
@@ -177,6 +177,18 @@ protected:
 
 public:
 	//Functions
+	UFUNCTION(BlueprintCallable, Category="Health")
+	float GetHealth() const {return Health;}
+
+	UFUNCTION(BlueprintCallable, Category="Health")
+	float GetMaxHealth()const {return MaxHealth;}
+
+	UFUNCTION(BlueprintCallable, Category="Stamina")
+	float GetStamina() const {return Stamina;}
+
+	UFUNCTION(BlueprintCallable, Category="Stamina")
+	float GetMaxStamina()const {return MaxStamina;}
+	
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStartSprint();
 

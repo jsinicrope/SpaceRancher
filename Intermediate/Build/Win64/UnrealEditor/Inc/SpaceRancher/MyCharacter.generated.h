@@ -34,7 +34,11 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execDamagePlayer); \
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
-	DECLARE_FUNCTION(execPlayerStartSprint);
+	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execGetMaxStamina); \
+	DECLARE_FUNCTION(execGetStamina); \
+	DECLARE_FUNCTION(execGetMaxHealth); \
+	DECLARE_FUNCTION(execGetHealth);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -56,7 +60,11 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execDamagePlayer); \
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
-	DECLARE_FUNCTION(execPlayerStartSprint);
+	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execGetMaxStamina); \
+	DECLARE_FUNCTION(execGetStamina); \
+	DECLARE_FUNCTION(execGetMaxHealth); \
+	DECLARE_FUNCTION(execGetHealth);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_20_INCLASS_NO_PURE_DECLS \
@@ -107,10 +115,10 @@ public: \
 	FORCEINLINE static uint32 __PPO__BaseTurnAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseTurnAtRate); } \
 	FORCEINLINE static uint32 __PPO__BaseLookUpAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseLookUpAtRate); } \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
-	FORCEINLINE static uint32 __PPO__maxHealth() { return STRUCT_OFFSET(AMyCharacter, maxHealth); } \
+	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(AMyCharacter, MaxHealth); } \
 	FORCEINLINE static uint32 __PPO__MaxRegeneratedHealth() { return STRUCT_OFFSET(AMyCharacter, MaxRegeneratedHealth); } \
 	FORCEINLINE static uint32 __PPO__bPlayerDead() { return STRUCT_OFFSET(AMyCharacter, bPlayerDead); } \
-	FORCEINLINE static uint32 __PPO__maxStamina() { return STRUCT_OFFSET(AMyCharacter, maxStamina); } \
+	FORCEINLINE static uint32 __PPO__MaxStamina() { return STRUCT_OFFSET(AMyCharacter, MaxStamina); } \
 	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); } \
 	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
 	FORCEINLINE static uint32 __PPO__bDamaged() { return STRUCT_OFFSET(AMyCharacter, bDamaged); } \

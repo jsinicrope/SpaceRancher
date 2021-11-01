@@ -22,14 +22,14 @@ AMyCharacter::AMyCharacter()
 	HealthLastTick = 100.0f;
 	HealthRegenPerSecond = 10.0f;
 	TimeToHealthRegen = 3.0f;
-	maxHealth = 100.0f;
+	MaxHealth = 100.0f;
 
 	// Stamina
 	Stamina = 100.0f;
 	StaminaLossRunning = 50.0f;
 	StaminaRegenPerSecond = 20.0f;
 	TimeToStaminaRegen = 2.0f;
-	maxStamina = 100.0f;
+	MaxStamina = 100.0f;
 
 	// Movement
 	WalkSpeed = 600.0f;
@@ -97,7 +97,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratedHealth))
 		{
-			Health = fmin(maxHealth, Health + HealthRegenPerSecond * DeltaTime);
+			Health = fmin(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
 		}
 	}
 
@@ -112,7 +112,7 @@ void AMyCharacter::Tick(float DeltaTime)
 			}
 	// Regen Stamina
 			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
-				Stamina = fmin(maxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
+				Stamina = fmin(MaxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
 		}
 	}
 
@@ -270,8 +270,8 @@ void AMyCharacter::RespawnPlayer()
 {
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
 	GetCharacterMovement()->StopActiveMovement();
-	Health = maxHealth;
-	Stamina = maxStamina;
+	Health = MaxHealth;
+	Stamina = MaxStamina;
 
 	bPlayerDead = false;
 }

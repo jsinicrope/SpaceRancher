@@ -25,4 +25,11 @@ void UClock::UpdateClock()
 		MinutesString = FString("0") + FString::FromInt(ClockTimeMinutes);
 
 	StringTime = FString::FromInt(ClockTimeHour) + FString(":") + MinutesString;
+	FText Text = FText::FromString(StringTime);
+	SetTextBlock(Text);
+}
+
+void UClock::SetTextBlock(FText Text) const
+{
+	TextBlockTime->SetText(Text);
 }

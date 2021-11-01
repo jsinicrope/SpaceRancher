@@ -41,4 +41,7 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlockTime;
+
+	UFUNCTION()
+	void SetTextBlock(FText Text) const;
 };
