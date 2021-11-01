@@ -170,7 +170,7 @@ protected:
 	bool bInventoryOpen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="HUD")
-	class UHUDSetting* MainHUD;
+	class UHUDSetting* HUDController;
 
 	UPROPERTY()
 	class UCameraComponent* PlayerCamera;

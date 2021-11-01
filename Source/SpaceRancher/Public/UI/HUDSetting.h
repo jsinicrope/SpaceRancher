@@ -26,8 +26,14 @@ public:
 
 	//Widgets
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class UUserWidget> MainHUDClass;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UCMainHUD* MainHUD;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class UUserWidget> InteractPopUpClass;
-
+	
 	UPROPERTY()
 	class UUserWidget* InteractPopUp;
 

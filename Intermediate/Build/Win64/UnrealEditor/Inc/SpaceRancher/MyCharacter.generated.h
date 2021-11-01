@@ -155,7 +155,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__JumpStartPoint() { return STRUCT_OFFSET(AMyCharacter, JumpStartPoint); } \
 	FORCEINLINE static uint32 __PPO__InventoryComp() { return STRUCT_OFFSET(AMyCharacter, InventoryComp); } \
 	FORCEINLINE static uint32 __PPO__bInventoryOpen() { return STRUCT_OFFSET(AMyCharacter, bInventoryOpen); } \
-	FORCEINLINE static uint32 __PPO__MainHUD() { return STRUCT_OFFSET(AMyCharacter, MainHUD); } \
+	FORCEINLINE static uint32 __PPO__HUDController() { return STRUCT_OFFSET(AMyCharacter, HUDController); } \
 	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); }
 
 

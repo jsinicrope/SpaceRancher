@@ -54,8 +54,8 @@ AMyCharacter::AMyCharacter()
 	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
 	AddOwnedComponent(InventoryComp);
 
-	MainHUD = CreateDefaultSubobject<UHUDSetting>(TEXT("HUD Settings"));
-	AddOwnedComponent(MainHUD);
+	HUDController = CreateDefaultSubobject<UHUDSetting>(TEXT("HUD Settings"));
+	AddOwnedComponent(HUDController);
 }
 
 // Called when the game starts or when spawned
@@ -126,16 +126,16 @@ void AMyCharacter::Tick(float DeltaTime)
 		bInteractableInRange = CheckForInteractable();
 		if (bInteractableInRange)
 		{
-			if (!MainHUD->InteractPopUp->IsInViewport())
+			if (!HUDController->InteractPopUp->IsInViewport())
 			{
-				MainHUD->InteractPopUp->AddToViewport();
+				HUDController->InteractPopUp->AddToViewport();
 			}
 		}
 		else
 		{
-			if (MainHUD->InteractPopUp->IsInViewport())
+			if (HUDController->InteractPopUp->IsInViewport())
 			{
-				MainHUD->InteractPopUp->RemoveFromViewport();
+				HUDController->InteractPopUp->RemoveFromViewport();
 			}
 		}
 	}
@@ -177,9 +177,6 @@ void AMyCharacter::Tick(float DeltaTime)
 			bPlayerDead = false;
 		}
 	}
-
-	// Update Clock Widget
-	MainHUD->ClockWidget->UpdateClock();
 }
 
 // Called to bind functionality to input
@@ -387,13 +384,13 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 
 	if (bAddSuccessful)
 	{
-		MainHUD->ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
+		HUDController->ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
 
-		if (MainHUD->ItemPickUpWidget->IsInViewport())
-			MainHUD->ItemPickUpWidget->RemoveFromViewport();
+		if (HUDController->ItemPickUpWidget->IsInViewport())
+			HUDController->ItemPickUpWidget->RemoveFromViewport();
 
-		MainHUD->ItemPickUpWidget->AddToViewport();
-		WidgetToRemove = MainHUD->ItemPickUpWidget;
+		HUDController->ItemPickUpWidget->AddToViewport();
+		WidgetToRemove = HUDController->ItemPickUpWidget;
 		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
 	}
 	return bAddSuccessful;

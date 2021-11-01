@@ -13,6 +13,13 @@ void UClock::NativeOnInitialized()
 	TextBlockTime = Cast<UTextBlock>(GetWidgetFromName(FName("TextBlockTime")));
 }
 
+void UClock::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	UpdateClock();
+}
+
 void UClock::UpdateClock()
 {
 	ClockTimeTotalMinutes = (int)(GameInstance->PlayerInGameTime * GameInstance->RealToGameTimeFactor);
