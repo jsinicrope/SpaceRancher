@@ -13,7 +13,7 @@ void UMainGameInstance::Init()
 	Super::Init();
 
 	GetSaveGame();
-
+	
 	PlayerInGameTime = InitialStartGameTime;
 }
 

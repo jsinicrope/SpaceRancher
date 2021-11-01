@@ -17,7 +17,7 @@ public:
 	// Sets default values for this actor's properties
 	APlayerBed();
 
-	void Interact_Implementation() override;
+	virtual void Interact_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
