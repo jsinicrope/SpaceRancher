@@ -9,6 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 struct FItem_Struct;
+class UHUDSetting;
 #ifdef SPACERANCHER_MyCharacter_generated_h
 #error "MyCharacter.generated.h already included, missing '#pragma once' in MyCharacter.h"
 #endif
@@ -35,6 +36,7 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execGetHUDController); \
 	DECLARE_FUNCTION(execGetMaxStamina); \
 	DECLARE_FUNCTION(execGetStamina); \
 	DECLARE_FUNCTION(execGetMaxHealth); \
@@ -61,6 +63,7 @@ struct FItem_Struct;
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execGetHUDController); \
 	DECLARE_FUNCTION(execGetMaxStamina); \
 	DECLARE_FUNCTION(execGetStamina); \
 	DECLARE_FUNCTION(execGetMaxHealth); \

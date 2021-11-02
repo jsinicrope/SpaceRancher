@@ -5,6 +5,10 @@
 #include "Inventory_System/InventorySlotWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/CppPlayerController.h"
+#include "Characters/Main Character/MyCharacter.h"
+#include "Components/CanvasPanelSlot.h"
+#include "UI/HUDSetting.h"
+#include "UI/CMainHUD.h"
 
 // Only called once 
 void UInventoryWindow::NativeOnInitialized()
@@ -24,27 +28,26 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 {
 	Inventory = InventoryComp;
 	InventorySlotWidgetClass = InventorySlotWidgetClassIn;
+	PlayerHUD = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn())->GetHUDController();
 }
 
 void UInventoryWindow::ShowWindow()
 {
-	this->AddToViewport();
+	CanvasSlot = PlayerHUD->MainHUD->AddToCanvas(this);
+	CanvasSlot->SetPosition(Inventory->WidgetPosition);
 	bWindowOpen = true;
 }
 
 void UInventoryWindow::CloseWindow()
 {
-	this->RemoveFromViewport();
-	bWindowOpen = false;
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	CloseInventory();
 	PC->bShowMouseCursor = false;
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 }
 
 void UInventoryWindow::CloseInventory()
 {
-	PC->bShowMouseCursor = true;
-	this->RemoveFromViewport();
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	this->RemoveFromParent();
 	bWindowOpen = false;
 }
 

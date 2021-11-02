@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	UPackage* Z_Construct_UPackage__Script_SpaceRancher();
 	SPACERANCHER_API UScriptStruct* Z_Construct_UScriptStruct_FItem_Struct();
+	SPACERANCHER_API UClass* Z_Construct_UClass_UHUDSetting_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
@@ -28,7 +29,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	SPACERANCHER_API UClass* Z_Construct_UClass_ACppPlayerController_NoRegister();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTimerHandle();
 	SPACERANCHER_API UClass* Z_Construct_UClass_UInventoryComponent_NoRegister();
-	SPACERANCHER_API UClass* Z_Construct_UClass_UHUDSetting_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	SPACERANCHER_API UClass* Z_Construct_UClass_UInteractInterface_NoRegister();
 // End Cross Module References
@@ -164,6 +164,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->PlayerStartSprint();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execGetHUDController)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(UHUDSetting**)Z_Param__Result=P_THIS->GetHUDController();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execGetMaxStamina)
 	{
 		P_FINISH;
@@ -201,6 +208,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "CheckForInteractable", &AMyCharacter::execCheckForInteractable },
 			{ "DamagePlayer", &AMyCharacter::execDamagePlayer },
 			{ "GetHealth", &AMyCharacter::execGetHealth },
+			{ "GetHUDController", &AMyCharacter::execGetHUDController },
 			{ "GetMaxHealth", &AMyCharacter::execGetMaxHealth },
 			{ "GetMaxStamina", &AMyCharacter::execGetMaxStamina },
 			{ "GetStamina", &AMyCharacter::execGetStamina },
@@ -404,6 +412,47 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetHealth_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics
+	{
+		struct MyCharacter_eventGetHUDController_Parms
+		{
+			UHUDSetting* ReturnValue;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReturnValue_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::NewProp_ReturnValue_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventGetHUDController_Parms, ReturnValue), Z_Construct_UClass_UHUDSetting_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::NewProp_ReturnValue_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::NewProp_ReturnValue_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::Function_MetaDataParams[] = {
+		{ "Category", "HUD" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetHUDController", nullptr, nullptr, sizeof(MyCharacter_eventGetHUDController_Parms), Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_GetHUDController()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetHUDController_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1087,6 +1136,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 1476590731
 		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1072611392
 		{ &Z_Construct_UFunction_AMyCharacter_GetHealth, "GetHealth" }, // 1079845287
+		{ &Z_Construct_UFunction_AMyCharacter_GetHUDController, "GetHUDController" }, // 657435290
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxHealth, "GetMaxHealth" }, // 3700793159
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxStamina, "GetMaxStamina" }, // 613426958
 		{ &Z_Construct_UFunction_AMyCharacter_GetStamina, "GetStamina" }, // 1678480132
@@ -1453,6 +1503,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen = { "bInventoryOpen", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_SetBit, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_HUDController_MetaData[] = {
+		{ "BlueprintGetter", "GetHUDController" },
 		{ "Category", "HUD" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
@@ -1543,7 +1594,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 1103116278);
+	IMPLEMENT_CLASS(AMyCharacter, 488223021);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

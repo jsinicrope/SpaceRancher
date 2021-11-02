@@ -44,7 +44,6 @@ public:
 	UFUNCTION()
 	void CloseWindow();
 
-
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UInventorySlotWidget* InventorySlotWidget;
@@ -61,10 +60,15 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
 	UButton* CloseInventoryButton;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UCanvasPanelSlot* CanvasSlot = nullptr;
+
 	UPROPERTY()
 	class ACppPlayerController* PC;
 
+	UPROPERTY()
+	class UHUDSetting* PlayerHUD;
+
 	UFUNCTION()
 	void CloseInventory();
-
 };

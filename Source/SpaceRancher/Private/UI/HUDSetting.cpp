@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI/HUDSetting.h"
-
 #include "Components/CanvasPanelSlot.h"
 #include "UI/Clock.h"
 #include "Inventory_System/ItemPickUpWidget.h"

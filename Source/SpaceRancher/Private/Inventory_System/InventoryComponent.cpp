@@ -45,7 +45,6 @@ void UInventoryComponent::BeginPlay()
 		InventoryWindow = CreateWidget<UInventoryWindow>(GetWorld(), InventoryWindowClass);
 		InventoryWindow->SetVariables(this, InventorySlotWidgetClass);
 		InventoryWindow->SetUpInventory();
-		InventoryWindow->SetPositionInViewport(WidgetPosition);
 	}
 }
 
@@ -129,6 +128,8 @@ void UInventoryComponent::ToggleInventory()
 	else
 	{
 		InventoryWindow->CloseWindow();
+		PC->bShowMouseCursor = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 	}
 	bInventoryOpen = InventoryWindow->bWindowOpen;
 }

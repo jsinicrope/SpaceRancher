@@ -169,7 +169,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	bool bInventoryOpen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="HUD")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
 	class UHUDSetting* HUDController;
 
 	UPROPERTY()
@@ -188,6 +188,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Stamina")
 	float GetMaxStamina()const {return MaxStamina;}
+
+	UFUNCTION(BlueprintCallable, Category="HUD")
+	class UHUDSetting* GetHUDController() const {return HUDController;}
 	
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStartSprint();
