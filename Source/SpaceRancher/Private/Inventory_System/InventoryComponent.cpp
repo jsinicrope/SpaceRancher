@@ -119,7 +119,10 @@ void UInventoryComponent::ToggleInventory()
 	bInventoryOpen = InventoryWindow->bWindowOpen;
 	if (!bInventoryOpen)
 	{
-		SortInventory();
+		if (bAutoSort)
+		{
+			SortInventory();
+		}
 		InventoryWindow->UpdateInventory();
 		InventoryWindow->ShowWindow();
 		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);

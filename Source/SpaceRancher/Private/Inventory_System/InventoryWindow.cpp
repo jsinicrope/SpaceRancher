@@ -22,6 +22,25 @@ void UInventoryWindow::NativeOnInitialized()
 
 	//Function gets called everytime widget is added to viewport
 	CloseInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::CloseWindow);
+	
+	if (SortInventoryButton)
+	{
+		SortInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::SortInventory);
+	}
+}
+
+void UInventoryWindow::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
+{
+	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
+
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Drag detected"));
+}
+
+FReply UInventoryWindow::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	const FKey DragKey = FKey(FName("RightMouseButton"));
+	FEventReply Reply = UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, DragKey);
+	return Reply.NativeReply;
 }
 
 void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclassOf<UUserWidget> InventorySlotWidgetClassIn)
@@ -49,6 +68,11 @@ void UInventoryWindow::CloseInventory()
 {
 	this->RemoveFromParent();
 	bWindowOpen = false;
+}
+
+void UInventoryWindow::SortInventory()
+{
+	Inventory->SortInventory();
 }
 
 void UInventoryWindow::SetUpInventory()

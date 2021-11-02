@@ -43,6 +43,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
 	bool bInventoryOpen = false;
 
+	// true if Inventory should be sorted automatically, false if sorting is handled by a widget button
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bAutoSort = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
