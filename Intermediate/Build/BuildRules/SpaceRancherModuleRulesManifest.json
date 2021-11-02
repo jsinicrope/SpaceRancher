@@ -1,13 +1,13 @@
 {
 	"SourceFiles": [
-		"E:\\SpaceRancher\\Source\\SpaceRancher\\SpaceRancher.Build.cs",
-		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
-		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprintExtension\\RiderBlueprintExtension.Build.cs",
-		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControlExtension\\RiderGameControlExtension.Build.cs",
-		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
-		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLoggingExtension\\RiderLoggingExtension.Build.cs",
-		"E:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
-		"E:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs"
+		"F:\\Space Rancher\\SpaceRancher\\Source\\SpaceRancher\\SpaceRancher.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprintExtension\\RiderBlueprintExtension.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControlExtension\\RiderGameControlExtension.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLoggingExtension\\RiderLoggingExtension.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
+		"F:\\Space Rancher\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs"
 	],
 	"EngineVersion": "5.0.0"
 }

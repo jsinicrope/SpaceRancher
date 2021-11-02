@@ -1,32 +1,32 @@
-E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main\base\RdBindableBase.cpp
+"F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main\base\RdBindableBase.cpp"
 /I .
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_core_cpp
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_core_cpp\src\main
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main\util
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_gen_cpp\src
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\ordered-map\include
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\optional\tl
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\variant\include
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\string-view-lite\include
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\spdlog\include
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\clsocket\src
-/I E:\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\CTPL\include
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_core_cpp"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_core_cpp\src\main"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_framework_cpp\src\main\util"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\src\rd_gen_cpp\src"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\ordered-map\include"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\optional\tl"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\variant\include"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\string-view-lite\include"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\spdlog\include"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\clsocket\src"
+/I "F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Source\RD\thirdparty\CTPL\include"
 /I Runtime
 /I Runtime\TraceLog\Public
 /I Runtime\Core\Public
-/I E:\VS\VC\Tools\MSVC\14.29.30133\INCLUDE
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
-/FI"E:\SpaceRancher\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Definitions.h"
-/Fo"E:\SpaceRancher\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RdBindableBase.cpp.obj"
+/FI"F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Definitions.h"
+/Fo"F:\Space Rancher\SpaceRancher\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RdBindableBase.cpp.obj"
 /Zc:inline
 /nologo
 /Oi
