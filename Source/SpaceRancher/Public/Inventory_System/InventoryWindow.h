@@ -73,6 +73,9 @@ protected:
 	UPROPERTY()
 	class UHUDSetting* PlayerHUD;
 
+	UPROPERTY()
+	FVector2D DragOffset;
+
 	UFUNCTION()
 	void CloseInventory();
 

@@ -13,6 +13,7 @@ class SPACERANCHER_API UCMainHUD : public UUserWidget
 	GENERATED_BODY()
 
 	virtual void NativeOnInitialized() override;
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))

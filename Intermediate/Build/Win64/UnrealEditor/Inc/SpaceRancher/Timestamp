@@ -1,28 +1,29 @@
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\AI\AttackPlayer.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\AI\NPC.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\AI\NPC_Controller.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\AI\RunAwayFromPlayer.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\CppPlayerController.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables\InteractInterface.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables\Plant.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlantPot.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlayerBed.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Interactables\ProgressibleObject.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryComponent.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\ZebosController.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\Zebos.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\UI\Clock.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\UI\CMainHUD.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\UI\HealthAndStaminaBar.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\UI\HUDSetting.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\UI\NeededItemPopUp.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World\Saves\ActorRecord.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World\Saves\MainSaveGame.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World\Saves\Saveable.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\World\MainGameInstance.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Base.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Struct.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\ItemPickUpWidget.h
-F:\Space Rancher\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
+E:\SpaceRancher\Source\SpaceRancher\Public\AI\AttackPlayer.h
+E:\SpaceRancher\Source\SpaceRancher\Public\AI\NPC.h
+E:\SpaceRancher\Source\SpaceRancher\Public\AI\NPC_Controller.h
+E:\SpaceRancher\Source\SpaceRancher\Public\AI\RunAwayFromPlayer.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\Zebos.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\ZebosController.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\CppPlayerController.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\InteractInterface.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\Plant.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlantPot.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlayerBed.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\ProgressibleObject.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryComponent.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\ItemPickUpWidget.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\Clock.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\HUDSetting.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\CMainHUD.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\HealthAndStaminaBar.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\NeededItemPopUp.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Struct.h
+E:\SpaceRancher\Source\SpaceRancher\Public\UI\WidgetDragOperation.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\ActorRecord.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Item_Base.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\MainGameInstance.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\MainSaveGame.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\Saveable.h

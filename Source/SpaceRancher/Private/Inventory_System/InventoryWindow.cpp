@@ -7,6 +7,7 @@
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Components/CanvasPanelSlot.h"
+#include "UI/WidgetDragOperation.h"
 #include "UI/HUDSetting.h"
 #include "UI/CMainHUD.h"
 
@@ -34,10 +35,18 @@ void UInventoryWindow::NativeOnDragDetected(const FGeometry& InGeometry, const F
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
 
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Drag detected"));
+
+	OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
+	OutOperation->DefaultDragVisual = this;
+	OutOperation->Pivot = EDragPivot::MouseDown;
+	Cast<UWidgetDragOperation>(OutOperation)->DragOffset = DragOffset;
+	this->RemoveFromParent();
 }
 
 FReply UInventoryWindow::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
+	DragOffset = InGeometry.AbsoluteToLocal(InMouseEvent.GetScreenSpacePosition());
+	
 	const FKey DragKey = FKey(FName("RightMouseButton"));
 	FEventReply Reply = UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, DragKey);
 	return Reply.NativeReply;
@@ -53,6 +62,7 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 void UInventoryWindow::ShowWindow()
 {
 	CanvasSlot = PlayerHUD->MainHUD->AddToCanvas(this);
+	CanvasSlot->SetAutoSize(true);
 	CanvasSlot->SetPosition(Inventory->WidgetPosition);
 	bWindowOpen = true;
 }
