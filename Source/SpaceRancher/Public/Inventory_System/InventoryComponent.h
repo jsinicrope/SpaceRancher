@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryWindow.h"
 #include "Components/ActorComponent.h"
 #include "Inventory_System/Item_Base.h"
 #include "InventoryComponent.generated.h"
@@ -15,7 +16,7 @@ struct FItemRows
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FItem_Struct> Row_Items;
 
-	FItemRows(int rows = 5);
+	FItemRows(int NewRows = 5);
 };
 
 
@@ -23,16 +24,16 @@ UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SPACERANCHER_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
-
-public:	
-	// Sets default values for this component's properties
+	
+public:
 	UInventoryComponent();
+	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Row"), Category = "Inventory")
-	int Columns = 5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	int Rows = 5;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="Slots per Column"), Category = "Inventory")
-	int Rows = 4;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	int Columns = 4;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int ItemSlots = 20;
@@ -53,11 +54,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory", AdvancedDisplay)
 	FVector2D WidgetPosition = FVector2D(700, 200);
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItem(FItem_Struct Item_Struct, int row = 0, int column = 0);
+	UFUNCTION(BlueprintGetter)
+	UInventoryWindow* GetInventoryWindow() const {return InventoryWindow;}
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemClosestPosition(int row, int column);
+	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct RemoveItemClosestPosition(int Row, int Column);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItem(FItem_Struct Item);
@@ -74,9 +78,6 @@ public:
 	UFUNCTION()
 	bool SortInventory();
 
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<UUserWidget> InventoryWindowClass;
@@ -84,7 +85,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category = "Inventory")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryWindow, AdvancedDisplay, Category = "Inventory")
 	class UInventoryWindow* InventoryWindow;
 
 	UPROPERTY()

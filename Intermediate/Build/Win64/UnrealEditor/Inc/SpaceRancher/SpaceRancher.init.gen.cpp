@@ -21,8 +21,8 @@ void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x5F2243A5,
-				0xB2AB300B,
+				0xD3C5690C,
+				0xFE9E0E3A,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

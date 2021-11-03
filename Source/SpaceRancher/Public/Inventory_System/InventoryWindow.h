@@ -45,6 +45,9 @@ public:
 	UFUNCTION()
 	void CloseWindow();
 
+	UFUNCTION()
+	bool SwitchSlots(int FirstSlotIndex, int SecondSlotIndex);
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UInventorySlotWidget* InventorySlotWidget;
@@ -82,4 +85,11 @@ protected:
 	// Delegate function for sort button
 	UFUNCTION()
 	void SortInventory();
+
+private:
+	UPROPERTY()
+	FVector2D FirstPosition;
+
+	UPROPERTY()
+	FVector2D SecondPosition;
 };

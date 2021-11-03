@@ -6,10 +6,10 @@
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/CppPlayerController.h"
 
-FItemRows::FItemRows(int rows)
+FItemRows::FItemRows(int NewRows)
 {
-	FItem_Struct Item;
-	Row_Items.Init(Item, rows);
+	const FItem_Struct Item;
+	Row_Items.Init(Item, NewRows);
 }
 
 
@@ -29,14 +29,14 @@ void UInventoryComponent::BeginPlay()
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
 	int RemainingItemSlots = ItemSlots;
-	for (int i = 0; i < Columns; i++)
+	for (int i = 0; i < Rows; i++)
 	{
 		if (RemainingItemSlots > 0)
 		{
-			int SlotsPerColumn = FMath::Min(Columns, RemainingItemSlots);
+			const int SlotsPerColumn = FMath::Min(Rows, RemainingItemSlots);
 			FItemRows Inventory_Row(SlotsPerColumn);
 			Inventory_Array_Columns.Add(Inventory_Row);
-			RemainingItemSlots -= Columns;
+			RemainingItemSlots -= Rows;
 		}
 	}
 
@@ -48,11 +48,11 @@ void UInventoryComponent::BeginPlay()
 	}
 }
 
-bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
+bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
 {
-	for (int i = column; i < Inventory_Array_Columns.Num(); i++)
+	for (int i = Column; i < Inventory_Array_Columns.Num(); i++)
 	{
-		for (int j = row; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		for (int j = Row; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
 			if (!Inventory_Array_Columns[i].Row_Items[j].bIsValidItem)
 			{
@@ -68,11 +68,11 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int row, int column)
 	return false;
 }
 
-FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int row, int column)
+FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int Row, int Column)
 {
-	FItem_Struct Item = Inventory_Array_Columns[column].Row_Items[row];
-	FItem_Struct EmptyItem;
-	Inventory_Array_Columns[column].Row_Items[row] = EmptyItem;
+	FItem_Struct Item = Inventory_Array_Columns[Column].Row_Items[Row];
+	const FItem_Struct EmptyItem;
+	Inventory_Array_Columns[Column].Row_Items[Row] = EmptyItem;
 	return Item;
 }
 

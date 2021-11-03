@@ -34,12 +34,12 @@ void UInventoryWindow::NativeOnDragDetected(const FGeometry& InGeometry, const F
 {
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
 
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Drag detected"));
-
 	OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
 	OutOperation->DefaultDragVisual = this;
 	OutOperation->Pivot = EDragPivot::MouseDown;
-	Cast<UWidgetDragOperation>(OutOperation)->DragOffset = DragOffset;
+	UWidgetDragOperation* OutOp = Cast<UWidgetDragOperation>(OutOperation);
+	OutOp->DragOffset = DragOffset;
+	OutOp->WidgetReference = this;
 	this->RemoveFromParent();
 }
 
@@ -85,6 +85,36 @@ void UInventoryWindow::SortInventory()
 	Inventory->SortInventory();
 }
 
+bool UInventoryWindow::SwitchSlots(int FirstSlotIndex, int SecondSlotIndex)
+{
+	TArray<FItem_Struct> Items;
+	for (int i = 0; i < Inventory->Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			Items.Add(Inventory->Inventory_Array_Columns[i].Row_Items[j]);
+		}
+	}
+
+	const FItem_Struct TempItem = Items[FirstSlotIndex];
+	Items[FirstSlotIndex] = Items[SecondSlotIndex];
+	Items[SecondSlotIndex] = TempItem;
+	
+	// Move Inventory from 2D back to it's intended shape
+	// Read pointer values to inventory
+	int index = 0;
+	for (int i = 0; i < Inventory->Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			Inventory->Inventory_Array_Columns[i].Row_Items[j] = Items[index];
+			index++;
+		}
+	}
+	UpdateInventory();
+	return true;
+}
+
 void UInventoryWindow::SetUpInventory()
 {
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
@@ -106,10 +136,11 @@ void UInventoryWindow::SetUpInventory()
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 1)));
 				InventoryGrid->RemoveChildAt(InventorySlotWidget->SlotIndex);
 				InventorySlotWidget->ImageThumbnail->SetBrushFromTexture(InventoryItem.Thumbnail);
-				InventorySlotWidget->SlotIndex = SlotIndex;
-				InventorySlotWidget->Inventory = Inventory;
 				InventorySlotWidget->TextBlock->SetText(FText::FromString(FString("Test Text")));
 			}
+			InventorySlotWidget->SlotContent = InventoryItem;
+			InventorySlotWidget->SlotIndex = SlotIndex;
+			InventorySlotWidget->InventoryWindow = this;
 			InventoryGrid->AddChildToGrid(InventorySlotWidget, i, j);
 			SlotIndex++;
 		}
@@ -127,22 +158,22 @@ void UInventoryWindow::UpdateInventory()
 		{
 			InventoryItem = Inventory->Inventory_Array_Columns[i].Row_Items[j];
 			InventorySlotWidget = Cast<UInventorySlotWidget>(InventoryGrid->GetChildAt(SlotIndex));
-
 			if (InventoryItem.bIsValidItem)
 			{
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 1)));
-				InventorySlotWidget->ImageThumbnail->SetBrushFromTexture(InventoryItem.Thumbnail);
-				InventorySlotWidget->SlotIndex = SlotIndex;
-				InventorySlotWidget->Inventory = Inventory;
 				FString ItemName = Inventory->Inventory_Array_Columns[i].Row_Items[j].Name;
 				InventorySlotWidget->TextBlock->SetText(FText::FromString(ItemName));
 			}
 			else
 			{
-				InventorySlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventorySlotWidgetClass);
-				
+				//InventorySlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventorySlotWidgetClass);
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 0)));
+				InventorySlotWidget->TextBlock->SetText(FText::FromString(""));
 			}
+			InventorySlotWidget->SlotContent = InventoryItem;
+			InventorySlotWidget->ImageThumbnail->SetBrushFromTexture(InventoryItem.Thumbnail);
+			InventorySlotWidget->SlotIndex = SlotIndex;
+			InventorySlotWidget->InventoryWindow = this;
 			InventoryGrid->ReplaceChildAt(SlotIndex, InventorySlotWidget);
 			SlotIndex += 1;
 		}

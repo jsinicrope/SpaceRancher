@@ -10,20 +10,22 @@
 #include "Inventory_System/InventoryComponent.h"
 #include "InventorySlotWidget.generated.h"
 
-
 UCLASS()
 class SPACERANCHER_API UInventorySlotWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
-	virtual void NativeConstruct();
+	virtual void NativeConstruct() override;
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UTextBlock* TextBlock = NULL;
+	UTextBlock* TextBlock = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UImage* ImageThumbnail = NULL;
+	UImage* ImageThumbnail = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	FItem_Struct SlotContent;
@@ -31,6 +33,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	int SlotIndex;
 
-	UPROPERTY(BlueprintReadWrite)
-	UInventoryComponent* Inventory = NULL;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UInventoryWindow* InventoryWindow = nullptr;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D DragOffset;
+
+	UPROPERTY()
+	UInventorySlotWidget* TempSwitchSlot;
 };

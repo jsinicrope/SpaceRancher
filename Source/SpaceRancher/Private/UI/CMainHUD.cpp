@@ -14,8 +14,14 @@ void UCMainHUD::NativeOnInitialized()
 
 bool UCMainHUD::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
+	if (InOperation->Tag.Equals(FString("Not draggable")))
+	{
+		return false;
+	}
+	
+	const UWidgetDragOperation* InOp = Cast<UWidgetDragOperation>(InOperation);
 	const FVector2D WidgetOffset = InGeometry.AbsoluteToLocal(InDragDropEvent.GetScreenSpacePosition());
-	const FVector2D WidgetPosition = WidgetOffset - Cast<UWidgetDragOperation>(InOperation)->DragOffset;
+	const FVector2D WidgetPosition = WidgetOffset - InOp->DragOffset;
 	
 	UCanvasPanelSlot* NewSlot = AddToCanvas(InOperation->DefaultDragVisual);
 	NewSlot->SetAutoSize(true);

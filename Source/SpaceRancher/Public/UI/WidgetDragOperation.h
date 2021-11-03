@@ -15,5 +15,7 @@ class SPACERANCHER_API UWidgetDragOperation : public UDragDropOperation
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ExposeOnSpawn="true"))
 	FVector2D DragOffset;
-	
+
+	UPROPERTY()
+	UWidget* WidgetReference = nullptr;
 };
