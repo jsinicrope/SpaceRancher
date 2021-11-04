@@ -26,8 +26,16 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 {
 	if (SlotContent.bIsValidItem)
 	{
+		// Create a copy of the current widget
+		UInventorySlotWidget* NewSlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventoryWindow->InventorySlotWidgetClass);
+		NewSlotWidget->ImageThumbnail->SetBrushFromTexture(SlotContent.Thumbnail);
+		NewSlotWidget->TextBlock->SetText(FText::FromString(SlotContent.Name));
+		NewSlotWidget->InventoryWindow = InventoryWindow;
+		NewSlotWidget->SlotIndex = SlotIndex;
+
 		OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
-		OutOperation->DefaultDragVisual = this;
+		
+		OutOperation->DefaultDragVisual = NewSlotWidget;
 		OutOperation->DefaultDragVisual->SetVisibility(ESlateVisibility::HitTestInvisible);
 		OutOperation->Pivot = EDragPivot::MouseDown;
 		OutOperation->Tag = FString("Not draggable");
@@ -39,8 +47,8 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 
 bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-	const UWidgetDragOperation* OutOp = Cast<UWidgetDragOperation>(InOperation);
-	TempSwitchSlot = Cast<UInventorySlotWidget>(OutOp->WidgetReference);
+	const UWidgetDragOperation* InOp = Cast<UWidgetDragOperation>(InOperation);
+	TempSwitchSlot = Cast<UInventorySlotWidget>(InOp->WidgetReference);
 	
 	if (TempSwitchSlot != nullptr)
 	{
