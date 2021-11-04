@@ -85,7 +85,7 @@ void UInventoryWindow::SortInventory()
 	Inventory->SortInventory();
 }
 
-bool UInventoryWindow::SwitchSlots(int FirstSlotIndex, int SecondSlotIndex)
+bool UInventoryWindow::SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot)
 {
 	TArray<FItem_Struct> Items;
 	for (int i = 0; i < Inventory->Inventory_Array_Columns.Num(); i++)
@@ -95,6 +95,9 @@ bool UInventoryWindow::SwitchSlots(int FirstSlotIndex, int SecondSlotIndex)
 			Items.Add(Inventory->Inventory_Array_Columns[i].Row_Items[j]);
 		}
 	}
+
+	const int FirstSlotIndex = FirstSlot->SlotIndex;
+	const int SecondSlotIndex = SecondSlot->SlotIndex;
 
 	const FItem_Struct TempItem = Items[FirstSlotIndex];
 	Items[FirstSlotIndex] = Items[SecondSlotIndex];

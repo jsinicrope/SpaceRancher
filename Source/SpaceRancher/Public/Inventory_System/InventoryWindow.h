@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventorySlotWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
@@ -46,7 +47,7 @@ public:
 	void CloseWindow();
 
 	UFUNCTION()
-	bool SwitchSlots(int FirstSlotIndex, int SecondSlotIndex);
+	bool SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot);
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

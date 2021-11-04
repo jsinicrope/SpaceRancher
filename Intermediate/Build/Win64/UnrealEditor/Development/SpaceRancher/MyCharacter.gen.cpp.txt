@@ -107,6 +107,7 @@ E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Image.h
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\Slate/SlateTextureAtlasInterface.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SlateTextureAtlasInterface.generated.h
@@ -116,12 +117,6 @@ E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/TextBlock.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/TextWidgetTypes.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\TextWidgetTypes.generated.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\TextBlock.generated.h
-E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/GridPanel.h
-E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
-E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/PanelSlot.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\PanelSlot.generated.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\PanelWidget.generated.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\GridPanel.generated.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Base.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/Item_Struct.h
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
@@ -131,6 +126,13 @@ E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Stru
 E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/Saveable.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Saveable.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Item_Base.generated.h
+E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InventorySlotWidget.generated.h
+E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/GridPanel.h
+E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
+E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/PanelSlot.h
+E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\PanelSlot.generated.h
+E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\PanelWidget.generated.h
+E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\GridPanel.generated.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Button.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/ContentWidget.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\ContentWidget.generated.h

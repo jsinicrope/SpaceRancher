@@ -7,7 +7,6 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Inventory_System/Item_Base.h"
-#include "Inventory_System/InventoryComponent.h"
 #include "InventorySlotWidget.generated.h"
 
 UCLASS()
@@ -34,7 +33,7 @@ public:
 	int SlotIndex;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UInventoryWindow* InventoryWindow = nullptr;
+	class UInventoryWindow* InventoryWindow = nullptr;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Inventory_System/InventorySlotWidget.h"
+#include "Inventory_System/InventoryComponent.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "UI/WidgetDragOperation.h"
 
@@ -27,6 +28,7 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 	{
 		OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
 		OutOperation->DefaultDragVisual = this;
+		OutOperation->DefaultDragVisual->SetVisibility(ESlateVisibility::HitTestInvisible);
 		OutOperation->Pivot = EDragPivot::MouseDown;
 		OutOperation->Tag = FString("Not draggable");
 		UWidgetDragOperation* OutOp = Cast<UWidgetDragOperation>(OutOperation);
@@ -42,7 +44,8 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 	
 	if (TempSwitchSlot != nullptr)
 	{
-		InventoryWindow->SwitchSlots(TempSwitchSlot->SlotIndex, SlotIndex);
+		InventoryWindow->SwitchSlots(TempSwitchSlot, this);
+		TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
 		return true;
 	}
 	return true;
