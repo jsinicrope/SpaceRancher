@@ -68,7 +68,7 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
 	return false;
 }
 
-FItem_Struct UInventoryComponent::RemoveItemClosestPosition(int Row, int Column)
+FItem_Struct UInventoryComponent::RemoveItemFromPosition(int Row, int Column)
 {
 	FItem_Struct Item = Inventory_Array_Columns[Column].Row_Items[Row];
 	const FItem_Struct EmptyItem;

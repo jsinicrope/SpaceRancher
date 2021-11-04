@@ -398,7 +398,7 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 
 FItem_Struct AMyCharacter::RemoveItemFromInventoryClosestPosition(int column, int row)
 {
-	FItem_Struct Item = InventoryComp->RemoveItemClosestPosition(row, column);
+	FItem_Struct Item = InventoryComp->RemoveItemFromPosition(row, column);
 	return Item;
 }
 
