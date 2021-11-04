@@ -41,4 +41,11 @@ protected:
 
 	UPROPERTY()
 	UInventorySlotWidget* TempSwitchSlot;
+
+	// Variables for item drag and drop switching
+	UPROPERTY()
+	TArray<FItem_Struct> CurrentInventory;
+
+	UPROPERTY()
+	TArray<FItem_Struct> DraggedFromInventory;
 };
