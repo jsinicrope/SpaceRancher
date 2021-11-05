@@ -396,7 +396,7 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 	return bAddSuccessful;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventoryClosestPosition(int column, int row)
+FItem_Struct AMyCharacter::RemoveItemFromInventoryFromPosition(int column, int row)
 {
 	FItem_Struct Item = InventoryComp->RemoveItemFromPosition(row, column);
 	return Item;

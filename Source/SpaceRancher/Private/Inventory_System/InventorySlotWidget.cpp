@@ -50,12 +50,15 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 	const UWidgetDragOperation* InOp = Cast<UWidgetDragOperation>(InOperation);
 	TempSwitchSlot = Cast<UInventorySlotWidget>(InOp->WidgetReference);
 	
-	if (TempSwitchSlot != nullptr && TempSwitchSlot->SlotIndex != SlotIndex)
+	if (TempSwitchSlot != nullptr)
 	{
-		if (this->InventoryWindow == TempSwitchSlot->InventoryWindow)
+		if (this->InventoryWindow->Inventory == TempSwitchSlot->InventoryWindow->Inventory)
 		{
-			InventoryWindow->SwitchSlots(TempSwitchSlot, this);
-			TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
+			if (TempSwitchSlot->SlotIndex != SlotIndex)
+			{
+				InventoryWindow->SwitchSlots(TempSwitchSlot, this);
+				TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
+			}
 		}
 		else
 		{
@@ -80,12 +83,11 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 			}
 
 			// Switch item positions
-			const int FirstSlotIndex = TempSwitchSlot->SlotIndex;
-			const int SecondSlotIndex = this->SlotIndex;
+			const int TempSlotIndex = TempSwitchSlot->SlotIndex;
 
-			const FItem_Struct TempItem = CurrentInventory[FirstSlotIndex];
-			CurrentInventory[FirstSlotIndex] = DraggedFromInventory[SecondSlotIndex];
-			DraggedFromInventory[SecondSlotIndex] = TempItem;
+			const FItem_Struct TempItem = CurrentInventory[SlotIndex];
+			CurrentInventory[SlotIndex] = DraggedFromInventory[TempSlotIndex];
+			DraggedFromInventory[TempSlotIndex] = TempItem;
 	
 			// Move Inventory from 2D back to it's intended shape
 			// Read pointer values to inventory
@@ -102,19 +104,19 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 
 			// Inventory that was dragged from
 			index = 0;
-			for (int i = 0; i < InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
+			for (int i = 0; i < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
 			{
-				for (int j = 0; j < InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
+				for (int j = 0; j < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
 				{
-					InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = DraggedFromInventory[index];
+					TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = DraggedFromInventory[index];
 					index++;
 				}
 			}
-
-			TempSwitchSlot->InventoryWindow->UpdateInventory();
-			InventoryWindow->UpdateInventory();
+			
 			TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
 			SetVisibility(ESlateVisibility::Visible);
+			TempSwitchSlot->InventoryWindow->UpdateInventory();
+			InventoryWindow->UpdateInventory();
 		}
 	}
 	return true;

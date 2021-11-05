@@ -84,7 +84,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemByName(FString ItemName);
 
-	// Call to toggle inventory open/closed state
+	// Call to toggle inventory state (open/closed)
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
 
@@ -96,7 +96,6 @@ public:
 	bool SortInventory();
 
 protected:
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<UUserWidget> InventoryWindowClass;
 

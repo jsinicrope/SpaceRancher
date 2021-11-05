@@ -69,13 +69,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		*(FItem_Struct*)Z_Param__Result=P_THIS->RemoveItemFromInventory(Z_Param_Item);
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(AMyCharacter::execRemoveItemFromInventoryClosestPosition)
+	DEFINE_FUNCTION(AMyCharacter::execRemoveItemFromInventoryFromPosition)
 	{
 		P_GET_PROPERTY(FIntProperty,Z_Param_column);
 		P_GET_PROPERTY(FIntProperty,Z_Param_row);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FItem_Struct*)Z_Param__Result=P_THIS->RemoveItemFromInventoryClosestPosition(Z_Param_column,Z_Param_row);
+		*(FItem_Struct*)Z_Param__Result=P_THIS->RemoveItemFromInventoryFromPosition(Z_Param_column,Z_Param_row);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execAddItemToInventory)
@@ -220,7 +220,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "PlayerStopSprint", &AMyCharacter::execPlayerStopSprint },
 			{ "RemoveItemFromInventory", &AMyCharacter::execRemoveItemFromInventory },
 			{ "RemoveItemFromInventoryByName", &AMyCharacter::execRemoveItemFromInventoryByName },
-			{ "RemoveItemFromInventoryClosestPosition", &AMyCharacter::execRemoveItemFromInventoryClosestPosition },
+			{ "RemoveItemFromInventoryFromPosition", &AMyCharacter::execRemoveItemFromInventoryFromPosition },
 			{ "RemoveWidgetFromViewport", &AMyCharacter::execRemoveWidgetFromViewport },
 			{ "RespawnPlayer", &AMyCharacter::execRespawnPlayer },
 			{ "SaveGame", &AMyCharacter::execSaveGame },
@@ -767,9 +767,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics
+	struct Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics
 	{
-		struct MyCharacter_eventRemoveItemFromInventoryClosestPosition_Parms
+		struct MyCharacter_eventRemoveItemFromInventoryFromPosition_Parms
 		{
 			int32 column;
 			int32 row;
@@ -784,27 +784,27 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_column = { "column", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryClosestPosition_Parms, column), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_row = { "row", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryClosestPosition_Parms, row), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryClosestPosition_Parms, ReturnValue), Z_Construct_UScriptStruct_FItem_Struct, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_column,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_row,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::NewProp_ReturnValue,
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_column = { "column", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryFromPosition_Parms, column), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_row = { "row", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryFromPosition_Parms, row), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventRemoveItemFromInventoryFromPosition_Parms, ReturnValue), Z_Construct_UScriptStruct_FItem_Struct, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_column,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_row,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Inventory" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "RemoveItemFromInventoryClosestPosition", nullptr, nullptr, sizeof(MyCharacter_eventRemoveItemFromInventoryClosestPosition_Parms), Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "RemoveItemFromInventoryFromPosition", nullptr, nullptr, sizeof(MyCharacter_eventRemoveItemFromInventoryFromPosition_Parms), Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1148,7 +1148,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerStopSprint, "PlayerStopSprint" }, // 173474060
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventory, "RemoveItemFromInventory" }, // 3753081161
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryByName, "RemoveItemFromInventoryByName" }, // 3959265479
-		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryClosestPosition, "RemoveItemFromInventoryClosestPosition" }, // 2254980906
+		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition, "RemoveItemFromInventoryFromPosition" }, // 3708749207
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveWidgetFromViewport, "RemoveWidgetFromViewport" }, // 506083104
 		{ &Z_Construct_UFunction_AMyCharacter_RespawnPlayer, "RespawnPlayer" }, // 1838780855
 		{ &Z_Construct_UFunction_AMyCharacter_SaveGame, "SaveGame" }, // 2500372366
@@ -1594,7 +1594,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 488223021);
+	IMPLEMENT_CLASS(AMyCharacter, 2135992262);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

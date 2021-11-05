@@ -23,7 +23,7 @@ class UHUDSetting;
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
+	DECLARE_FUNCTION(execRemoveItemFromInventoryFromPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \
 	DECLARE_FUNCTION(execLoadPlayerCharacter); \
 	DECLARE_FUNCTION(execSavePlayerCharacter); \
@@ -50,7 +50,7 @@ class UHUDSetting;
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryClosestPosition); \
+	DECLARE_FUNCTION(execRemoveItemFromInventoryFromPosition); \
 	DECLARE_FUNCTION(execAddItemToInventory); \
 	DECLARE_FUNCTION(execLoadPlayerCharacter); \
 	DECLARE_FUNCTION(execSavePlayerCharacter); \

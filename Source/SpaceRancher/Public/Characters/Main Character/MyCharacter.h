@@ -229,7 +229,7 @@ public:
 	bool AddItemToInventory(FItem_Struct Item_Struct);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventoryClosestPosition(int column, int row);
+	FItem_Struct RemoveItemFromInventoryFromPosition(int column, int row);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromInventory(FItem_Struct Item);
