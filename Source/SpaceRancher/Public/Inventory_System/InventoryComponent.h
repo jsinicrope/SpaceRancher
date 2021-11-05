@@ -59,7 +59,7 @@ public:
 
     // The position the widget is spawned at when opened
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory", AdvancedDisplay)
-	FVector2D WidgetPosition = FVector2D(700, 200);
+	FVector2D WidgetPosition = FVector2D(700, 225);
 
 	UFUNCTION(BlueprintGetter)
 	UInventoryWindow* GetInventoryWindow() const {return InventoryWindow;}
@@ -88,6 +88,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
 
+	// Toggles Inventory and that of the player
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void ToggleInventoryWithPlayerInventory();
+
 	UFUNCTION(BlueprintGetter)
 	bool GetInventoryOpen();
 
@@ -110,4 +114,7 @@ protected:
 
 	UPROPERTY()
 	class ACppPlayerController* PC;
+
+	UPROPERTY()
+	class AMyCharacter* Player;
 };

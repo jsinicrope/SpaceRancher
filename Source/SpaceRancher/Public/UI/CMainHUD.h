@@ -19,7 +19,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	UCanvasPanel* CanvasPanel = nullptr;
 
+	UPROPERTY()
+	int ActiveInteractableWidgets;
+
+	UPROPERTY()
+	TArray<UWidget*> InteractableWidgets;
+
 public:
 	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddToCanvas(UWidget* Widget);
+
+	UFUNCTION()
+	UCanvasPanelSlot* AddInteractableWidgetToCanvas(UWidget* Widget);
+
+	UFUNCTION()
+	void RemoveInteractableWidgetFromCanvas(UWidget* Widget);
+
+	UFUNCTION()
+	void RemoveAllInteractableWidgets();
 };

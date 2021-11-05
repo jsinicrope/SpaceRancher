@@ -3,6 +3,7 @@
 #include "Characters/Main Character/MyCharacter.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Interactables/InteractInterface.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "UI/Clock.h"
@@ -10,6 +11,7 @@
 #include "World/Saves/ActorSaveArchive.h"
 #include "UI/HUDSetting.h"
 #include "Kismet/GameplayStatics.h"
+#include "UI/CMainHUD.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -204,11 +206,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
 }
 
-void AMyCharacter::Interact_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Player Character Interact_Implemented received"));
-}
-
 void AMyCharacter::PlayerInteract()
 {
 	bInventoryOpen = InventoryComp->GetInventoryOpen();
@@ -259,7 +256,6 @@ void AMyCharacter::PlayerInteract()
 void AMyCharacter::KillPlayer()
 {
 	bPlayerDead = true;
-
 	RespawnPlayer();
 }
 
@@ -269,7 +265,6 @@ void AMyCharacter::RespawnPlayer()
 	GetCharacterMovement()->StopActiveMovement();
 	Health = MaxHealth;
 	Stamina = MaxStamina;
-
 	bPlayerDead = false;
 }
 
@@ -418,6 +413,10 @@ void AMyCharacter::ToggleInventory()
 {
 	InventoryComp->ToggleInventory();
 	bInventoryOpen = InventoryComp->bInventoryOpen;
+	if (!bInventoryOpen)
+	{
+		HUDController->MainHUD->RemoveAllInteractableWidgets();
+	}
 }
 
 void AMyCharacter::RemoveWidgetFromViewport()

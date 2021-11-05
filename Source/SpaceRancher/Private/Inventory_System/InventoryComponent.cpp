@@ -5,6 +5,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/CppPlayerController.h"
+#include "Characters/Main Character/MyCharacter.h"
 
 FItemRows::FItemRows(int NewRows)
 {
@@ -117,7 +118,7 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 void UInventoryComponent::ToggleInventory()
 {
 	bInventoryOpen = InventoryWindow->bWindowOpen;
-	if (!bInventoryOpen)
+	if (!bInventoryOpen || InventoryWindow->GetParent() == nullptr)
 	{
 		if (bAutoSort)
 		{
@@ -125,16 +126,22 @@ void UInventoryComponent::ToggleInventory()
 		}
 		InventoryWindow->UpdateInventory();
 		InventoryWindow->ShowWindow();
-		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
-		PC->bShowMouseCursor = true;
 	}
 	else
 	{
 		InventoryWindow->CloseWindow();
-		PC->bShowMouseCursor = false;
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 	}
 	bInventoryOpen = InventoryWindow->bWindowOpen;
+}
+
+void UInventoryComponent::ToggleInventoryWithPlayerInventory()
+{
+	Player = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (Player->GetInventoryComp() != this)
+	{
+		Player->ToggleInventory();
+		ToggleInventory();
+	}
 }
 
 bool UInventoryComponent::GetInventoryOpen()

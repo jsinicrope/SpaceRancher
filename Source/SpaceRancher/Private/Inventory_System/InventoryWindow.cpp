@@ -61,7 +61,7 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 
 void UInventoryWindow::ShowWindow()
 {
-	CanvasSlot = PlayerHUD->MainHUD->AddToCanvas(this);
+	CanvasSlot = PlayerHUD->MainHUD->AddInteractableWidgetToCanvas(this);
 	CanvasSlot->SetAutoSize(true);
 	CanvasSlot->SetPosition(Inventory->WidgetPosition);
 	bWindowOpen = true;
@@ -70,13 +70,11 @@ void UInventoryWindow::ShowWindow()
 void UInventoryWindow::CloseWindow()
 {
 	CloseInventory();
-	PC->bShowMouseCursor = false;
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 }
 
 void UInventoryWindow::CloseInventory()
 {
-	this->RemoveFromParent();
+	PlayerHUD->MainHUD->RemoveInteractableWidgetFromCanvas(this);
 	bWindowOpen = false;
 }
 

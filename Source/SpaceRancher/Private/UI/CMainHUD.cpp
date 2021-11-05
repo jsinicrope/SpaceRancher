@@ -4,6 +4,7 @@
 #include "Blueprint/DragDropOperation.h"
 #include "Components/CanvasPanelSlot.h"
 #include "UI/WidgetDragOperation.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 
 void UCMainHUD::NativeOnInitialized()
 {
@@ -32,4 +33,38 @@ bool UCMainHUD::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& 
 UCanvasPanelSlot* UCMainHUD::AddToCanvas(UWidget* Widget)
 {
 	return CanvasPanel->AddChildToCanvas(Widget);
+}
+
+UCanvasPanelSlot* UCMainHUD::AddInteractableWidgetToCanvas(UWidget* Widget)
+{
+	ActiveInteractableWidgets++;
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
+	PC->bShowMouseCursor = true;
+	InteractableWidgets.Add(Widget);
+	return AddToCanvas(Widget);
+}
+
+void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)
+{
+	Widget->RemoveFromParent();
+	InteractableWidgets.RemoveSingle(Widget);
+	ActiveInteractableWidgets--;
+	if (ActiveInteractableWidgets <= 0)
+	{
+		APlayerController* PC = GetWorld()->GetFirstPlayerController();
+		PC->bShowMouseCursor = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	}
+}
+
+void UCMainHUD::RemoveAllInteractableWidgets()
+{
+	for (UWidget* Widget : InteractableWidgets)
+	{
+		RemoveInteractableWidgetFromCanvas(Widget);
+	}
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	PC->bShowMouseCursor = false;
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 }

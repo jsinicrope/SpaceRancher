@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Interactables/InteractInterface.h"
 #include "Blueprint/UserWidget.h"
 #include "World/MainGameInstance.h"
 #include "Inventory_System/InventoryComponent.h"
@@ -15,7 +14,7 @@
 class UCharacterMovementComponent;
 
 UCLASS()
-class SPACERANCHER_API AMyCharacter : public ACharacter, public IInteractInterface
+class SPACERANCHER_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -28,8 +27,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	virtual void Interact_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -163,7 +160,7 @@ protected:
 	UPROPERTY(SaveGame)
 	FVector JumpStartPoint;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetInventoryComp, Category="Inventory")
 	class UInventoryComponent* InventoryComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
@@ -177,17 +174,20 @@ protected:
 
 public:
 	//Functions
-	UFUNCTION(BlueprintCallable, Category="Health")
+	UFUNCTION(BlueprintGetter, Category="Health")
 	float GetHealth() const {return Health;}
 
-	UFUNCTION(BlueprintCallable, Category="Health")
+	UFUNCTION(BlueprintGetter, Category="Health")
 	float GetMaxHealth()const {return MaxHealth;}
 
-	UFUNCTION(BlueprintCallable, Category="Stamina")
+	UFUNCTION(BlueprintGetter, Category="Stamina")
 	float GetStamina() const {return Stamina;}
 
-	UFUNCTION(BlueprintCallable, Category="Stamina")
-	float GetMaxStamina()const {return MaxStamina;}
+	UFUNCTION(BlueprintGetter, Category="Stamina")
+	float GetMaxStamina() const {return MaxStamina;}
+
+	UFUNCTION(BlueprintGetter, Category="Inventory")
+	UInventoryComponent* GetInventoryComp() const {return InventoryComp;}
 
 	UFUNCTION(BlueprintCallable, Category="HUD")
 	class UHUDSetting* GetHUDController() const {return HUDController;}
