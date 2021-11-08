@@ -415,7 +415,7 @@ void AMyCharacter::ToggleInventory()
 	bInventoryOpen = InventoryComp->bInventoryOpen;
 	if (!bInventoryOpen)
 	{
-		HUDController->MainHUD->RemoveAllInteractableWidgets();
+		HUDController->MainHUD->RemoveAllInventoryWidgets();
 	}
 }
 

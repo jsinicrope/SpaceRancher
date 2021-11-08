@@ -45,6 +45,16 @@ UCanvasPanelSlot* UCMainHUD::AddInteractableWidgetToCanvas(UWidget* Widget)
 	return AddToCanvas(Widget);
 }
 
+UCanvasPanelSlot* UCMainHUD::AddInventoryWidgetToCanvas(UWidget* Widget)
+{
+	ActiveInventoryWidgets++;
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
+	PC->bShowMouseCursor = true;
+	InventoryWidgets.Add(Widget);
+	return AddToCanvas(Widget);
+}
+
 void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)
 {
 	Widget->RemoveFromParent();
@@ -58,11 +68,45 @@ void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)
 	}
 }
 
+void UCMainHUD::RemoveInventoryWidgetFromCanvas(UWidget* Widget)
+{
+	Widget->RemoveFromParent();
+	InventoryWidgets.RemoveSingle(Widget);
+	ActiveInventoryWidgets--;
+	if (ActiveInventoryWidgets <= 0)
+	{
+		APlayerController* PC = GetWorld()->GetFirstPlayerController();
+		PC->bShowMouseCursor = false;
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	}
+}
+
 void UCMainHUD::RemoveAllInteractableWidgets()
 {
-	for (UWidget* Widget : InteractableWidgets)
+	check(!InteractableWidgets.IsEmpty());
+	const int InteractableWidgetsLength = InteractableWidgets.Num(); 
+	for (int i = 0; i<InteractableWidgetsLength; i++)
 	{
-		RemoveInteractableWidgetFromCanvas(Widget);
+		if (InteractableWidgets[i])
+		{
+			RemoveInteractableWidgetFromCanvas(InteractableWidgets[i]);
+		}
+	}
+	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	PC->bShowMouseCursor = false;
+	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+}
+
+void UCMainHUD::RemoveAllInventoryWidgets()
+{
+	check(!InventoryWidgets.IsEmpty());
+	const int InvLength = InventoryWidgets.Num();
+	for (int i = 0; i<InvLength; i++)
+	{
+		if (InventoryWidgets[i])
+		{
+			RemoveInventoryWidgetFromCanvas(InventoryWidgets[i]);
+		}
 	}
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
 	PC->bShowMouseCursor = false;

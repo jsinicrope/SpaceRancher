@@ -25,6 +25,12 @@ protected:
 	UPROPERTY()
 	TArray<UWidget*> InteractableWidgets;
 
+	UPROPERTY()
+	int ActiveInventoryWidgets;
+
+	UPROPERTY()
+	TArray<UWidget*> InventoryWidgets;
+
 public:
 	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddToCanvas(UWidget* Widget);
@@ -33,8 +39,17 @@ public:
 	UCanvasPanelSlot* AddInteractableWidgetToCanvas(UWidget* Widget);
 
 	UFUNCTION()
+	UCanvasPanelSlot* AddInventoryWidgetToCanvas(UWidget* Widget);
+
+	UFUNCTION()
 	void RemoveInteractableWidgetFromCanvas(UWidget* Widget);
 
 	UFUNCTION()
+	void RemoveInventoryWidgetFromCanvas(UWidget* Widget);
+
+	UFUNCTION()
 	void RemoveAllInteractableWidgets();
+
+	UFUNCTION()
+	void RemoveAllInventoryWidgets();
 };
