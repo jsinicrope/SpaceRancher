@@ -83,7 +83,6 @@ void UCMainHUD::RemoveInventoryWidgetFromCanvas(UWidget* Widget)
 
 void UCMainHUD::RemoveAllInteractableWidgets()
 {
-	check(!InteractableWidgets.IsEmpty());
 	const int InteractableWidgetsLength = InteractableWidgets.Num(); 
 	for (int i = 0; i<InteractableWidgetsLength; i++)
 	{
@@ -99,7 +98,6 @@ void UCMainHUD::RemoveAllInteractableWidgets()
 
 void UCMainHUD::RemoveAllInventoryWidgets()
 {
-	check(!InventoryWidgets.IsEmpty());
 	const int InvLength = InventoryWidgets.Num();
 	for (int i = 0; i<InvLength; i++)
 	{
