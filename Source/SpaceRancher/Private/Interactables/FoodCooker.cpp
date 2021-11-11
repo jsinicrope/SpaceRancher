@@ -3,27 +3,32 @@
 #include "Interactables/FoodCooker.h"
 #include "Components/WidgetComponent.h"
 #include "Widgets/UI/FoodCookerTimer.h"
+#include "Components/SpawnerComponent.h"
 
-AFoodCooker::AFoodCooker()
+AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	CookerFrame = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerFrame"));
+	CookerFrame = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("CookerFrame"));
 	CookerGrill = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerGrill"));
 	CookerDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerDoor"));
 	DoorTimelineComponent = CreateDefaultSubobject<UTimelineComponent>(TEXT("DoorTimelineComponent"));
 	TimerWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("TimerWidget"));
+	SpawnerComponent = CreateDefaultSubobject<USpawnerComponent>(TEXT("SpawnerComponent"));
 	
 	CookerFrame->SetupAttachment(RootComponent);
+	CookerDoor->SetupAttachment(CookerFrame);
+	CookerGrill->SetupAttachment(CookerFrame);
+	TimerWidget->SetupAttachment(CookerFrame);
+	SpawnerComponent->SetupAttachment(CookerFrame);
 }
 
 void AFoodCooker::BeginPlay()
 {
 	Super::BeginPlay();
-
-	CookerDoor->AttachToComponent(CookerFrame, FAttachmentTransformRules::KeepWorldTransform);
-	CookerGrill->AttachToComponent(CookerFrame, FAttachmentTransformRules::KeepWorldTransform);
-	TimerWidget->AttachToComponent(CookerFrame, FAttachmentTransformRules::KeepWorldTransform);
+	
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetComponentLocation().ToString());
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetRelativeLocation().ToString());
 	
 	//Binding our float track to our UpdateTimelineComp Function's output
 	UpdateFunctionFloat.BindDynamic(this, &AFoodCooker::UpdateTimelineComp);
@@ -97,6 +102,7 @@ void AFoodCooker::EndCooking()
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Finished cooking!"));
 	bCookingQueued = false;
 	bCooking = false;
+	SpawnerComponent->Spawn();
 }
 
 void AFoodCooker::UpdateTimelineComp(float Output)

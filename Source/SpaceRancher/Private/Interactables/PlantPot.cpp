@@ -79,6 +79,9 @@ void APlantPot::SpawnPlants(int AmountOfPlants)
 			FVector SpawnPoint = GetRandomPlantSpawnPoint();
 			FActorSpawnParameters SpawnInfo;
 			SpawnInfo.Owner = this;
+#if WITH_EDITOR
+			SpawnInfo.bTemporaryEditorActor = true;
+#endif
 			AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, SpawnPoint, GetActorRotation(), SpawnInfo);
 			PlantedPlants.Add(NewPlant);
 		}

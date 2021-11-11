@@ -15,11 +15,11 @@ class SPACERANCHER_API AFoodCooker : public AActor, public IInteractInterface
 	
 public:	
 	// Sets default values for this actor's properties
-	AFoodCooker();
+	AFoodCooker(const FObjectInitializer &ObjectInitializer);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	
 	virtual void Interact_Implementation() override;
 
 protected:
@@ -40,6 +40,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetComponent* TimerWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USpawnerComponent* SpawnerComponent;
 
 	UPROPERTY()
 	class UFoodCookerTimer* CookerTimer;
