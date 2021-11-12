@@ -47,6 +47,9 @@ protected:
 	UPROPERTY()
 	class UFoodCookerTimer* CookerTimer;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
+	FString RequiredItem;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bDoorOpen = false;
 
@@ -61,6 +64,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bCooking = false;
+
+	UPROPERTY()
+	class AMyCharacter* PC;
 
 	UFUNCTION(BlueprintCallable)
 	void QueueCooking();

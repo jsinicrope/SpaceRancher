@@ -10,8 +10,10 @@
 			"ZebosController.cpp.obj",
 			"CppPlayerController.cpp.obj",
 			"MyCharacter.cpp.obj",
+			"SpawnerComponent.cpp.obj",
 			"InteractInterface.cpp.obj",
 			"Plant.cpp.obj",
+			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
 			"InventoryComponent.cpp.obj",
@@ -33,9 +35,7 @@
 			"MainSaveGame.cpp.obj",
 			"Saveable.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"SpawnerComponent.cpp.obj",
-			"FoodCooker.cpp.obj",
-			"PlantPot.cpp.obj"
+			"FoodCooker.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",

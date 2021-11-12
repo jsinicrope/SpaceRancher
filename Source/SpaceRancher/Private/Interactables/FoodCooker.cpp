@@ -4,6 +4,7 @@
 #include "Components/WidgetComponent.h"
 #include "Widgets/UI/FoodCookerTimer.h"
 #include "Components/SpawnerComponent.h"
+#include "Characters/Main Character/MyCharacter.h"
 
 AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -26,6 +27,8 @@ AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(Ob
 void AFoodCooker::BeginPlay()
 {
 	Super::BeginPlay();
+
+	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetComponentLocation().ToString());
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetRelativeLocation().ToString());
@@ -62,7 +65,14 @@ void AFoodCooker::Interact_Implementation()
 {
 	if (bDoorOpen)
 	{
-		QueueCooking();
+		if (PC)
+		{
+			const FItem_Struct Item = PC->RemoveItemFromInventoryFromPosition(0, 0);
+			if (Item.Name.Equals(RequiredItem))
+			{
+				QueueCooking();
+			}
+		}
 		DoorTimelineComponent->Reverse();
 		bDoorOpen = false;
 	}
