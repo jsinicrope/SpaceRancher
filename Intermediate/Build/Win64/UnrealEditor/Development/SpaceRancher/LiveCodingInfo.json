@@ -29,13 +29,13 @@
 			"WidgetDragOperation.cpp.obj",
 			"FoodCookerTimer.cpp.obj",
 			"MainGameInstance.cpp.obj",
-			"ObjectSpawner.cpp.obj",
 			"ActorRecord.cpp.obj",
 			"ActorSaveArchive.cpp.obj",
 			"MainSaveGame.cpp.obj",
 			"Saveable.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"FoodCooker.cpp.obj"
+			"FoodCooker.cpp.obj",
+			"SpawnerVolume.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -60,7 +60,6 @@
 			"NeededItemPopUp.gen.cpp.obj",
 			"NPC.gen.cpp.obj",
 			"NPC_Controller.gen.cpp.obj",
-			"ObjectSpawner.gen.cpp.obj",
 			"Plant.gen.cpp.obj",
 			"PlantPot.gen.cpp.obj",
 			"PlayerBed.gen.cpp.obj",
@@ -68,6 +67,7 @@
 			"RunAwayFromPlayer.gen.cpp.obj",
 			"Saveable.gen.cpp.obj",
 			"SpawnerComponent.gen.cpp.obj",
+			"SpawnerVolume.gen.cpp.obj",
 			"WidgetDragOperation.gen.cpp.obj",
 			"Zebos.gen.cpp.obj",
 			"ZebosController.gen.cpp.obj",

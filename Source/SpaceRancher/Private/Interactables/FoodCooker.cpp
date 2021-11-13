@@ -30,9 +30,6 @@ void AFoodCooker::BeginPlay()
 
 	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetComponentLocation().ToString());
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, SpawnerComponent->GetRelativeLocation().ToString());
-	
 	//Binding our float track to our UpdateTimelineComp Function's output
 	UpdateFunctionFloat.BindDynamic(this, &AFoodCooker::UpdateTimelineComp);
 
