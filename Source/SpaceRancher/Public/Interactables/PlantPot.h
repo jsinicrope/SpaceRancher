@@ -51,7 +51,7 @@ public:
 	bool SetNewPlant(class TSubclassOf<APlant> NewPlant, bool bSpawnPlants = false, int AmountOfPlants = 20);
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content", meta=(DisplayThumbnail="true"))
 	class TSubclassOf<APlant> Plant;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Planter|Content")

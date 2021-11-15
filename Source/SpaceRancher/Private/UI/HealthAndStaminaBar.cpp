@@ -12,14 +12,18 @@ void UHealthAndStaminaBar::NativeOnInitialized()
 	StaminaBar = Cast<UProgressBar>(GetWidgetFromName(FName("StaminaBar")));
 
 	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	
 }
 
 void UHealthAndStaminaBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
-	UpdateHealthBar();
-	UpdateStaminaBar();
+	if (PC)
+	{
+		UpdateHealthBar();
+		UpdateStaminaBar();
+	}
 }
 
 void UHealthAndStaminaBar::UpdateHealthBar() const

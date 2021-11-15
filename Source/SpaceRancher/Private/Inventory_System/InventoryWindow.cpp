@@ -56,7 +56,11 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 {
 	Inventory = InventoryComp;
 	InventorySlotWidgetClass = InventorySlotWidgetClassIn;
-	PlayerHUD = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn())->GetHUDController();
+	AMyCharacter* Player =  Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (Player)
+	{
+		PlayerHUD = Player->GetHUDController();
+	}
 }
 
 void UInventoryWindow::ShowWindow()
