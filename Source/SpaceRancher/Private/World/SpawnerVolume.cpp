@@ -32,7 +32,7 @@ void ASpawnerVolume::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
-bool ASpawnerVolume::LineTraceToGround(FVector &NewPoint) const
+bool ASpawnerVolume::LineTraceToGround(FVector &NewPoint, FRotator &OutRotation) const
 {
 	FVector InOrigin;
 	FVector InBoxExtent;
@@ -56,6 +56,7 @@ bool ASpawnerVolume::LineTraceToGround(FVector &NewPoint) const
 	if (OutHit.GetActor())
 	{
 		NewPoint = OutHit.ImpactPoint;
+		OutRotation = (OutHit.ImpactNormal + Start.DownVector).Rotation();
 		return true;
 	}
 	if (bBoundingBoxIsLowest)
@@ -75,10 +76,11 @@ void ASpawnerVolume::GetRandomSpawnPoints()
 		FBox BoundingBox = GetComponentsBoundingBox();
 		BoundingBox.GetCenterAndExtents(InOrigin, InBoxExtent);
 		FVector NewPoint = UKismetMathLibrary::RandomPointInBoundingBox(InOrigin, InBoxExtent);
-
-		if (LineTraceToGround(NewPoint))
+		FRotator OutRotation;
+		if (LineTraceToGround(NewPoint, OutRotation))
 		{
 			SpawnPoints.Add(NewPoint);
+			SpawnRotation.Add(OutRotation);
 		}
 	}
 }
@@ -97,16 +99,23 @@ void ASpawnerVolume::GetSphereCenteredSpawnPoints()
 		{
 			CenterDensity = FMath::FRand();
 		}
+
+		// Radius is unified
+		float Radius = FMath::Pow(FMath::FRand(), CenterDensity);
+		Radius = Radius < InnerRing ? InnerRing : Radius;
+		Radius = Radius > OuterRing ? OuterRing : Radius;
+		Radius *= FMath::Min(InBoxExtent.X, InBoxExtent.Y);
 		
-		const float Radius = FMath::Min(InBoxExtent.X, InBoxExtent.Y) * FMath::Pow(FMath::FRand(), CenterDensity);
 		const float Degree = FMath::FRandRange(0.0f, 360.0f);
 		const float Y = InOrigin.Y + std::cos(Degree) * Radius;
 		const float X = InOrigin.X + std::sin(Degree) * Radius;
 		FVector NewPoint = FVector(X, Y, InOrigin.Z);
 		
-		if (LineTraceToGround(NewPoint))
+		FRotator OutRotation;
+		if (LineTraceToGround(NewPoint, OutRotation))
 		{
 			SpawnPoints.Add(NewPoint);
+			SpawnRotation.Add(OutRotation);
 		}
 	}
 }
@@ -129,9 +138,11 @@ void ASpawnerVolume::GetRasteredSpawnPoints()
 		for (int j = 0; j < RasterLayout.X; j++)
 		{
 			FVector NewPoint = FVector(StartX + SegmentLengthX * j, StartY + SegmentLengthY * i, InOrigin.Z);
-			if (LineTraceToGround(NewPoint))
+			FRotator OutRotation;
+			if (LineTraceToGround(NewPoint, OutRotation))
 			{
 				SpawnPoints.Add(NewPoint);
+				SpawnRotation.Add(OutRotation);
 			}
 		}
 	}
@@ -163,8 +174,11 @@ AActor* ASpawnerVolume::SpawnActor(FVector SpawnPoint, FRotator Rotation)
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 	
-	Rotation.Roll += FMath::RandRange(0.0f, ActorsRandomXRotation);
-	Rotation.Pitch += FMath::RandRange(0.0f, ActorsRandomYRotation);
+	if (!bAlignToGround)
+	{
+		Rotation.Roll = FMath::RandRange(0.0f, ActorsRandomXRotation);
+		Rotation.Pitch = FMath::RandRange(0.0f, ActorsRandomYRotation);
+	}
 	
 	const int RandActor = FMath::RandRange(0, ActorClasses.Num() - 1);
 	AActor* NewActor = GetWorld()->SpawnActor<AActor>(ActorClasses[RandActor], SpawnPoint, Rotation, SpawnParams);
@@ -177,8 +191,12 @@ AActor* ASpawnerVolume::SpawnActor(FVector SpawnPoint, FRotator Rotation)
 void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 {
 	FTransform Spawn = FTransform();
-	Rotation.Roll += FMath::RandRange(0.0f, MeshesRandomXRotation);
-	Rotation.Pitch += FMath::RandRange(0.0f, MeshesRandomYRotation);
+	if (!bAlignToGround)
+	{
+		Rotation.Roll = FMath::RandRange(0.0f, MeshesRandomXRotation);
+		Rotation.Pitch = FMath::RandRange(0.0f, MeshesRandomYRotation);
+	}
+	
 	const FVector RandomScale = FVector(FMath::RandRange(MeshesMinScale, MeshesMaxScale));
 	Spawn.SetLocation(SpawnPoint);
 	Spawn.SetRotation(Rotation.Quaternion());
@@ -191,6 +209,7 @@ void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 void ASpawnerVolume::SpawnActors()
 {
 	SpawnPoints.Empty();
+	SpawnRotation.Empty();
 	DeleteAllActors();
 	if (Meshes.Num() >= 1)	PrepareMeshInstancing();
 	AddActors();
@@ -199,6 +218,7 @@ void ASpawnerVolume::SpawnActors()
 void ASpawnerVolume::AddActors()
 {
 	SpawnPoints.Empty();
+	SpawnRotation.Empty();
 	
 	switch (SpawnState)
 	{
@@ -219,7 +239,7 @@ void ASpawnerVolume::AddActors()
 	for (int i = 0; i < SpawnPoints.Num(); i++)
 	{
 		const FVector SpawnPoint = SpawnPoints[i];
-		FRotator ActorRotation(0.0f);
+		FRotator ActorRotation = SpawnRotation[i];
 		if (bRandomRotation)
 		{
 			ActorRotation.Yaw += FMath::RandRange(0.0f, 360.0f); 
@@ -279,9 +299,10 @@ void ASpawnerVolume::DeleteAllActors()
 	
 	for (int i = 0; i < InstancedMeshes.Num(); i++)
 	{
-		
-		InstancedMeshes[i]->InstancedStaticMeshComponent->DestroyComponent();
-		InstancedMeshes[i]->Destroy();
+		if (InstancedMeshes[i])
+		{
+			InstancedMeshes[i]->Destroy();
+		}
 	}
 	
 	InstancedMeshes.Empty();
