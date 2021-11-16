@@ -3,6 +3,7 @@
 #include "World/SpawnerVolume.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "World/SpawnerMeshInstance.h"
 
 ASpawnerVolume::ASpawnerVolume()
 {
@@ -136,55 +137,153 @@ void ASpawnerVolume::GetRasteredSpawnPoints()
 	}
 }
 
+bool ASpawnerVolume::PrepareMeshInstancing()
+{
+	if (Meshes.Num() == 0)	return false;
+	
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	
+	if (InstancedMeshes.Num() == Meshes.Num())
+	{
+		return true;
+	}
+	
+	for (int i = 0; i < Meshes.Num(); i++)
+	{
+		ASpawnerMeshInstance* InstancedMesh = GetWorld()->SpawnActor<ASpawnerMeshInstance>(ASpawnerMeshInstance::StaticClass(), SpawnParams);
+		InstancedMesh->InstancedStaticMeshComponent->SetStaticMesh(Meshes[i]);
+		InstancedMeshes.Add(InstancedMesh);
+	}
+	return true;
+}
+
+AActor* ASpawnerVolume::SpawnActor(FVector SpawnPoint, FRotator Rotation)
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	
+	Rotation.Roll += FMath::RandRange(0.0f, ActorsRandomXRotation);
+	Rotation.Pitch += FMath::RandRange(0.0f, ActorsRandomYRotation);
+	
+	const int RandActor = FMath::RandRange(0, ActorClasses.Num() - 1);
+	AActor* NewActor = GetWorld()->SpawnActor<AActor>(ActorClasses[RandActor], SpawnPoint, Rotation, SpawnParams);
+	
+	const FVector RandomScale = FVector(FMath::RandRange(ActorsMinScale, ActorsMaxScale));
+	NewActor->SetActorScale3D(RandomScale);
+	return NewActor;
+}
+
+void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
+{
+	FTransform Spawn = FTransform();
+	Rotation.Roll += FMath::RandRange(0.0f, MeshesRandomXRotation);
+	Rotation.Pitch += FMath::RandRange(0.0f, MeshesRandomYRotation);
+	const FVector RandomScale = FVector(FMath::RandRange(MeshesMinScale, MeshesMaxScale));
+	Spawn.SetLocation(SpawnPoint);
+	Spawn.SetRotation(Rotation.Quaternion());
+	Spawn.SetScale3D(RandomScale);
+
+	const int RandMesh = FMath::RandRange(0, Meshes.Num() - 1);
+	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstanceWorldSpace(Spawn);
+}
+
 void ASpawnerVolume::SpawnActors()
 {
+	SpawnPoints.Empty();
 	DeleteAllActors();
+	if (Meshes.Num() >= 1)	PrepareMeshInstancing();
+	AddActors();
+}
+
+void ASpawnerVolume::AddActors()
+{
 	SpawnPoints.Empty();
 	
 	switch (SpawnState)
 	{
-		case (ESpawnState::Centered):
-			GetSphereCenteredSpawnPoints();
-			break;
+	case (ESpawnState::Centered):
+		GetSphereCenteredSpawnPoints();
+		break;
 		
-		case (ESpawnState::Rastered):
-			GetRasteredSpawnPoints();
-			break;
+	case (ESpawnState::Rastered):
+		GetRasteredSpawnPoints();
+		break;
 		
-		//  Random case as default spawn setting
-		default:
-			GetRandomSpawnPoints();
-			break;
+	//  Random case as default spawn setting
+	default:
+		GetRandomSpawnPoints();
+	break;
 	}
 	
 	for (int i = 0; i < SpawnPoints.Num(); i++)
 	{
-		FVector SpawnPoint = SpawnPoints[i];
+		const FVector SpawnPoint = SpawnPoints[i];
 		FRotator ActorRotation(0.0f);
 		if (bRandomRotation)
 		{
 			ActorRotation.Yaw += FMath::RandRange(0.0f, 360.0f); 
 		}
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-		ensure(ActorClasses.Num() >= 1);
-		const int RandActor = FMath::RandRange(0, ActorClasses.Num() - 1);
-		AActor* NewActor = GetWorld()->SpawnActor<AActor>(ActorClasses[RandActor], SpawnPoint, ActorRotation, SpawnParams);
-		if (NewActor != nullptr)
+
+		int CanUseMesh = 0;
+		int CanUseActors = 0;
+		if (Meshes.Num() >= 1 && bUseMeshes)	CanUseMesh = 1;
+		if (ActorClasses.Num() >= 1 && bUseActors)	CanUseActors = 1; 
+		
+		const int Spawner = CanUseMesh && CanUseActors ? 2 : 1;
+
+		// Determine whether to spawn an actor or mesh if both are used
+		if (Spawner == 2)
 		{
-			SpawnedActors.Add(NewActor);
+			const int Switch = FMath::RandRange(0, 1);
+			if (Switch == 0)
+			{
+				SpawnMesh(SpawnPoint, ActorRotation);
+			}
+			else
+			{
+				AActor * NewActor = SpawnActor(SpawnPoint, ActorRotation);
+				if (NewActor != nullptr)
+				{
+					SpawnedActors.Add(NewActor);
+				}
+			}
+		}
+		else if (Spawner == 1)
+		{
+			if (CanUseMesh)
+			{
+				SpawnMesh(SpawnPoint, ActorRotation);
+			}
+			else if (CanUseActors)
+			{
+				AActor * NewActor = SpawnActor(SpawnPoint, ActorRotation);
+				if (NewActor != nullptr)
+				{
+					SpawnedActors.Add(NewActor);
+				}
+			}
 		}
 	}
 }
 
 void ASpawnerVolume::DeleteAllActors()
 {
-	for (int i = 0; i<SpawnedActors.Num(); i++)
+	for (int i = 0; i < SpawnedActors.Num(); i++)
 	{
 		if (SpawnedActors[i])
 		{
 			SpawnedActors[i]->Destroy();
 		}
 	}
+	
+	for (int i = 0; i < InstancedMeshes.Num(); i++)
+	{
+		
+		InstancedMeshes[i]->InstancedStaticMeshComponent->DestroyComponent();
+		InstancedMeshes[i]->Destroy();
+	}
+	
+	InstancedMeshes.Empty();
 	SpawnedActors.Empty();
 }

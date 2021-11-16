@@ -27,8 +27,48 @@ public:
 	virtual void BeginDestroy() override;
 	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(DisplayThumbnail="true"))
+	// Classes to spawn
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(DisplayThumbnail="true", EditCondition="Meshes.Num() <= 0"))
 	TArray<TSubclassOf<AActor>> ActorClasses;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
+	bool bUseActors = true;
+
+	// Variational properties for meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.1f, ClampMax=10.0f))
+	float ActorsMinScale = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.1f, ClampMax=10.0f))
+	float ActorsMaxScale = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.0f, ClampMax=360.0f))
+	float ActorsRandomXRotation = 0.0f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.0f, ClampMax=360.0f))
+	float ActorsRandomYRotation = 0.0f;
+	
+	// Meshes to spawn
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(DisplayThumbnail="true", EditCondition="ActorClasses.Num() <= 0"))
+	TArray<UStaticMesh*> Meshes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
+	bool bUseMeshes = true;
+
+	// Variational properties for meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.1f, ClampMax=10.0f))
+	float MeshesMinScale = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.1f, ClampMax=10.0f))
+	float MeshesMaxScale = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.0f, ClampMax=360.0f))
+	float MeshesRandomXRotation = 0.0f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(ClampMin=0.0f, ClampMax=360.0f))
+	float MeshesRandomYRotation = 0.0f;
+	
+	UPROPERTY()
+	TArray<class ASpawnerMeshInstance*> InstancedMeshes;
 	
 	UPROPERTY()
 	TArray<AActor*> SpawnedActors;
@@ -40,7 +80,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(EditCondition="SpawnState!=ESpawnState::Rastered"))
 	int Population = 10;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(EditCondition="SpawnState==ESpawnState::Centered"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(EditCondition="SpawnState==ESpawnState::Centered && !bRandomCenterDensity"))
 	float CenterDensity = 2.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner", meta=(EditCondition="SpawnState==ESpawnState::Centered"))
@@ -61,7 +101,7 @@ protected:
 	 * box floor if no other object was hit							*/
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category="Spawner")
-	bool bBoundingBoxIsLowest = false;
+	bool bBoundingBoxIsLowest = true;
 	
 	UPROPERTY()
 	TArray<FVector> SpawnPoints;
@@ -70,7 +110,7 @@ protected:
 	 * or if they will be spawned at another time      */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
 	bool bSpawnOnBeginPlay = false;
-
+	
 	UFUNCTION()
 	bool LineTraceToGround(FVector &NewPoint) const;
 	
@@ -86,8 +126,21 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void GetRasteredSpawnPoints();
 
+	// Returns true if Mesh Instancers could be succesfully initialized or already are
+	UFUNCTION()
+	bool PrepareMeshInstancing();
+
+	UFUNCTION()
+	AActor* SpawnActor(FVector SpawnPoint, FRotator Rotation);
+
+	UFUNCTION()
+	void SpawnMesh(FVector SpawnPoint, FRotator Rotation);
+	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
 	void SpawnActors();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
+	void AddActors();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
 	void DeleteAllActors();
