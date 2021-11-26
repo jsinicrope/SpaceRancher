@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Inventory_System/Item_Base.h"
-#include "Interactables/InteractInterface.h"
-#include "World/Saves/Saveable.h"
 #include "Plant.generated.h"
 
 UCLASS()

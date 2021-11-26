@@ -8,8 +8,11 @@
 /NODEFAULTLIB
 "E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
 "E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Module.SpaceRancher.cpp.obj"
-"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpawnerMeshInstance.cpp.obj"
-"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpawnerVolume.cpp.obj"
+"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Computer.cpp.obj"
+"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Plant.cpp.obj"
+"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\HUDSetting.cpp.obj"
+"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Computer_ItemSelling.cpp.obj"
+"E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\ItemSellingTile.cpp.obj"
 "E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Module.SpaceRancher.gen.cpp.obj"
 "E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\SpaceRancher.init.gen.cpp.obj"
 "E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Default.rc2.res"
