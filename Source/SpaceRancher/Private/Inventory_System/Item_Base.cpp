@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Inventory_System/Item_Base.h"
+#include "Inventory_System/ItemBase.h"
 #include "Characters/Main Character/MyCharacter.h"
 
 // Sets default values
-AItem_Base::AItem_Base()
+AItemBase::AItemBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -13,14 +13,14 @@ AItem_Base::AItem_Base()
 	Main_Item_Structure.bIsValidItem = true;
 }
 
-void AItem_Base::BeginPlay()
+void AItemBase::BeginPlay()
 {
 	Super::BeginPlay();
 
 	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
-void AItem_Base::Interact_Implementation()
+void AItemBase::Interact_Implementation()
 {
 	if (!CollectItem(true))
 	{
@@ -31,7 +31,7 @@ void AItem_Base::Interact_Implementation()
 	}
 }
 
-bool AItem_Base::CollectItem(bool bAddToInventory)
+bool AItemBase::CollectItem(bool bAddToInventory)
 {
 	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)

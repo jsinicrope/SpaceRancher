@@ -15,6 +15,9 @@ class SPACERANCHER_API UItemSellingTile : public UUserWidget, public IUserObject
 	virtual void NativeOnInitialized() override;
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UItemStructTileView* RepresentedItem;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UImage* ItemDisplay;
 
@@ -24,6 +27,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* ItemDescription;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
-	class UButton* ItemTileButton;
+	UFUNCTION()
+	void SetWidgets() const;
+
+public:
+	virtual void NativeOnListItemObjectSet(UObject* ListItemObject) override;
+	virtual void NativeOnItemSelectionChanged(bool bIsSelected) override;
+	virtual void NativeOnItemExpansionChanged(bool bIsExpanded) override;
+	virtual void NativeOnEntryReleased() override;
 };

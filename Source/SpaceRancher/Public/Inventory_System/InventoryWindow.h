@@ -8,7 +8,7 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/GridPanel.h"
-#include "Inventory_System/Item_Base.h"
+#include "Inventory_System/ItemBase.h"
 #include "Components/Button.h"
 #include "InventoryWindow.generated.h"
 

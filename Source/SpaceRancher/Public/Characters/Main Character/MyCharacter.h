@@ -32,83 +32,85 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//Variables
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Custom Variables")
-	float BaseTurnAtRate;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
-	float BaseLookUpAtRate;
-
+	// Health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetHealth, Category="Health")
-	float Health;
+	float Health = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxHealth, Category="Health")
-	float MaxHealth;
+	float MaxHealth = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	float MaxRegeneratedHealth;
+	float HealthRegenPerSecond = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
+	float MaxRegeneratedHealth = 35.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
+	float TimeToHealthRegen = 3.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
 	bool bPlayerDead = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxStamina, Category="Stamina")
-	float MaxStamina;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetStamina, Category="Stamina")
-	float Stamina;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	float HealthRegenPerSecond;
-
 	// Set to true if player is damaged
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	bool bDamaged;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Health")
+	bool bDamaged = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float WalkSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float SprintSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	bool bSprinting;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Movement")
-	FVector CurrentVelocity;
+	// Stamina
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetStamina, Category="Stamina")
+	float Stamina = 100.0f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxStamina, Category="Stamina")
+	float MaxStamina = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
-	float StaminaLossRunning;
-
+	float StaminaRegenPerSecond = 20.0f;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
-	float StaminaRegenPerSecond;
+	float StaminaLossRunning = 50.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
-	float TimeToHealthRegen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Stamina")
+	float TimeToStaminaRegen = 2.0f;
+	
+	// Movement
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float BaseTurnAtRate = 45.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
-	float TimeToStaminaRegen;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Movement")
-	float FallingTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float BaseLookUpAtRate = 45.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float FallDamageFactor;
+	float WalkSpeed = 600.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float MinFallDamageVelocity;
+	float SprintSpeed = 1000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	bool bSprinting = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, SaveGame, Category="Movement")
+	FVector CurrentVelocity;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, SaveGame, Category="Movement")
+	float FallingTime = 0.0f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float FallDamageFactor = 6.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	float MinFallDamageVelocity = 5.0f;
+
+	// Interaction
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
+	bool bCanHarvest = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bCanHarvest;
+	bool bItemInRange = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bItemInRange;
+	float InteractDistance = 250.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	float InteractDistance;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bInteractableInRange;
+	bool bInteractableInRange = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Respawn")
 	FVector RespawnPoint;
@@ -128,6 +130,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	class UItemPickUpWidget* ItemPickUpWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	bool bInventoryOpen = false;
 
 	UPROPERTY()
 	class UUserWidget* WidgetToRemove;
@@ -149,29 +154,33 @@ protected:
 	FTimerHandle TimerHandler;
 
 	UPROPERTY(SaveGame)
-	float ElapsedDamageTime;
+	float ElapsedDamageTime = 0.0f;
 
 	UPROPERTY(SaveGame)
-	float ElapsedStaminaDrainTime;
+	float ElapsedStaminaDrainTime = 0.0f;
 
 	UPROPERTY(SaveGame)
-	float HealthLastTick;
+	float HealthLastTick = 100.0f;
 
 	UPROPERTY(SaveGame)
 	FVector JumpStartPoint;
-
+	
+	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetInventoryComp, Category="Inventory")
 	class UInventoryComponent* InventoryComp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	bool bInventoryOpen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UWidgetInteractionComponent* WidgetInteractionComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UCameraComponent* PlayerCamera;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
 	class UHUDSetting* HUDController;
-
-	UPROPERTY()
-	class UCameraComponent* PlayerCamera;
-
+	
 public:
 	//Functions
 	UFUNCTION(BlueprintGetter, Category="Health")

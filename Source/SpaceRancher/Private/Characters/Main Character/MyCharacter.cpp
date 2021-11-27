@@ -3,6 +3,8 @@
 #include "Characters/Main Character/MyCharacter.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/WidgetInteractionComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Interactables/InteractInterface.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -13,54 +15,36 @@
 #include "Kismet/GameplayStatics.h"
 #include "UI/CMainHUD.h"
 
-// Sets default values
 AMyCharacter::AMyCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Health
-	Health = 100.0f;
-	HealthLastTick = 100.0f;
-	HealthRegenPerSecond = 10.0f;
-	TimeToHealthRegen = 3.0f;
-	MaxHealth = 100.0f;
-
-	// Stamina
-	Stamina = 100.0f;
-	StaminaLossRunning = 50.0f;
-	StaminaRegenPerSecond = 20.0f;
-	TimeToStaminaRegen = 2.0f;
-	MaxStamina = 100.0f;
-
-	// Movement
-	WalkSpeed = 600.0f;
-	SprintSpeed = 1000.0f;
-	FallingTime = 0.0f;
-	FallDamageFactor = 6.0f;
-	MinFallDamageVelocity = 5.0f;
-
-	BaseTurnAtRate = 45.0f;
-	BaseLookUpAtRate = 45.0f;
-
-	// Interaction
-	InteractDistance = 250.0f;
-
-	// Death
-	RespawnPoint = FVector(0, 0, 0);
-	RespawnViewDirection = FRotator(0, 0, 0);
-
-	// Runtime
-	bSprinting = false;
-
-	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("UInventoryComponent"));
+	InventoryComp = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
 	AddOwnedComponent(InventoryComp);
-
+	
 	HUDController = CreateDefaultSubobject<UHUDSetting>(TEXT("HUD Settings"));
 	AddOwnedComponent(HUDController);
+
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	AddOwnedComponent(SpringArm);
+
+	SpringArm->TargetArmLength = 0.0f;
+	SpringArm->bUsePawnControlRotation = false;
+	
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	AddOwnedComponent(PlayerCamera);
+
+	PlayerCamera->bUsePawnControlRotation = true;
+	
+	WidgetInteractionComponent = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
+	AddOwnedComponent(WidgetInteractionComponent);
+
+	SpringArm->SetupAttachment(RootComponent);
+	PlayerCamera->SetupAttachment(SpringArm);
+
+	WidgetInteractionComponent->SetupAttachment(PlayerCamera);
 }
 
-// Called when the game starts or when spawned
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -69,20 +53,11 @@ void AMyCharacter::BeginPlay()
 	GameInstance->LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
-
-	TArray<UCameraComponent*> comps;
-
-	this->GetComponents(comps);
-	for (UCameraComponent* Camera : comps)
-	{
-		PlayerCamera = Camera;
-	}
 	
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	RespawnViewDirection = GetControlRotation();
 }
 
-// Called every frame
 void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -181,7 +156,6 @@ void AMyCharacter::Tick(float DeltaTime)
 	}
 }
 
-// Called to bind functionality to input
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);

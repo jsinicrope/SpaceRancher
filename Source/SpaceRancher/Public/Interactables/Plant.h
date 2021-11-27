@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Inventory_System/Item_Base.h"
+#include "Inventory_System/ItemBase.h"
 #include "Plant.generated.h"
 
 UCLASS()
-class SPACERANCHER_API APlant : public AItem_Base
+class SPACERANCHER_API APlant : public AItemBase
 {
 	GENERATED_BODY()
 	
@@ -67,8 +67,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;
-
-public:
+	
 	UFUNCTION(BlueprintCallable, Category = "Plant|Growth")
 	virtual bool GrowPlant();
 

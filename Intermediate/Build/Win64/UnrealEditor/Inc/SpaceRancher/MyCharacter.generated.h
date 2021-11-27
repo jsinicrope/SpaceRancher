@@ -116,24 +116,24 @@ public: \
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_19_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__BaseTurnAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseTurnAtRate); } \
-	FORCEINLINE static uint32 __PPO__BaseLookUpAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseLookUpAtRate); } \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
 	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(AMyCharacter, MaxHealth); } \
-	FORCEINLINE static uint32 __PPO__MaxRegeneratedHealth() { return STRUCT_OFFSET(AMyCharacter, MaxRegeneratedHealth); } \
-	FORCEINLINE static uint32 __PPO__bPlayerDead() { return STRUCT_OFFSET(AMyCharacter, bPlayerDead); } \
-	FORCEINLINE static uint32 __PPO__MaxStamina() { return STRUCT_OFFSET(AMyCharacter, MaxStamina); } \
-	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); } \
 	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
+	FORCEINLINE static uint32 __PPO__MaxRegeneratedHealth() { return STRUCT_OFFSET(AMyCharacter, MaxRegeneratedHealth); } \
+	FORCEINLINE static uint32 __PPO__TimeToHealthRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen); } \
+	FORCEINLINE static uint32 __PPO__bPlayerDead() { return STRUCT_OFFSET(AMyCharacter, bPlayerDead); } \
 	FORCEINLINE static uint32 __PPO__bDamaged() { return STRUCT_OFFSET(AMyCharacter, bDamaged); } \
+	FORCEINLINE static uint32 __PPO__Stamina() { return STRUCT_OFFSET(AMyCharacter, Stamina); } \
+	FORCEINLINE static uint32 __PPO__MaxStamina() { return STRUCT_OFFSET(AMyCharacter, MaxStamina); } \
+	FORCEINLINE static uint32 __PPO__StaminaRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, StaminaRegenPerSecond); } \
+	FORCEINLINE static uint32 __PPO__StaminaLossRunning() { return STRUCT_OFFSET(AMyCharacter, StaminaLossRunning); } \
+	FORCEINLINE static uint32 __PPO__TimeToStaminaRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToStaminaRegen); } \
+	FORCEINLINE static uint32 __PPO__BaseTurnAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseTurnAtRate); } \
+	FORCEINLINE static uint32 __PPO__BaseLookUpAtRate() { return STRUCT_OFFSET(AMyCharacter, BaseLookUpAtRate); } \
 	FORCEINLINE static uint32 __PPO__WalkSpeed() { return STRUCT_OFFSET(AMyCharacter, WalkSpeed); } \
 	FORCEINLINE static uint32 __PPO__SprintSpeed() { return STRUCT_OFFSET(AMyCharacter, SprintSpeed); } \
 	FORCEINLINE static uint32 __PPO__bSprinting() { return STRUCT_OFFSET(AMyCharacter, bSprinting); } \
 	FORCEINLINE static uint32 __PPO__CurrentVelocity() { return STRUCT_OFFSET(AMyCharacter, CurrentVelocity); } \
-	FORCEINLINE static uint32 __PPO__StaminaLossRunning() { return STRUCT_OFFSET(AMyCharacter, StaminaLossRunning); } \
-	FORCEINLINE static uint32 __PPO__StaminaRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, StaminaRegenPerSecond); } \
-	FORCEINLINE static uint32 __PPO__TimeToHealthRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen); } \
-	FORCEINLINE static uint32 __PPO__TimeToStaminaRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToStaminaRegen); } \
 	FORCEINLINE static uint32 __PPO__FallingTime() { return STRUCT_OFFSET(AMyCharacter, FallingTime); } \
 	FORCEINLINE static uint32 __PPO__FallDamageFactor() { return STRUCT_OFFSET(AMyCharacter, FallDamageFactor); } \
 	FORCEINLINE static uint32 __PPO__MinFallDamageVelocity() { return STRUCT_OFFSET(AMyCharacter, MinFallDamageVelocity); } \
@@ -147,6 +147,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__InteractPopUp() { return STRUCT_OFFSET(AMyCharacter, InteractPopUp); } \
 	FORCEINLINE static uint32 __PPO__ItemPickUpWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidgetClass); } \
 	FORCEINLINE static uint32 __PPO__ItemPickUpWidget() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidget); } \
+	FORCEINLINE static uint32 __PPO__bInventoryOpen() { return STRUCT_OFFSET(AMyCharacter, bInventoryOpen); } \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
 	FORCEINLINE static uint32 __PPO__ClockWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ClockWidgetClass); } \
 	FORCEINLINE static uint32 __PPO__ClockWidget() { return STRUCT_OFFSET(AMyCharacter, ClockWidget); } \
@@ -158,9 +159,10 @@ public: \
 	FORCEINLINE static uint32 __PPO__HealthLastTick() { return STRUCT_OFFSET(AMyCharacter, HealthLastTick); } \
 	FORCEINLINE static uint32 __PPO__JumpStartPoint() { return STRUCT_OFFSET(AMyCharacter, JumpStartPoint); } \
 	FORCEINLINE static uint32 __PPO__InventoryComp() { return STRUCT_OFFSET(AMyCharacter, InventoryComp); } \
-	FORCEINLINE static uint32 __PPO__bInventoryOpen() { return STRUCT_OFFSET(AMyCharacter, bInventoryOpen); } \
-	FORCEINLINE static uint32 __PPO__HUDController() { return STRUCT_OFFSET(AMyCharacter, HUDController); } \
-	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); }
+	FORCEINLINE static uint32 __PPO__WidgetInteractionComponent() { return STRUCT_OFFSET(AMyCharacter, WidgetInteractionComponent); } \
+	FORCEINLINE static uint32 __PPO__PlayerCamera() { return STRUCT_OFFSET(AMyCharacter, PlayerCamera); } \
+	FORCEINLINE static uint32 __PPO__SpringArm() { return STRUCT_OFFSET(AMyCharacter, SpringArm); } \
+	FORCEINLINE static uint32 __PPO__HUDController() { return STRUCT_OFFSET(AMyCharacter, HUDController); }
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_PROLOG

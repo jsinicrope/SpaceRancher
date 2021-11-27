@@ -5,6 +5,8 @@
 #include "Components/TextBlock.h"
 #include "Components/TileView.h"
 #include "Components/Button.h"
+#include "Inventory_System/ItemBase.h"
+#include "Widgets/ItemStructTileView.h"
 
 void UComputer_ItemSelling::NativeOnInitialized()
 {
@@ -19,4 +21,18 @@ void UComputer_ItemSelling::NativeOnInitialized()
 	IncreaseSelectedAmount = Cast<UButton>(GetWidgetFromName(FName("IncreaseSelectedAmount")));
 	SellButton = Cast<UButton>(GetWidgetFromName(FName("SellButton")));
 	SellButtonText = Cast<UTextBlock>(GetWidgetFromName(FName("SellButtonText")));
+
+	SellButton->OnPressed.AddDynamic(this, &UComputer_ItemSelling::Sell);
+}
+
+void UComputer_ItemSelling::Sell()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item sold!"));
+}
+
+void UComputer_ItemSelling::AddItemToList(FItem_Struct ItemStruct)
+{
+	UItemStructTileView* ItemObject = NewObject<UItemStructTileView>();
+	ItemObject->Item_Struct = ItemStruct;
+	ItemTiles->AddItem(ItemObject);
 }

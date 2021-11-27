@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Inventory_System/ItemStruct.h"
 #include "Computer_ItemSelling.generated.h"
 
 UCLASS()
@@ -40,4 +41,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* SellButtonText;
+
+	UFUNCTION(BlueprintCallable)
+	void Sell();
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void AddItemToList(FItem_Struct ItemStruct);
 };

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Inventory_System/Item_Struct.h"
 #include "Computer.generated.h"
 
 UCLASS()
@@ -19,12 +18,18 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FItem_Struct> SellableItems;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Selling")
+	TArray<struct FItem_Struct> SellableItems;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStaticMeshComponent* ComputerMesh;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetComponent* Screen;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UComputer_ItemSelling* ScreenWidget;
+
+	UFUNCTION(BlueprintCallable)
+	void SetSellingItemTiles();
 };
