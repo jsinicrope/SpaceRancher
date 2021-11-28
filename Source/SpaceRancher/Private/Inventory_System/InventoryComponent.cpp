@@ -14,15 +14,11 @@ FItemRows::FItemRows(int NewRows)
 }
 
 
-// Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-// Called when the game starts
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -46,6 +42,11 @@ void UInventoryComponent::BeginPlay()
 		InventoryWindow = CreateWidget<UInventoryWindow>(GetWorld(), InventoryWindowClass);
 		InventoryWindow->SetVariables(this, InventorySlotWidgetClass);
 		InventoryWindow->SetUpInventory();
+	}
+
+	for (const FItem_Struct DefaultItem : DefaultItems)
+	{
+		AddItem(DefaultItem);
 	}
 }
 
@@ -178,4 +179,20 @@ bool UInventoryComponent::SortInventory()
 	}
 	
 	return true;
+}
+
+int UInventoryComponent::GetNumMultipleItems(FString ItemName)
+{
+	int Amount = 0;
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(ItemName))
+			{
+				Amount++;
+			}
+		}
+	}
+	return Amount;
 }

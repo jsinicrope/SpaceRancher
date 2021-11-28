@@ -2,8 +2,9 @@
 
 #include "Interactables/Computer.h"
 #include "Components/WidgetComponent.h"
-#include "Widgets/UI/Computer_ItemSelling.h"
+#include "Widgets/UI/ComputerMonitor.h"
 #include "Inventory_System/ItemStruct.h"
+#include "Characters/Main Character/MyCharacter.h"
 
 AComputer::AComputer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -20,8 +21,10 @@ void AComputer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ScreenWidget = Cast<UComputer_ItemSelling>(Screen->GetWidget());
-    	
+	PlayerCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	ScreenWidget = Cast<UComputerMonitor>(Screen->GetWidget());
+	ScreenWidget->SetPlayerCharacter(PlayerCharacter);
+	
 	SetSellingItemTiles();
 }
 

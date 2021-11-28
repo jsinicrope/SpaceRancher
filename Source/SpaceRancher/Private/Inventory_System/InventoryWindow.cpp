@@ -11,7 +11,6 @@
 #include "UI/HUDSetting.h"
 #include "UI/CMainHUD.h"
 
-// Only called once 
 void UInventoryWindow::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
@@ -21,7 +20,6 @@ void UInventoryWindow::NativeOnInitialized()
 	InventoryGrid = Cast<UGridPanel>(GetWidgetFromName(FName("InventoryGrid")));
 	CloseInventoryButton = Cast<UButton>(GetWidgetFromName(FName("CloseInventoryButton")));
 
-	//Function gets called everytime widget is added to viewport
 	CloseInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::CloseWindow);
 	
 	if (SortInventoryButton)

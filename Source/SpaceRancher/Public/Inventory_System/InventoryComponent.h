@@ -40,6 +40,9 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int ItemSlots = 20;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category="Inventory")
+	TArray<FItem_Struct> DefaultItems;
 	
 	// The represented name of the inventory
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
@@ -53,7 +56,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	bool bAutoSort = false;
 
-	// The inventory array itself, TODO: Blueprint default set items
+	// The inventory array itself
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
@@ -65,14 +68,12 @@ public:
 	UInventoryWindow* GetInventoryWindow() const {return InventoryWindow;}
 
 	/* Add Item to the inventory
-	 * returns true if successful, else false
-	 */
+	 * returns true if successful, else false */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
 
 	/** Returns and removes an item from the inventory at given position
-	 * return an invalid item if no item is at given position
-	 */
+	 * return an invalid item if no item is at given position */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromPosition(int Row, int Column);
 
@@ -96,9 +97,12 @@ public:
 	bool GetInventoryOpen();
 
 	// Sorts inventory, does not update visual
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	bool SortInventory();
 
+	UFUNCTION(BlueprintCallable)
+	int GetNumMultipleItems(FString ItemName);
+	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	TSubclassOf<UUserWidget> InventoryWindowClass;

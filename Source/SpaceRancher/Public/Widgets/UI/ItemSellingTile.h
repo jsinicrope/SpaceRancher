@@ -27,6 +27,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTextBlock* ItemDescription;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
+	class UBorder* TileBorder;
+
 	UFUNCTION()
 	void SetWidgets() const;
 

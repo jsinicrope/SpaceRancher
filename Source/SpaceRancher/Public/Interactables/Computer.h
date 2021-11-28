@@ -18,6 +18,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY()
+	class AMyCharacter* PlayerCharacter;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Selling")
 	TArray<struct FItem_Struct> SellableItems;
 	
@@ -28,7 +31,7 @@ protected:
 	class UWidgetComponent* Screen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UComputer_ItemSelling* ScreenWidget;
+	class UComputerMonitor* ScreenWidget;
 
 	UFUNCTION(BlueprintCallable)
 	void SetSellingItemTiles();
