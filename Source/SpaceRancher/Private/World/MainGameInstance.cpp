@@ -6,6 +6,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "World/Saves/MainSaveGame.h"
 
+#define REAL_TO_GAME_TIME_FACTOR 48.0f
+
 void UMainGameInstance::Init()
 {
 	TickDelegateHandle = FTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateUObject(this, &UMainGameInstance::Tick));
@@ -13,28 +15,71 @@ void UMainGameInstance::Init()
 	Super::Init();
 
 	GetSaveGame();
-	
-	PlayerInGameTime = InitialStartGameTime;
+	SetTime(InitialStartGameTime.X, InitialStartGameTime.Y);
 }
 
 bool UMainGameInstance::Tick(float DeltaSeconds)
 {
+	DeltaSeconds *= TimeScale;
 	if (!UGameplayStatics::IsGamePaused(GetWorld()))
 	{
-		PlayerInGameTime += (DeltaSeconds / 60.0f) * TimeScale;
-		RealTimeMinutes += (DeltaSeconds / 60.0f) * TimeScale;
-
-		if (PlayerInGameTime >= 30.0f)
+		// Update Time related values
+		GameMinutes += (DeltaSeconds / 60.0f) * REAL_TO_GAME_TIME_FACTOR;
+		GameHour = GameMinutes / 60;
+		GameMinute = static_cast<int>(GameMinutes) % 60;
+		RealTimeMinutes += (DeltaSeconds / 100.0f);
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, FString::SanitizeFloat(GameMinutes));
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, FString::SanitizeFloat(RealTimeMinutes));
+		if (GameMinutes >= 24 * 60)
 		{
-			PlayerInGameTime -= 30.0f;
+			GameMinutes -= 24 * 60;
+		}
+
+		// Handle Time Acceleration
+		if (bTimeAcceleration)
+		{
+			TimeToAccelerate -= DeltaSeconds / 60.0f * REAL_TO_GAME_TIME_FACTOR;
+
+			if (TimeToAccelerate <= 0.0f)
+			{
+				bTimeAcceleration = false;
+				TimeScale = 1.0f;
+			}
 		}
 	}
+	
 	return true;
+}
+
+void UMainGameInstance::SetTime(int Hour, int Minute)
+{
+	GameMinutes += (Hour - GameHour) * 60 + Minute - GameMinute;
+}
+
+void UMainGameInstance::AccelerateTime(int Hour, int Minute, float Speed)
+{
+	int MinutesToSkip;
+	const int CurrentGameMinutes = GameHour * 60 + GameMinute;
+	const int TargetGameMinutes = Hour * 60 + Minute;
+
+	if (CurrentGameMinutes > TargetGameMinutes)
+	{
+		MinutesToSkip = 24 * 60 - CurrentGameMinutes;
+		MinutesToSkip += TargetGameMinutes;
+	}
+	else
+	{
+		MinutesToSkip = TargetGameMinutes - CurrentGameMinutes;
+	}
+	
+	TimeToAccelerate = MinutesToSkip;
+	bTimeAcceleration = true;
+	TimeScale = Speed;
 }
 
 bool UMainGameInstance::GetSaveGame()
 {
-	FString SlotName = SaveName;
+	const FString SlotName = SaveName;
 	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
 	{
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
@@ -51,8 +96,7 @@ void UMainGameInstance::NewSave(FString OldSave)
 {
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
 
-	FString SlotName = OldSave;
-	UGameplayStatics::DeleteGameInSlot(SlotName, 0);
+	UGameplayStatics::DeleteGameInSlot(OldSave, 0);
 }
 
 void UMainGameInstance::SaveGame()
@@ -61,7 +105,7 @@ void UMainGameInstance::SaveGame()
 	// Prepare for saving by emptying the old Serialized Data
 	SaveGameData->Data.Empty();
 	
-	SaveGameData->InGameTime = PlayerInGameTime;
+	SaveGameData->InGameTime = GameMinutes;
 
 	//Save, then serialize PlayerCharacter
 	SaveActors.Empty();
@@ -97,7 +141,7 @@ bool UMainGameInstance::LoadGame()
 		AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 		PCharacter->LoadPlayerCharacter();
 
-		PlayerInGameTime = SaveGameData->InGameTime;
+		GameMinutes = SaveGameData->InGameTime;
 
 		//De-Serialize Actors
 		SaveActors.Empty();

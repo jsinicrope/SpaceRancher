@@ -21,16 +21,23 @@ public:
 	FDelegateHandle TickDelegateHandle;
 
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
-	float PlayerInGameTime;
+	float GameMinutes;
+
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	int GameHour;
+
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	int GameMinute;
+
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	int Day;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float TimeScale = 1.0f;
 
+	// Hour/Minute
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float RealToGameTimeFactor = 48.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float InitialStartGameTime = 10.0f;
+	FVector2D InitialStartGameTime = FVector2D(8, 0);
 
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	float RealTimeMinutes = 0.0f;
@@ -44,7 +51,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
 	FString SaveName = FString("MainGame");
 
+	UPROPERTY()
+	bool bTimeAcceleration = false;
+
+	UPROPERTY()
+	float TimeToAccelerate = 0.0f;
+
 	//Functions
+	UFUNCTION(Exec)
+	inline void SetTime(int Hour, int Minute);
+
+	UFUNCTION(Exec)
+	void AccelerateTime(int Hour, int Minute, float Speed);
+	
 	UFUNCTION()
 	bool GetSaveGame();
 

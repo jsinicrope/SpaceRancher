@@ -26,14 +26,14 @@ void UInventoryComponent::BeginPlay()
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
 	int RemainingItemSlots = ItemSlots;
-	for (int i = 0; i < Rows; i++)
+	for (int i = 0; i < Columns; i++)
 	{
 		if (RemainingItemSlots > 0)
 		{
-			const int SlotsPerColumn = FMath::Min(Rows, RemainingItemSlots);
+			const int SlotsPerColumn = FMath::Min(Columns, RemainingItemSlots);
 			FItemRows Inventory_Row(SlotsPerColumn);
 			Inventory_Array_Columns.Add(Inventory_Row);
-			RemainingItemSlots -= Rows;
+			RemainingItemSlots -= Columns;
 		}
 	}
 

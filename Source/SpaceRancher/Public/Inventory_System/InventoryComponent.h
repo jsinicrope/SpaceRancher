@@ -30,14 +30,13 @@ public:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	int Rows = 5;
+	int Rows = 4;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	int Columns = 4;
+	int Columns = 5;
 
 	/** The amount of slots in the inventory
-	 * Fill Rows and columns until the desired amount is reached
-	 */
+	 * Fill Rows and columns until the desired amount is reached */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	int ItemSlots = 20;
 

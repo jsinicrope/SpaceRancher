@@ -29,30 +29,13 @@ void APlayerBed::BeginPlay()
 void APlayerBed::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (bTimeAcceleration)
-	{
-		TimeToAccelerate -= (DeltaTime / 60.0f) * GameInstance->TimeScale;
-
-		if (TimeToAccelerate <= 0.0f)
-		{
-			bTimeAcceleration = false;
-			this->SetActorTickEnabled(false);
-			GameInstance->TimeScale = 1.0f;
-		}
-	}
-
 }
 
 void APlayerBed::Interact_Implementation()
 {
-	if ((GameInstance->PlayerInGameTime >= AllowSleepTime) || (GameInstance->PlayerInGameTime < WakeUpTime))
+	if ((GameInstance->GameHour >= AllowSleepTime) || (GameInstance->GameHour < WakeUpTime))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Sleeping"));
-		TimeToAccelerate = (30.0f + WakeUpTime) - GameInstance->PlayerInGameTime;
-		GameInstance->TimeScale = TimeAcceleration;
-		bTimeAcceleration = true;
-		this->SetActorTickEnabled(true);
+		GameInstance->AccelerateTime(WakeUpTime, 0, TimeAcceleration);
 	}
 	else
 	{

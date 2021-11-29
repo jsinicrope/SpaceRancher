@@ -22,17 +22,13 @@ void UClock::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 void UClock::UpdateClock()
 {
-	ClockTimeTotalMinutes = (int)(GameInstance->PlayerInGameTime * GameInstance->RealToGameTimeFactor);
-	ClockTimeMinutes = ClockTimeTotalMinutes % 60;
-	ClockTimeHour = ClockTimeTotalMinutes / 60;
+	MinutesString = FString::FromInt(GameInstance->GameMinute);
 
-	MinutesString = FString::FromInt(ClockTimeMinutes);
+	if (GameInstance->GameMinute < 10)
+		MinutesString = FString("0") + FString::FromInt(GameInstance->GameMinute);
 
-	if (ClockTimeMinutes < 10)
-		MinutesString = FString("0") + FString::FromInt(ClockTimeMinutes);
-
-	StringTime = FString::FromInt(ClockTimeHour) + FString(":") + MinutesString;
-	FText Text = FText::FromString(StringTime);
+	StringTime = FString::FromInt(GameInstance->GameHour) + FString(":") + MinutesString;
+	const FText Text = FText::FromString(StringTime);
 	SetTextBlock(Text);
 }
 

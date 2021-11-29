@@ -31,5 +31,5 @@ void ACppPlayerController::Tick(float DeltaSeconds)
 void ACppPlayerController::SetTime(int Hour, int Minute) const
 {
 	const float NewTime = Hour * 1.25f + Minute / 60.0f * 1.25f;
-	GameInstance->PlayerInGameTime = NewTime;
+	GameInstance->GameMinutes = NewTime;
 }

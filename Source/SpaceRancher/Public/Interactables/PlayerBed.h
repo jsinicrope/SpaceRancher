@@ -13,33 +13,32 @@ class SPACERANCHER_API APlayerBed : public AActor, public IInteractInterface
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
+public:
 	APlayerBed();
 
 	virtual void Interact_Implementation() override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// Time that will be spooled forward to
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
-	float WakeUpTime;
+	int WakeUpTime = 8;
 
+	// Time from when on the player can interact with the bed to sleep
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
-	float AllowSleepTime;
+	int AllowSleepTime = 23;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Sleep")
+	UPROPERTY()
 	bool bTimeAcceleration;
 
 	UPROPERTY()
 	float TimeToAccelerate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sleep")
-	float TimeAcceleration;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category = "Sleep")
+	float TimeAcceleration = 300.0f;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(BlueprintReadOnly)
