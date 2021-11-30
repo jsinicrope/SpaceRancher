@@ -13,23 +13,20 @@
 
 class UCharacterMovementComponent;
 
-UCLASS()
+UCLASS(HideCategories=("Actor Tick"))
 class SPACERANCHER_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AMyCharacter();
 
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Health
@@ -48,11 +45,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToHealthRegen = 3.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	bool bPlayerDead = false;
 
 	// Set to true if player is damaged
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Health")
+	UPROPERTY(BlueprintReadOnly, Category="Health")
 	bool bDamaged = false;
 
 	// Stamina
@@ -84,13 +81,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float SprintSpeed = 1000.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
+	UPROPERTY(BlueprintReadOnly, Category="Movement")
 	bool bSprinting = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, SaveGame, Category="Movement")
+	UPROPERTY(BlueprintReadOnly, SaveGame, Category="Movement")
 	FVector CurrentVelocity;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, SaveGame, Category="Movement")
+	UPROPERTY(BlueprintReadOnly, SaveGame, Category="Movement")
 	float FallingTime = 0.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
@@ -118,36 +115,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Respawn")
 	FRotator RespawnViewDirection;
 
-	//Widgets
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Interaction")
-	TSubclassOf<class UUserWidget> InteractPopUpClass;
-
-	UPROPERTY(VisibleAnywhere)
-	class UUserWidget* InteractPopUp;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
-
-	UPROPERTY(VisibleAnywhere, Category = "Inventory")
-	class UItemPickUpWidget* ItemPickUpWidget;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	bool bInventoryOpen = false;
 
 	UPROPERTY()
 	class UUserWidget* WidgetToRemove;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Clock")
-	TSubclassOf<class UUserWidget> ClockWidgetClass;
-
-	UPROPERTY(VisibleAnywhere)
-	class UClock* ClockWidget;
-
 	UPROPERTY(BlueprintReadOnly)
 	UMainGameInstance* GameInstance;
 
 	//Variables hidden in Editor
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	class ACppPlayerController* PC;
 	
 	UPROPERTY(SaveGame)

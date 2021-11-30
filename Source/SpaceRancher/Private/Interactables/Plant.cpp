@@ -1,14 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Interactables/Plant.h"
 #include "World/MainGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
 APlant::APlant()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -16,14 +13,13 @@ APlant::APlant()
 	GrowState = 0;
 	bIsCollectible = bCanBeHarvested;
 	PlantStateAgeMinutes = 0.0f;
-
+	
 	if (StateMeshes.Num() > 0)
 	{
 		StaticMesh->SetStaticMesh(StateMeshes[0]);
 	}
 }
 
-// Called when the game starts or when spawned
 void APlant::BeginPlay()
 {
 	Super::BeginPlay();
@@ -36,12 +32,12 @@ void APlant::BeginPlay()
 	}
 }
 
-// Called every frame
 void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PlantStateAgeMinutes += DeltaTime;
+	PlantStateAgeMinutes += GameInstance->bIsDay ? DeltaTime : DeltaTime * NightGrowthSpeed;
+	
 	if (PlantStateAgeMinutes >= TimePerStage * 60.0f)
 	{
 		GrowPlant();
@@ -77,10 +73,8 @@ bool APlant::GrowPlant()
 		}
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	
+	return false;
 }
 
 bool APlant::PickupPlant()

@@ -50,19 +50,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
 	FString RequiredItem;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
+	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bDoorOpen = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
 	float CookingTime = 30.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
+	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	float CookedTime = 0.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
+	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bCookingQueued = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
+	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bCooking = false;
 
 	UPROPERTY()

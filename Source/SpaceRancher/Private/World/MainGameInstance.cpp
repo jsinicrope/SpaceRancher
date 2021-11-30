@@ -6,8 +6,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "World/Saves/MainSaveGame.h"
 
-#define REAL_TO_GAME_TIME_FACTOR 48.0f
-
 void UMainGameInstance::Init()
 {
 	TickDelegateHandle = FTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateUObject(this, &UMainGameInstance::Tick));
@@ -27,13 +25,14 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 		GameMinutes += (DeltaSeconds / 60.0f) * REAL_TO_GAME_TIME_FACTOR;
 		GameHour = GameMinutes / 60;
 		GameMinute = static_cast<int>(GameMinutes) % 60;
-		RealTimeMinutes += (DeltaSeconds / 100.0f);
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Blue, FString::SanitizeFloat(GameMinutes));
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, FString::SanitizeFloat(RealTimeMinutes));
+		RealTimeMinutes += DeltaSeconds / 100.0f;
+		
 		if (GameMinutes >= 24 * 60)
 		{
 			GameMinutes -= 24 * 60;
 		}
+
+		bIsDay = Sunrise.X * 60 + Sunrise.Y <= GameMinutes && GameMinutes <= Sunset.X * 60 + Sunset.Y ? 1 : 0;
 
 		// Handle Time Acceleration
 		if (bTimeAcceleration)

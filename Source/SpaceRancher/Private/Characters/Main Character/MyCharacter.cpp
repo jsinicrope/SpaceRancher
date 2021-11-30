@@ -353,7 +353,7 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
 
 	if (bAddSuccessful)
 	{
-		HUDController->ItemPickUpWidget->ItemImage = Item_Struct.Thumbnail;
+		HUDController->ItemPickUpWidget->UpdateWidget(Item_Struct.Thumbnail, Item_Struct.Name);
 
 		if (HUDController->ItemPickUpWidget->IsInViewport())
 			HUDController->ItemPickUpWidget->RemoveFromViewport();

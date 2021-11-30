@@ -21,7 +21,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UProgressBar* StaminaBar = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadOnly)
 	class AMyCharacter* PC = nullptr;
 	
 	UFUNCTION()

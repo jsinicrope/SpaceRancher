@@ -32,8 +32,10 @@ void AComputer::SetSellingItemTiles()
 {
 	for (int i = 0; i < SellableItems.Num(); i++)
 	{
-		ScreenWidget->AddItemToList(SellableItems[i]);
-		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Green, TEXT("Item added to widget"));
+		if (SellableItems[i])
+		{
+			ScreenWidget->AddItemToList(Cast<AItemBase>(SellableItems[i]->ClassDefaultObject)->Main_Item_Structure);
+		}
 	}
 }
 

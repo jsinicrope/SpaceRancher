@@ -54,7 +54,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content", meta=(DisplayThumbnail="true"))
 	class TSubclassOf<APlant> Plant;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Planter|Content")
+	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")
 	class APlant* MainPlant;
 
 	//Cast property to used Plant Class for use

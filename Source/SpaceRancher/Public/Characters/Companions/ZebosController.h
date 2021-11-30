@@ -6,9 +6,6 @@
 #include "AIController.h"
 #include "ZebosController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPACERANCHER_API AZebosController : public AAIController
 {

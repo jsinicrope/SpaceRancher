@@ -7,7 +7,6 @@
 #include "Components/Image.h"
 #include "ItemPickUpWidget.generated.h"
 
-
 UCLASS()
 class SPACERANCHER_API UItemPickUpWidget : public UUserWidget
 {
@@ -17,9 +16,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UImage* PickedUpItem;
 
-public:
-	virtual void NativeConstruct();
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* PickedUpItemName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* ItemImage = NULL;
+public:
+	virtual void NativeConstruct() override;
+
+	UFUNCTION()
+	void UpdateWidget(UTexture2D* ItemImage, const FString ItemName) const;
 };

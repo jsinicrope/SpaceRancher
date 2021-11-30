@@ -44,9 +44,12 @@ void UInventoryComponent::BeginPlay()
 		InventoryWindow->SetUpInventory();
 	}
 
-	for (const FItem_Struct DefaultItem : DefaultItems)
+	for (int i = 0; i < DefaultItems.Num(); i++)
 	{
-		AddItem(DefaultItem);
+		if (DefaultItems[i])
+		{
+			AddItem(Cast<AItemBase>(DefaultItems[i]->ClassDefaultObject)->Main_Item_Structure);
+		}
 	}
 }
 
@@ -68,6 +71,11 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
 
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item doesn't fit in Inventory"));
 	return false;
+}
+
+bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Column)
+{
+	return AddItem(Item->Main_Item_Structure, Row, Column);
 }
 
 FItem_Struct UInventoryComponent::RemoveItemFromPosition(int Row, int Column)
@@ -118,6 +126,7 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 
 void UInventoryComponent::ToggleInventory()
 {
+	ensure(InventoryWindow);
 	bInventoryOpen = InventoryWindow->bWindowOpen;
 	if (!bInventoryOpen || InventoryWindow->GetParent() == nullptr)
 	{

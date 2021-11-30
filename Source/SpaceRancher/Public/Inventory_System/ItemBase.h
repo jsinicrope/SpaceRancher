@@ -14,8 +14,7 @@ class SPACERANCHER_API AItemBase : public AActor, public IInteractInterface, pub
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
+public:
 	AItemBase();
 
 	virtual void BeginPlay() override;

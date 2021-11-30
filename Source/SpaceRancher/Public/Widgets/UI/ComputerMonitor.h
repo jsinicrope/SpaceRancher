@@ -16,7 +16,7 @@ class SPACERANCHER_API UComputerMonitor : public UUserWidget
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 protected:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	class AMyCharacter* PC;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
@@ -55,10 +55,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UItemStructTileView* ActiveTile;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	int SelectedSellAmount = 0;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	int MaxAmount = 0;
 
 	UPROPERTY()

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Inventory_System/ItemBase.h"
 #include "Computer.generated.h"
 
 UCLASS()
@@ -21,16 +22,18 @@ protected:
 	UPROPERTY()
 	class AMyCharacter* PlayerCharacter;
 
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Selling")
-	TArray<struct FItem_Struct> SellableItems;
-	
+	TArray<TSubclassOf<AItemBase>> SellableItems;
+
+protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UStaticMeshComponent* ComputerMesh;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetComponent* Screen;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite)
 	class UComputerMonitor* ScreenWidget;
 
 	UFUNCTION(BlueprintCallable)

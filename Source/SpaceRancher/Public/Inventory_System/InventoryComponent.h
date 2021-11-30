@@ -41,14 +41,14 @@ public:
 	int ItemSlots = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category="Inventory")
-	TArray<FItem_Struct> DefaultItems;
+	TArray<TSubclassOf<AItemBase>> DefaultItems;
 	
 	// The represented name of the inventory
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	FText InventoryName;
 
 	// If the inventory is open or not
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
+	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
 	bool bInventoryOpen = false;
 
 	// true if Inventory should be sorted automatically, false if sorting is handled by a widget button
@@ -56,20 +56,25 @@ public:
 	bool bAutoSort = false;
 
 	// The inventory array itself
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
+	UPROPERTY(BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
     // The position the widget is spawned at when opened
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory", AdvancedDisplay)
-	FVector2D WidgetPosition = FVector2D(700, 225);
+	FVector2D WidgetPosition = FVector2D(600, 225);
 
 	UFUNCTION(BlueprintGetter)
 	UInventoryWindow* GetInventoryWindow() const {return InventoryWindow;}
 
+	/** Overloaded function
+	 * Add Item to the inventory
+	 * returns true if successful, else false */
+	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
+
 	/* Add Item to the inventory
 	 * returns true if successful, else false */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
+	bool AddItem(AItemBase* Item, const int Row = 0, const int Column = 0);
 
 	/** Returns and removes an item from the inventory at given position
 	 * return an invalid item if no item is at given position */
@@ -104,12 +109,12 @@ public:
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TSubclassOf<UUserWidget> InventoryWindowClass;
+	TSubclassOf<UInventoryWindow> InventoryWindowClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
+	TSubclassOf<UInventorySlotWidget> InventorySlotWidgetClass;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, BlueprintGetter=GetInventoryWindow, AdvancedDisplay, Category = "Inventory")
+	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryWindow, AdvancedDisplay, Category = "Inventory")
 	class UInventoryWindow* InventoryWindow;
 
 	UPROPERTY()

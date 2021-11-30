@@ -14,7 +14,7 @@ class SPACERANCHER_API APlant : public AItemBase
 public:	
 	// Sets default values for this actor's properties
 	APlant();
-
+	
 	virtual void Interact_Implementation() override;
 	virtual void LoadActor_Implementation() override;
 	virtual void SaveActor_Implementation() override;
@@ -46,16 +46,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	float GrowFactor = 1.5f;
 
+	// How much less the plant grows during the night
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
+	float NightGrowthSpeed = 0.4;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int MinHarvestableState = 3;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int MaxHarvestableState = GrowthStages;
-
-	/**
-	* The thickness/radius of the bottom part of the stem
-	* This is used when spawning it
-	*/
+	
+	/** The thickness/radius of the bottom part of the stem
+	* This is used when spawning it */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
@@ -65,7 +67,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	TArray<UStaticMesh*> StateMeshes;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;
 	
 	UFUNCTION(BlueprintCallable, Category = "Plant|Growth")

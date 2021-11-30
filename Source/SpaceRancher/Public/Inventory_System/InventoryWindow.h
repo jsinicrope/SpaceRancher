@@ -50,7 +50,7 @@ public:
 	bool SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot);
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	class UInventorySlotWidget* InventorySlotWidget;
 
 	UPROPERTY()

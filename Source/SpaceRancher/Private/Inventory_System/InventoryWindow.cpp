@@ -76,10 +76,12 @@ void UInventoryWindow::CloseWindow()
 
 void UInventoryWindow::CloseInventory()
 {
+	Inventory->WidgetPosition = CanvasSlot->GetPosition();
 	PlayerHUD->MainHUD->RemoveInventoryWidgetFromCanvas(this);
 	bWindowOpen = false;
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void UInventoryWindow::SortInventory()
 {
 	Inventory->SortInventory();

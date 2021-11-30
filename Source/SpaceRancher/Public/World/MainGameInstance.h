@@ -8,6 +8,8 @@
 #include "Delegates/IDelegateInstance.h"
 #include "MainGameInstance.generated.h"
 
+#define REAL_TO_GAME_TIME_FACTOR 48.0f
+
 UCLASS()
 class SPACERANCHER_API UMainGameInstance : public UGameInstance
 {
@@ -20,26 +22,38 @@ public:
 
 	FDelegateHandle TickDelegateHandle;
 
-	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
-	float GameMinutes;
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
+	float GameMinutes = 0.0f;
 
-	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	int GameHour;
 
-	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	int GameMinute;
 
-	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	int Day;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite, Category="Time")
 	float TimeScale = 1.0f;
 
+	// Time (hours, minutes) to consider as sunrise and start of day time
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite, Category="Time")
+	FIntPoint Sunrise = FIntPoint(6, 30);
+
+	// Time (hours, minutes) to consider as sunset and start of night time
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite, Category="Time")
+	FIntPoint Sunset = FIntPoint(7, 00);
+
+	// Whether the game state is considered as day time or not(night time)
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
+	bool bIsDay;
+
 	// Hour/Minute
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Time")
 	FVector2D InitialStartGameTime = FVector2D(8, 0);
 
-	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	float RealTimeMinutes = 0.0f;
 
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)

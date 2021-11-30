@@ -38,7 +38,7 @@ protected:
 	UPROPERTY()
 	float HealthLastTick = Health;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Health", meta=(DisplayName="Is NPC Alive"))
+	UPROPERTY(BlueprintReadOnly, Category="Health", meta=(DisplayName="Is NPC Alive"))
 	bool bNPCAlive = true;
 
 	// Stamina

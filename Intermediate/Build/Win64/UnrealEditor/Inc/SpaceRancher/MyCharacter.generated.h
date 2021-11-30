@@ -143,14 +143,8 @@ public: \
 	FORCEINLINE static uint32 __PPO__bInteractableInRange() { return STRUCT_OFFSET(AMyCharacter, bInteractableInRange); } \
 	FORCEINLINE static uint32 __PPO__RespawnPoint() { return STRUCT_OFFSET(AMyCharacter, RespawnPoint); } \
 	FORCEINLINE static uint32 __PPO__RespawnViewDirection() { return STRUCT_OFFSET(AMyCharacter, RespawnViewDirection); } \
-	FORCEINLINE static uint32 __PPO__InteractPopUpClass() { return STRUCT_OFFSET(AMyCharacter, InteractPopUpClass); } \
-	FORCEINLINE static uint32 __PPO__InteractPopUp() { return STRUCT_OFFSET(AMyCharacter, InteractPopUp); } \
-	FORCEINLINE static uint32 __PPO__ItemPickUpWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidgetClass); } \
-	FORCEINLINE static uint32 __PPO__ItemPickUpWidget() { return STRUCT_OFFSET(AMyCharacter, ItemPickUpWidget); } \
 	FORCEINLINE static uint32 __PPO__bInventoryOpen() { return STRUCT_OFFSET(AMyCharacter, bInventoryOpen); } \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
-	FORCEINLINE static uint32 __PPO__ClockWidgetClass() { return STRUCT_OFFSET(AMyCharacter, ClockWidgetClass); } \
-	FORCEINLINE static uint32 __PPO__ClockWidget() { return STRUCT_OFFSET(AMyCharacter, ClockWidget); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__PC() { return STRUCT_OFFSET(AMyCharacter, PC); } \
 	FORCEINLINE static uint32 __PPO__TimerHandler() { return STRUCT_OFFSET(AMyCharacter, TimerHandler); } \
