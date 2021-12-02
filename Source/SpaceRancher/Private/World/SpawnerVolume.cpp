@@ -162,6 +162,7 @@ bool ASpawnerVolume::PrepareMeshInstancing()
 	
 	for (int i = 0; i < Meshes.Num(); i++)
 	{
+		checkf(Meshes[i], TEXT("Meshes Array in SpawnerVolume Object has empty field"));
 		ASpawnerMeshInstance* InstancedMesh = GetWorld()->SpawnActor<ASpawnerMeshInstance>(ASpawnerMeshInstance::StaticClass(), SpawnParams);
 		InstancedMesh->InstancedStaticMeshComponent->SetStaticMesh(Meshes[i]);
 		InstancedMeshes.Add(InstancedMesh);
@@ -181,6 +182,7 @@ AActor* ASpawnerVolume::SpawnActor(FVector SpawnPoint, FRotator Rotation)
 	}
 	
 	const int RandActor = FMath::RandRange(0, ActorClasses.Num() - 1);
+	checkf(ActorClasses[RandActor], TEXT("ActorClasses Array in SpawnerVolume Object has empty field"));
 	AActor* NewActor = GetWorld()->SpawnActor<AActor>(ActorClasses[RandActor], SpawnPoint, Rotation, SpawnParams);
 	
 	const FVector RandomScale = FVector(FMath::RandRange(ActorsMinScale, ActorsMaxScale));

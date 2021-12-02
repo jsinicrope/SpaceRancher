@@ -3,7 +3,6 @@
 #include "Interactables/PlantPot.h"
 #include "Kismet/KismetMathLibrary.h"
 
-// Sets default values
 APlantPot::APlantPot()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -17,14 +16,12 @@ APlantPot::APlantPot()
 	}
 }
 
-// Called when the game starts or when spawned
 void APlantPot::BeginPlay()
 {
 	Super::BeginPlay();
 	SpawnPlants(PlantsToSpawn);
 }
 
-// Called every frame
 void APlantPot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -43,7 +40,6 @@ void APlantPot::LoadActor_Implementation()
 
 FVector APlantPot::GetRandomPlantSpawnPoint()
 {
-
 	float fMinX = GetActorLocation()[0] + Width;
 	float fMaxX = GetActorLocation()[0] - Width;
 	float X = FMath::FRandRange(fMinX, fMaxX);
@@ -55,7 +51,7 @@ FVector APlantPot::GetRandomPlantSpawnPoint()
 	FVector2D Position2D = FVector2D(X, Y);
 
 	Position2D = UKismetMathLibrary::GetRotated2D(Position2D, GetActorRotation().Yaw);
-	FVector NewPosition = FVector(Position2D, GetActorLocation()[2]);
+	FVector NewPosition = FVector(Position2D, GetActorLocation().Z + ZOffset);
 
 	for (int j = 0; j < PlantedPlants.Num(); j++)
 	{
@@ -66,24 +62,59 @@ FVector APlantPot::GetRandomPlantSpawnPoint()
 		}
 		
 	}
-	
 	return NewPosition;
+}
+
+void APlantPot::GetRasteredPlantSpawnPoints()
+{
+	const float Scaling = 2.0f * BoxRasterScaling;
+	const float StartX = RasterLayout.X == 1 ? GetActorLocation().X : GetActorLocation().X - Length / (1 / BoxRasterScaling);
+	const float StartY = RasterLayout.Y == 1 ? GetActorLocation().Y : GetActorLocation().Y - Width / (1 / BoxRasterScaling);
+	const float SegmentLengthX = RasterLayout.X == 1 ? 0.0f : Length * Scaling / (RasterLayout.X - 1);
+	const float SegmentLengthY = RasterLayout.Y == 1 ? 0.0f : Width * Scaling / (RasterLayout.Y - 1);
+	
+	for (int i = 0; i < RasterLayout.Y; i++)
+	{
+		for (int j = 0; j < RasterLayout.X; j++)
+		{
+			FVector NewPoint = FVector(StartX + SegmentLengthX * j, StartY + SegmentLengthY * i, GetActorLocation().Z + ZOffset);
+			RasteredSpawnPoints.Add(NewPoint);
+		}
+	}
+}
+
+void APlantPot::Spawn()
+{
+	SpawnPlants(PlantsToSpawn);
 }
 
 void APlantPot::SpawnPlants(int AmountOfPlants)
 {
 	if (Plant)
 	{
-		for (int i = 0; i < AmountOfPlants; i++)
+		DestroyAllPlants();
+		
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.Owner = this;
+		
+		if (SpawnState == EPlantSpawnState::Random)
 		{
-			FVector SpawnPoint = GetRandomPlantSpawnPoint();
-			FActorSpawnParameters SpawnInfo;
-			SpawnInfo.Owner = this;
-#if WITH_EDITOR
-			SpawnInfo.bTemporaryEditorActor = true;
-#endif
-			AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, SpawnPoint, GetActorRotation(), SpawnInfo);
-			PlantedPlants.Add(NewPlant);
+			for (int i = 0; i < AmountOfPlants; i++)
+			{
+				AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, GetRandomPlantSpawnPoint(), GetActorRotation(), SpawnInfo);
+				PlantedPlants.Add(NewPlant);
+			}
+		}
+		
+		else
+		{
+			RasteredSpawnPoints.Empty();
+			GetRasteredPlantSpawnPoints();
+			for (int i = 0; i < RasteredSpawnPoints.Num(); i++)
+			{
+				AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, RasteredSpawnPoints[i], GetActorRotation(), SpawnInfo);
+				PlantedPlants.Add(NewPlant);
+			}
 		}
 	}
 }

@@ -9,24 +9,29 @@
 #include "World/Saves/Saveable.h"
 #include "PlantPot.generated.h"
 
+UENUM(BlueprintType, meta=(DisplayName="SpawnState"))
+enum class EPlantSpawnState : uint8
+{
+	Random			UMETA(DisplayName="Random"),
+	Rastered		UMETA(DisplayName="Rastered")
+};
+
+
 UCLASS()
 class SPACERANCHER_API APlantPot : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	APlantPot();
 
-	void Interact_Implementation() override;
-	void LoadActor_Implementation() override;
+	virtual void Interact_Implementation() override;
+	virtual void LoadActor_Implementation() override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter")
@@ -35,16 +40,39 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter")
 	float Length = 236.0f;
 
+	// The z offset given to plants when spawned. Use if plants are clipping
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Planter")
+	float ZOffset = 0.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Planting")
 	int PlantsToSpawn = 20;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Planter")
+	EPlantSpawnState SpawnState;
+
+	// How much of the volumes size should be used
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Planter", meta=(ClampMin=0.1f, ClampMax=1.0f, EditCondition="SpawnState==EPlantSpawnState::Rastered"))
+	float BoxRasterScaling = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Planter", meta=(EditCondition="SpawnState==EPlantSpawnState::Rastered"))
+	FIntPoint RasterLayout = FIntPoint(3, 3);
+
+	UPROPERTY()
+	TArray<FVector> RasteredSpawnPoints;
 
 	UFUNCTION(BlueprintCallable, Category = "Planter")
 	FVector GetRandomPlantSpawnPoint();
 
 	UFUNCTION(BlueprintCallable, Category = "Planter")
-	void SpawnPlants(int AmountOfPlant);
+	void GetRasteredPlantSpawnPoints();
+
+	UFUNCTION(CallInEditor, Category = "Planter")
+	void Spawn();
 
 	UFUNCTION(BlueprintCallable, Category = "Planter")
+	void SpawnPlants(int AmountOfPlant);
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Planter")
 	void DestroyAllPlants();
 
 	UFUNCTION(BlueprintCallable, Category = "Planter|Planting")
@@ -58,6 +86,6 @@ protected:
 	class APlant* MainPlant;
 
 	//Cast property to used Plant Class for use
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content")
+	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")
 	TArray<AActor*> PlantedPlants;
 };

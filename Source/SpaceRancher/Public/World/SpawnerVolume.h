@@ -14,6 +14,7 @@ enum class ESpawnState : uint8
 	Rastered		UMETA(DisplayName="Rastered")
 };
 
+
 UCLASS(HideCategories=(Collision, HLOD, Navigation))
 class SPACERANCHER_API ASpawnerVolume : public AVolume
 {
@@ -104,6 +105,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Rastered", meta=(EditCondition="SpawnState==ESpawnState::Rastered"))
 	FIntPoint RasterLayout = FIntPoint(3, 3);
 
+	// How much of the volumes size should be used
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Rastered", meta=(ClampMin=0.1f, ClampMax=1.0f, EditCondition="SpawnState==ESpawnState::Rastered"))
 	float BoxRasterScaling = 1.0f;
 
@@ -139,7 +141,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void GetRasteredSpawnPoints();
 
-	// Returns true if Mesh Instancers could be succesfully initialized or already are
+	// Returns true if Mesh Instances could be successfully initialized or already are
 	UFUNCTION()
 	bool PrepareMeshInstancing();
 
