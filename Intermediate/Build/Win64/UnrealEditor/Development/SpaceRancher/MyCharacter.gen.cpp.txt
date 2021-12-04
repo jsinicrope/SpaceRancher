@@ -143,6 +143,4 @@ E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/ActorRecord.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ActorRecord.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/ItemPickUpWidget.h
-E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemPickUpWidget.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h

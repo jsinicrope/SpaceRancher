@@ -8,7 +8,6 @@
 #include "World/MainGameInstance.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "Engine/EngineTypes.h"
-#include "Inventory_System/ItemPickUpWidget.h"
 #include "MyCharacter.generated.h"
 
 class UCharacterMovementComponent;
@@ -118,6 +117,23 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	bool bInventoryOpen = false;
 
+	// MiniMap
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
+	float DefaultMiniMapSize = 1024.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
+	int DefaultZoomLevel = 2;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="MiniMap")
+	int ZoomLevel = DefaultZoomLevel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
+	int MaxZoomLevel = 3;
+
+	// The amount the zoom changes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
+	float ZoomSize = 512.0f;
+
 	UPROPERTY()
 	class UUserWidget* WidgetToRemove;
 
@@ -155,9 +171,16 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USpringArmComponent* SpringArm;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
+	class UChildActorComponent* MiniMapCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
 	class UHUDSetting* HUDController;
+
+	// Mini Map
+	UPROPERTY(BlueprintReadOnly, Category="MiniMap")
+	class ASceneCapture2D* MiniMapCapture;
 	
 public:
 	//Functions
@@ -178,6 +201,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="HUD")
 	class UHUDSetting* GetHUDController() const {return HUDController;}
+	
+	// Zoom in or out of the MiniMap
+	UFUNCTION(BlueprintCallable, Category="MiniMap")
+	void ZoomMiniMap(const int Level);
+
+	UFUNCTION(BlueprintCallable, Category="MiniMap")
+	void ZoomMiniMapIn();
+
+	UFUNCTION(BlueprintCallable, Category="MiniMap")
+	void ZoomMiniMapOut();
 	
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStartSprint();

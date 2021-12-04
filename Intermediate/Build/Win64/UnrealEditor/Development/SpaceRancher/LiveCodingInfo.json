@@ -15,6 +15,7 @@
 			"FoodCooker.cpp.obj",
 			"InteractInterface.cpp.obj",
 			"Plant.cpp.obj",
+			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
 			"InventoryComponent.cpp.obj",
@@ -22,10 +23,8 @@
 			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
 			"Item_Base.cpp.obj",
-			"Clock.cpp.obj",
 			"CMainHUD.cpp.obj",
 			"HealthAndStaminaBar.cpp.obj",
-			"HUDSetting.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
 			"WidgetDragOperation.cpp.obj",
 			"ItemStructTileView.cpp.obj",
@@ -38,9 +37,10 @@
 			"MainSaveGame.cpp.obj",
 			"Saveable.cpp.obj",
 			"SpawnerMeshInstance.cpp.obj",
+			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"PlantPot.cpp.obj",
-			"SpawnerVolume.cpp.obj"
+			"Clock.cpp.obj",
+			"HUDSetting.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -67,7 +67,6 @@
 		],
 		"Module.SpaceRancher.gen.2_of_3.cpp.obj": [
 			"MainSaveGame.gen.cpp.obj",
-			"MyCharacter.gen.cpp.obj",
 			"NeededItemPopUp.gen.cpp.obj",
 			"NPC.gen.cpp.obj",
 			"NPC_Controller.gen.cpp.obj",
@@ -80,6 +79,7 @@
 			"SpawnerComponent.gen.cpp.obj",
 			"SpawnerMeshInstance.gen.cpp.obj",
 			"SpawnerVolume.gen.cpp.obj",
+			"MyCharacter.gen.cpp.obj",
 			"SpaceRancher.init.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [

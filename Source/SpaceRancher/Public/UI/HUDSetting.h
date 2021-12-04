@@ -21,11 +21,14 @@ protected:
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UPROPERTY()
+	class ACppPlayerController* PlayerController;
+	
 	//Widgets
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class UUserWidget> MainHUDClass;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 	class UCMainHUD* MainHUD;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -35,16 +38,22 @@ public:
 	class UUserWidget* InteractPopUp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class UUserWidget> ItemPickUpWidgetClass;
+	TSubclassOf<class UItemPickUpWidget> ItemPickUpWidgetClass;
 
 	UPROPERTY()
 	class UItemPickUpWidget* ItemPickUpWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class UUserWidget> ClockWidgetClass;
+	TSubclassOf<class UClock> ClockWidgetClass;
 
 	UPROPERTY()
 	class UClock* ClockWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class UUserWidget> MiniMapClass;
+
+	UPROPERTY()
+	class UUserWidget* MiniMap;
 	
 	UPROPERTY()
 	class UUserWidget* WidgetToRemove;

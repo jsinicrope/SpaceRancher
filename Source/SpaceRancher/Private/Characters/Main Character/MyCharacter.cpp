@@ -6,9 +6,11 @@
 #include "Components/WidgetInteractionComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Interactables/InteractInterface.h"
+#include "Inventory_System/ItemPickUpWidget.h"
 #include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
-#include "UI/Clock.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Engine/SceneCapture2D.h"
 #include "World/Saves/ActorRecord.h"
 #include "World/Saves/ActorSaveArchive.h"
 #include "UI/HUDSetting.h"
@@ -24,10 +26,12 @@ AMyCharacter::AMyCharacter()
 	
 	HUDController = CreateDefaultSubobject<UHUDSetting>(TEXT("HUD Settings"));
 	AddOwnedComponent(HUDController);
-
+	
+	// Setup Player Camera
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	AddOwnedComponent(SpringArm);
 
+	SpringArm->SetRelativeLocation(FVector(23, 0, 68));
 	SpringArm->TargetArmLength = 0.0f;
 	SpringArm->bUsePawnControlRotation = false;
 	
@@ -36,23 +40,33 @@ AMyCharacter::AMyCharacter()
 
 	PlayerCamera->bUsePawnControlRotation = true;
 	
+	SpringArm->SetupAttachment(RootComponent);
+	PlayerCamera->SetupAttachment(SpringArm);
+	
 	WidgetInteractionComponent = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
 	AddOwnedComponent(WidgetInteractionComponent);
 
-	SpringArm->SetupAttachment(RootComponent);
-	PlayerCamera->SetupAttachment(SpringArm);
-
 	WidgetInteractionComponent->SetupAttachment(PlayerCamera);
+
+	MiniMapCamera = CreateDefaultSubobject<UChildActorComponent>(TEXT("MiniMapCamera"));
+	AddOwnedComponent(MiniMapCamera);
 }
 
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	GameInstance->LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
+
+	// Setup the MiniMap Camera capturing
+	MiniMapCapture = Cast<ASceneCapture2D>(MiniMapCamera->GetChildActor());
+	checkf(MiniMapCapture, TEXT("MiniMap Camera not set to SceneCapture2D in Player Character"));
+	MiniMapCapture->GetCaptureComponent2D()->OrthoWidth = DefaultMiniMapSize;
+	MiniMapCapture->GetCaptureComponent2D()->HiddenActors.Add(this);
+	ZoomMiniMap(ZoomLevel);
 	
 	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	RespawnViewDirection = GetControlRotation();
@@ -170,6 +184,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
+
+	PlayerInputComponent->BindAction("MapZoomIn", IE_Released, this, &AMyCharacter::ZoomMiniMapIn);
+	PlayerInputComponent->BindAction("MapZoomOut", IE_Released, this, &AMyCharacter::ZoomMiniMapOut);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
@@ -330,6 +347,25 @@ void AMyCharacter::LookUpAtRate(float Value)
 void AMyCharacter::TurnAtRate(float Value)
 {
 	AddControllerYawInput(Value * BaseTurnAtRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AMyCharacter::ZoomMiniMap(const int Level)
+{
+	ZoomLevel = Level < 0 ? 0 : Level;
+	ZoomLevel = Level > MaxZoomLevel ? MaxZoomLevel : ZoomLevel;
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(ZoomLevel));
+	MiniMapCapture->GetCaptureComponent2D()->OrthoWidth = DefaultMiniMapSize + ZoomLevel * ZoomSize;
+	MiniMapCapture->GetCaptureComponent2D()->CaptureScene(); 
+}
+
+void AMyCharacter::ZoomMiniMapIn()
+{
+	ZoomMiniMap(ZoomLevel - 1);
+}
+
+void AMyCharacter::ZoomMiniMapOut()
+{
+	ZoomMiniMap(ZoomLevel + 1);
 }
 
 void AMyCharacter::PlayerStartSprint()

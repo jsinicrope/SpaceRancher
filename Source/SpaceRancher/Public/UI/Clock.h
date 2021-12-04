@@ -30,9 +30,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString StringTime;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector2D Position = FVector2D(1750.0f, 50.0f);
-
 protected:
 	UPROPERTY()
 	FString MinutesString;
