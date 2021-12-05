@@ -26,15 +26,16 @@ void UInventoryComponent::BeginPlay()
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
 	int RemainingItemSlots = ItemSlots;
-	for (int i = 0; i < Columns; i++)
+	for (int i = 0; i < Rows; i++)
 	{
-		if (RemainingItemSlots > 0)
+		int SlotsPerColumn = 0;
+		for (int j = 0; j < Columns; j++)
 		{
-			const int SlotsPerColumn = FMath::Min(Columns, RemainingItemSlots);
-			FItemRows Inventory_Row(SlotsPerColumn);
-			Inventory_Array_Columns.Add(Inventory_Row);
-			RemainingItemSlots -= Columns;
+			SlotsPerColumn += RemainingItemSlots > 0 ? 1 : 0;
+			RemainingItemSlots--;
 		}
+		FItemRows Inventory_Row(SlotsPerColumn);
+		Inventory_Array_Columns.Add(Inventory_Row);
 	}
 
 	if (InventoryWindowClass)
@@ -73,6 +74,13 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
 	return false;
 }
 
+bool UInventoryComponent::AddIndexItem(FItem_Struct Item_Struct, int Index)
+{
+	const int Row = Index % Columns;
+	const int Column = Index / Columns;
+	return AddItem(Item_Struct, Row, Column);
+}
+
 bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Column)
 {
 	return AddItem(Item->Main_Item_Structure, Row, Column);
@@ -83,7 +91,15 @@ FItem_Struct UInventoryComponent::RemoveItemFromPosition(int Row, int Column)
 	FItem_Struct Item = Inventory_Array_Columns[Column].Row_Items[Row];
 	const FItem_Struct EmptyItem;
 	Inventory_Array_Columns[Column].Row_Items[Row] = EmptyItem;
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item removed from Inventory"));
 	return Item;
+}
+
+FItem_Struct UInventoryComponent::RemoveItemFromPosition(const int Index)
+{
+	const int Row = Index % Columns;
+	const int Column = Index / Columns;
+	return RemoveItemFromPosition(Row, Column);
 }
 
 FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
@@ -160,6 +176,11 @@ bool UInventoryComponent::GetInventoryOpen()
 	return bInventoryOpen;
 }
 
+void UInventoryComponent::UpdateInventory()
+{
+	InventoryWindow->UpdateInventory();
+}
+
 bool UInventoryComponent::SortInventory()
 {
 	// Move Inventory to 2D for easier modification
@@ -186,7 +207,8 @@ bool UInventoryComponent::SortInventory()
 			index++;
 		}
 	}
-	
+
+	UpdateInventory();
 	return true;
 }
 

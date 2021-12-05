@@ -11,22 +11,21 @@ void UCMainHUD::NativeOnInitialized()
 	Super::NativeOnInitialized();
 
 	CanvasPanel = Cast<UCanvasPanel>(GetWidgetFromName(FName("CanvasPanel")));
+	PC = GetWorld()->GetFirstPlayerController();
 }
 
 bool UCMainHUD::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-	if (InOperation->Tag.Equals(FString("Not draggable")))
-	{
-		return false;
-	}
+	if (InOperation->Tag.Equals(FString("InventorySlot")))	{ return false; }
 	
 	const UWidgetDragOperation* InOp = Cast<UWidgetDragOperation>(InOperation);
+
+	UCanvasPanelSlot* NewSlot = AddToCanvas(InOperation->DefaultDragVisual);
 	const FVector2D WidgetOffset = InGeometry.AbsoluteToLocal(InDragDropEvent.GetScreenSpacePosition());
 	const FVector2D WidgetPosition = WidgetOffset - InOp->DragOffset;
-	
-	UCanvasPanelSlot* NewSlot = AddToCanvas(InOperation->DefaultDragVisual);
 	NewSlot->SetAutoSize(true);
 	NewSlot->SetPosition(WidgetPosition);
+	
 	return true;
 }
 
@@ -38,9 +37,7 @@ UCanvasPanelSlot* UCMainHUD::AddToCanvas(UWidget* Widget)
 UCanvasPanelSlot* UCMainHUD::AddInteractableWidgetToCanvas(UWidget* Widget)
 {
 	ActiveInteractableWidgets++;
-	APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
-	PC->bShowMouseCursor = true;
+	SetInputWidgetMode(true);
 	InteractableWidgets.Add(Widget);
 	return AddToCanvas(Widget);
 }
@@ -48,11 +45,27 @@ UCanvasPanelSlot* UCMainHUD::AddInteractableWidgetToCanvas(UWidget* Widget)
 UCanvasPanelSlot* UCMainHUD::AddInventoryWidgetToCanvas(UWidget* Widget)
 {
 	ActiveInventoryWidgets++;
-	APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
-	PC->bShowMouseCursor = true;
+	SetInputWidgetMode(true);
 	InventoryWidgets.Add(Widget);
 	return AddToCanvas(Widget);
+}
+
+void UCMainHUD::SetInputWidgetMode(bool bWidgetFocus) const
+{
+	if (bWidgetFocus)
+	{
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
+		PC->bShowMouseCursor = true;
+		PC->SetIgnoreLookInput(true);
+		PC->SetIgnoreMoveInput(true);
+	}
+	else
+	{
+		PC->bShowMouseCursor = false;
+		PC->SetIgnoreLookInput(false);
+		PC->SetIgnoreMoveInput(false);
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	}
 }
 
 void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)
@@ -62,9 +75,7 @@ void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)
 	ActiveInteractableWidgets--;
 	if (ActiveInteractableWidgets <= 0)
 	{
-		APlayerController* PC = GetWorld()->GetFirstPlayerController();
-		PC->bShowMouseCursor = false;
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		SetInputWidgetMode(false);
 	}
 }
 
@@ -75,9 +86,7 @@ void UCMainHUD::RemoveInventoryWidgetFromCanvas(UWidget* Widget)
 	ActiveInventoryWidgets--;
 	if (ActiveInventoryWidgets <= 0)
 	{
-		APlayerController* PC = GetWorld()->GetFirstPlayerController();
-		PC->bShowMouseCursor = false;
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+		SetInputWidgetMode(false);
 	}
 }
 
@@ -91,9 +100,7 @@ void UCMainHUD::RemoveAllInteractableWidgets()
 			RemoveInteractableWidgetFromCanvas(InteractableWidgets[i]);
 		}
 	}
-	APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	PC->bShowMouseCursor = false;
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	SetInputWidgetMode(false);
 }
 
 void UCMainHUD::RemoveAllInventoryWidgets()
@@ -106,7 +113,5 @@ void UCMainHUD::RemoveAllInventoryWidgets()
 			RemoveInventoryWidgetFromCanvas(InventoryWidgets[i]);
 		}
 	}
-	APlayerController* PC = GetWorld()->GetFirstPlayerController();
-	PC->bShowMouseCursor = false;
-	UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
+	SetInputWidgetMode(false);
 }

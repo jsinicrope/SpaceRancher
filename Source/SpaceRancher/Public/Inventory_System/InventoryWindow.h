@@ -21,6 +21,7 @@ public:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 	
 	UPROPERTY(BlueprintReadWrite)
 	class UInventoryComponent* Inventory;
@@ -68,6 +69,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidgetOptional))
 	UButton* SortInventoryButton;
 
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidgetOptional))
+	class UInventoryTrashSlot* TrashSlot;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCanvasPanelSlot* CanvasSlot = nullptr;
 
@@ -83,7 +87,8 @@ protected:
 	UFUNCTION()
 	void CloseInventory();
 
-	// Delegate function for sort button
+	/** Sorts Inventory
+	 * Delegate function for sort button */
 	UFUNCTION()
 	void SortInventory();
 

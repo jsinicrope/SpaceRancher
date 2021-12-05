@@ -3,6 +3,7 @@
 #include "Inventory_System/InventoryWindow.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "Inventory_System/InventorySlotWidget.h"
+#include "Inventory_System/InventoryTrashSlot.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
@@ -19,6 +20,12 @@ void UInventoryWindow::NativeOnInitialized()
 	InventoryTitle = Cast<UTextBlock>(GetWidgetFromName(FName("InventoryTitle")));
 	InventoryGrid = Cast<UGridPanel>(GetWidgetFromName(FName("InventoryGrid")));
 	CloseInventoryButton = Cast<UButton>(GetWidgetFromName(FName("CloseInventoryButton")));
+	TrashSlot = Cast<UInventoryTrashSlot>(GetWidgetFromName(FName("TrashSlot")));
+
+	if (TrashSlot)
+	{
+		TrashSlot->InventoryWindow = this;
+	}
 
 	CloseInventoryButton->OnClicked.AddDynamic(this, &UInventoryWindow::CloseWindow);
 	
@@ -39,6 +46,7 @@ void UInventoryWindow::NativeOnDragDetected(const FGeometry& InGeometry, const F
 	OutOp->DragOffset = DragOffset;
 	OutOp->WidgetReference = this;
 	this->RemoveFromParent();
+	OutOp->Tag = FString("InventoryWindow");
 }
 
 FReply UInventoryWindow::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
@@ -48,6 +56,62 @@ FReply UInventoryWindow::NativeOnMouseButtonDown(const FGeometry& InGeometry, co
 	const FKey DragKey = FKey(FName("RightMouseButton"));
 	FEventReply Reply = UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, DragKey);
 	return Reply.NativeReply;
+}
+
+bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	UWidgetDragOperation* DragOperation = Cast<UWidgetDragOperation>(InOperation);
+	
+	if (DragOperation->Tag.Equals(FString("InventorySlot")))
+	{
+		UInventorySlotWidget* InventorySlot = Cast<UInventorySlotWidget>(DragOperation->WidgetReference);
+		if (!ensureAlwaysMsgf(InventorySlot, TEXT("Used Tag 'InventorySlot' on not UInventorySlotWidget widget class in UWidgetDragOperation")))
+		{
+			return false;
+		}
+
+		if (Inventory == InventorySlot->InventoryWindow->Inventory)
+		{
+			Inventory->AddItem(Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex));
+		}
+		
+		else if (Inventory->AddItem(InventorySlot->SlotContent))
+		{
+			InventorySlot->InventoryWindow->Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex);
+			
+			InventorySlot->SetVisibility(ESlateVisibility::Visible);
+			InventorySlot->InventoryWindow->UpdateInventory();
+			SetVisibility(ESlateVisibility::Visible);
+			UpdateInventory();
+			return true;
+		}
+	}
+
+	// return false here to not make the InventoryWindow disappear
+	if (DragOperation->Tag.Equals(FString("InventoryWindow")))
+	{
+		UInventoryWindow* InventoryWindow = Cast<UInventoryWindow>(DragOperation->WidgetReference);
+
+		for (int i = 0; i < InventoryWindow->Inventory->ItemSlots; i++)
+		{
+			if (i < Inventory->ItemSlots)
+			{
+				const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemFromPosition(i);
+				if (Item.bIsValidItem)
+				{
+					if (!Inventory->AddItem(Item))
+					{
+						InventoryWindow->Inventory->AddIndexItem(Item, i);
+						break;
+					}
+				}
+			}
+		}
+		UpdateInventory();
+		InventoryWindow->UpdateInventory();
+		DragOperation->Tag = FString("InventoryWindow dropped");
+	}
+	return false;
 }
 
 void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclassOf<UUserWidget> InventorySlotWidgetClassIn)
@@ -171,7 +235,6 @@ void UInventoryWindow::UpdateInventory()
 			}
 			else
 			{
-				//InventorySlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventorySlotWidgetClass);
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 0)));
 				InventorySlotWidget->TextBlock->SetText(FText::FromString(""));
 			}

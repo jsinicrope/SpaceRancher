@@ -38,7 +38,7 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 		OutOperation->DefaultDragVisual = NewSlotWidget;
 		OutOperation->DefaultDragVisual->SetVisibility(ESlateVisibility::HitTestInvisible);
 		OutOperation->Pivot = EDragPivot::MouseDown;
-		OutOperation->Tag = FString("Not draggable");
+		OutOperation->Tag = FString("InventorySlot");
 		UWidgetDragOperation* OutOp = Cast<UWidgetDragOperation>(OutOperation);
 		OutOp->DragOffset = DragOffset;
 		OutOp->WidgetReference = this;
@@ -48,10 +48,10 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
 	const UWidgetDragOperation* InOp = Cast<UWidgetDragOperation>(InOperation);
-	TempSwitchSlot = Cast<UInventorySlotWidget>(InOp->WidgetReference);
-	
-	if (TempSwitchSlot != nullptr)
+	if (InOp->Tag.Equals(FString("InventorySlot")))
 	{
+		TempSwitchSlot = Cast<UInventorySlotWidget>(InOp->WidgetReference);
+		ensureAlwaysMsgf(TempSwitchSlot, TEXT("Used Tag 'InventorySlot' on not UInventorySlotWidget widget class in UWidgetDragOperation"));
 		if (this->InventoryWindow->Inventory == TempSwitchSlot->InventoryWindow->Inventory)
 		{
 			if (TempSwitchSlot->SlotIndex != SlotIndex)
@@ -88,31 +88,31 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 			const FItem_Struct TempItem = CurrentInventory[SlotIndex];
 			CurrentInventory[SlotIndex] = DraggedFromInventory[TempSlotIndex];
 			DraggedFromInventory[TempSlotIndex] = TempItem;
-	
+
 			// Move Inventory from 2D back to it's intended shape
 			// Read pointer values to inventory
 			// this inventory
-			int index = 0;
+			int Index = 0;
 			for (int i = 0; i < InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
 			{
 				for (int j = 0; j < InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
 				{
-					InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = CurrentInventory[index];
-					index++;
+					InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = CurrentInventory[Index];
+					Index++;
 				}
 			}
 
 			// Inventory that was dragged from
-			index = 0;
+			Index = 0;
 			for (int i = 0; i < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
 			{
 				for (int j = 0; j < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
 				{
-					TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = DraggedFromInventory[index];
-					index++;
+					TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = DraggedFromInventory[Index];
+					Index++;
 				}
 			}
-			
+		
 			TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
 			SetVisibility(ESlateVisibility::Visible);
 			TempSwitchSlot->InventoryWindow->UpdateInventory();

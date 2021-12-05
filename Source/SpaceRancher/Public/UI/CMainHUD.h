@@ -16,6 +16,9 @@ class SPACERANCHER_API UCMainHUD : public UUserWidget
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
 protected:
+	UPROPERTY()
+	APlayerController* PC;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	UCanvasPanel* CanvasPanel = nullptr;
 
@@ -40,6 +43,9 @@ public:
 
 	UFUNCTION()
 	UCanvasPanelSlot* AddInventoryWidgetToCanvas(UWidget* Widget);
+
+	UFUNCTION()
+	void SetInputWidgetMode(bool bWidgetFocus) const;
 
 	UFUNCTION()
 	void RemoveInteractableWidgetFromCanvas(UWidget* Widget);

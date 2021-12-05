@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryTrashSlot.h"
 #include "InventoryWindow.h"
 #include "Components/ActorComponent.h"
 #include "Inventory_System/ItemBase.h"
@@ -37,7 +38,7 @@ public:
 
 	/** The amount of slots in the inventory
 	 * Fill Rows and columns until the desired amount is reached */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0), Category = "Inventory")
 	int ItemSlots = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay, Category="Inventory")
@@ -71,6 +72,8 @@ public:
 	 * returns true if successful, else false */
 	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
 
+	bool AddIndexItem(FItem_Struct Item_Struct, int Index);
+
 	/* Add Item to the inventory
 	 * returns true if successful, else false */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -80,6 +83,8 @@ public:
 	 * return an invalid item if no item is at given position */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromPosition(int Row, int Column);
+
+	FItem_Struct RemoveItemFromPosition(const int Index);
 
 	// Returns and removes first item that matches the given item
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -100,7 +105,11 @@ public:
 	UFUNCTION(BlueprintGetter)
 	bool GetInventoryOpen();
 
-	// Sorts inventory, does not update visual
+	// Updates the visual representation of the inventory
+	UFUNCTION(BlueprintCallable)
+	void UpdateInventory();
+
+	// Sorts the inventory lexicographically
 	UFUNCTION(BlueprintCallable)
 	bool SortInventory();
 

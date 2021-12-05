@@ -31,7 +31,7 @@ AMyCharacter::AMyCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	AddOwnedComponent(SpringArm);
 
-	SpringArm->SetRelativeLocation(FVector(23, 0, 68));
+	SpringArm->SetRelativeLocation(FVector(17, 0, 68));
 	SpringArm->TargetArmLength = 0.0f;
 	SpringArm->bUsePawnControlRotation = false;
 	
@@ -62,6 +62,8 @@ void AMyCharacter::BeginPlay()
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
 	// Setup the MiniMap Camera capturing
+	MiniMapCamera->SetRelativeLocation(FVector(0, 0, 10000));
+	MiniMapCamera->SetRelativeRotation(FRotator(270, 0, 0));
 	MiniMapCapture = Cast<ASceneCapture2D>(MiniMapCamera->GetChildActor());
 	checkf(MiniMapCapture, TEXT("MiniMap Camera not set to SceneCapture2D in Player Character"));
 	MiniMapCapture->GetCaptureComponent2D()->OrthoWidth = DefaultMiniMapSize;
