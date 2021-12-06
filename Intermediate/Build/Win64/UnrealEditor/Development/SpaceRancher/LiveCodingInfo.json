@@ -18,9 +18,14 @@
 			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
+			"InventoryComponent.cpp.obj",
+			"InventorySlotWidget.cpp.obj",
+			"InventoryTrashSlot.cpp.obj",
+			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
 			"Item_Base.cpp.obj",
 			"Clock.cpp.obj",
+			"CMainHUD.cpp.obj",
 			"HealthAndStaminaBar.cpp.obj",
 			"HUDSetting.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
@@ -36,11 +41,8 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"InventoryComponent.cpp.obj",
-			"InventorySlotWidget.cpp.obj",
-			"InventoryTrashSlot.cpp.obj",
-			"InventoryWindow.cpp.obj",
-			"CMainHUD.cpp.obj"
+			"ItemSelectionHUD.cpp.obj",
+			"ItemSelectionSegment.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -61,10 +63,12 @@
 			"InventoryWindow.gen.cpp.obj",
 			"ItemBase.gen.cpp.obj",
 			"ItemPickUpWidget.gen.cpp.obj",
-			"ItemSellingTile.gen.cpp.obj",
-			"ItemStruct.gen.cpp.obj"
+			"ItemSelectionHUD.gen.cpp.obj",
+			"ItemSelectionSegment.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.2_of_3.cpp.obj": [
+			"ItemSellingTile.gen.cpp.obj",
+			"ItemStruct.gen.cpp.obj",
 			"ItemStructTileView.gen.cpp.obj",
 			"MainGameInstance.gen.cpp.obj",
 			"MainSaveGame.gen.cpp.obj",
@@ -79,11 +83,11 @@
 			"RunAwayFromPlayer.gen.cpp.obj",
 			"Saveable.gen.cpp.obj",
 			"SpawnerComponent.gen.cpp.obj",
-			"SpawnerMeshInstance.gen.cpp.obj",
-			"SpawnerVolume.gen.cpp.obj",
 			"SpaceRancher.init.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [
+			"SpawnerMeshInstance.gen.cpp.obj",
+			"SpawnerVolume.gen.cpp.obj",
 			"WidgetDragOperation.gen.cpp.obj",
 			"Zebos.gen.cpp.obj",
 			"ZebosController.gen.cpp.obj"
