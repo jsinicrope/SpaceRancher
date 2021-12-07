@@ -11,6 +11,9 @@ class SPACERANCHER_API UItemSelectionHUD : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+	virtual void NativeConstruct() override;
+	
 protected:
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
 	class UOverlay* RadialOverlay;

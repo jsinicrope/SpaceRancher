@@ -46,6 +46,20 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->RemoveWidgetFromViewport();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execCloseRadialMenu)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->CloseRadialMenu();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execOpenRadialMenu)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OpenRadialMenu();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execToggleInventory)
 	{
 		P_FINISH;
@@ -235,6 +249,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "AddItemToInventory", &AMyCharacter::execAddItemToInventory },
 			{ "bIsPlayerDead", &AMyCharacter::execbIsPlayerDead },
 			{ "CheckForInteractable", &AMyCharacter::execCheckForInteractable },
+			{ "CloseRadialMenu", &AMyCharacter::execCloseRadialMenu },
 			{ "DamagePlayer", &AMyCharacter::execDamagePlayer },
 			{ "GetHealth", &AMyCharacter::execGetHealth },
 			{ "GetHUDController", &AMyCharacter::execGetHUDController },
@@ -245,6 +260,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "KillPlayer", &AMyCharacter::execKillPlayer },
 			{ "LoadGame", &AMyCharacter::execLoadGame },
 			{ "LoadPlayerCharacter", &AMyCharacter::execLoadPlayerCharacter },
+			{ "OpenRadialMenu", &AMyCharacter::execOpenRadialMenu },
 			{ "PlayerInteract", &AMyCharacter::execPlayerInteract },
 			{ "PlayerStartSprint", &AMyCharacter::execPlayerStartSprint },
 			{ "PlayerStopSprint", &AMyCharacter::execPlayerStopSprint },
@@ -377,6 +393,31 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics::Function_MetaDataParams[] = {
+		{ "Category", "ItemSelection" },
+		{ "Comment", "// Closes the RadialMenu\n" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+		{ "ToolTip", "Closes the RadialMenu" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "CloseRadialMenu", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_CloseRadialMenu()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_CloseRadialMenu_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -700,6 +741,31 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_LoadPlayerCharacter_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics::Function_MetaDataParams[] = {
+		{ "Category", "ItemSelection" },
+		{ "Comment", "/** Opens the RadialMenu\n\x09 * Does not open the menu if other interactable widgets are active on screen */" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+		{ "ToolTip", "Opens the RadialMenu\nDoes not open the menu if other interactable widgets are active on screen" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "OpenRadialMenu", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_OpenRadialMenu()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_OpenRadialMenu_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1222,6 +1288,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static void NewProp_bInventoryOpen_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bInventoryOpen;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bItemSelectionOpen_MetaData[];
+#endif
+		static void NewProp_bItemSelectionOpen_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bItemSelectionOpen;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultMiniMapSize_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DefaultMiniMapSize;
@@ -1313,6 +1384,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_AddItemToInventory, "AddItemToInventory" }, // 4074940771
 		{ &Z_Construct_UFunction_AMyCharacter_bIsPlayerDead, "bIsPlayerDead" }, // 3633481977
 		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 1476590731
+		{ &Z_Construct_UFunction_AMyCharacter_CloseRadialMenu, "CloseRadialMenu" }, // 1215133628
 		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1072611392
 		{ &Z_Construct_UFunction_AMyCharacter_GetHealth, "GetHealth" }, // 260650493
 		{ &Z_Construct_UFunction_AMyCharacter_GetHUDController, "GetHUDController" }, // 657435290
@@ -1323,6 +1395,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_KillPlayer, "KillPlayer" }, // 286801584
 		{ &Z_Construct_UFunction_AMyCharacter_LoadGame, "LoadGame" }, // 472659649
 		{ &Z_Construct_UFunction_AMyCharacter_LoadPlayerCharacter, "LoadPlayerCharacter" }, // 631528198
+		{ &Z_Construct_UFunction_AMyCharacter_OpenRadialMenu, "OpenRadialMenu" }, // 4199420391
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerInteract, "PlayerInteract" }, // 1509151083
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerStartSprint, "PlayerStartSprint" }, // 215416479
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerStopSprint, "PlayerStopSprint" }, // 173474060
@@ -1584,6 +1657,17 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen = { "bInventoryOpen", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_SetBit, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_MetaData[] = {
+		{ "Category", "ItemSelection" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_SetBit(void* Obj)
+	{
+		((AMyCharacter*)Obj)->bItemSelectionOpen = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen = { "bItemSelectionOpen", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_SetBit, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultMiniMapSize_MetaData[] = {
 		{ "Category", "MiniMap" },
 		{ "Comment", "// MiniMap\n" },
@@ -1765,6 +1849,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_RespawnPoint,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_RespawnViewDirection,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultMiniMapSize,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomLevel,
@@ -1813,7 +1898,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 3207504092);
+	IMPLEMENT_CLASS(AMyCharacter, 3013548485);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

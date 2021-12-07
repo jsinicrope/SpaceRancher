@@ -21,6 +21,8 @@ class UInventoryComponent;
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execCloseRadialMenu); \
+	DECLARE_FUNCTION(execOpenRadialMenu); \
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
@@ -52,6 +54,8 @@ class UInventoryComponent;
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
+	DECLARE_FUNCTION(execCloseRadialMenu); \
+	DECLARE_FUNCTION(execOpenRadialMenu); \
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
 	DECLARE_FUNCTION(execRemoveItemFromInventory); \
@@ -150,6 +154,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__RespawnPoint() { return STRUCT_OFFSET(AMyCharacter, RespawnPoint); } \
 	FORCEINLINE static uint32 __PPO__RespawnViewDirection() { return STRUCT_OFFSET(AMyCharacter, RespawnViewDirection); } \
 	FORCEINLINE static uint32 __PPO__bInventoryOpen() { return STRUCT_OFFSET(AMyCharacter, bInventoryOpen); } \
+	FORCEINLINE static uint32 __PPO__bItemSelectionOpen() { return STRUCT_OFFSET(AMyCharacter, bItemSelectionOpen); } \
 	FORCEINLINE static uint32 __PPO__DefaultMiniMapSize() { return STRUCT_OFFSET(AMyCharacter, DefaultMiniMapSize); } \
 	FORCEINLINE static uint32 __PPO__DefaultZoomLevel() { return STRUCT_OFFSET(AMyCharacter, DefaultZoomLevel); } \
 	FORCEINLINE static uint32 __PPO__ZoomLevel() { return STRUCT_OFFSET(AMyCharacter, ZoomLevel); } \

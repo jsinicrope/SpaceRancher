@@ -28,6 +28,8 @@
 			"CMainHUD.cpp.obj",
 			"HealthAndStaminaBar.cpp.obj",
 			"HUDSetting.cpp.obj",
+			"ItemSelectionHUD.cpp.obj",
+			"ItemSelectionSegment.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
 			"ItemStructTileView.cpp.obj",
 			"ComputerMonitor.cpp.obj",
@@ -40,9 +42,7 @@
 			"Saveable.cpp.obj",
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
-			"SpaceRancher.cpp.obj",
-			"ItemSelectionHUD.cpp.obj",
-			"ItemSelectionSegment.cpp.obj"
+			"SpaceRancher.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -82,8 +82,8 @@
 			"ProgressibleObject.gen.cpp.obj",
 			"RunAwayFromPlayer.gen.cpp.obj",
 			"Saveable.gen.cpp.obj",
-			"SpawnerComponent.gen.cpp.obj",
-			"SpaceRancher.init.gen.cpp.obj"
+			"SpaceRancher.init.gen.cpp.obj",
+			"SpawnerComponent.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [
 			"SpawnerMeshInstance.gen.cpp.obj",

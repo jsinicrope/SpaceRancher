@@ -30,6 +30,12 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly)
 	class UCMainHUD* MainHUD;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class UItemSelectionHUD> RadialMenuClass;
+
+	UPROPERTY(BlueprintReadOnly)
+	class UItemSelectionHUD* RadialMenu;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class UUserWidget> InteractPopUpClass;
@@ -57,4 +63,10 @@ public:
 	
 	UPROPERTY()
 	class UUserWidget* WidgetToRemove;
+
+	UFUNCTION(BlueprintCallable)
+	bool OpenRadialMenu();
+
+	UFUNCTION(BlueprintCallable)
+	void CloseRadialMenu();
 };

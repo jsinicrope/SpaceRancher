@@ -25,12 +25,22 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	class UItemSelectionHUD* SelectionHUD;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0.0f, ClampMax=1.0f))
+	float MinInteractionDistance = 0.15f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0.0f, ClampMax=1.0f))
+	float MaxInteractionDistance = 0.43f;
+
 	UFUNCTION(BlueprintCallable)
 	inline void SetLocalAngle();
 
 	// Returns the absolute normalized distance to the menus center
 	UFUNCTION(BlueprintCallable)
 	inline float DistToMenuCenter();
+
+	// Return true if the mouse is in interaction distance with this segment
+	UFUNCTION(BlueprintCallable)
+	bool IsMouseOver();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI/HUDSetting.h"
-#include "Components/CanvasPanelSlot.h"
+#include "UI/ItemSelectionHUD.h"
 #include "Inventory_System/ItemPickUpWidget.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "UI/Clock.h"
@@ -52,9 +52,38 @@ void UHUDSetting::BeginPlay()
 		MiniMap = CreateWidget<UUserWidget>(GetWorld(), MiniMapClass);
 		MiniMap->AddToViewport();
 	}
+
+	if (RadialMenuClass)
+	{
+		RadialMenu = CreateWidget<UItemSelectionHUD>(GetWorld(), RadialMenuClass);
+	}
 }
 
 void UHUDSetting::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
+bool UHUDSetting::OpenRadialMenu()
+{
+	if (MainHUD->GetInteractableWidgets() < 1)
+	{
+		MainHUD->AddInteractableWidgetInternal(RadialMenu);
+		MainHUD->SetInputWidgetMode(true);
+		RadialMenu->AddToViewport();
+		
+		RadialMenu->CreateStandardWidget();
+
+		int ViewportX, ViewportY;
+		PlayerController->GetViewportSize(ViewportX, ViewportY);
+		PlayerController->SetMouseLocation(ViewportX / 2, ViewportY / 2);
+		
+		return true;
+	}
+	return false;
+}
+
+void UHUDSetting::CloseRadialMenu()
+{
+	MainHUD->RemoveInteractableWidgetFromCanvas(RadialMenu);
 }

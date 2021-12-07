@@ -50,6 +50,12 @@ UCanvasPanelSlot* UCMainHUD::AddInventoryWidgetToCanvas(UWidget* Widget)
 	return AddToCanvas(Widget);
 }
 
+void UCMainHUD::AddInteractableWidgetInternal(UWidget* Widget)
+{
+	ActiveInteractableWidgets++;
+	InteractableWidgets.Add(Widget);
+}
+
 void UCMainHUD::SetInputWidgetMode(bool bWidgetFocus) const
 {
 	if (bWidgetFocus)
@@ -57,13 +63,13 @@ void UCMainHUD::SetInputWidgetMode(bool bWidgetFocus) const
 		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
 		PC->bShowMouseCursor = true;
 		PC->SetIgnoreLookInput(true);
-		PC->SetIgnoreMoveInput(true);
+		// PC->SetIgnoreMoveInput(true);
 	}
 	else
 	{
 		PC->bShowMouseCursor = false;
 		PC->SetIgnoreLookInput(false);
-		PC->SetIgnoreMoveInput(false);
+		// PC->SetIgnoreMoveInput(false);
 		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 	}
 }

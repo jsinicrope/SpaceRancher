@@ -98,14 +98,16 @@ void AMyCharacter::Tick(float DeltaTime)
 	{
 		if (GetCharacterMovement()->IsMovingOnGround())
 		{
-			if (bSprinting)
+			if (bSprinting && GetMovementComponent()->GetLastInputVector().Size() > 0)
 			{
 				Stamina -= StaminaLossRunning * DeltaTime;
 				ElapsedStaminaDrainTime = 0.0f;
 			}
-	// Regen Stamina
+			// Regen Stamina
 			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
+			{
 				Stamina = fmin(MaxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
+			}
 		}
 	}
 
@@ -184,6 +186,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AMyCharacter::PlayerInteract);
 	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
+	PlayerInputComponent->BindAction("ItemSelection", IE_Pressed, this, &AMyCharacter::OpenRadialMenu);
+	PlayerInputComponent->BindAction("ItemSelection", IE_Released, this, &AMyCharacter::CloseRadialMenu);
+	
 	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
 	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
@@ -192,10 +197,10 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
-
-	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::AddControllerYawInput);
+	
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AMyCharacter::LookUpAtRate);
+	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMyCharacter::TurnAtRate);
 }
 
@@ -428,6 +433,24 @@ void AMyCharacter::ToggleInventory()
 	if (!bInventoryOpen)
 	{
 		HUDController->MainHUD->RemoveAllInventoryWidgets();
+	}
+}
+
+void AMyCharacter::OpenRadialMenu()
+{
+	if (!bItemSelectionOpen)
+	{
+		HUDController->OpenRadialMenu();
+		bItemSelectionOpen = true;
+	}
+}
+
+void AMyCharacter::CloseRadialMenu()
+{
+	if (bItemSelectionOpen)
+	{
+		HUDController->CloseRadialMenu();
+		bItemSelectionOpen = false;
 	}
 }
 

@@ -117,6 +117,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	bool bInventoryOpen = false;
 
+	UPROPERTY(BlueprintReadOnly, Category="ItemSelection")
+	bool bItemSelectionOpen = false;
+
 	// MiniMap
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	float DefaultMiniMapSize = 1024.0f;
@@ -259,6 +262,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
+
+	/** Opens the RadialMenu
+	 * Does not open the menu if other interactable widgets are active on screen */
+	UFUNCTION(BlueprintCallable, Category="ItemSelection")
+	void OpenRadialMenu();
+
+	// Closes the RadialMenu
+	UFUNCTION(BlueprintCallable, Category="ItemSelection")
+	void CloseRadialMenu();
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();

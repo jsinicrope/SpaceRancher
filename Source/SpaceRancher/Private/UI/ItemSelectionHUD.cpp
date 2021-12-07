@@ -1,9 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI/ItemSelectionHUD.h"
-#include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/Overlay.h"
 #include "UI/ItemSelectionSegment.h"
+
+void UItemSelectionHUD::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	RadialOverlay = Cast<UOverlay>(GetWidgetFromName(FName("RadialOverlay")));
+}
 
 void UItemSelectionHUD::CreateStandardWidget()
 {

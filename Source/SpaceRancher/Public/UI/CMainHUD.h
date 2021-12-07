@@ -45,6 +45,13 @@ public:
 	UCanvasPanelSlot* AddInventoryWidgetToCanvas(UWidget* Widget);
 
 	UFUNCTION()
+	int GetInteractableWidgets() const { return ActiveInteractableWidgets; }
+
+	// Only use if widgets can't be added to the MainHUD container
+	UFUNCTION()
+	void AddInteractableWidgetInternal(UWidget* Widget);
+
+	UFUNCTION()
 	void SetInputWidgetMode(bool bWidgetFocus) const;
 
 	UFUNCTION()

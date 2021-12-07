@@ -37,6 +37,18 @@ float UItemSelectionSegment::DistToMenuCenter()
 	return MouseDistToCenter / ViewportCenter.Size();
 }
 
+bool UItemSelectionSegment::IsMouseOver()
+{
+	SetLocalAngle();
+	const float Dist = DistToMenuCenter();
+	if (MaxInteractionDistance >= Dist && Dist >= MinInteractionDistance &&
+		MaxValue - (StartingPoint - MinValue) >= LocalAngle && LocalAngle >= StartingPoint)
+	{
+		return true;
+	}
+	return false;
+}
+
 void UItemSelectionSegment::SetVariables(float Start, float End, float Min, float Max, FName SegmentName)
 {
 	StartingPoint = Start;
