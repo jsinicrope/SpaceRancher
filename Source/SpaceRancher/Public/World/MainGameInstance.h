@@ -73,7 +73,7 @@ public:
 
 	//Functions
 	UFUNCTION(Exec)
-	inline void SetTime(int Hour, int Minute);
+	void SetTime(int Hour, int Minute);
 
 	UFUNCTION(Exec)
 	void AccelerateTime(int Hour, int Minute, float Speed);

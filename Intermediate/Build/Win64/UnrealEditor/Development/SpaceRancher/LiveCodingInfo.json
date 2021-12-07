@@ -14,7 +14,6 @@
 			"Computer.cpp.obj",
 			"FoodCooker.cpp.obj",
 			"InteractInterface.cpp.obj",
-			"Plant.cpp.obj",
 			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
@@ -29,20 +28,21 @@
 			"HealthAndStaminaBar.cpp.obj",
 			"HUDSetting.cpp.obj",
 			"ItemSelectionHUD.cpp.obj",
-			"ItemSelectionSegment.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
 			"ItemStructTileView.cpp.obj",
 			"ComputerMonitor.cpp.obj",
 			"FoodCookerTimer.cpp.obj",
 			"ItemSellingTile.cpp.obj",
-			"MainGameInstance.cpp.obj",
 			"ActorRecord.cpp.obj",
 			"ActorSaveArchive.cpp.obj",
 			"MainSaveGame.cpp.obj",
 			"Saveable.cpp.obj",
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
-			"SpaceRancher.cpp.obj"
+			"SpaceRancher.cpp.obj",
+			"Plant.cpp.obj",
+			"ItemSelectionSegment.cpp.obj",
+			"MainGameInstance.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -63,10 +63,10 @@
 			"InventoryWindow.gen.cpp.obj",
 			"ItemBase.gen.cpp.obj",
 			"ItemPickUpWidget.gen.cpp.obj",
-			"ItemSelectionHUD.gen.cpp.obj",
-			"ItemSelectionSegment.gen.cpp.obj"
+			"ItemSelectionHUD.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.2_of_3.cpp.obj": [
+			"ItemSelectionSegment.gen.cpp.obj",
 			"ItemSellingTile.gen.cpp.obj",
 			"ItemStruct.gen.cpp.obj",
 			"ItemStructTileView.gen.cpp.obj",
@@ -79,18 +79,18 @@
 			"Plant.gen.cpp.obj",
 			"PlantPot.gen.cpp.obj",
 			"PlayerBed.gen.cpp.obj",
-			"ProgressibleObject.gen.cpp.obj",
-			"RunAwayFromPlayer.gen.cpp.obj",
-			"Saveable.gen.cpp.obj",
-			"SpaceRancher.init.gen.cpp.obj",
-			"SpawnerComponent.gen.cpp.obj"
+			"ProgressibleObject.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [
+			"RunAwayFromPlayer.gen.cpp.obj",
+			"Saveable.gen.cpp.obj",
+			"SpawnerComponent.gen.cpp.obj",
 			"SpawnerMeshInstance.gen.cpp.obj",
 			"SpawnerVolume.gen.cpp.obj",
 			"WidgetDragOperation.gen.cpp.obj",
 			"Zebos.gen.cpp.obj",
-			"ZebosController.gen.cpp.obj"
+			"ZebosController.gen.cpp.obj",
+			"SpaceRancher.init.gen.cpp.obj"
 		]
 	}
 }

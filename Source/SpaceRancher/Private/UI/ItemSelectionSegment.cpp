@@ -15,7 +15,7 @@ void UItemSelectionSegment::NativeTick(const FGeometry& MyGeometry, float InDelt
 	Super::NativeTick(MyGeometry, InDeltaTime);
 }
 
-void UItemSelectionSegment::SetLocalAngle()
+inline void UItemSelectionSegment::SetLocalAngle()
 {
 	float MouseX, MouseY;
 	GetWorld()->GetFirstPlayerController()->GetMousePosition(MouseX, MouseY);
@@ -25,7 +25,7 @@ void UItemSelectionSegment::SetLocalAngle()
 	LocalAngle = 1 - (RotationY + 180) / 360.0f;
 }
 
-float UItemSelectionSegment::DistToMenuCenter()
+inline float UItemSelectionSegment::DistToMenuCenter()
 {
 	float MouseX, MouseY;
 	GetWorld()->GetFirstPlayerController()->GetMousePosition(MouseX, MouseY);

@@ -31,11 +31,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0.0f, ClampMax=1.0f))
 	float MaxInteractionDistance = 0.43f;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	inline void SetLocalAngle();
 
 	// Returns the absolute normalized distance to the menus center
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	inline float DistToMenuCenter();
 
 	// Return true if the mouse is in interaction distance with this segment

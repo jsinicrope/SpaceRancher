@@ -12,7 +12,6 @@ class SPACERANCHER_API APlant : public AItemBase
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	APlant();
 	
 	virtual void Interact_Implementation() override;
@@ -20,24 +19,22 @@ public:
 	virtual void SaveActor_Implementation() override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
 	bool bCanBeHarvested = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category = "Plant|Growth")
-	int GrowState = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="MinutesPerStage"), Category = "Plant|Growth")
-	float TimePerStage= 3.0f;
+	int GrowthState = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")
 	int GrowthStages = 3;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(DisplayName="MinutesPerStage"), Category = "Plant|Growth")
+	float TimePerStage= 3.0f;
 
 	/**The time the plant has spent in its current stage in minutes*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant|Growth")

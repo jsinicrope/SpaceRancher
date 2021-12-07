@@ -10,9 +10,7 @@ APlant::APlant()
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 
-	GrowState = 0;
 	bIsCollectible = bCanBeHarvested;
-	PlantStateAgeMinutes = 0.0f;
 	
 	if (StateMeshes.Num() > 0)
 	{
@@ -26,9 +24,9 @@ void APlant::BeginPlay()
 	
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
 
-	if (StateMeshes.Num() > GrowState)
+	if (StateMeshes.Num() > GrowthState - 1)
 	{
-		StaticMesh->SetStaticMesh(StateMeshes[GrowState]);
+		StaticMesh->SetStaticMesh(StateMeshes[GrowthState - 1]);
 	}
 }
 
@@ -62,14 +60,14 @@ void APlant::SaveActor_Implementation()
 
 bool APlant::GrowPlant()
 {
-	if (GrowState < GrowthStages)
+	if (GrowthState < GrowthStages)
 	{
-		GrowState++;
+		GrowthState++;
 		PlantStateAgeMinutes = 0.0f;
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Plant grew"));
-		if (StateMeshes.Num() > GrowState)
+		if (StateMeshes.Num() > GrowthState - 1)
 		{
-			StaticMesh->SetStaticMesh(StateMeshes[GrowState]);
+			StaticMesh->SetStaticMesh(StateMeshes[GrowthState - 1]);
 		}
 		return true;
 	}
@@ -79,7 +77,7 @@ bool APlant::GrowPlant()
 
 bool APlant::PickupPlant()
 {
-	if (GrowState >= MinHarvestableState && GrowState <= MaxHarvestableState)
+	if (GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState)
 	{
 		return CollectItem();
 	}
