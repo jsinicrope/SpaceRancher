@@ -2,9 +2,9 @@
 
 #include "Interactables/Computer.h"
 #include "Components/WidgetComponent.h"
-#include "Widgets/UI/ComputerMonitor.h"
-#include "Inventory_System/ItemStruct.h"
 #include "Characters/Main Character/MyCharacter.h"
+#include "Widgets/UI/ComputerScreen.h"
+#include "Widgets/UI/ComputerBuying.h"
 
 AComputer::AComputer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -22,21 +22,11 @@ void AComputer::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	ScreenWidget = Cast<UComputerMonitor>(Screen->GetWidget());
-	ScreenWidget->SetPlayerCharacter(PlayerCharacter);
-	
-	SetSellingItemTiles();
-}
+	ScreenWidget = Cast<UComputerScreen>(Screen->GetWidget());
+	ScreenWidget->SetOwningComputer(this);
+	ScreenWidget->SetSellingTabActive();
 
-void AComputer::SetSellingItemTiles()
-{
-	for (int i = 0; i < SellableItems.Num(); i++)
-	{
-		if (SellableItems[i])
-		{
-			ScreenWidget->AddItemToList(Cast<AItemBase>(SellableItems[i]->ClassDefaultObject)->Main_Item_Structure);
-		}
-	}
+	ScreenWidget->BuyingTab->SetMaxStock(MaxBuyStock);
 }
 
 void AComputer::Tick(float DeltaTime)

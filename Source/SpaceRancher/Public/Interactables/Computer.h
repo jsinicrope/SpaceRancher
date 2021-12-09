@@ -23,8 +23,21 @@ protected:
 	class AMyCharacter* PlayerCharacter;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Selling")
+	UPROPERTY(EditAnywhere, BlueprintGetter=GetSellableItems, BlueprintReadWrite, Category="Selling")
 	TArray<TSubclassOf<AItemBase>> SellableItems;
+
+	UPROPERTY(EditAnywhere, BlueprintGetter=GetSellableItems, BlueprintReadWrite, Category="Buying")
+	TArray<TSubclassOf<AItemBase>> BuyableItems;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Buying")
+	int MaxBuyStock = 12;
+
+	UFUNCTION(BlueprintGetter)
+	TArray<TSubclassOf<AItemBase>> GetSellableItems() const	{ return SellableItems;}
+
+	UFUNCTION(BlueprintGetter)
+	TArray<TSubclassOf<AItemBase>> GetBuyableItems() const	{ return BuyableItems;}
+
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -34,8 +47,5 @@ protected:
 	class UWidgetComponent* Screen;
 
 	UPROPERTY(BlueprintReadWrite)
-	class UComputerMonitor* ScreenWidget;
-
-	UFUNCTION(BlueprintCallable)
-	void SetSellingItemTiles();
+	class UComputerScreen* ScreenWidget;
 };
