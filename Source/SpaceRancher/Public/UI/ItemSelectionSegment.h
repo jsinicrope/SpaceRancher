@@ -34,11 +34,14 @@ protected:
 	UFUNCTION()
 	inline void SetLocalAngle();
 
-	// Returns the absolute normalized distance to the menus center
+	// @Returns the absolute normalized distance to the menus center
 	UFUNCTION()
-	inline float DistToMenuCenter();
+	inline float DistToMenuCenter() const;
 
-	// Return true if the mouse is in interaction distance with this segment
+	UFUNCTION(BlueprintCallable)
+	FVector2D GetSegmentCenter();
+
+	// @Return true if the mouse is in interaction distance with this segment
 	UFUNCTION(BlueprintCallable)
 	bool IsMouseOver();
 
@@ -50,7 +53,7 @@ public:
 	float StartingPoint = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ExposeOnSpawn="true"))
-	float EndPoint = 0.2f;
+	float RelativeEnd = 0.2f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ExposeOnSpawn="true"))
 	float MinValue = 0;

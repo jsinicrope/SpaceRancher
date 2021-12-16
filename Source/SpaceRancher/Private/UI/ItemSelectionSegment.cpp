@@ -25,7 +25,7 @@ inline void UItemSelectionSegment::SetLocalAngle()
 	LocalAngle = 1 - (RotationY + 180) / 360.0f;
 }
 
-inline float UItemSelectionSegment::DistToMenuCenter()
+inline float UItemSelectionSegment::DistToMenuCenter() const
 {
 	float MouseX, MouseY;
 	GetWorld()->GetFirstPlayerController()->GetMousePosition(MouseX, MouseY);
@@ -35,6 +35,17 @@ inline float UItemSelectionSegment::DistToMenuCenter()
 	const float MouseDistToCenter = FVector2D::Distance(MousePosition, ViewportCenter);
 	
 	return MouseDistToCenter / ViewportCenter.Size();
+}
+
+FVector2D UItemSelectionSegment::GetSegmentCenter()
+{
+	const float OuterRadius = MaterialInstance->K2_GetScalarParameterValue(FName("OuterRadius"));
+	const float InnerRadius = MaterialInstance->K2_GetScalarParameterValue(FName("InnerRadius"));
+	const float RotateDegrees = -(StartingPoint + RelativeEnd / 2) * 2 * PI + PI;
+	const float VectorLength = (OuterRadius + InnerRadius) * 0.43f * GetDesiredSize().X;
+	
+	// Rotated vector point
+	return FVector2D(VectorLength * cos(RotateDegrees), VectorLength * sin(RotateDegrees));
 }
 
 bool UItemSelectionSegment::IsMouseOver()
@@ -52,7 +63,7 @@ bool UItemSelectionSegment::IsMouseOver()
 void UItemSelectionSegment::SetVariables(float Start, float End, float Min, float Max, FName SegmentName)
 {
 	StartingPoint = Start;
-	EndPoint = End;
+	RelativeEnd = End;
 	MinValue = Min;
 	MaxValue = Max;
 	Name = SegmentName;
