@@ -29,9 +29,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> InventorySlotWidgetClass;
 
-	UPROPERTY()
-	bool bWindowOpen = false;
-
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SetUpInventory();
 
@@ -49,6 +46,9 @@ public:
 
 	UFUNCTION()
 	bool SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot);
+
+	UFUNCTION(BlueprintGetter)
+	bool GetInventoryOpen();
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -74,6 +74,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCanvasPanelSlot* CanvasSlot = nullptr;
+
+	UPROPERTY()
+	bool bWindowOpen = false;
 
 	UPROPERTY()
 	class ACppPlayerController* PC;

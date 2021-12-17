@@ -5,6 +5,7 @@
 #include "Components/CanvasPanelSlot.h"
 #include "UI/WidgetDragOperation.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Inventory_System/InventoryWindow.h"
 
 void UCMainHUD::NativeOnInitialized()
 {
@@ -62,16 +63,20 @@ void UCMainHUD::SetInputWidgetMode(bool bWidgetFocus) const
 	{
 		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(PC);
 		PC->bShowMouseCursor = true;
+		PC->ResetIgnoreLookInput();
 		PC->SetIgnoreLookInput(true);
-		// PC->SetIgnoreMoveInput(true);
 	}
 	else
 	{
 		PC->bShowMouseCursor = false;
 		PC->SetIgnoreLookInput(false);
-		// PC->SetIgnoreMoveInput(false);
 		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PC);
 	}
+}
+
+int UCMainHUD::GetInventoryWidgetsOnScreenScreen()
+{
+	return InventoryWidgets.Num();
 }
 
 void UCMainHUD::RemoveInteractableWidgetFromCanvas(UWidget* Widget)

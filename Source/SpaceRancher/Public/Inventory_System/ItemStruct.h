@@ -24,10 +24,14 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsValidItem;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsSelectable;
+
 	FItem_Struct()
 	{
 		Name = FString("zzz");
 		Thumbnail = nullptr;
 		bIsValidItem = false;
+		bIsSelectable = false;
 	}
 };

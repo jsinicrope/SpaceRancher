@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Inventory_System/ItemStruct.h"
 #include "ItemSelectionHUD.generated.h"
 
 UCLASS()
@@ -22,9 +23,12 @@ protected:
 	TSubclassOf<class UItemSelectionSegment> SegmentClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FName> PiePieces;
+	TArray<FItem_Struct> PiePieces;
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void CreateStandardWidget();
+	void CreateStandardWidget(TArray<FItem_Struct> &Selectables);
+
+	UFUNCTION(BlueprintCallable)
+	FItem_Struct GetSelectedItem();
 };

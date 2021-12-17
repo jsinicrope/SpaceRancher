@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Inventory_System/ItemStruct.h"
 #include "HUDSetting.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
@@ -65,7 +66,7 @@ public:
 	class UUserWidget* WidgetToRemove;
 
 	UFUNCTION(BlueprintCallable)
-	bool OpenRadialMenu();
+	bool OpenRadialMenu(TArray<FItem_Struct> &Selectables);
 
 	UFUNCTION(BlueprintCallable)
 	void CloseRadialMenu();

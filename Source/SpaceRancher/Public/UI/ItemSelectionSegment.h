@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Inventory_System/ItemStruct.h"
 #include "ItemSelectionSegment.generated.h"
 
 UCLASS()
@@ -19,7 +20,10 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
 	class UButton* SelectionButton;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
+	class UImage* ItemImage;
+
+	UPROPERTY(BlueprintReadWrite)
 	UMaterialInstanceDynamic* MaterialInstance;
 	
 	UPROPERTY(BlueprintReadOnly)
@@ -30,6 +34,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin=0.0f, ClampMax=1.0f))
 	float MaxInteractionDistance = 0.43f;
+
+	UPROPERTY(BlueprintReadWrite, BlueprintGetter=GetItem, meta=(ExposeOnSpawn="true"))
+	FItem_Struct Item_Struct;
 
 	UFUNCTION()
 	inline void SetLocalAngle();
@@ -63,10 +70,20 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ExposeOnSpawn="true"))
 	FName Name;
+
+	// Whether the Segment is selected
+	UPROPERTY(BlueprintReadOnly)
+	bool bSelected;
+
+	UFUNCTION(BlueprintGetter)
+	FItem_Struct GetItem() const {return Item_Struct;}
 	
 	UFUNCTION()
 	void SetVariables(float Start, float End, float Min, float Max, FName SegmentName);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void CreateStyle();
+
+	UFUNCTION(BlueprintCallable)
+	void SetItem(const FItem_Struct &Item);
 };

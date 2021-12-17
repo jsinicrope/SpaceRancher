@@ -46,6 +46,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->RemoveWidgetFromViewport();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execGetSelectedItem)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FItem_Struct*)Z_Param__Result=P_THIS->GetSelectedItem();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMyCharacter::execCloseRadialMenu)
 	{
 		P_FINISH;
@@ -256,6 +263,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "GetInventoryComp", &AMyCharacter::execGetInventoryComp },
 			{ "GetMaxHealth", &AMyCharacter::execGetMaxHealth },
 			{ "GetMaxStamina", &AMyCharacter::execGetMaxStamina },
+			{ "GetSelectedItem", &AMyCharacter::execGetSelectedItem },
 			{ "GetStamina", &AMyCharacter::execGetStamina },
 			{ "KillPlayer", &AMyCharacter::execKillPlayer },
 			{ "LoadGame", &AMyCharacter::execLoadGame },
@@ -638,6 +646,39 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetMaxStamina_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics
+	{
+		struct MyCharacter_eventGetSelectedItem_Parms
+		{
+			FItem_Struct ReturnValue;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventGetSelectedItem_Parms, ReturnValue), Z_Construct_UScriptStruct_FItem_Struct, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::Function_MetaDataParams[] = {
+		{ "BlueprintGetter", "" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetSelectedItem", nullptr, nullptr, sizeof(MyCharacter_eventGetSelectedItem_Parms), Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_GetSelectedItem()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetSelectedItem_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1293,6 +1334,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static void NewProp_bItemSelectionOpen_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bItemSelectionOpen;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SelectedItem_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_SelectedItem;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DefaultMiniMapSize_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DefaultMiniMapSize;
@@ -1391,6 +1436,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_GetInventoryComp, "GetInventoryComp" }, // 3176147444
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxHealth, "GetMaxHealth" }, // 230594925
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxStamina, "GetMaxStamina" }, // 451992980
+		{ &Z_Construct_UFunction_AMyCharacter_GetSelectedItem, "GetSelectedItem" }, // 3900058430
 		{ &Z_Construct_UFunction_AMyCharacter_GetStamina, "GetStamina" }, // 950084552
 		{ &Z_Construct_UFunction_AMyCharacter_KillPlayer, "KillPlayer" }, // 286801584
 		{ &Z_Construct_UFunction_AMyCharacter_LoadGame, "LoadGame" }, // 472659649
@@ -1668,6 +1714,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen = { "bItemSelectionOpen", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_SetBit, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_SelectedItem_MetaData[] = {
+		{ "Category", "ItemSelection" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_SelectedItem = { "SelectedItem", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, SelectedItem), Z_Construct_UScriptStruct_FItem_Struct, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_SelectedItem_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_SelectedItem_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultMiniMapSize_MetaData[] = {
 		{ "Category", "MiniMap" },
 		{ "Comment", "// MiniMap\n" },
@@ -1850,6 +1903,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_RespawnViewDirection,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bInventoryOpen,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bItemSelectionOpen,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_SelectedItem,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultMiniMapSize,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_DefaultZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomLevel,
@@ -1898,7 +1952,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 3013548485);
+	IMPLEMENT_CLASS(AMyCharacter, 4041303411);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

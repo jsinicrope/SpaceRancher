@@ -54,6 +54,9 @@ public:
 	UFUNCTION()
 	void SetInputWidgetMode(bool bWidgetFocus) const;
 
+	UFUNCTION(BlueprintCallable)
+	int GetInventoryWidgetsOnScreenScreen();
+
 	UFUNCTION()
 	void RemoveInteractableWidgetFromCanvas(UWidget* Widget);
 

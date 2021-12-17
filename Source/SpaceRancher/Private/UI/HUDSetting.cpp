@@ -64,7 +64,7 @@ void UHUDSetting::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-bool UHUDSetting::OpenRadialMenu()
+bool UHUDSetting::OpenRadialMenu(TArray<FItem_Struct> &Selectables)
 {
 	if (MainHUD->GetInteractableWidgets() < 1)
 	{
@@ -72,7 +72,7 @@ bool UHUDSetting::OpenRadialMenu()
 		MainHUD->SetInputWidgetMode(true);
 		RadialMenu->AddToViewport();
 		
-		RadialMenu->CreateStandardWidget();
+		RadialMenu->CreateStandardWidget(Selectables);
 
 		int ViewportX, ViewportY;
 		PlayerController->GetViewportSize(ViewportX, ViewportY);

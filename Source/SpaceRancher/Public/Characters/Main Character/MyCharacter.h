@@ -120,6 +120,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="ItemSelection")
 	bool bItemSelectionOpen = false;
 
+	UPROPERTY(BlueprintReadOnly, Category="ItemSelection")
+	FItem_Struct SelectedItem;
+
 	// MiniMap
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	float DefaultMiniMapSize = 1024.0f;
@@ -271,6 +274,9 @@ public:
 	// Closes the RadialMenu
 	UFUNCTION(BlueprintCallable, Category="ItemSelection")
 	void CloseRadialMenu();
+
+	UFUNCTION(BlueprintGetter)
+	FItem_Struct GetSelectedItem() const	{return SelectedItem;}
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();

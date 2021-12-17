@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryTrashSlot.h"
 #include "InventoryWindow.h"
 #include "Components/ActorComponent.h"
 #include "Inventory_System/ItemBase.h"
@@ -47,10 +46,6 @@ public:
 	// The represented name of the inventory
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	FText InventoryName;
-
-	// If the inventory is open or not
-	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
-	bool bInventoryOpen = false;
 
 	// true if Inventory should be sorted automatically, false if sorting is handled by a widget button
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
@@ -115,6 +110,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetNumMultipleItems(FString ItemName);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FItem_Struct> GetUniqueSelectables();
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
@@ -125,6 +123,10 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryWindow, AdvancedDisplay, Category = "Inventory")
 	class UInventoryWindow* InventoryWindow;
+
+	// If the inventory is open or not
+	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
+	bool bInventoryOpen = false;
 
 	UPROPERTY()
 	TArray<FItem_Struct> Items;

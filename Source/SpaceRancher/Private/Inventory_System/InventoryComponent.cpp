@@ -143,7 +143,7 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 void UInventoryComponent::ToggleInventory()
 {
 	ensure(InventoryWindow);
-	bInventoryOpen = InventoryWindow->bWindowOpen;
+	bInventoryOpen = InventoryWindow->GetInventoryOpen();
 	if (!bInventoryOpen || InventoryWindow->GetParent() == nullptr)
 	{
 		if (bAutoSort)
@@ -157,7 +157,7 @@ void UInventoryComponent::ToggleInventory()
 	{
 		InventoryWindow->CloseWindow();
 	}
-	bInventoryOpen = InventoryWindow->bWindowOpen;
+	bInventoryOpen = InventoryWindow->GetInventoryOpen();
 }
 
 void UInventoryComponent::ToggleInventoryWithPlayerInventory()
@@ -165,14 +165,18 @@ void UInventoryComponent::ToggleInventoryWithPlayerInventory()
 	Player = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	if (Player->GetInventoryComp() != this)
 	{
-		Player->ToggleInventory();
-		ToggleInventory();
+		if (GetInventoryOpen() && Player->GetInventoryComp()->GetInventoryOpen() ||
+			!GetInventoryOpen() && !Player->GetInventoryComp()->GetInventoryOpen())
+		{
+			Player->ToggleInventory();
+			ToggleInventory();
+		}
 	}
 }
 
 bool UInventoryComponent::GetInventoryOpen()
 {
-	bInventoryOpen = InventoryWindow->bWindowOpen;
+	bInventoryOpen = InventoryWindow->GetInventoryOpen();
 	return bInventoryOpen;
 }
 
@@ -226,4 +230,34 @@ int UInventoryComponent::GetNumMultipleItems(FString ItemName)
 		}
 	}
 	return Amount;
+}
+
+TArray<FItem_Struct> UInventoryComponent::GetUniqueSelectables()
+{
+	TArray<FItem_Struct> Uniques;
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
+
+			if (Uniques.Num() <= 0 && Item.bIsSelectable)
+			{
+				Uniques.Add(Item);
+			}
+			else
+			{
+				for (int k = 0; k < Uniques.Num(); k++)
+				{
+					if (!Uniques[k].Name.Equals(Item.Name) && Item.bIsSelectable)
+					{
+						Uniques.Add(Item);
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	return Uniques;
 }

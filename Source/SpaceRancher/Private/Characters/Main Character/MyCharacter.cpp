@@ -16,6 +16,7 @@
 #include "UI/HUDSetting.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/CMainHUD.h"
+#include "UI/ItemSelectionHUD.h"
 
 AMyCharacter::AMyCharacter()
 {
@@ -207,7 +208,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AMyCharacter::PlayerInteract()
 {
 	bInventoryOpen = InventoryComp->GetInventoryOpen();
-	if (!bInventoryOpen)
+	if (!bInventoryOpen && HUDController->MainHUD->GetInventoryWidgetsOnScreenScreen() <= 0)
 	{
 		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 		TraceParams.bTraceComplex = true;
@@ -226,22 +227,14 @@ void AMyCharacter::PlayerInteract()
 		{
 			auto Actor = OutHit.GetActor();
 
-			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor hit"));
-
-			//DrawDebugLine(GetWorld(), Start, OutHit.ImpactPoint, FColor::Red, false, 1.0f, false, 12.3333f);
-
 			if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor Implements Interface"));
-				//Cast<IInteractInterface>(Actor)->Interact();	//Use this to call C++ only Implementation
 				IInteractInterface::Execute_Interact(Actor);
 			}
 		}
 
 		else
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Actor not hit"));
-
 			DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 10.0f);
 		}
 	}
@@ -429,7 +422,7 @@ FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
 void AMyCharacter::ToggleInventory()
 {
 	InventoryComp->ToggleInventory();
-	bInventoryOpen = InventoryComp->bInventoryOpen;
+	bInventoryOpen = InventoryComp->GetInventoryOpen();
 	if (!bInventoryOpen)
 	{
 		HUDController->MainHUD->RemoveAllInventoryWidgets();
@@ -440,7 +433,8 @@ void AMyCharacter::OpenRadialMenu()
 {
 	if (!bItemSelectionOpen)
 	{
-		HUDController->OpenRadialMenu();
+		TArray<FItem_Struct> Selectables = InventoryComp->GetUniqueSelectables();
+		HUDController->OpenRadialMenu(Selectables);
 		bItemSelectionOpen = true;
 	}
 }
@@ -450,7 +444,13 @@ void AMyCharacter::CloseRadialMenu()
 	if (bItemSelectionOpen)
 	{
 		HUDController->CloseRadialMenu();
+		const FItem_Struct ActiveItem = HUDController->RadialMenu->GetSelectedItem();
+		SelectedItem = ActiveItem;
 		bItemSelectionOpen = false;
+		if (SelectedItem.bIsSelectable)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, FString("Selected Item: ") + SelectedItem.Name);
+		}
 	}
 }
 

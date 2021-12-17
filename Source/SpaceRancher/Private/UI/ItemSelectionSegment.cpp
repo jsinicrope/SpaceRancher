@@ -3,6 +3,7 @@
 #include "UI/ItemSelectionSegment.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/Button.h"
+#include "Components/Image.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UItemSelectionSegment::NativeConstruct()
@@ -13,6 +14,9 @@ void UItemSelectionSegment::NativeConstruct()
 void UItemSelectionSegment::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	const FVector2D SegmentCenter = GetSegmentCenter();
+	ItemImage->SetRenderTranslation(SegmentCenter);
 }
 
 inline void UItemSelectionSegment::SetLocalAngle()
@@ -50,14 +54,17 @@ FVector2D UItemSelectionSegment::GetSegmentCenter()
 
 bool UItemSelectionSegment::IsMouseOver()
 {
+	bSelected = false;
 	SetLocalAngle();
 	const float Dist = DistToMenuCenter();
-	if (MaxInteractionDistance >= Dist && Dist >= MinInteractionDistance &&
-		MaxValue - (StartingPoint - MinValue) >= LocalAngle && LocalAngle >= StartingPoint)
+	if (MaxInteractionDistance >= Dist &&
+		Dist >= MinInteractionDistance &&
+		MaxValue - (StartingPoint - MinValue) >= LocalAngle &&
+		LocalAngle >= StartingPoint)
 	{
-		return true;
+		bSelected = true;
 	}
-	return false;
+	return bSelected;
 }
 
 void UItemSelectionSegment::SetVariables(float Start, float End, float Min, float Max, FName SegmentName)
@@ -67,6 +74,12 @@ void UItemSelectionSegment::SetVariables(float Start, float End, float Min, floa
 	MinValue = Min;
 	MaxValue = Max;
 	Name = SegmentName;
+}
+
+void UItemSelectionSegment::SetItem(const FItem_Struct &Item)
+{
+	Item_Struct = Item;
+	ItemImage->SetBrushFromTexture(Item_Struct.Thumbnail);
 }
 
 void UItemSelectionSegment::CreateStyle_Implementation()	{ }

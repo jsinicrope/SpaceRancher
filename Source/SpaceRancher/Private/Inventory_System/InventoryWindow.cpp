@@ -143,6 +143,7 @@ void UInventoryWindow::CloseInventory()
 	Inventory->WidgetPosition = CanvasSlot->GetPosition();
 	PlayerHUD->MainHUD->RemoveInventoryWidgetFromCanvas(this);
 	bWindowOpen = false;
+	bWindowOpen = GetInventoryOpen();
 }
 
 // ReSharper disable once CppMemberFunctionMayBeConst
@@ -182,6 +183,12 @@ bool UInventoryWindow::SwitchSlots(const UInventorySlotWidget* FirstSlot, const 
 	}
 	UpdateInventory();
 	return true;
+}
+
+bool UInventoryWindow::GetInventoryOpen()
+{
+	bWindowOpen = this->GetParent() ? true : false;
+	return bWindowOpen;
 }
 
 void UInventoryWindow::SetUpInventory()
