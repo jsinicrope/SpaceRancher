@@ -19,6 +19,9 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UTexture2D* Thumbnail;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UClass* ItemClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Details;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -29,8 +32,9 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 
 	FItem_Struct()
 	{
-		Name = FString("zzz");
+		Name = FString("");
 		Thumbnail = nullptr;
+		ItemClass = nullptr;
 		bIsValidItem = false;
 		bIsSelectable = false;
 	}

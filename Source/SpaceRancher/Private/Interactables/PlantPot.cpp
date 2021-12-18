@@ -5,14 +5,13 @@
 
 APlantPot::APlantPot()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	if (Plant)
+	if (DefaultPlant)
 	{
-		MainPlant = Cast<APlant>(Plant);
-		Width -= MainPlant->BottomStemThickness;
-		Length -= MainPlant->BottomStemThickness;
+		Plant = Cast<APlant>(DefaultPlant->GetDefaultObject());
+		Width -= Plant->BottomStemThickness;
+		Length -= Plant->BottomStemThickness;
 	}
 }
 
@@ -33,6 +32,16 @@ void APlantPot::Interact_Implementation()
 	DestroyAllPlants();
 }
 
+bool APlantPot::ItemInteract_Implementation(FItem_Struct &EquippedItem)
+{
+	APlant* ItemPlant = Cast<APlant>(EquippedItem.ItemClass->GetDefaultObject());
+	if (ItemPlant)
+	{
+		return SetNewPlant(ItemPlant, true, PlantsToSpawn);
+	}
+	return false;
+}
+
 void APlantPot::LoadActor_Implementation()
 {
 	
@@ -40,13 +49,13 @@ void APlantPot::LoadActor_Implementation()
 
 FVector APlantPot::GetRandomPlantSpawnPoint()
 {
-	float fMinX = GetActorLocation()[0] + Width;
-	float fMaxX = GetActorLocation()[0] - Width;
-	float X = FMath::FRandRange(fMinX, fMaxX);
+	const float FMinX = GetActorLocation()[0] + Width;
+	const float FMaxX = GetActorLocation()[0] - Width;
+	const float X = FMath::FRandRange(FMinX, FMaxX);
 
-	float fMinY = GetActorLocation()[1] + Length;
-	float fMaxY = GetActorLocation()[1] - Length;
-	float Y = FMath::FRandRange(fMinY, fMaxY);
+	const float FMinY = GetActorLocation()[1] + Length;
+	const float FMaxY = GetActorLocation()[1] - Length;
+	const float Y = FMath::FRandRange(FMinY, FMaxY);
 
 	FVector2D Position2D = FVector2D(X, Y);
 
@@ -55,7 +64,7 @@ FVector APlantPot::GetRandomPlantSpawnPoint()
 
 	for (int j = 0; j < PlantedPlants.Num(); j++)
 	{
-		float MinDistance = Cast<APlant>(PlantedPlants[j])->BottomStemThickness + 5.0f;
+		const float MinDistance = Cast<APlant>(PlantedPlants[j])->BottomStemThickness + 5.0f;
 		if (NewPosition.Equals(PlantedPlants[j]->GetActorLocation(), MinDistance))
 		{
 			NewPosition = GetRandomPlantSpawnPoint();
@@ -90,30 +99,49 @@ void APlantPot::Spawn()
 
 void APlantPot::SpawnPlants(int AmountOfPlants)
 {
-	if (Plant)
+	if (DefaultPlant || Plant)
 	{
-		DestroyAllPlants();
-		
-		FActorSpawnParameters SpawnInfo;
-		SpawnInfo.Owner = this;
-		
-		if (SpawnState == EPlantSpawnState::Random)
+		APlant* TempPlant = nullptr;
+		if (DefaultPlant)
 		{
-			for (int i = 0; i < AmountOfPlants; i++)
-			{
-				AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, GetRandomPlantSpawnPoint(), GetActorRotation(), SpawnInfo);
-				PlantedPlants.Add(NewPlant);
-			}
+			TempPlant = Cast<APlant>(DefaultPlant->GetDefaultObject());
 		}
 		
-		else
+		if (TempPlant || Plant)
 		{
-			RasteredSpawnPoints.Empty();
-			GetRasteredPlantSpawnPoints();
-			for (int i = 0; i < RasteredSpawnPoints.Num(); i++)
+			if (!Plant)
 			{
-				AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant, RasteredSpawnPoints[i], GetActorRotation(), SpawnInfo);
-				PlantedPlants.Add(NewPlant);
+				DestroyAllPlants();
+				Plant = TempPlant;
+			}
+			else
+			{
+				TempPlant = Plant;
+				DestroyAllPlants();
+				Plant = TempPlant;
+			}
+		
+			FActorSpawnParameters SpawnInfo;
+			SpawnInfo.Owner = this;
+		
+			if (SpawnState == EPlantSpawnState::Random)
+			{
+				for (int i = 0; i < AmountOfPlants; i++)
+				{
+					AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant->GetClass(), GetRandomPlantSpawnPoint(), GetActorRotation(), SpawnInfo);
+					PlantedPlants.Add(NewPlant);
+				}
+			}
+		
+			else
+			{
+				RasteredSpawnPoints.Empty();
+				GetRasteredPlantSpawnPoints();
+				for (int i = 0; i < RasteredSpawnPoints.Num(); i++)
+				{
+					AActor* NewPlant = GetWorld()->SpawnActor<AActor>(Plant->GetClass(), RasteredSpawnPoints[i], GetActorRotation(), SpawnInfo);
+					PlantedPlants.Add(NewPlant);
+				}
 			}
 		}
 	}
@@ -126,18 +154,17 @@ void APlantPot::DestroyAllPlants()
 		Cast<APlant>(PlantedPlants[i])->CollectItem(false);
 	}
 	PlantedPlants.Empty();
-	MainPlant = nullptr;
+	Plant = nullptr;
 }
 
-bool APlantPot::SetNewPlant(class TSubclassOf<APlant> NewPlant, bool bSpawnPlants, int AmountOfPlants)
+bool APlantPot::SetNewPlant(class APlant* NewPlant, bool bSpawnPlants, int AmountOfPlants)
 {
-	if (MainPlant == nullptr)
+	if (!Plant)
 	{
 		Plant = NewPlant;
-		MainPlant = Cast<APlant>(Plant);
-		Width -= MainPlant->BottomStemThickness;
-		Length -= MainPlant->BottomStemThickness;
-
+		Width -= Plant->BottomStemThickness;
+		Length -= Plant->BottomStemThickness;
+		
 		if (bSpawnPlants)
 		{
 			SpawnPlants(AmountOfPlants);

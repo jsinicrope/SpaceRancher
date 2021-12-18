@@ -26,6 +26,7 @@ public:
 	APlantPot();
 
 	virtual void Interact_Implementation() override;
+	virtual bool ItemInteract_Implementation(FItem_Struct &EquippedItem) override;
 	virtual void LoadActor_Implementation() override;
 
 protected:
@@ -76,14 +77,14 @@ public:
 	void DestroyAllPlants();
 
 	UFUNCTION(BlueprintCallable, Category = "Planter|Planting")
-	bool SetNewPlant(class TSubclassOf<APlant> NewPlant, bool bSpawnPlants = false, int AmountOfPlants = 20);
+	bool SetNewPlant(class APlant* NewPlant, bool bSpawnPlants = false, int AmountOfPlants = 20);
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content", meta=(DisplayThumbnail="true"))
-	class TSubclassOf<APlant> Plant;
+	class TSubclassOf<APlant> DefaultPlant;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")
-	class APlant* MainPlant;
+	class APlant* Plant;
 
 	//Cast property to used Plant Class for use
 	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")

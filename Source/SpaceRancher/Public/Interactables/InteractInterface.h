@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Inventory_System/ItemStruct.h"
 #include "UObject/Interface.h"
 #include "InteractInterface.generated.h"
 
@@ -22,4 +23,7 @@ class SPACERANCHER_API IInteractInterface
 public:
 	UFUNCTION(BlueprintNativeEvent)
 	void Interact();
+
+	UFUNCTION(BlueprintNativeEvent)
+	bool ItemInteract(FItem_Struct &EquippedItem);
 };

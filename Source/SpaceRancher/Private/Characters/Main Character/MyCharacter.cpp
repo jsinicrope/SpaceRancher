@@ -229,7 +229,17 @@ void AMyCharacter::PlayerInteract()
 
 			if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 			{
-				IInteractInterface::Execute_Interact(Actor);
+				if (SelectedItem.bIsValidItem)
+				{
+					if (IInteractInterface::Execute_ItemInteract(Actor, SelectedItem))
+					{
+						RemoveItemFromInventory(SelectedItem);
+					}
+				}
+				else
+				{
+					IInteractInterface::Execute_Interact(Actor);
+				}
 			}
 		}
 
