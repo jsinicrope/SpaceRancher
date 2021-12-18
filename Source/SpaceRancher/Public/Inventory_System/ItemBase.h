@@ -20,12 +20,17 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Interact_Implementation() override;
+	virtual bool ItemInteract_Implementation(FItem_Struct& EquippedItem) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem_Struct Main_Item_Structure;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsCollectible = false;
+	bool bIsCollectible = true;
+
+	// A required item to harvest the plant. Empty if none is needed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
+	FName RequiredItem = FName("");
 
 	UFUNCTION(BlueprintCallable)
 	bool CollectItem(bool bAddToInventory = true);

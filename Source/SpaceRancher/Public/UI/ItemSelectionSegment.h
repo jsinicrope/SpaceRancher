@@ -23,6 +23,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
 	class UImage* ItemImage;
 
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* ItemName;
+
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
+	class UVerticalBox* DisplayVerticalBox;
+
 	UPROPERTY(BlueprintReadWrite)
 	UMaterialInstanceDynamic* MaterialInstance;
 	

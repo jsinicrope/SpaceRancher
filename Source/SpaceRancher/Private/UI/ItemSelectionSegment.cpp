@@ -2,8 +2,9 @@
 
 #include "UI/ItemSelectionSegment.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
-#include "Components/Button.h"
 #include "Components/Image.h"
+#include "Components/TextBlock.h"
+#include "Components/VerticalBox.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UItemSelectionSegment::NativeConstruct()
@@ -16,7 +17,7 @@ void UItemSelectionSegment::NativeTick(const FGeometry& MyGeometry, float InDelt
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
 	const FVector2D SegmentCenter = GetSegmentCenter();
-	ItemImage->SetRenderTranslation(SegmentCenter);
+	DisplayVerticalBox->SetRenderTranslation(SegmentCenter);
 }
 
 inline void UItemSelectionSegment::SetLocalAngle()
@@ -80,6 +81,7 @@ void UItemSelectionSegment::SetItem(const FItem_Struct &Item)
 {
 	Item_Struct = Item;
 	ItemImage->SetBrushFromTexture(Item_Struct.Thumbnail);
+	ItemName->SetText(FText::FromString(Item_Struct.Name));
 }
 
 void UItemSelectionSegment::CreateStyle_Implementation()	{ }

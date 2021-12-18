@@ -22,11 +22,20 @@ void AItemBase::Interact_Implementation()
 {
 	if (!CollectItem(true))
 	{
-		
 		const FString ObjectName = GetName();
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("No interaction implemented for interacted item: ") + ObjectName);
 		UE_LOG(LogTemp, Warning, TEXT("No interaction implemented for interacted item: %s"), *ObjectName);
 	}
+}
+
+// Default function returns true to signal the item was used up.
+bool AItemBase::ItemInteract_Implementation(FItem_Struct& EquippedItem)
+{
+	if (EquippedItem.Name.Equals(RequiredItem.ToString()) || RequiredItem.IsEqual(FName("")))
+	{
+		return true;
+	}
+	return false;
 }
 
 bool AItemBase::CollectItem(bool bAddToInventory)

@@ -13,7 +13,7 @@
 			"SpawnerComponent.cpp.obj",
 			"Computer.cpp.obj",
 			"FoodCooker.cpp.obj",
-			"Plant.cpp.obj",
+			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
 			"InventoryComponent.cpp.obj",
@@ -26,7 +26,6 @@
 			"HealthAndStaminaBar.cpp.obj",
 			"HUDSetting.cpp.obj",
 			"ItemSelectionHUD.cpp.obj",
-			"ItemSelectionSegment.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
 			"ItemStructTileView.cpp.obj",
 			"ComputerBuying.cpp.obj",
@@ -43,8 +42,9 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"PlantPot.cpp.obj",
-			"Item_Base.cpp.obj"
+			"Plant.cpp.obj",
+			"Item_Base.cpp.obj",
+			"ItemSelectionSegment.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
