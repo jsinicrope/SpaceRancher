@@ -26,7 +26,7 @@ public:
 	APlantPot();
 
 	virtual void Interact_Implementation() override;
-	virtual bool ItemInteract_Implementation(FItem_Struct &EquippedItem) override;
+	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
 	virtual void LoadActor_Implementation() override;
 
 protected:

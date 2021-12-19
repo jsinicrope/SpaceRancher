@@ -54,7 +54,7 @@ void UInventoryComponent::BeginPlay()
 	}
 }
 
-bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
+bool UInventoryComponent::AddItem(const FItem_Struct &Item_Struct, int Row, int Column)
 {
 	for (int i = Column; i < Inventory_Array_Columns.Num(); i++)
 	{
@@ -74,7 +74,7 @@ bool UInventoryComponent::AddItem(FItem_Struct Item_Struct, int Row, int Column)
 	return false;
 }
 
-bool UInventoryComponent::AddIndexItem(FItem_Struct Item_Struct, int Index)
+bool UInventoryComponent::AddItemByIndex(const FItem_Struct &Item_Struct, int Index)
 {
 	const int Row = Index % Columns;
 	const int Column = Index / Columns;
@@ -102,7 +102,7 @@ FItem_Struct UInventoryComponent::RemoveItemFromPosition(const int Index)
 	return RemoveItemFromPosition(Row, Column);
 }
 
-FItem_Struct UInventoryComponent::RemoveItem(FItem_Struct Item)
+FItem_Struct UInventoryComponent::RemoveItem(const FItem_Struct &Item)
 {
 	FItem_Struct EmptyItem;
 	for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)

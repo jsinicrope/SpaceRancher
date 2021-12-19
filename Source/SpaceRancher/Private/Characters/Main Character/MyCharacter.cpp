@@ -393,7 +393,7 @@ void AMyCharacter::PlayerStopSprint()
 	bSprinting = false;
 }
 
-bool AMyCharacter::AddItemToInventory(FItem_Struct Item_Struct)
+bool AMyCharacter::AddItemToInventory(FItem_Struct &Item_Struct)
 {
 	const bool bAddSuccessful = InventoryComp->AddItem(Item_Struct);
 
@@ -417,7 +417,7 @@ FItem_Struct AMyCharacter::RemoveItemFromInventoryFromPosition(int column, int r
 	return Item;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct Item)
+FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct &Item)
 {
 	FItem_Struct RemovedItem = InventoryComp->RemoveItem(Item);
 	return RemovedItem;
@@ -454,14 +454,25 @@ void AMyCharacter::CloseRadialMenu()
 	if (bItemSelectionOpen)
 	{
 		HUDController->CloseRadialMenu();
-		const FItem_Struct ActiveItem = HUDController->RadialMenu->GetSelectedItem();
-		SelectedItem = ActiveItem;
-		bItemSelectionOpen = false;
-		if (SelectedItem.bIsSelectable)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, FString("Selected Item: ") + SelectedItem.Name);
-		}
+		UpdateSelectedItem();
 	}
+}
+
+void AMyCharacter::UpdateSelectedItem()
+{
+	const FItem_Struct ActiveItem = HUDController->RadialMenu->GetSelectedItem();
+	SelectedItem = ActiveItem;
+	bItemSelectionOpen = false;
+	if (SelectedItem.bIsSelectable)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, FString("Selected Item: ") + SelectedItem.Name);
+	}
+
+	OnSelectedItemChanged(SelectedItem);
+}
+
+void AMyCharacter::OnSelectedItemChanged_Implementation(FItem_Struct &Item)
+{
 }
 
 void AMyCharacter::RemoveWidgetFromViewport()

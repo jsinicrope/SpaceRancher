@@ -25,5 +25,5 @@ public:
 	void Interact();
 
 	UFUNCTION(BlueprintNativeEvent)
-	bool ItemInteract(FItem_Struct &EquippedItem);
+	bool ItemInteract(FItem_Struct EquippedItem);
 };

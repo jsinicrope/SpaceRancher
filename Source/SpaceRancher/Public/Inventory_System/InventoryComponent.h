@@ -65,9 +65,9 @@ public:
 	/** Overloaded function
 	 * Add Item to the inventory
 	 * returns true if successful, else false */
-	bool AddItem(FItem_Struct Item_Struct, int Row = 0, int Column = 0);
+	bool AddItem(const FItem_Struct &Item_Struct, int Row = 0, int Column = 0);
 
-	bool AddIndexItem(FItem_Struct Item_Struct, int Index);
+	bool AddItemByIndex(const FItem_Struct &Item_Struct, int Index);
 
 	/* Add Item to the inventory
 	 * returns true if successful, else false */
@@ -83,7 +83,7 @@ public:
 
 	// Returns and removes first item that matches the given item
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItem(FItem_Struct Item);
+	FItem_Struct RemoveItem(const FItem_Struct &Item);
 
 	// Returns and removes first item that matches the given item name
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

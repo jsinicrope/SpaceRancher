@@ -187,9 +187,16 @@ protected:
 	// Mini Map
 	UPROPERTY(BlueprintReadOnly, Category="MiniMap")
 	class ASceneCapture2D* MiniMapCapture;
+
+	// Functions
+	UFUNCTION()
+	void UpdateSelectedItem();
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void OnSelectedItemChanged(FItem_Struct &Item);
 	
 public:
-	//Functions
+	// Functions
 	UFUNCTION(BlueprintGetter, Category="Health")
 	float GetHealth() const {return Health;}
 
@@ -252,13 +259,13 @@ public:
 	void LoadPlayerCharacter();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItemToInventory(FItem_Struct Item_Struct);
+	bool AddItemToInventory(FItem_Struct &Item_Struct);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromInventoryFromPosition(int column, int row);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventory(FItem_Struct Item);
+	FItem_Struct RemoveItemFromInventory(FItem_Struct &Item);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemFromInventoryByName(FString ItemName);

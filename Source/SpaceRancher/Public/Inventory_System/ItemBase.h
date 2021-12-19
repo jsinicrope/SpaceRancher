@@ -20,7 +20,7 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Interact_Implementation() override;
-	virtual bool ItemInteract_Implementation(FItem_Struct& EquippedItem) override;
+	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem_Struct Main_Item_Structure;

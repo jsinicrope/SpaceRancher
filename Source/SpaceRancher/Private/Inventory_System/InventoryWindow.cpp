@@ -101,7 +101,7 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 				{
 					if (!Inventory->AddItem(Item))
 					{
-						InventoryWindow->Inventory->AddIndexItem(Item, i);
+						InventoryWindow->Inventory->AddItemByIndex(Item, i);
 						break;
 					}
 				}

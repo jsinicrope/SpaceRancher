@@ -18,6 +18,7 @@ class UInventoryComponent;
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_SPARSE_DATA
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_RPC_WRAPPERS \
+	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
@@ -48,10 +49,13 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execGetMaxStamina); \
 	DECLARE_FUNCTION(execGetStamina); \
 	DECLARE_FUNCTION(execGetMaxHealth); \
-	DECLARE_FUNCTION(execGetHealth);
+	DECLARE_FUNCTION(execGetHealth); \
+	DECLARE_FUNCTION(execOnSelectedItemChanged); \
+	DECLARE_FUNCTION(execUpdateSelectedItem);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
@@ -82,9 +86,19 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execGetMaxStamina); \
 	DECLARE_FUNCTION(execGetStamina); \
 	DECLARE_FUNCTION(execGetMaxHealth); \
-	DECLARE_FUNCTION(execGetHealth);
+	DECLARE_FUNCTION(execGetHealth); \
+	DECLARE_FUNCTION(execOnSelectedItemChanged); \
+	DECLARE_FUNCTION(execUpdateSelectedItem);
 
 
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_EVENT_PARMS \
+	struct MyCharacter_eventOnSelectedItemChanged_Parms \
+	{ \
+		FItem_Struct Item; \
+	};
+
+
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_CALLBACK_WRAPPERS
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
@@ -180,13 +194,17 @@ public: \
 	FORCEINLINE static uint32 __PPO__MiniMapCapture() { return STRUCT_OFFSET(AMyCharacter, MiniMapCapture); }
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_PROLOG
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_PROLOG \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_EVENT_PARMS
+
+
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_PRIVATE_PROPERTY_OFFSET \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_SPARSE_DATA \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_RPC_WRAPPERS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_CALLBACK_WRAPPERS \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_INCLASS \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_STANDARD_CONSTRUCTORS \
 public: \
@@ -199,6 +217,7 @@ public: \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_PRIVATE_PROPERTY_OFFSET \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_SPARSE_DATA \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_CALLBACK_WRAPPERS \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_INCLASS_NO_PURE_DECLS \
 	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_18_ENHANCED_CONSTRUCTORS \
 private: \

@@ -6,6 +6,7 @@
 		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControlExtension\\RiderGameControlExtension.Build.cs",
 		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
 		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderLoggingExtension\\RiderLoggingExtension.Build.cs",
+		"E:\\SpaceRancher\\Plugins\\Developer\\RiderLink\\Source\\RiderShaderInfoDump\\RiderShaderInfoDump.Build.cs",
 		"E:\\SpaceRancher\\Source\\SpaceRancher.Target.cs",
 		"E:\\SpaceRancher\\Source\\SpaceRancherEditor.Target.cs"
 	],
