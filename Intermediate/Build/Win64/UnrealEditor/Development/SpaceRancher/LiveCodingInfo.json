@@ -17,10 +17,11 @@
 			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
+			"InventoryComponent.cpp.obj",
 			"InventorySlotWidget.cpp.obj",
 			"InventoryTrashSlot.cpp.obj",
+			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
-			"Item_Base.cpp.obj",
 			"Clock.cpp.obj",
 			"CMainHUD.cpp.obj",
 			"HealthAndStaminaBar.cpp.obj",
@@ -43,8 +44,7 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"InventoryComponent.cpp.obj",
-			"InventoryWindow.cpp.obj"
+			"Item_Base.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",

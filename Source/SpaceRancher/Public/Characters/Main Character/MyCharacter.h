@@ -10,8 +10,6 @@
 #include "Engine/EngineTypes.h"
 #include "MyCharacter.generated.h"
 
-class UCharacterMovementComponent;
-
 UCLASS(HideCategories=("Actor Tick"))
 class SPACERANCHER_API AMyCharacter : public ACharacter
 {
@@ -141,14 +139,14 @@ protected:
 	float ZoomSize = 512.0f;
 
 	UPROPERTY()
-	class UUserWidget* WidgetToRemove;
+	UUserWidget* WidgetToRemove;
 
 	UPROPERTY(BlueprintReadOnly)
 	UMainGameInstance* GameInstance;
 
 	//Variables hidden in Editor
 	UPROPERTY(BlueprintReadOnly)
-	class ACppPlayerController* PC;
+	ACppPlayerController* PC;
 	
 	UPROPERTY(SaveGame)
 	FTimerHandle TimerHandler;
@@ -167,7 +165,7 @@ protected:
 	
 	// Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetInventoryComp, Category="Inventory")
-	class UInventoryComponent* InventoryComp;
+	UInventoryComponent* InventoryComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetInteractionComponent* WidgetInteractionComponent;
@@ -179,10 +177,10 @@ protected:
 	class USpringArmComponent* SpringArm;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
-	class UChildActorComponent* MiniMapCamera;
+	UChildActorComponent* MiniMapCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
-	class UHUDSetting* HUDController;
+	UHUDSetting* HUDController;
 
 	// Mini Map
 	UPROPERTY(BlueprintReadOnly, Category="MiniMap")
@@ -213,7 +211,7 @@ public:
 	UInventoryComponent* GetInventoryComp() const {return InventoryComp;}
 
 	UFUNCTION(BlueprintCallable, Category="HUD")
-	class UHUDSetting* GetHUDController() const {return HUDController;}
+	UHUDSetting* GetHUDController() const {return HUDController;}
 	
 	// Zoom in or out of the MiniMap
 	UFUNCTION(BlueprintCallable, Category="MiniMap")
