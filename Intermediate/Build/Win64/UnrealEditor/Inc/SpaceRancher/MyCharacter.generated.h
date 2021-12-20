@@ -20,6 +20,8 @@ class UInventoryComponent;
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_SPARSE_DATA
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS \
 	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
+	virtual void PrimaryActionReleased_Implementation(); \
+	virtual void PrimaryActionPressed_Implementation(); \
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
@@ -55,11 +57,15 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execGetHealth); \
 	DECLARE_FUNCTION(execOnSelectedItemChanged); \
 	DECLARE_FUNCTION(execUnEquipItem); \
-	DECLARE_FUNCTION(execUpdateSelectedItem);
+	DECLARE_FUNCTION(execUpdateSelectedItem); \
+	DECLARE_FUNCTION(execPrimaryActionReleased); \
+	DECLARE_FUNCTION(execPrimaryActionPressed);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
+	virtual void PrimaryActionReleased_Implementation(); \
+	virtual void PrimaryActionPressed_Implementation(); \
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
@@ -95,7 +101,9 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execGetHealth); \
 	DECLARE_FUNCTION(execOnSelectedItemChanged); \
 	DECLARE_FUNCTION(execUnEquipItem); \
-	DECLARE_FUNCTION(execUpdateSelectedItem);
+	DECLARE_FUNCTION(execUpdateSelectedItem); \
+	DECLARE_FUNCTION(execPrimaryActionReleased); \
+	DECLARE_FUNCTION(execPrimaryActionPressed);
 
 
 #define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_EVENT_PARMS \

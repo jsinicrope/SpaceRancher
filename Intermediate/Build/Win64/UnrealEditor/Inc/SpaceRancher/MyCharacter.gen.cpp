@@ -286,6 +286,20 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_THIS->UpdateSelectedItem();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCharacter::execPrimaryActionReleased)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->PrimaryActionReleased_Implementation();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execPrimaryActionPressed)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->PrimaryActionPressed_Implementation();
+		P_NATIVE_END;
+	}
 	static FName NAME_AMyCharacter_OnSelectedItemChanged = FName(TEXT("OnSelectedItemChanged"));
 	void AMyCharacter::OnSelectedItemChanged(FItem_Struct& Item)
 	{
@@ -293,6 +307,16 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		Parms.Item=Item;
 		ProcessEvent(FindFunctionChecked(NAME_AMyCharacter_OnSelectedItemChanged),&Parms);
 		Item=Parms.Item;
+	}
+	static FName NAME_AMyCharacter_PrimaryActionPressed = FName(TEXT("PrimaryActionPressed"));
+	void AMyCharacter::PrimaryActionPressed()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMyCharacter_PrimaryActionPressed),NULL);
+	}
+	static FName NAME_AMyCharacter_PrimaryActionReleased = FName(TEXT("PrimaryActionReleased"));
+	void AMyCharacter::PrimaryActionReleased()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMyCharacter_PrimaryActionReleased),NULL);
 	}
 	void AMyCharacter::StaticRegisterNativesAMyCharacter()
 	{
@@ -320,6 +344,8 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "PlayerInteract", &AMyCharacter::execPlayerInteract },
 			{ "PlayerStartSprint", &AMyCharacter::execPlayerStartSprint },
 			{ "PlayerStopSprint", &AMyCharacter::execPlayerStopSprint },
+			{ "PrimaryActionPressed", &AMyCharacter::execPrimaryActionPressed },
+			{ "PrimaryActionReleased", &AMyCharacter::execPrimaryActionReleased },
 			{ "RemoveItemFromInventory", &AMyCharacter::execRemoveItemFromInventory },
 			{ "RemoveItemFromInventoryByName", &AMyCharacter::execRemoveItemFromInventoryByName },
 			{ "RemoveItemFromInventoryFromPosition", &AMyCharacter::execRemoveItemFromInventoryFromPosition },
@@ -1021,6 +1047,52 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "// Functions\n" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+		{ "ToolTip", "Functions" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "PrimaryActionPressed", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C080C00, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "PrimaryActionReleased", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C080C00, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventory_Statics
 	{
 		struct MyCharacter_eventRemoveItemFromInventory_Parms
@@ -1282,9 +1354,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "// Functions\n" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
-		{ "ToolTip", "Functions" },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "UpdateSelectedItem", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem_Statics::Function_MetaDataParams)) };
@@ -1644,6 +1714,8 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerInteract, "PlayerInteract" }, // 1509151083
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerStartSprint, "PlayerStartSprint" }, // 215416479
 		{ &Z_Construct_UFunction_AMyCharacter_PlayerStopSprint, "PlayerStopSprint" }, // 173474060
+		{ &Z_Construct_UFunction_AMyCharacter_PrimaryActionPressed, "PrimaryActionPressed" }, // 3080335046
+		{ &Z_Construct_UFunction_AMyCharacter_PrimaryActionReleased, "PrimaryActionReleased" }, // 2502493712
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventory, "RemoveItemFromInventory" }, // 1331955064
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryByName, "RemoveItemFromInventoryByName" }, // 3959265479
 		{ &Z_Construct_UFunction_AMyCharacter_RemoveItemFromInventoryFromPosition, "RemoveItemFromInventoryFromPosition" }, // 3708749207
@@ -1653,7 +1725,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_SavePlayerCharacter, "SavePlayerCharacter" }, // 389760350
 		{ &Z_Construct_UFunction_AMyCharacter_ToggleInventory, "ToggleInventory" }, // 3809195433
 		{ &Z_Construct_UFunction_AMyCharacter_UnEquipItem, "UnEquipItem" }, // 2222884729
-		{ &Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem, "UpdateSelectedItem" }, // 2415077725
+		{ &Z_Construct_UFunction_AMyCharacter_UpdateSelectedItem, "UpdateSelectedItem" }, // 2743363783
 		{ &Z_Construct_UFunction_AMyCharacter_ZoomMiniMap, "ZoomMiniMap" }, // 1919235683
 		{ &Z_Construct_UFunction_AMyCharacter_ZoomMiniMapIn, "ZoomMiniMapIn" }, // 3350794173
 		{ &Z_Construct_UFunction_AMyCharacter_ZoomMiniMapOut, "ZoomMiniMapOut" }, // 3383763005
@@ -2170,7 +2242,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 1182579169);
+	IMPLEMENT_CLASS(AMyCharacter, 1582313888);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

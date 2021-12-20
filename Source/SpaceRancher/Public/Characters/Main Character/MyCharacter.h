@@ -193,6 +193,12 @@ protected:
 	UHUDSetting* HUDController;
 
 	// Functions
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PrimaryActionPressed();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PrimaryActionReleased();
+	
 	UFUNCTION()
 	void UpdateSelectedItem();
 

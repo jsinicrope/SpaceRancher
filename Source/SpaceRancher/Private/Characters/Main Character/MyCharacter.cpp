@@ -227,11 +227,6 @@ void AMyCharacter::PlayerInteract()
 
 		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
 		
-		if (HeldItem)
-		{
-			IEquippable::Execute_Activated(HeldItem);
-		}
-		
 		if (OutHit.GetActor())
 		{
 			auto Actor = OutHit.GetActor();
@@ -459,6 +454,27 @@ void AMyCharacter::CloseRadialMenu()
 	{
 		HUDController->CloseRadialMenu();
 		UpdateSelectedItem();
+	}
+}
+
+
+void AMyCharacter::PrimaryActionPressed_Implementation()
+{
+	WidgetInteractionComponent->PressPointerKey(FKey(FName("LeftMouseButton")));
+	
+	if (HeldItem)
+	{
+		IEquippable::Execute_Activated(HeldItem);
+	}
+}
+
+void AMyCharacter::PrimaryActionReleased_Implementation()
+{
+	WidgetInteractionComponent->ReleasePointerKey(FKey(FName("LeftMouseButton")));
+
+	if (HeldItem)
+	{
+		IEquippable::Execute_Deactivated(HeldItem);
 	}
 }
 
