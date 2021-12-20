@@ -26,6 +26,8 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginDestroy() override;
+
+	void SetCanRespawn(bool value);
 	
 protected:
 	// Actors
@@ -78,6 +80,9 @@ protected:
 	
 	UPROPERTY()
 	TArray<AActor*> SpawnedActors;
+
+	UPROPERTY()
+	int SpawnedObjects = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
 	ESpawnState SpawnState;
@@ -125,17 +130,34 @@ protected:
 	 * or if they will be spawned at another time      */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
 	bool bSpawnOnBeginPlay = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
+	bool bCanRespawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
+	float TimeToRespawn = 60.0f;
+
+	// The amount of actors to respawn every time respawn is called
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
+	int AmountToRespawn = 1;
+
+	UPROPERTY()
+	float TimeSinceRespawn = 0.0f;
+
+	// The maximum number of items still active before they can be respawned
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
+	int MaxNumberBeforeRespawn = 2;
 	
 	UFUNCTION()
 	bool LineTraceToGround(FVector &NewPoint, FRotator &OutRotation) const;
 	
 	// Gets spawn points from random points in the volume
 	UFUNCTION(BlueprintCallable, Category="Spawner")
-	void GetRandomSpawnPoints();
+	void GetRandomSpawnPoints(int Amount);
 
 	// Gets spawn points from random points distributed spherically around the center of the volume
 	UFUNCTION(BlueprintCallable)
-	void GetSphereCenteredSpawnPoints();
+	void GetSphereCenteredSpawnPoints(int Amount);
 
 	// Gets spawn points from points in a raster of the volume
 	UFUNCTION(BlueprintCallable)
@@ -156,6 +178,11 @@ protected:
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
 	void AddActors();
+	
+	void AddActors(int Amount);
+
+	UFUNCTION()
+	void VerifyActiveActors();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
 	void DeleteAllActors();

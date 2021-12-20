@@ -7,7 +7,7 @@
 
 ASpawnerVolume::ASpawnerVolume()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 void ASpawnerVolume::BeginPlay()
@@ -18,6 +18,12 @@ void ASpawnerVolume::BeginPlay()
 	{
 		SpawnActors();
 	}
+	
+	SetActorTickEnabled(false);
+	if (bCanRespawn)
+	{
+		SetActorTickEnabled(true);
+	}
 }
 
 void ASpawnerVolume::BeginDestroy()
@@ -27,9 +33,33 @@ void ASpawnerVolume::BeginDestroy()
 	Super::BeginDestroy();
 }
 
+void ASpawnerVolume::SetCanRespawn(bool value)
+{
+	bCanRespawn = value;
+	if (bCanRespawn)
+	{
+		SetActorTickEnabled(true);
+	}
+	else
+	{
+		SetActorTickEnabled(false);
+	}
+}
+
 void ASpawnerVolume::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	TimeSinceRespawn += DeltaSeconds;
+	if (TimeSinceRespawn > TimeToRespawn)
+	{
+		VerifyActiveActors();
+		if (SpawnedObjects <= MaxNumberBeforeRespawn)
+		{
+			AddActors(AmountToRespawn);
+		}
+		TimeSinceRespawn = 0.0f;
+	}
 }
 
 bool ASpawnerVolume::LineTraceToGround(FVector &NewPoint, FRotator &OutRotation) const
@@ -67,9 +97,9 @@ bool ASpawnerVolume::LineTraceToGround(FVector &NewPoint, FRotator &OutRotation)
 	return false;
 }
 
-void ASpawnerVolume::GetRandomSpawnPoints()
+void ASpawnerVolume::GetRandomSpawnPoints(int Amount)
 {
-	for (int i = 0; i < Population; i++)
+	for (int i = 0; i < Amount; i++)
 	{
 		FVector InOrigin;
 		FVector InBoxExtent;
@@ -85,9 +115,9 @@ void ASpawnerVolume::GetRandomSpawnPoints()
 	}
 }
 
-void ASpawnerVolume::GetSphereCenteredSpawnPoints()
+void ASpawnerVolume::GetSphereCenteredSpawnPoints(int Amount)
 {
-	for (int i = 0; i < Population; i++)
+	for (int i = 0; i < Amount; i++)
 	{
 		FVector InOrigin;
 		FVector InBoxExtent;
@@ -217,27 +247,28 @@ void ASpawnerVolume::SpawnActors()
 	AddActors();
 }
 
-void ASpawnerVolume::AddActors()
+void ASpawnerVolume::AddActors(int Amount)
 {
 	SpawnPoints.Empty();
 	SpawnRotation.Empty();
 	
 	switch (SpawnState)
 	{
-	case (ESpawnState::Centered):
-		GetSphereCenteredSpawnPoints();
+	case ESpawnState::Centered:
+		GetSphereCenteredSpawnPoints(Amount);
 		break;
 		
-	case (ESpawnState::Rastered):
+	case ESpawnState::Rastered:
 		GetRasteredSpawnPoints();
 		break;
 		
-	//  Random case as default spawn setting
-	default:
-		GetRandomSpawnPoints();
-	break;
+		//  Random case as default spawn setting
+		default:
+			GetRandomSpawnPoints(Amount);
+		break;
 	}
-	
+
+	SpawnedObjects += SpawnPoints.Num();
 	for (int i = 0; i < SpawnPoints.Num(); i++)
 	{
 		const FVector SpawnPoint = SpawnPoints[i];
@@ -289,6 +320,32 @@ void ASpawnerVolume::AddActors()
 	}
 }
 
+
+void ASpawnerVolume::AddActors()
+{
+	AddActors(Population);
+}
+
+void ASpawnerVolume::VerifyActiveActors()
+{
+	SpawnedObjects = 0;
+	for (int i = 0; i < SpawnedActors.Num(); i++)
+	{
+		if (IsValid(SpawnedActors[i]))
+		{
+			SpawnedObjects++;
+		}
+	}
+	
+	for (int i = 0; i < InstancedMeshes.Num(); i++)
+	{
+		if (IsValid(InstancedMeshes[i]))
+		{
+			SpawnedObjects++;
+		}
+	}
+}
+
 void ASpawnerVolume::DeleteAllActors()
 {
 	for (int i = 0; i < SpawnedActors.Num(); i++)
@@ -298,7 +355,7 @@ void ASpawnerVolume::DeleteAllActors()
 			SpawnedActors[i]->Destroy();
 		}
 	}
-	
+
 	for (int i = 0; i < InstancedMeshes.Num(); i++)
 	{
 		if (InstancedMeshes[i])
@@ -306,7 +363,19 @@ void ASpawnerVolume::DeleteAllActors()
 			InstancedMeshes[i]->Destroy();
 		}
 	}
+
+	for (int i = 0; i < SpawnedActors.Num(); i++)
+	{
+		if (!SpawnedActors[i]) {SpawnedActors.RemoveAt(i, 1, true);}
+		
+	}
+
+	for (int i = 0; i < InstancedMeshes.Num(); i++)
+	{
+		if (!InstancedMeshes[i]) {InstancedMeshes.RemoveAt(i, 1, true);}
+	}
 	
+	SpawnedObjects = 0;
 	InstancedMeshes.Empty();
 	SpawnedActors.Empty();
 }
