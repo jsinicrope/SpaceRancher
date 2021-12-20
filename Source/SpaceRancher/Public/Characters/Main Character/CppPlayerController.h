@@ -10,19 +10,25 @@ UCLASS()
 class SPACERANCHER_API ACppPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 public:
 	ACppPlayerController(const FObjectInitializer& ObjectInitializer);
 
 	virtual void SetupInputComponent() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
-
+	
+protected:
 	UPROPERTY(EditAnywhere, BLueprintReadWrite)
 	class AMyCharacter* PlayerCharacter;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UMainGameInstance* GameInstance;
+	
+public:
+	AMyCharacter* GetPlayerCharacter() const {return PlayerCharacter;}
+
+	UMainGameInstance* GetMainGameInstance() const{return GameInstance;}
 
 	UFUNCTION(Exec)
 	void SetTime(int Hour, int Minute = 0) const;

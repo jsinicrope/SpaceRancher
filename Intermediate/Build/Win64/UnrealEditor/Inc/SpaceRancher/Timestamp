@@ -1,10 +1,10 @@
 E:\SpaceRancher\Source\SpaceRancher\Public\AI\AttackPlayer.h
 E:\SpaceRancher\Source\SpaceRancher\Public\AI\NPC.h
-E:\SpaceRancher\Source\SpaceRancher\Public\AI\NPC_Controller.h
 E:\SpaceRancher\Source\SpaceRancher\Public\AI\RunAwayFromPlayer.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\Zebos.h
+E:\SpaceRancher\Source\SpaceRancher\Public\AI\NPC_Controller.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\ZebosController.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\CppPlayerController.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Companions\Zebos.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Characters\Main Character\MyCharacter.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Components\SpawnerComponent.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\Computer.h
@@ -12,8 +12,9 @@ E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\FoodCooker.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\InteractInterface.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\Plant.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlantPot.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlayerBed.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\ProgressibleObject.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\Equippable.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interactables\PlayerBed.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryComponent.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryTrashSlot.h
@@ -21,6 +22,7 @@ E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\ItemBase.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\ItemPickUpWidget.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\ItemStruct.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Items\Harvester.h
 E:\SpaceRancher\Source\SpaceRancher\Public\UI\Clock.h
 E:\SpaceRancher\Source\SpaceRancher\Public\UI\CMainHUD.h
 E:\SpaceRancher\Source\SpaceRancher\Public\UI\HealthAndStaminaBar.h
@@ -38,7 +40,7 @@ E:\SpaceRancher\Source\SpaceRancher\Public\Widgets\UI\TradingTab.h
 E:\SpaceRancher\Source\SpaceRancher\Public\Widgets\ItemStructTileView.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\ActorRecord.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\MainSaveGame.h
-E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\Saveable.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World\MainGameInstance.h
-E:\SpaceRancher\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World\SpawnerVolume.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World\Saves\Saveable.h

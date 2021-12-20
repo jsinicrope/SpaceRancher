@@ -28,14 +28,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsCollectible = true;
 
-	// A required item to harvest the plant. Empty if none is needed
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plant")
+	// A required item to collect the item. Empty if none is needed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName RequiredItem = FName("");
 
 	UFUNCTION(BlueprintCallable)
 	bool CollectItem(bool bAddToInventory = true);
 
-private:
-	UPROPERTY()
-	class AMyCharacter* PC;
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	class ACppPlayerController* PC;
 };

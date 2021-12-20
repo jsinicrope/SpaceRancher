@@ -179,16 +179,25 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	UChildActorComponent* MiniMapCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
-	UHUDSetting* HUDController;
-
 	// Mini Map
 	UPROPERTY(BlueprintReadOnly, Category="MiniMap")
 	class ASceneCapture2D* MiniMapCapture;
 
+	UPROPERTY(BlueprintReadWrite, Category="Handheld")
+	AActor* HeldItem;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Handheld")
+	UChildActorComponent* HandItem;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHUDController, Category="HUD")
+	UHUDSetting* HUDController;
+
 	// Functions
 	UFUNCTION()
 	void UpdateSelectedItem();
+
+	UFUNCTION()
+	void UnEquipItem();
 	
 	UFUNCTION(BlueprintNativeEvent)
 	void OnSelectedItemChanged(FItem_Struct &Item);
@@ -242,7 +251,7 @@ public:
 	void RespawnPlayer();
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-	bool bIsPlayerDead();
+	bool GetIsPlayerDead();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void SaveGame();
@@ -286,8 +295,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();
 
+	UFUNCTION(BlueprintCallable)
+	FVector GetViewPoint() const;
+
+	UFUNCTION(BlueprintCallable)
+	FVector GetViewForwardVector() const;
+
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
-	bool CheckForInteractable();
+	bool CheckForInteractable() const;
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

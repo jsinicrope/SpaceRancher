@@ -43,7 +43,7 @@ void AProgressableObject::Interact_Implementation()
 	for (int i = 0; i < RequiredAmount; i++)
 	{
 		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(ItemName);
-		if (AcquiredItem.bIsValidItem)
+		if (AcquiredItem.bValidItem)
 		{
 			RequiredAmount--;
 			if (RequiredAmount == 0)

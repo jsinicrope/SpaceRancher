@@ -7,10 +7,11 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Interactables/InteractInterface.h"
 #include "Inventory_System/ItemPickUpWidget.h"
-#include "DrawDebugHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneCaptureComponent2D.h"
 #include "Engine/SceneCapture2D.h"
+#include "Engine/SkeletalMeshSocket.h"
+#include "Inventory_System/Equippable.h"
 #include "World/Saves/ActorRecord.h"
 #include "World/Saves/ActorSaveArchive.h"
 #include "UI/HUDSetting.h"
@@ -51,6 +52,9 @@ AMyCharacter::AMyCharacter()
 
 	MiniMapCamera = CreateDefaultSubobject<UChildActorComponent>(TEXT("MiniMapCamera"));
 	AddOwnedComponent(MiniMapCamera);
+
+	HandItem = CreateDefaultSubobject<UChildActorComponent>(TEXT("RightHandItem"));
+	HandItem->SetupAttachment(GetMesh(), "hand_rSocket");
 }
 
 void AMyCharacter::BeginPlay()
@@ -222,14 +226,19 @@ void AMyCharacter::PlayerInteract()
 		ECollisionChannel Channel = ECC_Visibility;
 
 		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-
+		
+		if (HeldItem)
+		{
+			IEquippable::Execute_Activated(HeldItem);
+		}
+		
 		if (OutHit.GetActor())
 		{
 			auto Actor = OutHit.GetActor();
 
 			if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 			{
-				if (SelectedItem.bIsValidItem)
+				if (SelectedItem.bValidItem)
 				{
 					if (IInteractInterface::Execute_ItemInteract(Actor, SelectedItem))
 					{
@@ -241,11 +250,6 @@ void AMyCharacter::PlayerInteract()
 					IInteractInterface::Execute_Interact(Actor);
 				}
 			}
-		}
-
-		else
-		{
-			DrawDebugLine(GetWorld(), Start, OutHit.TraceEnd, FColor::Red, false, 1.0f, false, 10.0f);
 		}
 	}
 	else
@@ -279,7 +283,7 @@ void AMyCharacter::DamagePlayer(float Damage)
 	}
 }
 
-bool AMyCharacter::bIsPlayerDead()
+bool AMyCharacter::GetIsPlayerDead()
 {
 	return bPlayerDead;
 }
@@ -463,12 +467,42 @@ void AMyCharacter::UpdateSelectedItem()
 	const FItem_Struct ActiveItem = HUDController->RadialMenu->GetSelectedItem();
 	SelectedItem = ActiveItem;
 	bItemSelectionOpen = false;
-	if (SelectedItem.bIsSelectable)
+	if (SelectedItem.bSelectable)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, FString("Selected Item: ") + SelectedItem.Name);
+		if (SelectedItem.ItemClass->ImplementsInterface(UEquippable::StaticClass()))
+		{
+			if (HeldItem != HandItem->GetChildActor() || !HeldItem)
+			{
+				HandItem->SetChildActorClass(SelectedItem.ItemClass);
+				HeldItem = HandItem->GetChildActor();
+				HeldItem->SetActorEnableCollision(false);
+				HeldItem->SetActorScale3D(FVector(0.2f));
+				IEquippable::Execute_Selected(HeldItem);
+			}
+		}
+
+		else
+		{
+			UnEquipItem();
+		}
+	}
+	else
+	{
+		UnEquipItem();
 	}
 
 	OnSelectedItemChanged(SelectedItem);
+}
+
+void AMyCharacter::UnEquipItem()
+{
+	if (HeldItem)
+	{
+		IEquippable::Execute_DeSelect(HeldItem);
+		HandItem->DestroyChildActor();
+		HeldItem = nullptr;
+	}
 }
 
 void AMyCharacter::OnSelectedItemChanged_Implementation(FItem_Struct &Item)
@@ -483,7 +517,7 @@ void AMyCharacter::RemoveWidgetFromViewport()
 	WidgetToRemove->RemoveFromViewport();
 }
 
-bool AMyCharacter::CheckForInteractable()
+FVector AMyCharacter::GetViewPoint() const
 {
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
@@ -492,7 +526,29 @@ bool AMyCharacter::CheckForInteractable()
 	FHitResult OutHit(ForceInit);
 
 	FVector Start = PlayerCamera->GetComponentLocation();
-	FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
+	FVector End = Start + PlayerCamera->GetForwardVector() * 10000.0f;
+
+	ECollisionChannel Channel = ECC_Visibility;
+
+	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+	return OutHit.ImpactPoint;
+}
+
+FVector AMyCharacter::GetViewForwardVector() const
+{
+	return PlayerCamera->GetForwardVector();
+}
+
+bool AMyCharacter::CheckForInteractable() const
+{
+	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	FHitResult OutHit(ForceInit);
+
+	FVector Start = PlayerCamera->GetComponentLocation();
+	FVector End = Start + PlayerCamera->GetForwardVector() * InteractDistance;
 
 	ECollisionChannel Channel = ECC_Visibility;
 

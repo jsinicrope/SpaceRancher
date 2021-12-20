@@ -6,7 +6,6 @@
 
 ACppPlayerController::ACppPlayerController(const FObjectInitializer& ObjectInitializer) :Super(ObjectInitializer)
 {
-	PlayerCharacter = Cast<AMyCharacter>(GetPawn());
 }
 
 void ACppPlayerController::SetupInputComponent()
@@ -19,7 +18,8 @@ void ACppPlayerController::SetupInputComponent()
 void ACppPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
+	PlayerCharacter = Cast<AMyCharacter>(GetPawn());
 	GameInstance = Cast<UMainGameInstance>(GetWorld()->GetGameInstance());
 }
 

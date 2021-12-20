@@ -28,25 +28,23 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	FString Details;
 
 	// Used to give info about the item that can be used to get the item type or similar
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, AdvancedDisplay, BlueprintReadWrite)
 	FString Tag;
 
 	/** Whether the item is supposed to be treated like a regular item
 	 * Should generally be set to true.
 	 * Setting it to false will lead to unwanted behaviour */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsValidItem;
+	bool bValidItem = false;
 
 	// Whether the item should appear in the radial menu if when it's in the players inventory
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsSelectable;
+	bool bSelectable = false;
 
 	FItem_Struct()
 	{
 		Name = FString("");
 		Thumbnail = nullptr;
 		ItemClass = nullptr;
-		bIsValidItem = false;
-		bIsSelectable = false;
 	}
 };

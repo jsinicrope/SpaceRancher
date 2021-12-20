@@ -17,7 +17,7 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 {
 	Player = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	
-	if (Player->bIsPlayerDead())
+	if (Player->GetIsPlayerDead())
 	{
 		return EBTNodeResult::Succeeded;
 	}
@@ -40,7 +40,7 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 			Player->DamagePlayer(Damage);
 			TimeSinceLastAttack = 0.0f;
 
-			if (Player->bIsPlayerDead())
+			if (Player->GetIsPlayerDead())
 			{
 				return EBTNodeResult::Succeeded;
 			}

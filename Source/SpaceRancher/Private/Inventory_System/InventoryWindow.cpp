@@ -97,7 +97,7 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 			if (i < Inventory->ItemSlots)
 			{
 				const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemFromPosition(i);
-				if (Item.bIsValidItem)
+				if (Item.bValidItem)
 				{
 					if (!Inventory->AddItem(Item))
 					{
@@ -207,7 +207,7 @@ void UInventoryWindow::SetUpInventory()
 			InventorySlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventorySlotWidgetClass);
 			InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 0)));
 
-			if (InventoryItem.bIsValidItem)
+			if (InventoryItem.bValidItem)
 			{
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 1)));
 				InventoryGrid->RemoveChildAt(InventorySlotWidget->SlotIndex);
@@ -234,7 +234,7 @@ void UInventoryWindow::UpdateInventory()
 		{
 			InventoryItem = Inventory->Inventory_Array_Columns[i].Row_Items[j];
 			InventorySlotWidget = Cast<UInventorySlotWidget>(InventoryGrid->GetChildAt(SlotIndex));
-			if (InventoryItem.bIsValidItem)
+			if (InventoryItem.bValidItem)
 			{
 				InventorySlotWidget->ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 1)));
 				FString ItemName = Inventory->Inventory_Array_Columns[i].Row_Items[j].Name;

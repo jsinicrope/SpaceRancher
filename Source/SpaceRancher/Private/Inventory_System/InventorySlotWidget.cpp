@@ -24,7 +24,7 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 
 void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
 {
-	if (SlotContent.bIsValidItem)
+	if (SlotContent.bValidItem)
 	{
 		// Create a copy of the current widget
 		UInventorySlotWidget* NewSlotWidget = CreateWidget<UInventorySlotWidget>(GetWorld(), InventoryWindow->InventorySlotWidgetClass);

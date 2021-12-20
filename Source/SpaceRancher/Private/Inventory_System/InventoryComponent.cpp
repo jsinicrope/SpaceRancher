@@ -60,7 +60,7 @@ bool UInventoryComponent::AddItem(const FItem_Struct &Item_Struct, int Row, int 
 	{
 		for (int j = Row; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
-			if (!Inventory_Array_Columns[i].Row_Items[j].bIsValidItem)
+			if (!Inventory_Array_Columns[i].Row_Items[j].bValidItem)
 			{
 				Inventory_Array_Columns[i].Row_Items[j] = Item_Struct;
 
@@ -241,7 +241,7 @@ TArray<FItem_Struct> UInventoryComponent::GetUniqueSelectables()
 		{
 			FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
 
-			if (Uniques.Num() <= 0 && Item.bIsSelectable)
+			if (Uniques.Num() <= 0 && Item.bSelectable)
 			{
 				Uniques.Add(Item);
 			}
@@ -249,7 +249,7 @@ TArray<FItem_Struct> UInventoryComponent::GetUniqueSelectables()
 			{
 				for (int k = 0; k < Uniques.Num(); k++)
 				{
-					if (!Uniques[k].Name.Equals(Item.Name) && Item.bIsSelectable)
+					if (!Uniques[k].Name.Equals(Item.Name) && Item.bSelectable)
 					{
 						Uniques.Add(Item);
 						break;

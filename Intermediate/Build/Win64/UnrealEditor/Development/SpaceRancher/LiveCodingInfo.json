@@ -16,11 +16,7 @@
 			"Plant.cpp.obj",
 			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
-			"ProgressibleObject.cpp.obj",
-			"InventoryComponent.cpp.obj",
-			"InventorySlotWidget.cpp.obj",
 			"InventoryTrashSlot.cpp.obj",
-			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
 			"Clock.cpp.obj",
 			"CMainHUD.cpp.obj",
@@ -44,7 +40,13 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"Item_Base.cpp.obj"
+			"ProgressibleObject.cpp.obj",
+			"Equippable.cpp.obj",
+			"InventoryComponent.cpp.obj",
+			"InventorySlotWidget.cpp.obj",
+			"InventoryWindow.cpp.obj",
+			"Item_Base.cpp.obj",
+			"Harvester.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
@@ -56,19 +58,21 @@
 			"ComputerScreen.gen.cpp.obj",
 			"ComputerSelling.gen.cpp.obj",
 			"CppPlayerController.gen.cpp.obj",
+			"Equippable.gen.cpp.obj",
 			"FoodCooker.gen.cpp.obj",
 			"FoodCookerTimer.gen.cpp.obj",
+			"Harvester.gen.cpp.obj",
 			"HealthAndStaminaBar.gen.cpp.obj",
 			"HUDSetting.gen.cpp.obj",
 			"InteractInterface.gen.cpp.obj",
 			"InventoryComponent.gen.cpp.obj",
 			"InventorySlotWidget.gen.cpp.obj",
 			"InventoryTrashSlot.gen.cpp.obj",
-			"InventoryWindow.gen.cpp.obj",
-			"ItemBase.gen.cpp.obj",
-			"ItemPickUpWidget.gen.cpp.obj"
+			"InventoryWindow.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.2_of_3.cpp.obj": [
+			"ItemBase.gen.cpp.obj",
+			"ItemPickUpWidget.gen.cpp.obj",
 			"ItemSelectionHUD.gen.cpp.obj",
 			"ItemSelectionSegment.gen.cpp.obj",
 			"ItemSellingTile.gen.cpp.obj",
@@ -80,10 +84,10 @@
 			"NPC.gen.cpp.obj",
 			"NPC_Controller.gen.cpp.obj",
 			"Plant.gen.cpp.obj",
-			"PlantPot.gen.cpp.obj",
 			"MyCharacter.gen.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [
+			"PlantPot.gen.cpp.obj",
 			"PlayerBed.gen.cpp.obj",
 			"ProgressibleObject.gen.cpp.obj",
 			"RunAwayFromPlayer.gen.cpp.obj",

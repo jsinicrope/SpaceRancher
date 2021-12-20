@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Characters/Main Character/CppPlayerController.h"
 #include "Inventory_System/ItemBase.h"
 #include "Characters/Main Character/MyCharacter.h"
 
@@ -7,7 +8,7 @@ AItemBase::AItemBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	Main_Item_Structure.bIsValidItem = true;
+	Main_Item_Structure.bValidItem = true;
 	Main_Item_Structure.ItemClass = GetClass();
 }
 
@@ -15,7 +16,7 @@ void AItemBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 }
 
 void AItemBase::Interact_Implementation()
@@ -43,7 +44,7 @@ bool AItemBase::CollectItem(bool bAddToInventory)
 	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)
 	{
-		ItemAdded = PC->AddItemToInventory(Main_Item_Structure);
+		ItemAdded = PC->GetPlayerCharacter()->AddItemToInventory(Main_Item_Structure);
 	}
 	if (ItemAdded || !bAddToInventory)
 	{
