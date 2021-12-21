@@ -81,16 +81,22 @@ bool AHarvester::DeactivateLaser()
 
 void AHarvester::UpdateAimDirection()
 {
+	const FVector Start = LaserHolder->GetComponentLocation();
+	
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
 	TraceParams.bReturnPhysicalMaterial = false;
 	ECollisionChannel Channel = ECC_Visibility;
 	FHitResult OutHit(ForceInit);
-	
-	const FVector Start = LaserHolder->GetComponentLocation();
-	FVector End = PC->GetPlayerCharacter()->GetViewForwardVector() * LaserRange + Start;
 
-	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
+	FVector TargetViewPoint = PC->GetPlayerCharacter()->GetViewPoint();
+
+	if (FVector::Distance(Start, TargetViewPoint) > LaserRange)
+	{
+		TargetViewPoint = PC->GetPlayerCharacter()->GetViewForwardVector() * LaserRange + Start;
+	}
+
+	GetWorld()->LineTraceSingleByChannel(OutHit, Start, TargetViewPoint, Channel, TraceParams);
 	
 	BeamTarget = OutHit.TraceEnd;
 	
