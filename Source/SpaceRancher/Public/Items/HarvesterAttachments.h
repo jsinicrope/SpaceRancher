@@ -15,14 +15,3 @@ enum class EHarvesterAttachmentType : uint8
 	Minerals		UMETA(DisplayName="Minerals"),
 	Combat			UMETA(DisplayName="Combat")
 };
-
-
-USTRUCT(BlueprintType)
-struct SPACERANCHER_API FHarvesterAttachment_Struct : public FItem_Struct
-{
-	GENERATED_USTRUCT_BODY()
-
-	// The attachment type
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EHarvesterAttachmentType Type;
-};

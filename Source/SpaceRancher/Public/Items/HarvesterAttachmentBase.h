@@ -18,12 +18,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintGetter=GetAttachment_Struct, BlueprintReadWrite)
-	FHarvesterAttachment_Struct Attachment_Struct;
+	UPROPERTY(EditAnywhere, BlueprintGetter=GetAttachmentType, BlueprintReadWrite)
+	EHarvesterAttachmentType AttachmentType;
 
 public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintGetter)
-	FHarvesterAttachment_Struct GetAttachment_Struct() const {return Attachment_Struct;}
+	EHarvesterAttachmentType GetAttachmentType() const {return AttachmentType;}
 };

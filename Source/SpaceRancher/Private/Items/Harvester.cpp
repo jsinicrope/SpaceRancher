@@ -30,7 +30,6 @@ AHarvester::AHarvester()
 void AHarvester::BeginPlay()
 {
 	Super::BeginPlay();
-	LaserBeam->Activate();
 }
 
 void AHarvester::Tick(float DeltaTime)
@@ -120,7 +119,7 @@ void AHarvester::UpdateAimDirection()
 	
 	BeamTarget = OutHit.TraceEnd;
 
-	HitActor = OutHit.GetActor();
+	HitActor = PC->GetPlayerCharacter()->GetViewedActor();
 	
 	LaserBeam->SetVariableVec3(FName("BeamEnd"), BeamTarget);
 	LaserBeam->SetVariableVec3(FName("BeamStart"), Start);

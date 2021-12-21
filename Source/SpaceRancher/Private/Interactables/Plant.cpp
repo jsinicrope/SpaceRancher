@@ -49,25 +49,14 @@ void APlant::Interact_Implementation()
 
 bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
 {
-	if (RequiredAttachment == EHarvesterAttachmentType::None)
-	{
-		const bool Success = Super::ItemInteract_Implementation(EquippedItem);
-		if (Success)
-		{
-			PickupPlant();
-		}
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, TEXT("Different Harvesting Attachment required"));
-	}
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Plant"));
 	return false;
 }
 
 void APlant::PrimaryAffect_Implementation(TSubclassOf<AHarvesterAttachmentBase> Attachment, float DeltaAffectedTime)
 {
-	const FHarvesterAttachment_Struct AttachmentStruct = Attachment.GetDefaultObject()->GetAttachment_Struct();
-	if (RequiredAttachment == EHarvesterAttachmentType::None || AttachmentStruct.Type == RequiredAttachment)
+	const EHarvesterAttachmentType AttachmentStruct = Attachment.GetDefaultObject()->GetAttachmentType();
+	if (RequiredAttachment == EHarvesterAttachmentType::None || AttachmentStruct == RequiredAttachment)
 	{
 		AffectedTime += DeltaAffectedTime;
 		if (AffectedTime >= RequiredAffectTime)

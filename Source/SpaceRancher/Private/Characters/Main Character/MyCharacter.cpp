@@ -229,7 +229,7 @@ void AMyCharacter::PlayerInteract()
 		
 		if (OutHit.GetActor())
 		{
-			auto Actor = OutHit.GetActor();
+			AActor* Actor = OutHit.GetActor();
 
 			if (Actor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 			{
@@ -555,7 +555,7 @@ FVector AMyCharacter::GetViewForwardVector() const
 	return PlayerCamera->GetForwardVector();
 }
 
-bool AMyCharacter::CheckForInteractable() const
+bool AMyCharacter::CheckForInteractable()
 {
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
@@ -572,6 +572,7 @@ bool AMyCharacter::CheckForInteractable() const
 
 	if (OutHit.GetActor())
 	{
+		ViewedActor = OutHit.GetActor();
 		return OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass());
 	}
 	return false;

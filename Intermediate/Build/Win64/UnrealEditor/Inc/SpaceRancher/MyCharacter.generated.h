@@ -9,6 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 struct FVector;
+class AActor;
 struct FItem_Struct;
 class UHUDSetting;
 class UInventoryComponent;
@@ -25,6 +26,7 @@ class UInventoryComponent;
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
+	DECLARE_FUNCTION(execGetViewedActor); \
 	DECLARE_FUNCTION(execGetViewPoint); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
 	DECLARE_FUNCTION(execGetSelectedItem); \
@@ -69,6 +71,7 @@ class UInventoryComponent;
  \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
+	DECLARE_FUNCTION(execGetViewedActor); \
 	DECLARE_FUNCTION(execGetViewPoint); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
 	DECLARE_FUNCTION(execGetSelectedItem); \
@@ -192,6 +195,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__ZoomLevel() { return STRUCT_OFFSET(AMyCharacter, ZoomLevel); } \
 	FORCEINLINE static uint32 __PPO__MaxZoomLevel() { return STRUCT_OFFSET(AMyCharacter, MaxZoomLevel); } \
 	FORCEINLINE static uint32 __PPO__ZoomSize() { return STRUCT_OFFSET(AMyCharacter, ZoomSize); } \
+	FORCEINLINE static uint32 __PPO__ViewedActor() { return STRUCT_OFFSET(AMyCharacter, ViewedActor); } \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__PC() { return STRUCT_OFFSET(AMyCharacter, PC); } \

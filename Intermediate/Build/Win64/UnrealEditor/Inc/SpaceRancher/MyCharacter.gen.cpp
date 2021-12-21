@@ -20,6 +20,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	SPACERANCHER_API UScriptStruct* Z_Construct_UScriptStruct_FItem_Struct();
 	SPACERANCHER_API UClass* Z_Construct_UClass_UHUDSetting_NoRegister();
 	SPACERANCHER_API UClass* Z_Construct_UClass_UInventoryComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
@@ -31,7 +32,6 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UChildActorComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_ASceneCapture2D_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(AMyCharacter::execCheckForInteractable)
 	{
@@ -45,6 +45,13 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		*(FVector*)Z_Param__Result=P_THIS->GetViewForwardVector();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execGetViewedActor)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(AActor**)Z_Param__Result=P_THIS->GetViewedActor();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execGetViewPoint)
@@ -334,6 +341,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "GetMaxStamina", &AMyCharacter::execGetMaxStamina },
 			{ "GetSelectedItem", &AMyCharacter::execGetSelectedItem },
 			{ "GetStamina", &AMyCharacter::execGetStamina },
+			{ "GetViewedActor", &AMyCharacter::execGetViewedActor },
 			{ "GetViewForwardVector", &AMyCharacter::execGetViewForwardVector },
 			{ "GetViewPoint", &AMyCharacter::execGetViewPoint },
 			{ "KillPlayer", &AMyCharacter::execKillPlayer },
@@ -432,7 +440,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "CheckForInteractable", nullptr, nullptr, sizeof(MyCharacter_eventCheckForInteractable_Parms), Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "CheckForInteractable", nullptr, nullptr, sizeof(MyCharacter_eventCheckForInteractable_Parms), Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_CheckForInteractable_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AMyCharacter_CheckForInteractable()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -789,6 +797,39 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetStamina_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics
+	{
+		struct MyCharacter_eventGetViewedActor_Parms
+		{
+			AActor* ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventGetViewedActor_Parms, ReturnValue), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::Function_MetaDataParams[] = {
+		{ "BlueprintGetter", "" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetViewedActor", nullptr, nullptr, sizeof(MyCharacter_eventGetViewedActor_Parms), Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_GetViewedActor()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AMyCharacter_GetViewedActor_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1616,6 +1657,10 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_ZoomSize;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ViewedActor_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ViewedActor;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_WidgetToRemove_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_WidgetToRemove;
@@ -1693,7 +1738,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMyCharacter_AddItemToInventory, "AddItemToInventory" }, // 2497367192
-		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 786451081
+		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 1476590731
 		{ &Z_Construct_UFunction_AMyCharacter_CloseRadialMenu, "CloseRadialMenu" }, // 1215133628
 		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1072611392
 		{ &Z_Construct_UFunction_AMyCharacter_GetHealth, "GetHealth" }, // 2176630474
@@ -1704,6 +1749,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxStamina, "GetMaxStamina" }, // 451992980
 		{ &Z_Construct_UFunction_AMyCharacter_GetSelectedItem, "GetSelectedItem" }, // 3900058430
 		{ &Z_Construct_UFunction_AMyCharacter_GetStamina, "GetStamina" }, // 950084552
+		{ &Z_Construct_UFunction_AMyCharacter_GetViewedActor, "GetViewedActor" }, // 2009937704
 		{ &Z_Construct_UFunction_AMyCharacter_GetViewForwardVector, "GetViewForwardVector" }, // 1928174150
 		{ &Z_Construct_UFunction_AMyCharacter_GetViewPoint, "GetViewPoint" }, // 1271686848
 		{ &Z_Construct_UFunction_AMyCharacter_KillPlayer, "KillPlayer" }, // 286801584
@@ -2033,6 +2079,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize = { "ZoomSize", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, ZoomSize), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_ViewedActor_MetaData[] = {
+		{ "BlueprintGetter", "GetViewedActor" },
+		{ "Category", "MyCharacter" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_ViewedActor = { "ViewedActor", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, ViewedActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ViewedActor_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ViewedActor_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_WidgetToRemove_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
@@ -2197,6 +2251,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ViewedActor,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_WidgetToRemove,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_GameInstance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_PC,
@@ -2242,7 +2297,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyCharacter, 1582313888);
+	IMPLEMENT_CLASS(AMyCharacter, 1974890017);
 	template<> SPACERANCHER_API UClass* StaticClass<AMyCharacter>()
 	{
 		return AMyCharacter::StaticClass();

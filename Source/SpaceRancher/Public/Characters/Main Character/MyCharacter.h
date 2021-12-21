@@ -138,6 +138,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	float ZoomSize = 512.0f;
 
+	UPROPERTY(BlueprintGetter=GetViewedActor)
+	AActor* ViewedActor;
+
 	UPROPERTY()
 	UUserWidget* WidgetToRemove;
 
@@ -304,11 +307,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FVector GetViewPoint() const;
 
+	UFUNCTION(BlueprintGetter)
+	AActor* GetViewedActor() const {return ViewedActor;};
+
 	UFUNCTION(BlueprintCallable)
 	FVector GetViewForwardVector() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
-	bool CheckForInteractable() const;
+	bool CheckForInteractable();
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
