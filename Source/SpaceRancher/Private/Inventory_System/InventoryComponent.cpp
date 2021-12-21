@@ -7,7 +7,7 @@
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 
-FItemRows::FItemRows(int NewRows)
+FItemRows::FItemRows(const int NewRows)
 {
 	const FItem_Struct Item;
 	Row_Items.Init(Item, NewRows);
@@ -241,22 +241,11 @@ TArray<FItem_Struct> UInventoryComponent::GetUniqueSelectables()
 	{
 		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
-			FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
+			const FItem_Struct Item = Inventory_Array_Columns[i].Row_Items[j];
 
-			if (Uniques.Num() <= 0 && Item.bSelectable)
+			if (Item.bSelectable && !Uniques.Contains(Item))
 			{
 				Uniques.Add(Item);
-			}
-			else
-			{
-				for (int k = 0; k < Uniques.Num(); k++)
-				{
-					if (!Uniques[k].Name.Equals(Item.Name) && Item.bSelectable)
-					{
-						Uniques.Add(Item);
-						break;
-					}
-				}
 			}
 		}
 	}

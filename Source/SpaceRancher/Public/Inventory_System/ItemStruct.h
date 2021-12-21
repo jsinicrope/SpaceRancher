@@ -49,4 +49,9 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 		bValidItem = false;
 		bSelectable = false;
 	}
+
+	bool operator==(const FItem_Struct& Struct) const
+	{
+		return Name == Struct.Name;
+	}
 };

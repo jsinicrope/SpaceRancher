@@ -36,6 +36,7 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 		OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
 		
 		OutOperation->DefaultDragVisual = NewSlotWidget;
+		// Make InventorySlot not hit testable to avoid dropping on this
 		OutOperation->DefaultDragVisual->SetVisibility(ESlateVisibility::HitTestInvisible);
 		OutOperation->Pivot = EDragPivot::MouseDown;
 		OutOperation->Tag = FString("InventorySlot");
@@ -62,57 +63,13 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 		}
 		else
 		{
-			// Inventory of this widget
-			CurrentInventory.Empty();
-			for (int i = 0; i < InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
-			{
-				for (int j = 0; j < InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-				{
-					CurrentInventory.Add(InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j]);
-				}
-			}
+			const FItem_Struct FirstItem = InventoryWindow->Inventory->RemoveItemFromPosition(SlotIndex);
+			const FItem_Struct SecondItem = TempSwitchSlot->InventoryWindow->Inventory->RemoveItemFromPosition(TempSwitchSlot->SlotIndex);
 
-			// Inventory of the widget that was dragged from
-			DraggedFromInventory.Empty();
-			for (int i = 0; i < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
-			{
-				for (int j = 0; j < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-				{
-					DraggedFromInventory.Add(TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j]);
-				}
-			}
+			InventoryWindow->Inventory->AddItemByIndex(SecondItem, SlotIndex);
+			TempSwitchSlot->InventoryWindow->Inventory->AddItemByIndex(FirstItem, TempSwitchSlot->SlotIndex);
 
-			// Switch item positions
-			const int TempSlotIndex = TempSwitchSlot->SlotIndex;
-
-			const FItem_Struct TempItem = CurrentInventory[SlotIndex];
-			CurrentInventory[SlotIndex] = DraggedFromInventory[TempSlotIndex];
-			DraggedFromInventory[TempSlotIndex] = TempItem;
-
-			// Move Inventory from 2D back to it's intended shape
-			// Read pointer values to inventory
-			// this inventory
-			int Index = 0;
-			for (int i = 0; i < InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
-			{
-				for (int j = 0; j < InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-				{
-					InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = CurrentInventory[Index];
-					Index++;
-				}
-			}
-
-			// Inventory that was dragged from
-			Index = 0;
-			for (int i = 0; i < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns.Num(); i++)
-			{
-				for (int j = 0; j < TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-				{
-					TempSwitchSlot->InventoryWindow->Inventory->Inventory_Array_Columns[i].Row_Items[j] = DraggedFromInventory[Index];
-					Index++;
-				}
-			}
-		
+			// Make InventorySlot hit testable
 			TempSwitchSlot->SetVisibility(ESlateVisibility::Visible);
 			SetVisibility(ESlateVisibility::Visible);
 			TempSwitchSlot->InventoryWindow->UpdateInventory();

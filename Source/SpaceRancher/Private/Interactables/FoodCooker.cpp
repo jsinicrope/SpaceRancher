@@ -22,7 +22,7 @@ AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	CookerDoor->SetupAttachment(CookerFrame);
 	CookerGrill->SetupAttachment(CookerFrame);
 	TimerWidget->SetupAttachment(CookerFrame);
-	SpawnerComponent->SetupAttachment(CookerFrame);
+	SpawnerComponent->SetupAttachment(CookerGrill);
 }
 
 void AFoodCooker::BeginPlay()

@@ -16,7 +16,7 @@ struct FItemRows
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FItem_Struct> Row_Items;
 
-	FItemRows(int NewRows = 5);
+	FItemRows(const int NewRows = 5);
 };
 
 

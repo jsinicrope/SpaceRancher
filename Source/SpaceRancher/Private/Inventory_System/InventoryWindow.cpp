@@ -37,8 +37,7 @@ void UInventoryWindow::NativeOnInitialized()
 
 void UInventoryWindow::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
 {
-	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
-
+	// TODO: Make drag visual a separate widget to allow for saving position in case the Window is dragged atop another
 	OutOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UWidgetDragOperation::StaticClass());
 	OutOperation->DefaultDragVisual = this;
 	OutOperation->Pivot = EDragPivot::MouseDown;
@@ -61,7 +60,8 @@ FReply UInventoryWindow::NativeOnMouseButtonDown(const FGeometry& InGeometry, co
 bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
 	UWidgetDragOperation* DragOperation = Cast<UWidgetDragOperation>(InOperation);
-	
+
+	// Handle item dropping on inventory
 	if (DragOperation->Tag.Equals(FString("InventorySlot")))
 	{
 		UInventorySlotWidget* InventorySlot = Cast<UInventorySlotWidget>(DragOperation->WidgetReference);
@@ -69,13 +69,16 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 		{
 			return false;
 		}
-
+		
 		if (Inventory == InventorySlot->InventoryWindow->Inventory)
 		{
-			Inventory->AddItem(Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex));
+			const FItem_Struct Item = Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex);
+			Inventory->AddItem(Item);
+			UpdateInventory();
+			return true;
 		}
 		
-		else if (Inventory->AddItem(InventorySlot->SlotContent))
+		if (Inventory->AddItem(InventorySlot->SlotContent))
 		{
 			InventorySlot->InventoryWindow->Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex);
 			
@@ -87,24 +90,19 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 		}
 	}
 
+	// Handle InventoryWindow on InventoryWindow dropping
 	// return false here to not make the InventoryWindow disappear
 	if (DragOperation->Tag.Equals(FString("InventoryWindow")))
 	{
 		UInventoryWindow* InventoryWindow = Cast<UInventoryWindow>(DragOperation->WidgetReference);
 
-		for (int i = 0; i < InventoryWindow->Inventory->ItemSlots; i++)
+		for (int i = 0; i < InventoryWindow->Inventory->ItemSlots && i < Inventory->ItemSlots; i++)
 		{
-			if (i < Inventory->ItemSlots)
+			const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemFromPosition(i);
+			if (Item.bValidItem && !Inventory->AddItem(Item))
 			{
-				const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemFromPosition(i);
-				if (Item.bValidItem)
-				{
-					if (!Inventory->AddItem(Item))
-					{
-						InventoryWindow->Inventory->AddItemByIndex(Item, i);
-						break;
-					}
-				}
+				InventoryWindow->Inventory->AddItemByIndex(Item, i);
+				break;
 			}
 		}
 		UpdateInventory();
@@ -154,33 +152,11 @@ void UInventoryWindow::SortInventory()
 
 bool UInventoryWindow::SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot)
 {
-	TArray<FItem_Struct> Items;
-	for (int i = 0; i < Inventory->Inventory_Array_Columns.Num(); i++)
-	{
-		for (int j = 0; j < Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-		{
-			Items.Add(Inventory->Inventory_Array_Columns[i].Row_Items[j]);
-		}
-	}
-
-	const int FirstSlotIndex = FirstSlot->SlotIndex;
-	const int SecondSlotIndex = SecondSlot->SlotIndex;
-
-	const FItem_Struct TempItem = Items[FirstSlotIndex];
-	Items[FirstSlotIndex] = Items[SecondSlotIndex];
-	Items[SecondSlotIndex] = TempItem;
+	const FItem_Struct FirstItem = Inventory->RemoveItemFromPosition(FirstSlot->SlotIndex);
+	const FItem_Struct SecondItem = Inventory->RemoveItemFromPosition(SecondSlot->SlotIndex);
+	Inventory->AddItemByIndex(FirstItem, SecondSlot->SlotIndex);
+	Inventory->AddItemByIndex(SecondItem, FirstSlot->SlotIndex);
 	
-	// Move Inventory from 2D back to it's intended shape
-	// Read pointer values to inventory
-	int index = 0;
-	for (int i = 0; i < Inventory->Inventory_Array_Columns.Num(); i++)
-	{
-		for (int j = 0; j < Inventory->Inventory_Array_Columns[i].Row_Items.Num(); j++)
-		{
-			Inventory->Inventory_Array_Columns[i].Row_Items[j] = Items[index];
-			index++;
-		}
-	}
 	UpdateInventory();
 	return true;
 }
