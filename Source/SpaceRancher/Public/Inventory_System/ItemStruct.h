@@ -43,8 +43,10 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 
 	FItem_Struct()
 	{
-		Name = FString("ZZZ");
+		Name = FString("");
 		Thumbnail = nullptr;
 		ItemClass = nullptr;
+		bValidItem = false;
+		bSelectable = false;
 	}
 };

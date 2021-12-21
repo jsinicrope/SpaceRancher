@@ -198,7 +198,9 @@ bool UInventoryComponent::SortInventory()
 		}
 	}
 
+	// Sort by name THEN sort the invalid (empty) item to the back
 	Algo::SortBy(Items, &FItem_Struct::Name);
+	Algo::SortBy(Items, &FItem_Struct::bValidItem, TGreater<>());
 	
 	// Move Inventory from 2D back to it's intended shape
 	// Read pointer values to inventory
