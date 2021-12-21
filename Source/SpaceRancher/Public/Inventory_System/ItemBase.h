@@ -30,7 +30,7 @@ public:
 
 	// A required item to collect the item. Empty if none is needed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FName RequiredItem = FName("");
+	TSubclassOf<AItemBase> RequiredItem = nullptr;
 
 	UFUNCTION(BlueprintCallable)
 	bool CollectItem(bool bAddToInventory = true);

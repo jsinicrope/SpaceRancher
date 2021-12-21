@@ -4,6 +4,7 @@
 #include "Components/WidgetComponent.h"
 #include "Widgets/UI/FoodCookerTimer.h"
 #include "Components/SpawnerComponent.h"
+#include "Inventory_System/ItemBase.h"
 #include "Characters/Main Character/MyCharacter.h"
 
 AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
@@ -60,31 +61,34 @@ void AFoodCooker::Tick(float DeltaTime)
 
 void AFoodCooker::Interact_Implementation()
 {
-	if (bDoorOpen)
+	
+}
+
+bool AFoodCooker::ItemInteract_Implementation(FItem_Struct EquippedItem)
+{
+	if (EquippedItem.ItemClass == RequiredItem)
 	{
-		if (PC)
+		if (bDoorOpen)
 		{
-			const FItem_Struct Item = PC->RemoveItemFromInventoryFromPosition(0, 0);
-			if (Item.Name.Equals(RequiredItem))
-			{
-				QueueCooking();
-			}
-		}
-		DoorTimelineComponent->Reverse();
-		bDoorOpen = false;
-	}
-	else
-	{
-		if (bCookingQueued)
-		{
-			StartCooking();
+			QueueCooking();
+			DoorTimelineComponent->Reverse();
+			bDoorOpen = false;
 		}
 		else
 		{
-			DoorTimelineComponent->Play();
-			bDoorOpen = true;
+			if (bCookingQueued)
+			{
+				StartCooking();
+			}
+			else
+			{
+				DoorTimelineComponent->Play();
+				bDoorOpen = true;
+			}
 		}
+		return true;
 	}
+	return false;
 }
 
 void AFoodCooker::QueueCooking()
@@ -112,7 +116,7 @@ void AFoodCooker::EndCooking()
 	SpawnerComponent->Spawn();
 }
 
-void AFoodCooker::UpdateTimelineComp(float Output)
+void AFoodCooker::UpdateTimelineComp(const float Output)
 {
 	// Create and set our Door's new relative location based on the output from our Timeline Curve
 	const FRotator DoorNewRotation = FRotator(0.0f, Output, 0.0f);

@@ -50,12 +50,12 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 	return true;
 }
 
-void UMainGameInstance::SetTime(int Hour, int Minute)
+void UMainGameInstance::SetTime(const int Hour, const int Minute)
 {
 	GameMinutes += (Hour - GameHour) * 60 + Minute - GameMinute;
 }
 
-void UMainGameInstance::AccelerateTime(int Hour, int Minute, float Speed)
+void UMainGameInstance::AccelerateTime(const int Hour, const int Minute, const float Speed)
 {
 	int MinutesToSkip;
 	const int CurrentGameMinutes = GameHour * 60 + GameMinute;
@@ -84,11 +84,8 @@ bool UMainGameInstance::GetSaveGame()
 		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
 		return true;
 	}
-	else
-	{
-		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
-		return false;
-	}
+	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
+	return false;
 }
 
 void UMainGameInstance::NewSave(FString OldSave)

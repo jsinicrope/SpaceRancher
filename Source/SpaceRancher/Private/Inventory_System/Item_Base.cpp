@@ -32,7 +32,7 @@ void AItemBase::Interact_Implementation()
 // Default function returns true to signal the item was used up.
 bool AItemBase::ItemInteract_Implementation(FItem_Struct EquippedItem)
 {
-	if (RequiredItem.IsEqual(FName("")) || EquippedItem.Name.Equals(RequiredItem.ToString()))
+	if (!RequiredItem || EquippedItem.ItemClass == RequiredItem)
 	{
 		CollectItem(true);
 	}

@@ -21,6 +21,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	virtual void Interact_Implementation() override;
+	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -48,7 +49,7 @@ protected:
 	class UFoodCookerTimer* CookerTimer;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
-	FString RequiredItem;
+	TSubclassOf<class AItemBase> RequiredItem = nullptr;
 
 	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bDoorOpen = false;
@@ -88,5 +89,5 @@ private:
 
 	//Function which updates our Door's relative location with the timeline graph
 	UFUNCTION()
-	void UpdateTimelineComp(float Output);
+	void UpdateTimelineComp(const float Output);
 };

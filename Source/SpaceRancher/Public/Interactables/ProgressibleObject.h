@@ -9,15 +9,16 @@
 #include "ProgressibleObject.generated.h"
 
 UCLASS()
-class SPACERANCHER_API AProgressableObject : public AActor, public IInteractInterface, public ISaveable
+class SPACERANCHER_API AProgressibleObject : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProgressableObject();
+	AProgressibleObject();
 
 	virtual void Interact_Implementation() override;
+	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
 	virtual void LoadActor_Implementation() override;
 	virtual void PreLoadActor_Implementation() override;
 	virtual void SaveActor_Implementation() override;
@@ -27,15 +28,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame)
 	int RequiredAmount = 1;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString ItemName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* ItemThumbnail = nullptr;
+	TSubclassOf<class AItemBase> RequiredItem;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame)
 	int Stage = 0;
@@ -56,7 +54,7 @@ public:
 	class AMyCharacter* PlayerCharacter;
 
 	UFUNCTION(BlueprintCallable)
-	void SetWidget(UTexture2D* ItemTexture, FString NameOfItem = FString(""), int ItemAmount = -1);
+	void SetWidget(const int ItemAmount = -1);
 
 	UFUNCTION(BlueprintCallable)
 	bool ShowWidget();
@@ -66,4 +64,6 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	bool AdvanceStage();
+
+	void IncrementStage();
 };

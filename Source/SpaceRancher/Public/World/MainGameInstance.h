@@ -59,7 +59,7 @@ public:
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	int Difficulty;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(BlueprintReadOnly)
 	UMainSaveGame* SaveGameData = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
@@ -73,10 +73,10 @@ public:
 
 	//Functions
 	UFUNCTION(Exec)
-	void SetTime(int Hour, int Minute);
+	void SetTime(const int Hour, const int Minute);
 
 	UFUNCTION(Exec)
-	void AccelerateTime(int Hour, int Minute, float Speed);
+	void AccelerateTime(const int Hour, const int Minute, const float Speed);
 	
 	UFUNCTION()
 	bool GetSaveGame();

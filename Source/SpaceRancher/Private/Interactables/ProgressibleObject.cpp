@@ -3,20 +3,20 @@
 
 #include "Interactables/ProgressibleObject.h"
 #include "UI/NeededItemPopUp.h"
-#include "Engine/Texture2D.h"
 #include "Components/Image.h"
 #include "Characters/Main Character/MyCharacter.h"
+#include "Inventory_System/ItemBase.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
-AProgressableObject::AProgressableObject()
+AProgressibleObject::AProgressibleObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 }
 
 // Called when the game starts or when spawned
-void AProgressableObject::BeginPlay()
+void AProgressibleObject::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -25,7 +25,7 @@ void AProgressableObject::BeginPlay()
 	if (NeededItemPopUpClass != nullptr)
 	{
 		NeededItemWidget = CreateWidget<UNeededItemPopUp>(GetWorld(), NeededItemPopUpClass);
-		SetWidget(ItemThumbnail, ItemName, RequiredAmount);
+		SetWidget(RequiredAmount);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ void AProgressableObject::BeginPlay()
 	}
 }
 
-void AProgressableObject::Interact_Implementation()
+void AProgressibleObject::Interact_Implementation()
 {
 	if (RequiredAmount == 0)
 	{
@@ -42,59 +42,78 @@ void AProgressableObject::Interact_Implementation()
 	
 	for (int i = 0; i < RequiredAmount; i++)
 	{
-		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(ItemName);
+		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(RequiredItem.GetDefaultObject()->Main_Item_Structure.Name);
 		if (AcquiredItem.bValidItem)
 		{
 			RequiredAmount--;
 			if (RequiredAmount == 0)
 			{
-				AdvanceStage();
+				IncrementStage();
 			}
 		}
 		else
 		{
-			SetWidget(ItemThumbnail, ItemName, RequiredAmount);
+			SetWidget(RequiredAmount);
 			ShowWidget();
-			GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressableObject::HideWidget, 2.0f, false, 2.0f);
+			GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressibleObject::HideWidget, 2.0f, false, 2.0f);
 		}
 	}
 }
 
-void AProgressableObject::PreLoadActor_Implementation()
+bool AProgressibleObject::ItemInteract_Implementation(FItem_Struct EquippedItem)
+{
+	if (RequiredAmount == 0)
+	{
+		IncrementStage();
+	}
+	
+	if (EquippedItem.ItemClass == RequiredItem)
+	{
+		RequiredAmount--;
+		if (RequiredAmount == 0)
+		{
+			IncrementStage();
+		}
+	}
+	SetWidget(RequiredAmount);
+	ShowWidget();
+	GetWorldTimerManager().SetTimer(TimerHandler, this, &AProgressibleObject::HideWidget, 2.0f, false, 2.0f);
+	
+	return true;
+}
+
+void AProgressibleObject::PreLoadActor_Implementation()
 {
 	
 }
 
-void AProgressableObject::LoadActor_Implementation()
+void AProgressibleObject::LoadActor_Implementation()
 {
 	
 }
 
-void AProgressableObject::PreSaveActor_Implementation()
+void AProgressibleObject::PreSaveActor_Implementation()
 {
 	
 }
 
-void AProgressableObject::SaveActor_Implementation()
+void AProgressibleObject::SaveActor_Implementation()
 {
 	
 }
 
-void AProgressableObject::SetWidget(UTexture2D* ItemTexture, FString NameOfItem, int ItemAmount)
-{
-	ItemThumbnail = ItemTexture;
-	ItemName = NameOfItem;
-
+void AProgressibleObject::SetWidget(const int ItemAmount)
+{;
 	if (ItemAmount != -1)
 	{
 		RequiredAmount = ItemAmount;
 	}
-	NeededItemWidget->ItemImage->SetBrushFromTexture(ItemTexture);
+	NeededItemWidget->ItemImage->SetBrushFromTexture(RequiredItem.GetDefaultObject()->Main_Item_Structure.Thumbnail);
 
-	NeededItemWidget->SetTextAmount(ItemAmount, NameOfItem);
+	NeededItemWidget->SetTextAmount(ItemAmount, RequiredItem.GetDefaultObject()->Main_Item_Structure.Name);
 }
 
-bool AProgressableObject::ShowWidget()
+bool AProgressibleObject::ShowWidget()
 {
 	if (!NeededItemWidget->IsInViewport())
 	{
@@ -104,18 +123,21 @@ bool AProgressableObject::ShowWidget()
 	return false;
 }
 
-void AProgressableObject::HideWidget()
+void AProgressibleObject::HideWidget()
 {
 	GetWorldTimerManager().ClearTimer(TimerHandler);
 	NeededItemWidget->RemoveFromViewport();
 }
 
-bool AProgressableObject::AdvanceStage_Implementation()
+void AProgressibleObject::IncrementStage()
 {
 	if (Stage < Stages)
 	{
 		Stage++;
-		return true;
 	}
+}
+
+bool AProgressibleObject::AdvanceStage_Implementation()
+{
 	return false;
 }

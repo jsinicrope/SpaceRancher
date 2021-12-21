@@ -118,6 +118,7 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 			TempSwitchSlot->InventoryWindow->UpdateInventory();
 			InventoryWindow->UpdateInventory();
 		}
+		return true;
 	}
-	return true;
+	return false;
 }
