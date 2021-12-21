@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Characters/Main Character/CppPlayerController.h"
-#include "Inventory_System/ItemBase.h"
 #include "Characters/Main Character/MyCharacter.h"
+#include "Inventory_System/ItemBase.h"
 
 AItemBase::AItemBase()
 {
@@ -34,7 +34,7 @@ bool AItemBase::ItemInteract_Implementation(FItem_Struct EquippedItem)
 {
 	if (!RequiredItem || EquippedItem.ItemClass == RequiredItem)
 	{
-		CollectItem(true);
+		return true;
 	}
 	return false;
 }

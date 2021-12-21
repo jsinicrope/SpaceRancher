@@ -1,10 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Items/Harvester.h"
-
+#include "Interactables/HarvesterAffectable.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Items/HarvesterAttachmentBase.h"
 
 AHarvester::AHarvester()
 {
@@ -18,20 +19,36 @@ AHarvester::AHarvester()
 	
 	LaserBeam = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Laser Beam"));
 	LaserBeam->SetupAttachment(LaserHolder);
+
+	AttachmentHolder = CreateDefaultSubobject<USceneComponent>(TEXT("AttachmentHolder"));
+	AttachmentHolder->SetupAttachment(StaticMesh);
+
+	Attachment = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Attachment"));
+	Attachment->SetupAttachment(AttachmentHolder);
 }
 
 void AHarvester::BeginPlay()
 {
 	Super::BeginPlay();
 	LaserBeam->Activate();
-	SetActorTickEnabled(false);
 }
 
 void AHarvester::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	UpdateAimDirection();
+	if (bLaserActive)
+	{
+		UpdateAimDirection();
+		AActor* AffectedActor = GetHitActor();
+		if (AffectedActor)
+		{
+			if (AffectedActor->GetClass()->ImplementsInterface(UHarvesterAffectable::StaticClass()))
+			{
+				IHarvesterAffectable::Execute_PrimaryAffect(AffectedActor, ActiveAttachment, DeltaTime);
+			}
+		}
+	}
 }
 
 void AHarvester::Selected_Implementation()
@@ -49,6 +66,11 @@ void AHarvester::Deactivated_Implementation()
 	DeactivateLaser();
 }
 
+AActor* AHarvester::GetHitActor()
+{
+	return HitActor;
+}
+
 bool AHarvester::ToggleLaser()
 {
 	if (bLaserActive)
@@ -63,7 +85,6 @@ bool AHarvester::ActivateLaser()
 	bLaserActive = true;
 	LaserBeam->Activate();
 	LaserBeam->SetVariableVec3(FName("BeamEnd"), BeamTarget);
-	SetActorTickEnabled(true);
 	return false;
 }
 
@@ -73,7 +94,6 @@ bool AHarvester::DeactivateLaser()
 	{
 		LaserBeam->Deactivate();
 		bLaserActive = false;
-		SetActorTickEnabled(false);
 		return true;
 	}
 	return false;
@@ -99,6 +119,8 @@ void AHarvester::UpdateAimDirection()
 	GetWorld()->LineTraceSingleByChannel(OutHit, Start, TargetViewPoint, Channel, TraceParams);
 	
 	BeamTarget = OutHit.TraceEnd;
+
+	HitActor = OutHit.GetActor();
 	
 	LaserBeam->SetVariableVec3(FName("BeamEnd"), BeamTarget);
 	LaserBeam->SetVariableVec3(FName("BeamStart"), Start);

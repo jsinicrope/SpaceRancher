@@ -10,8 +10,8 @@ APlantPot::APlantPot()
 	if (DefaultPlant)
 	{
 		Plant = Cast<APlant>(DefaultPlant->GetDefaultObject());
-		Width -= Plant->BottomStemThickness;
-		Length -= Plant->BottomStemThickness;
+		Width -= Plant->GetBottomStemThickness();
+		Length -= Plant->GetBottomStemThickness();
 	}
 }
 
@@ -64,7 +64,7 @@ FVector APlantPot::GetRandomPlantSpawnPoint()
 
 	for (int j = 0; j < PlantedPlants.Num(); j++)
 	{
-		const float MinDistance = Cast<APlant>(PlantedPlants[j])->BottomStemThickness + 5.0f;
+		const float MinDistance = Cast<APlant>(PlantedPlants[j])->GetBottomStemThickness() + 5.0f;
 		if (NewPosition.Equals(PlantedPlants[j]->GetActorLocation(), MinDistance))
 		{
 			NewPosition = GetRandomPlantSpawnPoint();
@@ -162,8 +162,8 @@ bool APlantPot::SetNewPlant(class APlant* NewPlant, bool bSpawnPlants, int Amoun
 	if (!Plant)
 	{
 		Plant = NewPlant;
-		Width -= Plant->BottomStemThickness;
-		Length -= Plant->BottomStemThickness;
+		Width -= Plant->GetBottomStemThickness();
+		Length -= Plant->GetBottomStemThickness();
 		
 		if (bSpawnPlants)
 		{

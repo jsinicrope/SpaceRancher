@@ -49,12 +49,36 @@ void APlant::Interact_Implementation()
 
 bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
 {
-	const bool Success = Super::ItemInteract_Implementation(EquippedItem);
-	if (Success)
+	if (RequiredAttachment == EHarvesterAttachmentType::None)
 	{
-		PickupPlant();
+		const bool Success = Super::ItemInteract_Implementation(EquippedItem);
+		if (Success)
+		{
+			PickupPlant();
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, TEXT("Different Harvesting Attachment required"));
 	}
 	return false;
+}
+
+void APlant::PrimaryAffect_Implementation(TSubclassOf<AHarvesterAttachmentBase> Attachment, float DeltaAffectedTime)
+{
+	const FHarvesterAttachment_Struct AttachmentStruct = Attachment.GetDefaultObject()->GetAttachment_Struct();
+	if (RequiredAttachment == EHarvesterAttachmentType::None || AttachmentStruct.Type == RequiredAttachment)
+	{
+		AffectedTime += DeltaAffectedTime;
+		if (AffectedTime >= RequiredAffectTime)
+		{
+			PickupPlant();
+		}
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, TEXT("Different Harvesting Attachment required"));
+	}
 }
 
 void APlant::LoadActor_Implementation()

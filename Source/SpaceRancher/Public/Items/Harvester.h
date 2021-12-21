@@ -32,6 +32,15 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UNiagaraComponent* LaserBeam;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* AttachmentHolder;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* Attachment;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class AHarvesterAttachmentBase> ActiveAttachment;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float LaserRange = 750.0f;
@@ -41,10 +50,16 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	FVector BeamTarget;
+
+	UPROPERTY()
+	AActor* HitActor = nullptr;
 	
 public:
 	UFUNCTION(BlueprintGetter)
 	bool GetLaserActive() const	{return bLaserActive;}
+
+	UFUNCTION(BlueprintCallable)
+	AActor* GetHitActor();
 	
 	UFUNCTION(BlueprintCallable)
 	bool ToggleLaser();

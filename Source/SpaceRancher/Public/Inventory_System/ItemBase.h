@@ -34,7 +34,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CollectItem(bool bAddToInventory = true);
-
+	
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	class ACppPlayerController* PC;
