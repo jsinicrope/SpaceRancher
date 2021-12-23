@@ -77,4 +77,4 @@ Plugins/Wwise/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
-Plugins/Developer/RiderLink/*
+Plugins/*
