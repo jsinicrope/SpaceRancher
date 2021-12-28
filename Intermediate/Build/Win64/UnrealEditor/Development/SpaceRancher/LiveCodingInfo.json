@@ -31,6 +31,7 @@
 			"Clock.cpp.obj",
 			"CMainHUD.cpp.obj",
 			"HealthAndStaminaBar.cpp.obj",
+			"HUDSetting.cpp.obj",
 			"ItemSelectionHUD.cpp.obj",
 			"ItemSelectionSegment.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
@@ -49,10 +50,11 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"HUDSetting.cpp.obj"
+			"AffectableItemBase.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
+			"AffectableItemBase.gen.cpp.obj",
 			"AttackPlayer.gen.cpp.obj",
 			"Clock.gen.cpp.obj",
 			"CMainHUD.gen.cpp.obj",

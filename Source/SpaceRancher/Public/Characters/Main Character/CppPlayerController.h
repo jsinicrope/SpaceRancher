@@ -37,5 +37,7 @@ public:
 	void SaveGame();
 
 	UFUNCTION(BlueprintCallable, Category = "Saving")
-	void LoadGame();
+	bool LoadGame();
+
+	void ActionLoadGame() {LoadGame();}
 };

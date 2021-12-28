@@ -159,7 +159,7 @@ public: \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
 	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(AMyCharacter, MaxHealth); } \
 	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
-	FORCEINLINE static uint32 __PPO__MaxRegeneratedHealth() { return STRUCT_OFFSET(AMyCharacter, MaxRegeneratedHealth); } \
+	FORCEINLINE static uint32 __PPO__MaxRegeneratableHealth() { return STRUCT_OFFSET(AMyCharacter, MaxRegeneratableHealth); } \
 	FORCEINLINE static uint32 __PPO__TimeToHealthRegen() { return STRUCT_OFFSET(AMyCharacter, TimeToHealthRegen); } \
 	FORCEINLINE static uint32 __PPO__bPlayerDead() { return STRUCT_OFFSET(AMyCharacter, bPlayerDead); } \
 	FORCEINLINE static uint32 __PPO__bDamaged() { return STRUCT_OFFSET(AMyCharacter, bDamaged); } \

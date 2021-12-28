@@ -88,14 +88,14 @@ void AMyCharacter::Tick(float DeltaTime)
 	ElapsedDamageTime += DeltaTime;
 	ElapsedStaminaDrainTime += DeltaTime;
 
-	// Heal Player slowly up to 35 HP if no damage was received in the last 'TimeToHealthRegen' seconds
+	// Heal Player slowly up to MaxRegeneratedHealth if no damage was received in the last 'TimeToHealthRegen' seconds
 	{
-		if (HealthLastTick < Health)
+		if (HealthLastTick > Health)
 			ElapsedDamageTime = 0.0f;
-
+		
 		HealthLastTick = Health;
 
-		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratedHealth))
+		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratableHealth))
 		{
 			Health = fmin(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
 		}
@@ -156,7 +156,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 			if (FallSpeed >= MinFallDamageVelocity)
 			{
-				Health -= (FallSpeed - MinFallDamageVelocity) * FallDamageFactor;
+				Health -= FMath::Pow(FallSpeed - MinFallDamageVelocity, FallDamageFactor);
 			}
 		}
 	}

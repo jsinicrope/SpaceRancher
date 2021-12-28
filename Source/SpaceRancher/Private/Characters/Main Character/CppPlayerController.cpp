@@ -14,7 +14,7 @@ void ACppPlayerController::SetupInputComponent()
 
 	check(InputComponent)
 	InputComponent->BindAction("SaveGame", IE_Released, this, &ACppPlayerController::SaveGame);
-	InputComponent->BindAction("LoadGame", IE_Released, this, &ACppPlayerController::LoadGame);
+	InputComponent->BindAction("LoadGame", IE_Released, this, &ACppPlayerController::ActionLoadGame);
 }
 
 void ACppPlayerController::BeginPlay()
@@ -40,7 +40,7 @@ void ACppPlayerController::SaveGame()
 	GameInstance->SaveGame();
 }
 
-void ACppPlayerController::LoadGame()
+bool ACppPlayerController::LoadGame()
 {
-	GameInstance->LoadGame();
+	return GameInstance->LoadGame();
 }

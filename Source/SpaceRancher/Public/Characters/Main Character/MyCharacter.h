@@ -36,7 +36,7 @@ protected:
 	float HealthRegenPerSecond = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	float MaxRegeneratedHealth = 35.0f;
+	float MaxRegeneratableHealth = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToHealthRegen = 3.0f;
@@ -87,7 +87,7 @@ protected:
 	float FallingTime = 0.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
-	float FallDamageFactor = 6.0f;
+	float FallDamageFactor = 2.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float MinFallDamageVelocity = 5.0f;
