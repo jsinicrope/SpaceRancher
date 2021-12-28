@@ -4,6 +4,7 @@
 #include "UI/ItemSelectionHUD.h"
 #include "Inventory_System/ItemPickUpWidget.h"
 #include "Characters/Main Character/CppPlayerController.h"
+#include "UI/HealthAndStaminaBar.h"
 #include "UI/Clock.h"
 #include "UI/CMainHUD.h"
 
@@ -23,7 +24,7 @@ void UHUDSetting::BeginPlay()
 		if (MainHUDClass)
 		{
 			MainHUD = CreateWidget<UCMainHUD>(GetWorld(), MainHUDClass);
-			MainHUD->AddToViewport(0);
+			MainHUD->AddToViewport(1);
 		
 		}
 		else
@@ -44,16 +45,22 @@ void UHUDSetting::BeginPlay()
 			ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
 		}
 
+		if (HealthAndStaminaBarClass)
+		{
+			HealthAndStaminaBar = CreateWidget<UHealthAndStaminaBar>(GetWorld(), HealthAndStaminaBarClass);
+			HealthAndStaminaBar->AddToViewport(-1);
+		}
+		
 		if (ClockWidgetClass)
 		{
 			ClockWidget = CreateWidget<UClock>(GetWorld(), ClockWidgetClass);
-			ClockWidget->AddToViewport();
+			ClockWidget->AddToViewport(-1);
 		}
 
 		if (MiniMapClass)
 		{
 			MiniMap = CreateWidget<UUserWidget>(GetWorld(), MiniMapClass);
-			MiniMap->AddToViewport();
+			MiniMap->AddToViewport(-1);
 		}
 
 		if (RadialMenuClass)

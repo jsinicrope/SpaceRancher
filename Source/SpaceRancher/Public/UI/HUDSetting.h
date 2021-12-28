@@ -48,7 +48,13 @@ public:
 	TSubclassOf<class UItemPickUpWidget> ItemPickUpWidgetClass;
 
 	UPROPERTY()
-	class UItemPickUpWidget* ItemPickUpWidget;
+	UItemPickUpWidget* ItemPickUpWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class UHealthAndStaminaBar> HealthAndStaminaBarClass;
+
+	UPROPERTY()
+	UHealthAndStaminaBar* HealthAndStaminaBar;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class UClock> ClockWidgetClass;
