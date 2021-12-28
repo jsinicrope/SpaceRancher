@@ -16,15 +16,22 @@ class ISaveable
 	GENERATED_BODY()
 
 public:
+	/** Called before any saving on the actor takes place
+	 * @return true if the actor should be automatically serialized */
 	UFUNCTION(BlueprintNativeEvent)
-	void SaveActor();
-	
-	UFUNCTION(BlueprintNativeEvent)
-	void PreSaveActor();
-	
-	UFUNCTION(BlueprintNativeEvent)
-	void LoadActor();
+	bool PreSaveActor();
 
+	/** Called before any loading on the actor takes place
+	 * @return true if the actor should be automatically serialized
+	 * @note This might not be called if the actor has not spawned yet */
 	UFUNCTION(BlueprintNativeEvent)
-	void PreLoadActor();
+	bool PreLoadActor();
+
+	// Called after the actor has been saved
+	UFUNCTION(BlueprintNativeEvent)
+	void PostSaveActor();
+
+	// Called after the actor has been successfully spawned and loaded
+	UFUNCTION(BlueprintNativeEvent)
+	void PostLoadActor();
 };

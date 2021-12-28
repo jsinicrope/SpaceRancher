@@ -5,15 +5,14 @@
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Particles/ParticleSystemComponent.h"
-#include "Items/HarvesterAttachmentBase.h"
 
 AHarvester::AHarvester()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
-	AddOwnedComponent(StaticMesh);
-
+	SetRootComponent(StaticMesh);
+	
 	LaserHolder = CreateDefaultSubobject<USceneComponent>(TEXT("LaserHolder"));
 	LaserHolder->SetupAttachment(StaticMesh);
 	
@@ -30,24 +29,31 @@ AHarvester::AHarvester()
 void AHarvester::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SetActorTickEnabled(false);
 }
 
 void AHarvester::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (bLaserActive)
+	if (bLaserActive && !bCollectDeactivated)
 	{
 		UpdateAimDirection();
-		AActor* AffectedActor = GetHitActor();
-		if (AffectedActor)
+		if (HitActor && HitActor == LastAffectedActor)
 		{
-			if (AffectedActor->GetClass()->ImplementsInterface(UHarvesterAffectable::StaticClass()))
+			if (HitActor->GetClass()->ImplementsInterface(UHarvesterAffectable::StaticClass()))
 			{
-				IHarvesterAffectable::Execute_PrimaryAffect(AffectedActor, ActiveAttachment, DeltaTime);
+				IHarvesterAffectable::Execute_PrimaryAffect(HitActor, this, DeltaTime);
 			}
 		}
+		else if (LastAffectedActor)
+		{
+			IHarvesterAffectable::Execute_EndPrimaryAffect(LastAffectedActor, this);
+		}
 	}
+
+	LastAffectedActor = GetHitActor() ? HitActor : LastAffectedActor;
 }
 
 void AHarvester::Selected_Implementation()
@@ -82,9 +88,10 @@ bool AHarvester::ToggleLaser()
 bool AHarvester::ActivateLaser()
 {
 	bLaserActive = true;
+	SetActorTickEnabled(true);
 	LaserBeam->Activate();
 	LaserBeam->SetVariableVec3(FName("BeamEnd"), BeamTarget);
-	return false;
+	return true;
 }
 
 bool AHarvester::DeactivateLaser()
@@ -92,7 +99,13 @@ bool AHarvester::DeactivateLaser()
 	if (bLaserActive)
 	{
 		LaserBeam->Deactivate();
+		SetActorTickEnabled(false);
 		bLaserActive = false;
+		SetCollectDeactivated(false);
+		if (LastAffectedActor)
+		{
+			IHarvesterAffectable::Execute_EndPrimaryAffect(LastAffectedActor, this);
+		}
 		return true;
 	}
 	return false;
@@ -100,7 +113,7 @@ bool AHarvester::DeactivateLaser()
 
 void AHarvester::UpdateAimDirection()
 {
-	const FVector Start = LaserHolder->GetComponentLocation();
+	LaserStart = LaserHolder->GetComponentLocation();
 	
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
@@ -108,19 +121,23 @@ void AHarvester::UpdateAimDirection()
 	ECollisionChannel Channel = ECC_Visibility;
 	FHitResult OutHit(ForceInit);
 
-	FVector TargetViewPoint = PC->GetPlayerCharacter()->GetViewPoint();
+	LaserTarget = PC->GetPlayerCharacter()->GetViewPoint();
 
-	if (FVector::Distance(Start, TargetViewPoint) > LaserRange)
+	if (FVector::Distance(LaserStart, LaserTarget) > LaserRange)
 	{
-		TargetViewPoint = PC->GetPlayerCharacter()->GetViewForwardVector() * LaserRange + Start;
+		LaserTarget = PC->GetPlayerCharacter()->GetViewForwardVector() * LaserRange + LaserStart;
 	}
 
-	GetWorld()->LineTraceSingleByChannel(OutHit, Start, TargetViewPoint, Channel, TraceParams);
+	GetWorld()->LineTraceSingleByChannel(OutHit, LaserStart, LaserTarget, Channel, TraceParams);
 	
 	BeamTarget = OutHit.TraceEnd;
 
-	HitActor = PC->GetPlayerCharacter()->GetViewedActor();
+	HitActor = PC->GetPlayerCharacter()->LineTraceFromView(LaserRange).GetActor();
+	if (HitActor)
+	{
+		HitActor = HitActor->Implements<UHarvesterAffectable>() ? HitActor : nullptr;
+	}
 	
 	LaserBeam->SetVariableVec3(FName("BeamEnd"), BeamTarget);
-	LaserBeam->SetVariableVec3(FName("BeamStart"), Start);
+	LaserBeam->SetVariableVec3(FName("BeamStart"), LaserStart);
 }

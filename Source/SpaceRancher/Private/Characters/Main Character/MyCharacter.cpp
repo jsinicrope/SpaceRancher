@@ -51,7 +51,10 @@ AMyCharacter::AMyCharacter()
 	WidgetInteractionComponent->SetupAttachment(PlayerCamera);
 
 	MiniMapCamera = CreateDefaultSubobject<UChildActorComponent>(TEXT("MiniMapCamera"));
-	AddOwnedComponent(MiniMapCamera);
+	MiniMapCamera->SetupAttachment(RootComponent);
+
+	MiniMapCamera->SetRelativeLocation(FVector(0, 0, 10000));
+	MiniMapCamera->SetRelativeRotation(FRotator(270, 0, 0));
 
 	HandItem = CreateDefaultSubobject<UChildActorComponent>(TEXT("RightHandItem"));
 	HandItem->SetupAttachment(GetMesh(), "hand_rSocket");
@@ -62,7 +65,6 @@ void AMyCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	GameInstance->LoadGame();
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 
@@ -75,7 +77,7 @@ void AMyCharacter::BeginPlay()
 	MiniMapCapture->GetCaptureComponent2D()->HiddenActors.Add(this);
 	ZoomMiniMap(ZoomLevel);
 	
-	RespawnPoint = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	RespawnPoint = GetActorLocation();
 	RespawnViewDirection = GetControlRotation();
 }
 
@@ -121,22 +123,16 @@ void AMyCharacter::Tick(float DeltaTime)
 			PlayerStopSprint();
 	}
 
-	//Call Pop Up for Interaction if Interactable actor is hit
+	// Call Pop Up for Interaction if Interactable actor is hit
 	{
 		bInteractableInRange = CheckForInteractable();
-		if (bInteractableInRange)
+		if (bInteractableInRange && !SelectedItem.ItemClass->ImplementsInterface(UEquippable::StaticClass()))
 		{
-			if (!HUDController->InteractPopUp->IsInViewport())
-			{
-				HUDController->InteractPopUp->AddToViewport();
-			}
+			HUDController->ShowInteractPopUp();
 		}
 		else
 		{
-			if (HUDController->InteractPopUp->IsInViewport())
-			{
-				HUDController->InteractPopUp->RemoveFromViewport();
-			}
+			HUDController->HideInteractPopUp();
 		}
 	}
 
@@ -154,7 +150,6 @@ void AMyCharacter::Tick(float DeltaTime)
 		{
 			// Calculate Landing Velocity
 			// 2 * acceleration * delta time = velocity
-			// 9.81 average gravity acceleration; should be same in engine
 			const float FallSpeed = 9.81 * FallingTime;
 
 			FallingTime = 0.0f;
@@ -193,9 +188,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Inventory", IE_Released, this, &AMyCharacter::ToggleInventory);
 	PlayerInputComponent->BindAction("ItemSelection", IE_Pressed, this, &AMyCharacter::OpenRadialMenu);
 	PlayerInputComponent->BindAction("ItemSelection", IE_Released, this, &AMyCharacter::CloseRadialMenu);
-	
-	PlayerInputComponent->BindAction("SaveGame", IE_Released, this, &AMyCharacter::SaveGame);
-	PlayerInputComponent->BindAction("LoadGame", IE_Released, this, &AMyCharacter::LoadGame);
 
 	PlayerInputComponent->BindAction("MapZoomIn", IE_Released, this, &AMyCharacter::ZoomMiniMapIn);
 	PlayerInputComponent->BindAction("MapZoomOut", IE_Released, this, &AMyCharacter::ZoomMiniMapOut);
@@ -214,19 +206,7 @@ void AMyCharacter::PlayerInteract()
 	bInventoryOpen = InventoryComp->GetInventoryOpen();
 	if (!bInventoryOpen && HUDController->MainHUD->GetInventoryWidgetsOnScreenScreen() <= 0)
 	{
-		FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
-		TraceParams.bTraceComplex = true;
-		TraceParams.bReturnPhysicalMaterial = false;
-
-		FHitResult OutHit(ForceInit);
-
-		FVector Start = PlayerCamera->GetComponentLocation();
-		FVector End = Start + (PlayerCamera->GetForwardVector() * InteractDistance);
-
-		ECollisionChannel Channel = ECC_Visibility;
-
-		GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-		
+		const FHitResult OutHit = LineTraceFromView(InteractDistance);
 		if (OutHit.GetActor())
 		{
 			AActor* Actor = OutHit.GetActor();
@@ -237,7 +217,8 @@ void AMyCharacter::PlayerInteract()
 				{
 					if (IInteractInterface::Execute_ItemInteract(Actor, SelectedItem))
 					{
-						RemoveItemFromInventory(SelectedItem);
+						RemoveInventoryItem(SelectedItem);
+						UpdateSelectedItem();
 					}
 				}
 				else
@@ -283,19 +264,9 @@ bool AMyCharacter::GetIsPlayerDead()
 	return bPlayerDead;
 }
 
-void AMyCharacter::SaveGame()
+void AMyCharacter::Save()
 {
-	GameInstance->SaveGame();
-}
-
-void AMyCharacter::LoadGame()
-{
-	GameInstance->LoadGame();
-}
-
-void AMyCharacter::SavePlayerCharacter()
-{
-	UMainSaveGame* SaveData = GameInstance->SaveGameData;
+	UMainSaveGame* SaveData = GameInstance->GetSaveGameData();
 	CurrentVelocity = GetCharacterMovement()->Velocity;
 	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 
@@ -303,12 +274,12 @@ void AMyCharacter::SavePlayerCharacter()
 	FMemoryWriter MemoryWriterPlayer(PlayerRecord.Data, true);
 	FActorSaveArchive PlayerAr(MemoryWriterPlayer, false);
 	Serialize(PlayerAr);
-	GameInstance->SaveGameData->PlayerCharacterData = PlayerRecord;
+	GameInstance->GetSaveGameData()->PlayerCharacterData = PlayerRecord;
 }
 
-void AMyCharacter::LoadPlayerCharacter()
+void AMyCharacter::Load()
 {
-	UMainSaveGame* SaveData = GameInstance->SaveGameData;
+	UMainSaveGame* SaveData = GameInstance->GetSaveGameData();
 	InventoryComp->Inventory_Array_Columns = SaveData->Player_Inventory_Array_Columns;
 
 	// De-Serialize
@@ -392,7 +363,7 @@ void AMyCharacter::PlayerStopSprint()
 	bSprinting = false;
 }
 
-bool AMyCharacter::AddItemToInventory(FItem_Struct &Item_Struct)
+bool AMyCharacter::AddInventoryItem(FItem_Struct &Item_Struct)
 {
 	const bool bAddSuccessful = InventoryComp->AddItem(Item_Struct);
 
@@ -410,19 +381,19 @@ bool AMyCharacter::AddItemToInventory(FItem_Struct &Item_Struct)
 	return bAddSuccessful;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventoryFromPosition(int column, int row)
+FItem_Struct AMyCharacter::RemoveInventoryItemFromPosition(int column, int row)
 {
 	FItem_Struct Item = InventoryComp->RemoveItemFromPosition(row, column);
 	return Item;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventory(FItem_Struct &Item)
+FItem_Struct AMyCharacter::RemoveInventoryItem(FItem_Struct &Item)
 {
 	FItem_Struct RemovedItem = InventoryComp->RemoveItem(Item);
 	return RemovedItem;
 }
 
-FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
+FItem_Struct AMyCharacter::RemoveInventoryItemByName(FString ItemName)
 {
 	FItem_Struct RemovedItem = InventoryComp->RemoveItemByName(ItemName);
 	return RemovedItem;
@@ -430,6 +401,8 @@ FItem_Struct AMyCharacter::RemoveItemFromInventoryByName(FString ItemName)
 
 void AMyCharacter::ToggleInventory()
 {
+	if (bItemSelectionOpen)
+		return;
 	InventoryComp->ToggleInventory();
 	bInventoryOpen = InventoryComp->GetInventoryOpen();
 	if (!bInventoryOpen)
@@ -440,7 +413,7 @@ void AMyCharacter::ToggleInventory()
 
 void AMyCharacter::OpenRadialMenu()
 {
-	if (!bItemSelectionOpen)
+	if (!bItemSelectionOpen && !InventoryComp->GetInventoryOpen())
 	{
 		TArray<FItem_Struct> Selectables = InventoryComp->GetUniqueSelectables();
 		HUDController->OpenRadialMenu(Selectables);
@@ -456,7 +429,6 @@ void AMyCharacter::CloseRadialMenu()
 		UpdateSelectedItem();
 	}
 }
-
 
 void AMyCharacter::PrimaryActionPressed_Implementation()
 {
@@ -481,7 +453,8 @@ void AMyCharacter::PrimaryActionReleased_Implementation()
 void AMyCharacter::UpdateSelectedItem()
 {
 	const FItem_Struct ActiveItem = HUDController->RadialMenu->GetSelectedItem();
-	SelectedItem = ActiveItem;
+	SelectedItem = InventoryComp->Contains(ActiveItem) ? ActiveItem : FItem_Struct();
+	
 	bItemSelectionOpen = false;
 	if (SelectedItem.bSelectable)
 	{
@@ -533,7 +506,7 @@ void AMyCharacter::RemoveWidgetFromViewport()
 	WidgetToRemove->RemoveFromViewport();
 }
 
-FVector AMyCharacter::GetViewPoint() const
+FVector AMyCharacter::GetViewPoint()
 {
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
@@ -547,7 +520,7 @@ FVector AMyCharacter::GetViewPoint() const
 	ECollisionChannel Channel = ECC_Visibility;
 
 	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-	return OutHit.ImpactPoint;
+	return LineTraceFromView(10000.0f).ImpactPoint;
 }
 
 FVector AMyCharacter::GetViewForwardVector() const
@@ -557,6 +530,17 @@ FVector AMyCharacter::GetViewForwardVector() const
 
 bool AMyCharacter::CheckForInteractable()
 {
+	const FHitResult OutHit = LineTraceFromView(InteractDistance);
+
+	if (OutHit.GetActor())
+	{
+		return OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass());
+	}
+	return false;
+}
+
+FHitResult AMyCharacter::LineTraceFromView(float Distance)
+{
 	FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
 	TraceParams.bTraceComplex = true;
 	TraceParams.bReturnPhysicalMaterial = false;
@@ -564,16 +548,11 @@ bool AMyCharacter::CheckForInteractable()
 	FHitResult OutHit(ForceInit);
 
 	FVector Start = PlayerCamera->GetComponentLocation();
-	FVector End = Start + PlayerCamera->GetForwardVector() * InteractDistance;
+	FVector End = Start + PlayerCamera->GetForwardVector() * Distance;
 
 	ECollisionChannel Channel = ECC_Visibility;
 
 	GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, Channel, TraceParams);
-
-	if (OutHit.GetActor())
-	{
-		ViewedActor = OutHit.GetActor();
-		return OutHit.GetActor()->GetClass()->ImplementsInterface(UInteractInterface::StaticClass());
-	}
-	return false;
+	
+	return OutHit;
 }

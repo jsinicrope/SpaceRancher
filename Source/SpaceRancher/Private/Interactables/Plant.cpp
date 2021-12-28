@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Interactables/Plant.h"
+#include "Items/Harvester.h"
 #include "World/MainGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -9,6 +10,11 @@ APlant::APlant()
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	AddOwnedComponent(StaticMesh);
+
+	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponentDissolving"));
+	NiagaraComponent->SetupAttachment(StaticMesh);
+	NiagaraComponent->SetAutoActivate(false);
 
 	bIsCollectible = bCanBeHarvested;
 	
@@ -23,7 +29,7 @@ void APlant::BeginPlay()
 	Super::BeginPlay();
 	
 	GameInstance = Cast<UMainGameInstance>(GetGameInstance());
-
+	ensureMsgf(NiagaraComponent->GetAsset(), TEXT("No Niagara system set for Plant dissolve effect"));
 	if (StateMeshes.Num() > GrowthState - 1)
 	{
 		StaticMesh->SetStaticMesh(StateMeshes[GrowthState - 1]);
@@ -34,7 +40,7 @@ void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PlantStateAgeMinutes += GameInstance->bIsDay ? DeltaTime : DeltaTime * NightGrowthSpeed;
+	PlantStateAgeMinutes += GameInstance->GetIsDay() ? DeltaTime : DeltaTime * NightGrowthSpeed;
 	
 	if (PlantStateAgeMinutes >= TimePerStage * 60.0f)
 	{
@@ -45,6 +51,10 @@ void APlant::Tick(float DeltaTime)
 void APlant::Interact_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Plant"));
+	if (RequiredAttachment == EHarvesterAttachmentType::None)
+	{
+		PickupPlant();
+	}
 }
 
 bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
@@ -53,31 +63,54 @@ bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
 	return false;
 }
 
-void APlant::PrimaryAffect_Implementation(TSubclassOf<AHarvesterAttachmentBase> Attachment, float DeltaAffectedTime)
+void APlant::PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime)
 {
-	const EHarvesterAttachmentType AttachmentStruct = Attachment.GetDefaultObject()->GetAttachmentType();
-	if (RequiredAttachment == EHarvesterAttachmentType::None || AttachmentStruct == RequiredAttachment)
+	if (IsCurrentlyCollectible() && (RequiredAttachment == EHarvesterAttachmentType::None || Effector->GetAttachmentType() == RequiredAttachment))
 	{
+		SetNiagaraComponentValues(Effector->GetLaserStartPos(), Effector->GetLaserTargetPos());
 		AffectedTime += DeltaAffectedTime;
 		if (AffectedTime >= RequiredAffectTime)
 		{
-			PickupPlant();
+			Execute_EndPrimaryAffect(this, Effector);
+			Effector->SetCollectDeactivated(true);
+			IEquippable::Execute_Deactivated(Effector);
+			if (!PickupPlant())
+				AffectedTime = 0.0f;
 		}
 	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, TEXT("Different Harvesting Attachment required"));
-	}
 }
 
-void APlant::LoadActor_Implementation()
+void APlant::EndPrimaryAffect_Implementation(AHarvester* Effector)
+{
+	NiagaraComponent->Deactivate();
+}
+
+bool APlant::PreSaveActor_Implementation()
+{
+	return Super::PreSaveActor_Implementation();
+}
+
+bool APlant::PreLoadActor_Implementation()
+{
+	return Super::PreLoadActor_Implementation();
+}
+
+void APlant::PostLoadActor_Implementation()
 {
 	
 }
 
-void APlant::SaveActor_Implementation()
+void APlant::PostSaveActor_Implementation()
 {
 	
+}
+
+void APlant::SetNiagaraComponentValues(const FVector &AttractionPoint, const FVector &HitPoint)
+{
+	NiagaraComponent->Activate();
+	bAffected = true;
+	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
+	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
 }
 
 bool APlant::GrowPlant()
@@ -95,6 +128,11 @@ bool APlant::GrowPlant()
 	}
 	
 	return false;
+}
+
+bool APlant::IsCurrentlyCollectible()
+{
+	return GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState;
 }
 
 bool APlant::PickupPlant()

@@ -93,6 +93,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void OpenInventory();
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void CloseInventory();
+
 	// Toggles Inventory and that of the player
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventoryWithPlayerInventory();
@@ -113,6 +119,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<FItem_Struct> GetUniqueSelectables();
+
+	UFUNCTION(BlueprintCallable)
+	bool Contains(const FItem_Struct &Item);
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")

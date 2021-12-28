@@ -19,10 +19,10 @@ public:
 
 	virtual void Interact_Implementation() override;
 	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
-	virtual void LoadActor_Implementation() override;
-	virtual void PreLoadActor_Implementation() override;
-	virtual void SaveActor_Implementation() override;
-	virtual void PreSaveActor_Implementation() override;
+	virtual void PostLoadActor_Implementation() override;
+	virtual bool PreLoadActor_Implementation() override;
+	virtual void PostSaveActor_Implementation() override;
+	virtual bool PreSaveActor_Implementation() override;
 
 protected:
 	// Called when the game starts or when spawned

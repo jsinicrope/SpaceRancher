@@ -12,7 +12,9 @@ void ACppPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	check(InputComponent);
+	check(InputComponent)
+	InputComponent->BindAction("SaveGame", IE_Released, this, &ACppPlayerController::SaveGame);
+	InputComponent->BindAction("LoadGame", IE_Released, this, &ACppPlayerController::LoadGame);
 }
 
 void ACppPlayerController::BeginPlay()
@@ -28,8 +30,17 @@ void ACppPlayerController::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
-void ACppPlayerController::SetTime(int Hour, int Minute) const
+void ACppPlayerController::SetTime(const int Hour, const int Minute) const
 {
-	const float NewTime = Hour * 1.25f + Minute / 60.0f * 1.25f;
-	GameInstance->GameMinutes = NewTime;
+	GameInstance->SetTime(Hour, Minute);
+}
+
+void ACppPlayerController::SaveGame()
+{
+	GameInstance->SaveGame();
+}
+
+void ACppPlayerController::LoadGame()
+{
+	GameInstance->LoadGame();
 }

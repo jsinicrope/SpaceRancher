@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "World/SpawnerVolume.h"
+
+#include "Components/BrushComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "World/SpawnerMeshInstance.h"
@@ -8,6 +10,7 @@
 ASpawnerVolume::ASpawnerVolume()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	GetBrushComponent()->SetMobility(EComponentMobility::Movable);
 }
 
 void ASpawnerVolume::BeginPlay()
@@ -16,7 +19,7 @@ void ASpawnerVolume::BeginPlay()
 	
 	if (bSpawnOnBeginPlay)
 	{
-		SpawnActors();
+		SpawnObjects();
 	}
 	
 	SetActorTickEnabled(false);
@@ -28,14 +31,39 @@ void ASpawnerVolume::BeginPlay()
 
 void ASpawnerVolume::BeginDestroy()
 {
-	DeleteAllActors();
+	DeleteAllObjects();
 
 	Super::BeginDestroy();
 }
 
-void ASpawnerVolume::SetCanRespawn(bool value)
+bool ASpawnerVolume::PreSaveActor_Implementation()
 {
-	bCanRespawn = value;
+	SpawnedObjectsLastSave = SpawnedObjects;
+	return true;
+}
+
+bool ASpawnerVolume::PreLoadActor_Implementation()
+{
+	return true;
+}
+
+void ASpawnerVolume::PostSaveActor_Implementation()
+{
+	
+}
+
+void ASpawnerVolume::PostLoadActor_Implementation()
+{
+	if (!SpawnedActors[0]) return;
+	while (SpawnedObjects > SpawnedObjectsLastSave && SpawnedObjectsLastSave != 0)
+	{
+		DeleteLastAddedActor();
+	}
+}
+
+void ASpawnerVolume::SetCanRespawn(const bool bValue)
+{
+	bCanRespawn = bValue;
 	if (bCanRespawn)
 	{
 		SetActorTickEnabled(true);
@@ -56,7 +84,7 @@ void ASpawnerVolume::Tick(float DeltaSeconds)
 		VerifyActiveActors();
 		if (SpawnedObjects <= MaxNumberBeforeRespawn)
 		{
-			AddActors(AmountToRespawn);
+			AddObjects(AmountToRespawn);
 		}
 		TimeSinceRespawn = 0.0f;
 	}
@@ -238,16 +266,16 @@ void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstanceWorldSpace(Spawn);
 }
 
-void ASpawnerVolume::SpawnActors()
+void ASpawnerVolume::SpawnObjects()
 {
 	SpawnPoints.Empty();
 	SpawnRotation.Empty();
-	DeleteAllActors();
+	DeleteAllObjects();
 	if (Meshes.Num() >= 1)	PrepareMeshInstancing();
-	AddActors();
+	AddObjects();
 }
 
-void ASpawnerVolume::AddActors(int Amount)
+void ASpawnerVolume::AddObjects(int Amount)
 {
 	SpawnPoints.Empty();
 	SpawnRotation.Empty();
@@ -321,9 +349,9 @@ void ASpawnerVolume::AddActors(int Amount)
 }
 
 
-void ASpawnerVolume::AddActors()
+void ASpawnerVolume::AddObjects()
 {
-	AddActors(Population);
+	AddObjects(Population);
 }
 
 void ASpawnerVolume::VerifyActiveActors()
@@ -346,7 +374,21 @@ void ASpawnerVolume::VerifyActiveActors()
 	}
 }
 
-void ASpawnerVolume::DeleteAllActors()
+void ASpawnerVolume::DeleteLastAddedActor()
+{
+	if (SpawnedActors.IsEmpty() || SpawnedActors.Last() == nullptr) return;
+	SpawnedActors.Last()->Destroy();
+	SpawnedActors.RemoveAt(SpawnedActors.Num() - 1);
+	SpawnedObjects--;
+}
+
+void ASpawnerVolume::DeleteLastAddedMesh()
+{
+	InstancedMeshes.Last()->Destroy();
+	SpawnedObjects--;
+}
+
+void ASpawnerVolume::DeleteAllObjects()
 {
 	for (int i = 0; i < SpawnedActors.Num(); i++)
 	{

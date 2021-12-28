@@ -8,8 +8,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FHitResult;
 struct FVector;
-class AActor;
 struct FItem_Struct;
 class UHUDSetting;
 class UInventoryComponent;
@@ -18,29 +18,27 @@ class UInventoryComponent;
 #endif
 #define SPACERANCHER_MyCharacter_generated_h
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_SPARSE_DATA
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_SPARSE_DATA
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_RPC_WRAPPERS \
 	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
 	virtual void PrimaryActionReleased_Implementation(); \
 	virtual void PrimaryActionPressed_Implementation(); \
  \
+	DECLARE_FUNCTION(execLineTraceFromView); \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
-	DECLARE_FUNCTION(execGetViewedActor); \
 	DECLARE_FUNCTION(execGetViewPoint); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
 	DECLARE_FUNCTION(execGetSelectedItem); \
 	DECLARE_FUNCTION(execCloseRadialMenu); \
 	DECLARE_FUNCTION(execOpenRadialMenu); \
 	DECLARE_FUNCTION(execToggleInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
-	DECLARE_FUNCTION(execRemoveItemFromInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryFromPosition); \
-	DECLARE_FUNCTION(execAddItemToInventory); \
-	DECLARE_FUNCTION(execLoadPlayerCharacter); \
-	DECLARE_FUNCTION(execSavePlayerCharacter); \
-	DECLARE_FUNCTION(execLoadGame); \
-	DECLARE_FUNCTION(execSaveGame); \
+	DECLARE_FUNCTION(execRemoveInventoryItemByName); \
+	DECLARE_FUNCTION(execRemoveInventoryItem); \
+	DECLARE_FUNCTION(execRemoveInventoryItemFromPosition); \
+	DECLARE_FUNCTION(execAddInventoryItem); \
+	DECLARE_FUNCTION(execLoad); \
+	DECLARE_FUNCTION(execSave); \
 	DECLARE_FUNCTION(execGetIsPlayerDead); \
 	DECLARE_FUNCTION(execRespawnPlayer); \
 	DECLARE_FUNCTION(execKillPlayer); \
@@ -64,28 +62,26 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execPrimaryActionPressed);
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void OnSelectedItemChanged_Implementation(FItem_Struct& Item); \
 	virtual void PrimaryActionReleased_Implementation(); \
 	virtual void PrimaryActionPressed_Implementation(); \
  \
+	DECLARE_FUNCTION(execLineTraceFromView); \
 	DECLARE_FUNCTION(execCheckForInteractable); \
 	DECLARE_FUNCTION(execGetViewForwardVector); \
-	DECLARE_FUNCTION(execGetViewedActor); \
 	DECLARE_FUNCTION(execGetViewPoint); \
 	DECLARE_FUNCTION(execRemoveWidgetFromViewport); \
 	DECLARE_FUNCTION(execGetSelectedItem); \
 	DECLARE_FUNCTION(execCloseRadialMenu); \
 	DECLARE_FUNCTION(execOpenRadialMenu); \
 	DECLARE_FUNCTION(execToggleInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryByName); \
-	DECLARE_FUNCTION(execRemoveItemFromInventory); \
-	DECLARE_FUNCTION(execRemoveItemFromInventoryFromPosition); \
-	DECLARE_FUNCTION(execAddItemToInventory); \
-	DECLARE_FUNCTION(execLoadPlayerCharacter); \
-	DECLARE_FUNCTION(execSavePlayerCharacter); \
-	DECLARE_FUNCTION(execLoadGame); \
-	DECLARE_FUNCTION(execSaveGame); \
+	DECLARE_FUNCTION(execRemoveInventoryItemByName); \
+	DECLARE_FUNCTION(execRemoveInventoryItem); \
+	DECLARE_FUNCTION(execRemoveInventoryItemFromPosition); \
+	DECLARE_FUNCTION(execAddInventoryItem); \
+	DECLARE_FUNCTION(execLoad); \
+	DECLARE_FUNCTION(execSave); \
 	DECLARE_FUNCTION(execGetIsPlayerDead); \
 	DECLARE_FUNCTION(execRespawnPlayer); \
 	DECLARE_FUNCTION(execKillPlayer); \
@@ -109,15 +105,15 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execPrimaryActionPressed);
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_EVENT_PARMS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_EVENT_PARMS \
 	struct MyCharacter_eventOnSelectedItemChanged_Parms \
 	{ \
 		FItem_Struct Item; \
 	};
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_CALLBACK_WRAPPERS
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_INCLASS_NO_PURE_DECLS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_CALLBACK_WRAPPERS
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
 	friend struct Z_Construct_UClass_AMyCharacter_Statics; \
@@ -126,7 +122,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCharacter)
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_INCLASS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_INCLASS \
 private: \
 	static void StaticRegisterNativesAMyCharacter(); \
 	friend struct Z_Construct_UClass_AMyCharacter_Statics; \
@@ -135,7 +131,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCharacter)
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_STANDARD_CONSTRUCTORS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMyCharacter(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMyCharacter) \
@@ -148,7 +144,7 @@ private: \
 public:
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_ENHANCED_CONSTRUCTORS \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMyCharacter(AMyCharacter&&); \
@@ -159,7 +155,7 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMyCharacter)
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_PRIVATE_PROPERTY_OFFSET \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__Health() { return STRUCT_OFFSET(AMyCharacter, Health); } \
 	FORCEINLINE static uint32 __PPO__MaxHealth() { return STRUCT_OFFSET(AMyCharacter, MaxHealth); } \
 	FORCEINLINE static uint32 __PPO__HealthRegenPerSecond() { return STRUCT_OFFSET(AMyCharacter, HealthRegenPerSecond); } \
@@ -195,7 +191,6 @@ public: \
 	FORCEINLINE static uint32 __PPO__ZoomLevel() { return STRUCT_OFFSET(AMyCharacter, ZoomLevel); } \
 	FORCEINLINE static uint32 __PPO__MaxZoomLevel() { return STRUCT_OFFSET(AMyCharacter, MaxZoomLevel); } \
 	FORCEINLINE static uint32 __PPO__ZoomSize() { return STRUCT_OFFSET(AMyCharacter, ZoomSize); } \
-	FORCEINLINE static uint32 __PPO__ViewedActor() { return STRUCT_OFFSET(AMyCharacter, ViewedActor); } \
 	FORCEINLINE static uint32 __PPO__WidgetToRemove() { return STRUCT_OFFSET(AMyCharacter, WidgetToRemove); } \
 	FORCEINLINE static uint32 __PPO__GameInstance() { return STRUCT_OFFSET(AMyCharacter, GameInstance); } \
 	FORCEINLINE static uint32 __PPO__PC() { return STRUCT_OFFSET(AMyCharacter, PC); } \
@@ -215,32 +210,32 @@ public: \
 	FORCEINLINE static uint32 __PPO__HUDController() { return STRUCT_OFFSET(AMyCharacter, HUDController); }
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_13_PROLOG \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_EVENT_PARMS
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_12_PROLOG \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_EVENT_PARMS
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_GENERATED_BODY_LEGACY \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_PRIVATE_PROPERTY_OFFSET \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_SPARSE_DATA \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_CALLBACK_WRAPPERS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_INCLASS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_STANDARD_CONSTRUCTORS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_PRIVATE_PROPERTY_OFFSET \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_SPARSE_DATA \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_RPC_WRAPPERS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_CALLBACK_WRAPPERS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_INCLASS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_GENERATED_BODY \
+#define SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_PRIVATE_PROPERTY_OFFSET \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_SPARSE_DATA \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_CALLBACK_WRAPPERS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_INCLASS_NO_PURE_DECLS \
-	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_16_ENHANCED_CONSTRUCTORS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_PRIVATE_PROPERTY_OFFSET \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_SPARSE_DATA \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_CALLBACK_WRAPPERS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_INCLASS_NO_PURE_DECLS \
+	SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

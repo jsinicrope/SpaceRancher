@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "NiagaraComponent.h"
+#include "Items/HarvesterAttachmentBase.h"
 #include "Inventory_System/Equippable.h"
 #include "Inventory_System/ItemBase.h"
 #include "Harvester.generated.h"
 
+enum class EHarvesterAttachmentType : uint8;
 UCLASS()
 class SPACERANCHER_API AHarvester : public AItemBase, public IEquippable
 {
@@ -40,10 +42,16 @@ protected:
 	UStaticMeshComponent* Attachment;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class AHarvesterAttachmentBase> ActiveAttachment;
+	TSubclassOf<AHarvesterAttachmentBase> ActiveAttachment;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float LaserRange = 750.0f;
+
+	UPROPERTY(BlueprintReadWrite, BlueprintGetter=GetLaserStartPos)
+	FVector LaserStart;
+
+	UPROPERTY(BlueprintReadWrite, BlueprintGetter=GetLaserTargetPos)
+	FVector LaserTarget;
 
 	UPROPERTY(BlueprintReadWrite, BlueprintGetter=GetLaserActive)
 	bool bLaserActive = false;
@@ -53,13 +61,31 @@ protected:
 
 	UPROPERTY()
 	AActor* HitActor = nullptr;
+
+	UPROPERTY()
+	AActor* LastAffectedActor = nullptr;
+
+	UPROPERTY(BlueprintSetter=SetCollectDeactivated)
+	bool bCollectDeactivated = false;
 	
 public:
 	UFUNCTION(BlueprintGetter)
+	EHarvesterAttachmentType GetAttachmentType() const { return Cast<AHarvesterAttachmentBase>(ActiveAttachment->GetDefaultObject())->GetAttachmentType();}
+	
+	UFUNCTION(BlueprintGetter)
 	bool GetLaserActive() const	{return bLaserActive;}
+
+	UFUNCTION(BlueprintSetter)
+	void SetCollectDeactivated(const bool Value) {bCollectDeactivated = Value;}
 
 	UFUNCTION(BlueprintCallable)
 	AActor* GetHitActor();
+
+	UFUNCTION(BlueprintGetter)
+	FVector GetLaserStartPos() const {return LaserStart;}
+
+	UFUNCTION(BlueprintGetter)
+	FVector GetLaserTargetPos() const {return LaserTarget;}
 	
 	UFUNCTION(BlueprintCallable)
 	bool ToggleLaser();

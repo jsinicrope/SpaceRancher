@@ -31,5 +31,11 @@ public:
 	UMainGameInstance* GetMainGameInstance() const{return GameInstance;}
 
 	UFUNCTION(Exec)
-	void SetTime(int Hour, int Minute = 0) const;
+	void SetTime(const int Hour, const int Minute = 0) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Saving")
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable, Category = "Saving")
+	void LoadGame();
 };

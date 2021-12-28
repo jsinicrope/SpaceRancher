@@ -142,6 +142,11 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 
 void UInventoryComponent::ToggleInventory()
 {
+	!bInventoryOpen ? OpenInventory() : CloseInventory();
+}
+
+void UInventoryComponent::OpenInventory()
+{
 	ensure(InventoryWindow);
 	bInventoryOpen = InventoryWindow->GetInventoryOpen();
 	if (!bInventoryOpen || InventoryWindow->GetParent() == nullptr)
@@ -153,7 +158,14 @@ void UInventoryComponent::ToggleInventory()
 		InventoryWindow->UpdateInventory();
 		InventoryWindow->ShowWindow();
 	}
-	else
+	bInventoryOpen = InventoryWindow->GetInventoryOpen();
+}
+
+void UInventoryComponent::CloseInventory()
+{
+	ensure(InventoryWindow);
+	bInventoryOpen = InventoryWindow->GetInventoryOpen();
+	if (bInventoryOpen || InventoryWindow->GetParent() != nullptr)
 	{
 		InventoryWindow->CloseWindow();
 	}
@@ -251,4 +263,19 @@ TArray<FItem_Struct> UInventoryComponent::GetUniqueSelectables()
 	}
 	
 	return Uniques;
+}
+
+bool UInventoryComponent::Contains(const FItem_Struct& Item)
+{
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			if (Inventory_Array_Columns[i].Row_Items[j] == Item)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }

@@ -27,7 +27,7 @@ public:
 	
 	//Widgets
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class UUserWidget> MainHUDClass;
+	TSubclassOf<UUserWidget> MainHUDClass;
 	
 	UPROPERTY(BlueprintReadOnly)
 	class UCMainHUD* MainHUD;
@@ -36,13 +36,13 @@ public:
 	TSubclassOf<class UItemSelectionHUD> RadialMenuClass;
 
 	UPROPERTY(BlueprintReadOnly)
-	class UItemSelectionHUD* RadialMenu;
+	UItemSelectionHUD* RadialMenu;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class UUserWidget> InteractPopUpClass;
+	TSubclassOf<UUserWidget> InteractPopUpClass;
 	
 	UPROPERTY()
-	class UUserWidget* InteractPopUp;
+	UUserWidget* InteractPopUp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<class UItemPickUpWidget> ItemPickUpWidgetClass;
@@ -54,17 +54,23 @@ public:
 	TSubclassOf<class UClock> ClockWidgetClass;
 
 	UPROPERTY()
-	class UClock* ClockWidget;
+	UClock* ClockWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class UUserWidget> MiniMapClass;
+	TSubclassOf<UUserWidget> MiniMapClass;
 
 	UPROPERTY()
-	class UUserWidget* MiniMap;
+	UUserWidget* MiniMap;
 	
 	UPROPERTY()
-	class UUserWidget* WidgetToRemove;
+	UUserWidget* WidgetToRemove;
 
+	UFUNCTION(BlueprintCallable)
+	void ShowInteractPopUp();
+
+	UFUNCTION(BlueprintCallable)
+	void HideInteractPopUp();
+	
 	UFUNCTION(BlueprintCallable)
 	bool OpenRadialMenu(TArray<FItem_Struct> &Selectables);
 

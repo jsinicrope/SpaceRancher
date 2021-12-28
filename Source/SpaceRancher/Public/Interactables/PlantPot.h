@@ -27,7 +27,10 @@ public:
 
 	virtual void Interact_Implementation() override;
 	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
-	virtual void LoadActor_Implementation() override;
+	virtual bool PreSaveActor_Implementation() override;
+	virtual bool PreLoadActor_Implementation() override;
+	virtual void PostSaveActor_Implementation() override;
+	virtual void PostLoadActor_Implementation() override;
 
 protected:
 	virtual void BeginPlay() override;

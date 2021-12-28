@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "HarvesterAffectable.h"
+#include "NiagaraComponent.h"
 #include "Inventory_System/ItemBase.h"
 #include "Items/HarvesterAttachments.h"
-#include "Items/HarvesterAttachmentBase.h"
 #include "Plant.generated.h"
 
 UCLASS()
@@ -19,9 +19,12 @@ public:
 	
 	virtual void Interact_Implementation() override;
 	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
-	virtual void PrimaryAffect_Implementation(TSubclassOf<AHarvesterAttachmentBase> Attachment, float DeltaAffectedTime) override;
-	virtual void LoadActor_Implementation() override;
-	virtual void SaveActor_Implementation() override;
+	virtual void PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime) override;
+	virtual void EndPrimaryAffect_Implementation(AHarvester* Effector) override;
+	virtual bool PreSaveActor_Implementation() override;
+	virtual bool PreLoadActor_Implementation() override;
+	virtual void PostLoadActor_Implementation() override;
+	virtual void PostSaveActor_Implementation() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -64,6 +67,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RequiredAffectTime = 1.0f;
 
+	UPROPERTY(BlueprintReadOnly)
+	bool bAffected;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EHarvesterAttachmentType RequiredAttachment;
 	
@@ -72,14 +78,20 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetBottomStemThickness, Category="Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMesh;
+
+	UPROPERTY(EditAnywhere)
+	UNiagaraComponent* NiagaraComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Plant|Growth")
 	TArray<UStaticMesh*> StateMeshes;
 
 	UPROPERTY(BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;
+
+	UFUNCTION()
+	void SetNiagaraComponentValues(const FVector &AttractionPoint, const FVector &HitPoint);
 	
 	UFUNCTION(BlueprintCallable, Category="Plant|Growth")
 	bool GrowPlant();
@@ -87,6 +99,9 @@ protected:
 public:
 	UFUNCTION(BlueprintGetter)
 	float GetBottomStemThickness() const {return BottomStemThickness;}
+
+	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
+	bool IsCurrentlyCollectible();
 	
 	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
 	bool PickupPlant();

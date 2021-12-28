@@ -32,8 +32,6 @@ bool UMainGameInstance::Tick(float DeltaSeconds)
 			GameMinutes -= 24 * 60;
 		}
 
-		bIsDay = Sunrise.X * 60 + Sunrise.Y <= GameMinutes && GameMinutes <= Sunset.X * 60 + Sunset.Y ? 1 : 0;
-
 		// Handle Time Acceleration
 		if (bTimeAcceleration)
 		{
@@ -88,6 +86,11 @@ bool UMainGameInstance::GetSaveGame()
 	return false;
 }
 
+bool UMainGameInstance::GetIsDay()
+{
+	return bIsDay = Sunrise.X * 60 + Sunrise.Y <= GameMinutes && GameMinutes <= Sunset.X * 60 + Sunset.Y ? 1 : 0;
+}
+
 void UMainGameInstance::NewSave(FString OldSave)
 {
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
@@ -98,32 +101,44 @@ void UMainGameInstance::NewSave(FString OldSave)
 void UMainGameInstance::SaveGame()
 {
 	GetSaveGame();
-	// Prepare for saving by emptying the old Serialized Data
 	SaveGameData->Data.Empty();
 	
 	SaveGameData->InGameTime = GameMinutes;
 
-	//Save, then serialize PlayerCharacter
+	// Save objects then save player character
 	SaveActors.Empty();
 	
 	UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), SaveActors);
 
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("Savable Actors Found: ") + FString::FromInt(SaveActors.Num()));
 
+	bool* bSerialize = new bool[SaveActors.Num()];
+	for (size_t i = 0; i < SaveActors.Num(); i++)
+	{
+		bSerialize[i] = ISaveable::Execute_PreSaveActor(SaveActors[i]);
+	}
+
 	for (int i = 0; i < SaveActors.Num(); i++)
 	{
-		ISaveable::Execute_PreSaveActor(SaveActors[i]);
-		FActorRecord ActorRecord(SaveActors[i]);
-		FMemoryWriter MemoryWriter(ActorRecord.Data, true);
-		FActorSaveArchive Ar(MemoryWriter, false);
-		MemoryWriter.SetIsSaving(true);
-		SaveActors[i]->Serialize(Ar);
-		SaveGameData->Data.Add(ActorRecord);
-		ISaveable::Execute_SaveActor(SaveActors[i]);
+		if (bSerialize[i])
+		{
+			ensureAlwaysMsgf(bSerialize, TEXT("bSerialize array garbage collected"));
+			FActorRecord ActorRecord(SaveActors[i]);
+			FMemoryWriter MemoryWriter(ActorRecord.Data, true);
+			FActorSaveArchive Ar(MemoryWriter, false);
+			MemoryWriter.SetIsSaving(true);
+			SaveActors[i]->Serialize(Ar);
+			SaveGameData->Data.Add(ActorRecord);
+		}
+	}
+
+	for (AActor* Actor : SaveActors)
+	{
+		ISaveable::Execute_PostSaveActor(Actor);
 	}
 
 	AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	PCharacter->SavePlayerCharacter();
+	PCharacter->Save();
 
 	FString SlotName = SaveName;
 	if (UGameplayStatics::SaveGameToSlot(SaveGameData, SlotName, 0))
@@ -135,37 +150,88 @@ bool UMainGameInstance::LoadGame()
 	if (GetSaveGame())
 	{
 		AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-		PCharacter->LoadPlayerCharacter();
-
+		PCharacter->Load();
 		GameMinutes = SaveGameData->InGameTime;
 
-		//De-Serialize Actors
-		SaveActors.Empty();
+		// De-Serialize Actors
 		UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USaveable::StaticClass(), SaveActors);
-		
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, FString::FromInt(SaveActors.Num()));
-		
-		for (int i = 0; i < SaveGameData->Data.Num(); i++)
+
+		bool* bSerialize = new bool[SaveActors.Num()];
+		for (size_t i = 0; i < SaveActors.Num(); i++)
 		{
-			for (int j = i; j < SaveActors.Num(); j++)
+			bSerialize[i] = ISaveable::Execute_PreLoadActor(SaveActors[i]);
+		}
+		
+		for (FActorRecord &ActorRecord : SaveGameData->Data)
+		{
+			bool bActorFound = false;
+			int ActorIndex = -1;
+			// Match the save data to the correct actor
+			for (size_t i = 0; i < SaveActors.Num(); i++)
 			{
-				if (SaveGameData->Data[i].Name == SaveActors[j]->GetName())
+				if (ActorRecord.Name == SaveActors[i]->GetName())
 				{
-					ISaveable::Execute_PreLoadActor(SaveActors[i]);
-					SaveActors[i]->SetActorTransform(SaveGameData->Data[i].Transform);
-					FMemoryReader MemoryReader(SaveGameData->Data[i].Data, true);
-					FActorSaveArchive Ar(MemoryReader, false);
-					MemoryReader.SetIsLoading(true);
-					SaveActors[i]->Serialize(Ar);
-					ISaveable::Execute_LoadActor(SaveActors[i]);
+					ActorIndex = i;
+					SaveActor = SaveActors[i];
+					bActorFound = true;
 					break;
 				}
 			}
+			
+			if (bActorFound)
+			{
+				ensureAlways(ActorIndex != -1);
+				if (bSerialize[ActorIndex])
+				{
+					SaveActor->SetActorTransform(ActorRecord.Transform);
+					FMemoryReader MemoryReader(ActorRecord.Data, true);
+					FActorSaveArchive Ar(MemoryReader, false);
+					MemoryReader.SetIsLoading(true);
+					SaveActor->Serialize(Ar);
+				}
+			}
+			else
+			{
+				// Spawn Actor
+				UClass* Class = ActorRecord.Class;
+				const FTransform* Transform = &ActorRecord.Transform;
+				FActorSpawnParameters SpawnParameters;
+				// We can force spawn the actor, because we already know that the position is not being blocked
+				SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				AActor* SpawnedActor = GetWorld()->SpawnActor(Class, Transform, SpawnParameters);
+				ActorRecord.Name = SpawnedActor->GetName();
+				
+				ISaveable::Execute_PreLoadActor(SpawnedActor);
+
+				// De-Serialize it's data
+				FMemoryReader MemoryReader(ActorRecord.Data, true);
+				FActorSaveArchive Ar(MemoryReader, false);
+				MemoryReader.SetIsLoading(true);
+				SpawnedActor->Serialize(Ar);
+
+				SaveActors.Add(SpawnedActor);
+			}
+			
+			for (AActor* Actor : SaveActors)
+			{
+				ISaveable::Execute_PostLoadActor(Actor);
+			}
 		}
 
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Game Loaded!"));
+		// We have to save again to update the new names for spawned actors
+		FString SlotName = SaveName;
+		if (UGameplayStatics::SaveGameToSlot(SaveGameData, SlotName, 0))
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Game Loaded!"));
+		else
+			checkNoEntry();
+		
 		return true;
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("No Save Game found"));
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("No Save Game found"));
 	return false;
+}
+
+void UMainGameInstance::DeleteActiveSave() const
+{
+	UGameplayStatics::DeleteGameInSlot(SaveName, 0);
 }

@@ -6,6 +6,8 @@
 #include "UObject/Interface.h"
 #include "HarvesterAffectable.generated.h"
 
+class AHarvester;
+
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
 class UHarvesterAffectable : public UInterface
@@ -21,5 +23,8 @@ class SPACERANCHER_API IHarvesterAffectable
 
 public:
 	UFUNCTION(BlueprintNativeEvent)
-	void PrimaryAffect(TSubclassOf<class AHarvesterAttachmentBase> Attachment, float DeltaAffectedTime);
+	void PrimaryAffect(AHarvester* Effector, float DeltaAffectedTime);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void EndPrimaryAffect(AHarvester* Effector);
 };

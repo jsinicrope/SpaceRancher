@@ -12,7 +12,6 @@ void UHealthAndStaminaBar::NativeOnInitialized()
 	StaminaBar = Cast<UProgressBar>(GetWidgetFromName(FName("StaminaBar")));
 
 	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	
 }
 
 void UHealthAndStaminaBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)

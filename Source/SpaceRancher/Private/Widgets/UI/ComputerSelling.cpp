@@ -24,7 +24,7 @@ void UComputerSelling::Transfer()
 	{
 		for (int i = 0; i < SelectedAmount; i++)
 		{
-			PC->RemoveItemFromInventoryByName(ActiveTile->Item_Struct.Name);
+			PC->RemoveInventoryItemByName(ActiveTile->Item_Struct.Name);
 		}
 		TransferButtonText->SetText(FText::FromString("Sold!"));
 		TimeSinceTransfer = 0.0f;

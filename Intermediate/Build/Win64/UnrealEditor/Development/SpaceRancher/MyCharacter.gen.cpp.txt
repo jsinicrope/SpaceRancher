@@ -8,6 +8,13 @@ E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\CharacterMov
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\RootMotionSource.generated.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\Character.generated.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
+E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
+E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
+E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\SlateWrapperTypes.generated.h
@@ -99,13 +106,6 @@ E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\PropertyPath\Proper
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\DynamicPropertyPath.generated.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UserWidget.generated.h
-E:\SpaceRancher\Source\SpaceRancher\Public\World/MainGameInstance.h
-E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/MainSaveGame.h
-E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\GameFramework/SaveGame.h
-E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SaveGame.generated.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System/InventoryComponent.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h
 E:\UE_5.0EA\Engine\Source\Runtime\UMG\Public\Components/Image.h
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\Slate/SlateTextureAtlasInterface.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\SlateTextureAtlasInterface.generated.h

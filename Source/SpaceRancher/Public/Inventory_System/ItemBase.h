@@ -21,6 +21,10 @@ public:
 
 	virtual void Interact_Implementation() override;
 	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
+	virtual bool PreSaveActor_Implementation() override;
+	virtual bool PreLoadActor_Implementation() override;
+	virtual void PostSaveActor_Implementation() override;
+	virtual void PostLoadActor_Implementation() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem_Struct Main_Item_Structure;

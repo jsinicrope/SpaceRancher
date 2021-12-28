@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Blueprint/UserWidget.h"
 #include "World/MainGameInstance.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "Engine/EngineTypes.h"
@@ -21,7 +20,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -137,9 +136,6 @@ protected:
 	// The amount the zoom changes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	float ZoomSize = 512.0f;
-
-	UPROPERTY(BlueprintGetter=GetViewedActor)
-	AActor* ViewedActor;
 
 	UPROPERTY()
 	UUserWidget* WidgetToRemove;
@@ -263,28 +259,22 @@ public:
 	bool GetIsPlayerDead();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-	void SaveGame();
+	void Save();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-	void LoadGame();
-
-	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-	void SavePlayerCharacter();
-
-	UFUNCTION(BlueprintCallable, Category = "SaveGame")
-	void LoadPlayerCharacter();
+	void Load();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItemToInventory(FItem_Struct &Item_Struct);
+	bool AddInventoryItem(FItem_Struct &Item_Struct);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventoryFromPosition(int column, int row);
+	FItem_Struct RemoveInventoryItemFromPosition(int column, int row);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventory(FItem_Struct &Item);
+	FItem_Struct RemoveInventoryItem(FItem_Struct &Item);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromInventoryByName(FString ItemName);
+	FItem_Struct RemoveInventoryItemByName(FString ItemName);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();
@@ -305,16 +295,16 @@ public:
 	void RemoveWidgetFromViewport();
 
 	UFUNCTION(BlueprintCallable)
-	FVector GetViewPoint() const;
-
-	UFUNCTION(BlueprintGetter)
-	AActor* GetViewedActor() const {return ViewedActor;};
+	FVector GetViewPoint();
 
 	UFUNCTION(BlueprintCallable)
 	FVector GetViewForwardVector() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	bool CheckForInteractable();
+
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	FHitResult LineTraceFromView(float Distance);
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

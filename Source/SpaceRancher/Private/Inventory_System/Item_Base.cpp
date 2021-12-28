@@ -39,12 +39,32 @@ bool AItemBase::ItemInteract_Implementation(FItem_Struct EquippedItem)
 	return false;
 }
 
+bool AItemBase::PreSaveActor_Implementation()
+{
+	return true;
+}
+
+bool AItemBase::PreLoadActor_Implementation()
+{
+	return true;
+}
+
+void AItemBase::PostSaveActor_Implementation()
+{
+	
+}
+
+void AItemBase::PostLoadActor_Implementation()
+{
+	
+}
+
 bool AItemBase::CollectItem(bool bAddToInventory)
 {
 	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)
 	{
-		ItemAdded = PC->GetPlayerCharacter()->AddItemToInventory(Main_Item_Structure);
+		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
 	}
 	if (ItemAdded || !bAddToInventory)
 	{

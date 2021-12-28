@@ -42,7 +42,7 @@ void AProgressibleObject::Interact_Implementation()
 	
 	for (int i = 0; i < RequiredAmount; i++)
 	{
-		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveItemFromInventoryByName(RequiredItem.GetDefaultObject()->Main_Item_Structure.Name);
+		const FItem_Struct AcquiredItem = PlayerCharacter->RemoveInventoryItemByName(RequiredItem.GetDefaultObject()->Main_Item_Structure.Name);
 		if (AcquiredItem.bValidItem)
 		{
 			RequiredAmount--;
@@ -82,22 +82,22 @@ bool AProgressibleObject::ItemInteract_Implementation(FItem_Struct EquippedItem)
 	return true;
 }
 
-void AProgressibleObject::PreLoadActor_Implementation()
+bool AProgressibleObject::PreLoadActor_Implementation()
+{
+	return true;
+}
+
+void AProgressibleObject::PostLoadActor_Implementation()
 {
 	
 }
 
-void AProgressibleObject::LoadActor_Implementation()
+bool AProgressibleObject::PreSaveActor_Implementation()
 {
-	
+	return true;
 }
 
-void AProgressibleObject::PreSaveActor_Implementation()
-{
-	
-}
-
-void AProgressibleObject::SaveActor_Implementation()
+void AProgressibleObject::PostSaveActor_Implementation()
 {
 	
 }

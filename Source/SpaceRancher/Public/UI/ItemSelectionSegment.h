@@ -44,11 +44,9 @@ protected:
 	UPROPERTY(BlueprintReadWrite, BlueprintGetter=GetItem, meta=(ExposeOnSpawn="true"))
 	FItem_Struct Item_Struct;
 
-	UFUNCTION()
 	inline void SetLocalAngle();
 
 	// @Returns the absolute normalized distance to the menus center
-	UFUNCTION()
 	inline float DistToMenuCenter() const;
 
 	UFUNCTION(BlueprintCallable)

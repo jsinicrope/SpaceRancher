@@ -42,7 +42,22 @@ bool APlantPot::ItemInteract_Implementation(FItem_Struct EquippedItem)
 	return false;
 }
 
-void APlantPot::LoadActor_Implementation()
+bool APlantPot::PreSaveActor_Implementation()
+{
+	return true;
+}
+
+bool APlantPot::PreLoadActor_Implementation()
+{
+	return true;
+}
+
+void APlantPot::PostSaveActor_Implementation()
+{
+	
+}
+
+void APlantPot::PostLoadActor_Implementation()
 {
 	
 }

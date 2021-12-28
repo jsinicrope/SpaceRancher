@@ -17,13 +17,7 @@ class SPACERANCHER_API UMainGameInstance : public UGameInstance
 
 public:
 	virtual void Init() override;
-
 	bool Tick(float DeltaSeconds);
-
-	FDelegateHandle TickDelegateHandle;
-
-	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
-	float GameMinutes = 0.0f;
 
 	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	int GameHour;
@@ -34,6 +28,12 @@ public:
 	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	int Day;
 
+protected:
+	FDelegateHandle TickDelegateHandle;
+
+	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
+	float GameMinutes = 0.0f;
+	
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite, Category="Time")
 	float TimeScale = 1.0f;
 
@@ -46,7 +46,7 @@ public:
 	FIntPoint Sunset = FIntPoint(7, 00);
 
 	// Whether the game state is considered as day time or not(night time)
-	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
+	UPROPERTY(SaveGame, BlueprintReadOnly, BlueprintGetter=GetIsDay, Category="Time")
 	bool bIsDay;
 
 	// Hour/Minute
@@ -59,7 +59,7 @@ public:
 	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	int Difficulty;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetSaveGameData)
 	UMainSaveGame* SaveGameData = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Saving")
@@ -71,15 +71,22 @@ public:
 	UPROPERTY()
 	float TimeToAccelerate = 0.0f;
 
-	//Functions
+	/** @returns false if no save game is available */
+	UFUNCTION()
+	bool GetSaveGame();
+
+public:
+	UFUNCTION(BlueprintGetter)
+	bool GetIsDay();
+
+	UFUNCTION(BlueprintGetter)
+	UMainSaveGame* GetSaveGameData() const {return SaveGameData;}
+	
 	UFUNCTION(Exec)
 	void SetTime(const int Hour, const int Minute);
 
 	UFUNCTION(Exec)
 	void AccelerateTime(const int Hour, const int Minute, const float Speed);
-	
-	UFUNCTION()
-	bool GetSaveGame();
 
 	UFUNCTION(BlueprintCallable, Category = "Saving")
 	void NewSave(FString OldSave);
@@ -89,8 +96,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Saving")
 	bool LoadGame();
+
+	UFUNCTION(Exec)
+	void DeleteActiveSave() const;
 	
 private:
 	UPROPERTY()
 	TArray<AActor*> SaveActors;
+
+	UPROPERTY()
+	AActor* SaveActor;
 };

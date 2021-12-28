@@ -38,10 +38,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddToCanvas(UWidget* Widget);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddInteractableWidgetToCanvas(UWidget* Widget);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddInventoryWidgetToCanvas(UWidget* Widget);
 
 	UFUNCTION()

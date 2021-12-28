@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Volume.h"
+#include "Saves/Saveable.h"
 #include "SpawnerVolume.generated.h"
 
 UENUM(BlueprintType, meta=(DisplayName="SpawnState"))
@@ -16,7 +17,7 @@ enum class ESpawnState : uint8
 
 
 UCLASS(HideCategories=(Collision, HLOD, Navigation))
-class SPACERANCHER_API ASpawnerVolume : public AVolume
+class SPACERANCHER_API ASpawnerVolume : public AVolume, public ISaveable
 {
 	GENERATED_BODY()
 
@@ -27,7 +28,12 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginDestroy() override;
 
-	void SetCanRespawn(bool value);
+	virtual bool PreSaveActor_Implementation() override;
+	virtual bool PreLoadActor_Implementation() override;
+	virtual void PostSaveActor_Implementation() override;
+	virtual void PostLoadActor_Implementation() override;
+
+	void SetCanRespawn(const bool bValue);
 	
 protected:
 	// Actors
@@ -35,7 +41,7 @@ protected:
 	bool bUseActors = true;
 	
 	// Classes to spawn
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(DisplayThumbnail="true", EditCondition="Meshes.Num() <= 0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(DisplayThumbnail="true"))
 	TArray<TSubclassOf<AActor>> ActorClasses;
 
 	// Variational properties for meshes
@@ -56,7 +62,7 @@ protected:
 	bool bUseMeshes = true;
 	
 	// Meshes to spawn
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Meshes", meta=(DisplayThumbnail="true", EditCondition="ActorClasses.Num() <= 0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Meshes", meta=(DisplayThumbnail="true"))
 	TArray<UStaticMesh*> Meshes;
 
 	// Variational properties for meshes
@@ -81,7 +87,7 @@ protected:
 	UPROPERTY()
 	TArray<AActor*> SpawnedActors;
 
-	UPROPERTY()
+	UPROPERTY(SaveGame)
 	int SpawnedObjects = 0;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
@@ -141,12 +147,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
 	int AmountToRespawn = 1;
 
-	UPROPERTY()
+	UPROPERTY(SaveGame)
 	float TimeSinceRespawn = 0.0f;
 
 	// The maximum number of items still active before they can be respawned
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Respawn")
 	int MaxNumberBeforeRespawn = 2;
+
+	// Saving
+	UPROPERTY(SaveGame)
+	int SpawnedObjectsLastSave = Population;
 	
 	UFUNCTION()
 	bool LineTraceToGround(FVector &NewPoint, FRotator &OutRotation) const;
@@ -174,16 +184,22 @@ protected:
 	void SpawnMesh(FVector SpawnPoint, FRotator Rotation);
 	
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
-	void SpawnActors();
+	void SpawnObjects();
 
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
-	void AddActors();
+	void AddObjects();
 	
-	void AddActors(int Amount);
+	void AddObjects(int Amount);
 
 	UFUNCTION()
 	void VerifyActiveActors();
 
+	UFUNCTION(BlueprintCallable, Category="Spawner")
+	void DeleteLastAddedActor();
+
+	UFUNCTION(BlueprintCallable, Category="Spawner")
+	void DeleteLastAddedMesh();
+
 	UFUNCTION(BlueprintCallable, CallInEditor, Category="Spawner")
-	void DeleteAllActors();
+	void DeleteAllObjects();
 };

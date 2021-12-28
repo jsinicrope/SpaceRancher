@@ -34,7 +34,7 @@ void UComputerBuying::Transfer()
 	{
 		for (int i = 0; i < SelectedAmount; i++)
 		{
-			PC->AddItemToInventory(ActiveTile->Item_Struct);
+			PC->AddInventoryItem(ActiveTile->Item_Struct);
 		}
 		MaxAmount -= SelectedAmount;
 		TransferButtonText->SetText(FText::FromString("Bought!"));

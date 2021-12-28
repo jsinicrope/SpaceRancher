@@ -15,53 +15,73 @@ UHUDSetting::UHUDSetting()
 void UHUDSetting::BeginPlay()
 {
 	Super::BeginPlay();
-
 	PlayerController = Cast<ACppPlayerController>(GetOwner()->GetInstigatorController());
+
+	// No need to create widgets for simulating mode
+	if (PlayerController)
+	{
+		if (MainHUDClass)
+		{
+			MainHUD = CreateWidget<UCMainHUD>(GetWorld(), MainHUDClass);
+			MainHUD->AddToViewport(0);
+		
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No MainHUD set"));
+			UE_LOG(LogTemp, Warning, TEXT("No MainHUD set in UHUDSettings"));
+		}
+
+		ensureAlwaysMsgf(MainHUD, TEXT("MainHUD returns nullptr after creation in HUDSetting"));
 	
-	if (MainHUDClass)
-	{
-		MainHUD = CreateWidget<UCMainHUD>(GetWorld(), MainHUDClass);
-		MainHUD->AddToViewport(100);
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("No MainHUD set"));
-		UE_LOG(LogTemp, Warning, TEXT("No MainHUD set in UHUDSettings"));
-	}
+		if (InteractPopUpClass)
+		{
+			InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
+		}
 
-	ensureAlwaysMsgf(MainHUD, TEXT("MainHUD returns nullptr after creation in HUDSetting"));
-	
-	if (InteractPopUpClass)
-	{
-		InteractPopUp = CreateWidget<UUserWidget>(GetWorld(), InteractPopUpClass);
-	}
+		if (ItemPickUpWidgetClass)
+		{
+			ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
+		}
 
-	if (ItemPickUpWidgetClass)
-	{
-		ItemPickUpWidget = CreateWidget<UItemPickUpWidget>(GetWorld(), ItemPickUpWidgetClass);
-	}
+		if (ClockWidgetClass)
+		{
+			ClockWidget = CreateWidget<UClock>(GetWorld(), ClockWidgetClass);
+			ClockWidget->AddToViewport();
+		}
 
-	if (ClockWidgetClass)
-	{
-		ClockWidget = CreateWidget<UClock>(GetWorld(), ClockWidgetClass);
-		ClockWidget->AddToViewport();
-	}
+		if (MiniMapClass)
+		{
+			MiniMap = CreateWidget<UUserWidget>(GetWorld(), MiniMapClass);
+			MiniMap->AddToViewport();
+		}
 
-	if (MiniMapClass)
-	{
-		MiniMap = CreateWidget<UUserWidget>(GetWorld(), MiniMapClass);
-		MiniMap->AddToViewport();
-	}
-
-	if (RadialMenuClass)
-	{
-		RadialMenu = CreateWidget<UItemSelectionHUD>(GetWorld(), RadialMenuClass);
+		if (RadialMenuClass)
+		{
+			RadialMenu = CreateWidget<UItemSelectionHUD>(GetWorld(), RadialMenuClass);
+		}
 	}
 }
 
 void UHUDSetting::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
+void UHUDSetting::ShowInteractPopUp()
+{
+	if (InteractPopUp && !InteractPopUp->IsInViewport())
+	{
+		InteractPopUp->AddToViewport();
+	}
+}
+
+void UHUDSetting::HideInteractPopUp()
+{
+	if (InteractPopUp && InteractPopUp->IsInViewport())
+	{
+		InteractPopUp->RemoveFromViewport();
+	}
 }
 
 bool UHUDSetting::OpenRadialMenu(TArray<FItem_Struct> &Selectables)
