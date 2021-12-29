@@ -2,14 +2,13 @@
 
 
 #include "Items/AffectableItemBase.h"
-
 #include "Inventory_System/Equippable.h"
 #include "Items/Harvester.h"
 
 AAffectableItemBase::AAffectableItemBase()
 {
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	AddOwnedComponent(StaticMesh);
+	SetRootComponent(StaticMesh);
 
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponentDissolving"));
 	NiagaraComponent->SetupAttachment(StaticMesh);
@@ -38,7 +37,7 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 			Effector->SetCollectDeactivated(true);
 			IEquippable::Execute_Deactivated(Effector);
 			AffectedTime = 0.0f;
-			CollectItem();
+			Collect();
 		}
 		return true;
 	}

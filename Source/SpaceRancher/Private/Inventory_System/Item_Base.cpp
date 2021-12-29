@@ -21,7 +21,7 @@ void AItemBase::BeginPlay()
 
 void AItemBase::Interact_Implementation()
 {
-	if (!CollectItem(true))
+	if (!Collect(true))
 	{
 		const FString ObjectName = GetName();
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString("No interaction implemented for interacted item: ") + ObjectName);
@@ -59,7 +59,7 @@ void AItemBase::PostLoadActor_Implementation()
 	
 }
 
-bool AItemBase::CollectItem(bool bAddToInventory)
+bool AItemBase::Collect(bool bAddToInventory)
 {
 	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)

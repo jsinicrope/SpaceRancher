@@ -3,11 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Harvester.h"
 #include "Interactables/HarvesterAffectable.h"
 #include "Inventory_System/ItemBase.h"
 #include "AffectableItemBase.generated.h"
-
-enum class EHarvesterAttachmentType : uint8;
 
 UCLASS()
 class SPACERANCHER_API AAffectableItemBase : public AItemBase, public IHarvesterAffectable
@@ -17,10 +16,11 @@ class SPACERANCHER_API AAffectableItemBase : public AItemBase, public IHarvester
 public:
 	AAffectableItemBase();
 	
-	virtual void PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime) override;
+	virtual void PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime) override final;
 	virtual void EndPrimaryAffect_Implementation(AHarvester* Effector) override;
-	
-	bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime);
+
+	// This function is called when the PrimaryAffect Interface function is called
+	virtual bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime);
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -29,7 +29,7 @@ protected:
 	UPROPERTY(EditAnywhere)
 	class UNiagaraComponent* NiagaraComponent;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, SaveGame)
 	float AffectedTime = 0.0f;
 
 	// The time required to harvest the plant

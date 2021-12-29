@@ -9,13 +9,6 @@ APlant::APlant()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	AddOwnedComponent(StaticMesh);
-
-	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponentDissolving"));
-	NiagaraComponent->SetupAttachment(StaticMesh);
-	NiagaraComponent->SetAutoActivate(false);
-
 	bIsCollectible = bCanBeHarvested;
 	
 	if (StateMeshes.Num() > 0)
@@ -53,7 +46,7 @@ void APlant::Interact_Implementation()
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Plant"));
 	if (RequiredAttachment == EHarvesterAttachmentType::None)
 	{
-		PickupPlant();
+		Collect();
 	}
 }
 
@@ -63,7 +56,7 @@ bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
 	return false;
 }
 
-void APlant::PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime)
+bool APlant::PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime)
 {
 	if (IsCurrentlyCollectible() && (RequiredAttachment == EHarvesterAttachmentType::None || Effector->GetAttachmentType() == RequiredAttachment))
 	{
@@ -74,15 +67,12 @@ void APlant::PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffec
 			Execute_EndPrimaryAffect(this, Effector);
 			Effector->SetCollectDeactivated(true);
 			IEquippable::Execute_Deactivated(Effector);
-			if (!PickupPlant())
+			if (!Collect())
 				AffectedTime = 0.0f;
 		}
+		return true;
 	}
-}
-
-void APlant::EndPrimaryAffect_Implementation(AHarvester* Effector)
-{
-	NiagaraComponent->Deactivate();
+	return false;
 }
 
 bool APlant::PreSaveActor_Implementation()
@@ -103,14 +93,6 @@ void APlant::PostLoadActor_Implementation()
 void APlant::PostSaveActor_Implementation()
 {
 	
-}
-
-void APlant::SetNiagaraComponentValues(const FVector &AttractionPoint, const FVector &HitPoint)
-{
-	NiagaraComponent->Activate();
-	bAffected = true;
-	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
-	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
 }
 
 bool APlant::GrowPlant()
@@ -135,11 +117,11 @@ bool APlant::IsCurrentlyCollectible()
 	return GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState;
 }
 
-bool APlant::PickupPlant()
+bool APlant::Collect(bool bAddToInventory)
 {
 	if (GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState)
 	{
-		return CollectItem();
+		return Super::Collect(bAddToInventory);
 	}
 	return false;
 }

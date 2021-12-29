@@ -37,7 +37,7 @@ public:
 	TSubclassOf<AItemBase> RequiredItem = nullptr;
 
 	UFUNCTION(BlueprintCallable)
-	bool CollectItem(bool bAddToInventory = true);
+	virtual bool Collect(bool bAddToInventory = true);
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)

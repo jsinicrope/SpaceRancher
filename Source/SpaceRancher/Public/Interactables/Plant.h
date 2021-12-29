@@ -3,14 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HarvesterAffectable.h"
 #include "NiagaraComponent.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/AffectableItemBase.h"
 #include "Items/HarvesterAttachments.h"
 #include "Plant.generated.h"
 
 UCLASS()
-class SPACERANCHER_API APlant : public AItemBase, public IHarvesterAffectable
+class SPACERANCHER_API APlant : public AAffectableItemBase
 {
 	GENERATED_BODY()
 	
@@ -19,8 +18,7 @@ public:
 	
 	virtual void Interact_Implementation() override;
 	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
-	virtual void PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime) override;
-	virtual void EndPrimaryAffect_Implementation(AHarvester* Effector) override;
+	virtual bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime) override;
 	virtual bool PreSaveActor_Implementation() override;
 	virtual bool PreLoadActor_Implementation() override;
 	virtual void PostLoadActor_Implementation() override;
@@ -59,39 +57,17 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Plant|Growth")
 	int MaxHarvestableState = GrowthStages;
-
-	UPROPERTY(BlueprintReadOnly)
-	float AffectedTime = 0.0f;
-
-	// The time required to harvest the plant
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float RequiredAffectTime = 1.0f;
-
-	UPROPERTY(BlueprintReadOnly)
-	bool bAffected;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EHarvesterAttachmentType RequiredAttachment;
 	
 	/** The thickness/radius of the bottom part of the stem
 	* This is used when spawning it */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetBottomStemThickness, Category="Plant|Properties")
 	float BottomStemThickness = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UStaticMeshComponent* StaticMesh;
-
-	UPROPERTY(EditAnywhere)
-	UNiagaraComponent* NiagaraComponent;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Plant|Growth")
 	TArray<UStaticMesh*> StateMeshes;
 
 	UPROPERTY(BlueprintReadOnly)
 	class UMainGameInstance* GameInstance;
-
-	UFUNCTION()
-	void SetNiagaraComponentValues(const FVector &AttractionPoint, const FVector &HitPoint);
 	
 	UFUNCTION(BlueprintCallable, Category="Plant|Growth")
 	bool GrowPlant();
@@ -103,8 +79,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
 	bool IsCurrentlyCollectible();
 	
-	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
-	bool PickupPlant();
+	virtual bool Collect(bool bAddToInventory = true) override;
 
 	UFUNCTION(BlueprintCallable, Category="Plant|Growth")
 	bool WaterPlant();

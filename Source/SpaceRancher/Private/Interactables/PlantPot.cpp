@@ -166,7 +166,7 @@ void APlantPot::DestroyAllPlants()
 {
 	for (int i = 0; i < PlantedPlants.Num(); i++)
 	{
-		Cast<APlant>(PlantedPlants[i])->CollectItem(false);
+		Cast<APlant>(PlantedPlants[i])->Collect(false);
 	}
 	PlantedPlants.Empty();
 	Plant = nullptr;

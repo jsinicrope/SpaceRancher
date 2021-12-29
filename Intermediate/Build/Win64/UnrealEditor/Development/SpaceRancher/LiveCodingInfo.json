@@ -14,8 +14,6 @@
 			"Computer.cpp.obj",
 			"FoodCooker.cpp.obj",
 			"HarvesterAffectable.cpp.obj",
-			"Plant.cpp.obj",
-			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
 			"Equippable.cpp.obj",
@@ -24,7 +22,6 @@
 			"InventoryTrashSlot.cpp.obj",
 			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
-			"Item_Base.cpp.obj",
 			"Harvester.cpp.obj",
 			"HarvesterAttachmentBase.cpp.obj",
 			"HarvesterAttachments.cpp.obj",
@@ -50,6 +47,9 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
+			"Plant.cpp.obj",
+			"PlantPot.cpp.obj",
+			"Item_Base.cpp.obj",
 			"AffectableItemBase.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
