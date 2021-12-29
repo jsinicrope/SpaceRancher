@@ -24,6 +24,7 @@
 			"InventoryTrashSlot.cpp.obj",
 			"InventoryWindow.cpp.obj",
 			"ItemPickUpWidget.cpp.obj",
+			"Item_Base.cpp.obj",
 			"Harvester.cpp.obj",
 			"HarvesterAttachmentBase.cpp.obj",
 			"HarvesterAttachments.cpp.obj",
@@ -49,7 +50,6 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"Item_Base.cpp.obj",
 			"AffectableItemBase.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
@@ -100,14 +100,14 @@
 			"ProgressibleObject.gen.cpp.obj",
 			"RunAwayFromPlayer.gen.cpp.obj",
 			"Saveable.gen.cpp.obj",
+			"SpaceRancher.init.gen.cpp.obj",
 			"SpawnerComponent.gen.cpp.obj",
 			"SpawnerMeshInstance.gen.cpp.obj",
 			"SpawnerVolume.gen.cpp.obj",
 			"TradingTab.gen.cpp.obj",
 			"WidgetDragOperation.gen.cpp.obj",
 			"Zebos.gen.cpp.obj",
-			"ZebosController.gen.cpp.obj",
-			"SpaceRancher.init.gen.cpp.obj"
+			"ZebosController.gen.cpp.obj"
 		]
 	}
 }

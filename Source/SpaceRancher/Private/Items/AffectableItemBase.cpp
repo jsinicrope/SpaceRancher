@@ -37,7 +37,10 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 			Effector->SetCollectDeactivated(true);
 			IEquippable::Execute_Deactivated(Effector);
 			AffectedTime = 0.0f;
-			Collect();
+			if (bOnlyDestructible)
+				Destroy();
+			else
+				Collect();
 		}
 		return true;
 	}
@@ -51,4 +54,3 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
 	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
 }
-

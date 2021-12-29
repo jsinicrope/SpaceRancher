@@ -9,7 +9,7 @@ APlant::APlant()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	bIsCollectible = bCanBeHarvested;
+	bInventoryAddable = bCanBeHarvested;
 	
 	if (StateMeshes.Num() > 0)
 	{

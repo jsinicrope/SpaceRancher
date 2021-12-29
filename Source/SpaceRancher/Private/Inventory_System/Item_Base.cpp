@@ -32,7 +32,7 @@ void AItemBase::Interact_Implementation()
 // Default function returns true to signal the item was used up.
 bool AItemBase::ItemInteract_Implementation(FItem_Struct EquippedItem)
 {
-	if (!RequiredItem || EquippedItem.ItemClass == RequiredItem)
+	if ((!RequiredItem || EquippedItem.ItemClass == RequiredItem) && bInventoryAddable)
 	{
 		return true;
 	}
@@ -62,7 +62,7 @@ void AItemBase::PostLoadActor_Implementation()
 bool AItemBase::Collect_Implementation(bool bAddToInventory)
 {
 	bool ItemAdded = false;
-	if (bAddToInventory && bIsCollectible)
+	if (bAddToInventory && bInventoryAddable)
 	{
 		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
 	}

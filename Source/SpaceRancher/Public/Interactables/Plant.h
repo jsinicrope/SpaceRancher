@@ -79,7 +79,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Plant|Harvesting")
 	bool IsCurrentlyCollectible();
 	
-	bool Collect_Implementation(bool bAddToInventory = true) override;
+	virtual bool Collect_Implementation(bool bAddToInventory = true) override;
 
 	UFUNCTION(BlueprintCallable, Category="Plant|Growth")
 	bool WaterPlant();

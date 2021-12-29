@@ -30,7 +30,7 @@ public:
 	FItem_Struct Main_Item_Structure;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsCollectible = true;
+	bool bInventoryAddable = true;
 
 	// A required item to collect the item. Empty if none is needed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

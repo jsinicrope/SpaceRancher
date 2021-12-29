@@ -38,6 +38,10 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	bool bAffected;
+
+	// Whether the actor gets collected when it's destroyed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bOnlyDestructible;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EHarvesterAttachmentType RequiredAttachment;
