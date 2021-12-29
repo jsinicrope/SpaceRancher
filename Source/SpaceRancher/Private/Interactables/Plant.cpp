@@ -117,11 +117,11 @@ bool APlant::IsCurrentlyCollectible()
 	return GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState;
 }
 
-bool APlant::Collect(bool bAddToInventory)
+bool APlant::Collect_Implementation(bool bAddToInventory)
 {
 	if (GrowthState >= MinHarvestableState && GrowthState <= MaxHarvestableState)
 	{
-		return Super::Collect(bAddToInventory);
+		return Super::Collect_Implementation(bAddToInventory);
 	}
 	return false;
 }

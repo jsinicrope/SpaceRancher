@@ -59,7 +59,7 @@ void AItemBase::PostLoadActor_Implementation()
 	
 }
 
-bool AItemBase::Collect(bool bAddToInventory)
+bool AItemBase::Collect_Implementation(bool bAddToInventory)
 {
 	bool ItemAdded = false;
 	if (bAddToInventory && bIsCollectible)

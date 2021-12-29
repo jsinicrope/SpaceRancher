@@ -36,8 +36,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AItemBase> RequiredItem = nullptr;
 
-	UFUNCTION(BlueprintCallable)
-	virtual bool Collect(bool bAddToInventory = true);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool Collect(bool bAddToInventory = true);
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)

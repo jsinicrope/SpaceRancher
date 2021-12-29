@@ -14,6 +14,8 @@
 			"Computer.cpp.obj",
 			"FoodCooker.cpp.obj",
 			"HarvesterAffectable.cpp.obj",
+			"Plant.cpp.obj",
+			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
 			"Equippable.cpp.obj",
@@ -47,8 +49,6 @@
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"Plant.cpp.obj",
-			"PlantPot.cpp.obj",
 			"Item_Base.cpp.obj",
 			"AffectableItemBase.cpp.obj"
 		],

@@ -51,3 +51,4 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
 	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
 }
+
