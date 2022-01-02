@@ -28,7 +28,7 @@ protected:
 public:
 	AMyCharacter* GetPlayerCharacter() const {return PlayerCharacter;}
 
-	UMainGameInstance* GetMainGameInstance() const{return GameInstance;}
+	UMainGameInstance* GetMainGameInstance() const {return GameInstance;}
 
 	UFUNCTION(Exec)
 	void SetTime(const int Hour, const int Minute = 0) const;
@@ -40,4 +40,8 @@ public:
 	bool LoadGame();
 
 	void ActionLoadGame() {LoadGame();}
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Credits = 0;
 };

@@ -242,11 +242,7 @@ void AMyCharacter::KillPlayer()
 
 void AMyCharacter::RespawnPlayer()
 {
-	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(RespawnPoint, RespawnViewDirection, false, true);
-	GetCharacterMovement()->StopActiveMovement();
-	Health = MaxHealth;
-	Stamina = MaxStamina;
-	bPlayerDead = false;
+	PC->LoadGame();
 }
 
 void AMyCharacter::DamagePlayer(float Damage)
@@ -273,6 +269,7 @@ void AMyCharacter::Save()
 	FActorRecord PlayerRecord(this);
 	FMemoryWriter MemoryWriterPlayer(PlayerRecord.Data, true);
 	FActorSaveArchive PlayerAr(MemoryWriterPlayer, false);
+	MemoryWriterPlayer.SetIsSaving(true);
 	Serialize(PlayerAr);
 	GameInstance->GetSaveGameData()->PlayerCharacterData = PlayerRecord;
 }
@@ -286,8 +283,8 @@ void AMyCharacter::Load()
 	FActorRecord ActorRecord = SaveData->PlayerCharacterData;
 	FMemoryReader MemoryReader(ActorRecord.Data);
 	FActorSaveArchive Ar(MemoryReader, false);
+	MemoryReader.SetIsLoading(true);
 	Serialize(Ar);
-	
 	const FVector SpawnLocation = ActorRecord.Transform.GetLocation();
 	const FRotator SpawnRotation = ActorRecord.Transform.GetRotation().Rotator();
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
@@ -379,12 +376,6 @@ bool AMyCharacter::AddInventoryItem(FItem_Struct &Item_Struct)
 		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
 	}
 	return bAddSuccessful;
-}
-
-FItem_Struct AMyCharacter::RemoveInventoryItemFromPosition(int column, int row)
-{
-	FItem_Struct Item = InventoryComp->RemoveItemFromPosition(row, column);
-	return Item;
 }
 
 FItem_Struct AMyCharacter::RemoveInventoryItem(FItem_Struct &Item)

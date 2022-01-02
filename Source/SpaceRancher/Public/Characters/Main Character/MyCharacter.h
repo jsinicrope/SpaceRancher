@@ -26,7 +26,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// Health
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetHealth, Category="Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHealth, SaveGame, Category="Health")
 	float Health = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxHealth, Category="Health")
@@ -49,7 +49,7 @@ protected:
 	bool bDamaged = false;
 
 	// Stamina
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, BlueprintGetter=GetStamina, Category="Stamina")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetStamina, SaveGame, Category="Stamina")
 	float Stamina = 100.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxStamina, Category="Stamina")
@@ -93,12 +93,6 @@ protected:
 	float MinFallDamageVelocity = 5.0f;
 
 	// Interaction
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bCanHarvest = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bItemInRange = false;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	float InteractDistance = 250.0f;
 
@@ -266,9 +260,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddInventoryItem(FItem_Struct &Item_Struct);
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveInventoryItemFromPosition(int column, int row);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveInventoryItem(FItem_Struct &Item);
