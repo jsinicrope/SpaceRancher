@@ -67,6 +67,12 @@ public:
 
 	UPROPERTY()
 	UUserWidget* MiniMap;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class UFunds> AvailableFundsClass;
+	
+	UPROPERTY()
+	UFunds* AvailableFunds;
 	
 	UPROPERTY()
 	UUserWidget* WidgetToRemove;

@@ -35,7 +35,6 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveInventoryItemByName); \
 	DECLARE_FUNCTION(execRemoveInventoryItem); \
-	DECLARE_FUNCTION(execRemoveInventoryItemFromPosition); \
 	DECLARE_FUNCTION(execAddInventoryItem); \
 	DECLARE_FUNCTION(execLoad); \
 	DECLARE_FUNCTION(execSave); \
@@ -78,7 +77,6 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execToggleInventory); \
 	DECLARE_FUNCTION(execRemoveInventoryItemByName); \
 	DECLARE_FUNCTION(execRemoveInventoryItem); \
-	DECLARE_FUNCTION(execRemoveInventoryItemFromPosition); \
 	DECLARE_FUNCTION(execAddInventoryItem); \
 	DECLARE_FUNCTION(execLoad); \
 	DECLARE_FUNCTION(execSave); \

@@ -5,8 +5,9 @@
 #include "Inventory_System/ItemPickUpWidget.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "UI/HealthAndStaminaBar.h"
-#include "UI/Clock.h"
 #include "UI/CMainHUD.h"
+#include "UI/Clock.h"
+#include "UI/Funds.h"
 
 UHUDSetting::UHUDSetting()
 {
@@ -66,6 +67,12 @@ void UHUDSetting::BeginPlay()
 		if (RadialMenuClass)
 		{
 			RadialMenu = CreateWidget<UItemSelectionHUD>(GetWorld(), RadialMenuClass);
+		}
+
+		if (AvailableFundsClass)
+		{
+			AvailableFunds = CreateWidget<UFunds>(GetWorld(), AvailableFundsClass);
+			AvailableFunds->AddToViewport();
 		}
 	}
 }

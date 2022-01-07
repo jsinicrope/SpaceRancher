@@ -275,6 +275,11 @@ void ASpawnerVolume::SpawnObjects()
 	AddObjects();
 }
 
+void ASpawnerVolume::AddObjects()
+{
+	AddObjects(Population);
+}
+
 void ASpawnerVolume::AddObjects(int Amount)
 {
 	SpawnPoints.Empty();
@@ -346,12 +351,6 @@ void ASpawnerVolume::AddObjects(int Amount)
 			}
 		}
 	}
-}
-
-
-void ASpawnerVolume::AddObjects()
-{
-	AddObjects(Population);
 }
 
 void ASpawnerVolume::VerifyActiveActors()

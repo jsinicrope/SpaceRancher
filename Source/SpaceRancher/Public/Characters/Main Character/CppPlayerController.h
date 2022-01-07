@@ -30,6 +30,9 @@ public:
 
 	UMainGameInstance* GetMainGameInstance() const {return GameInstance;}
 
+	UFUNCTION(BlueprintGetter)
+	int GetCredits() const {return Credits;}
+
 	UFUNCTION(Exec)
 	void SetTime(const int Hour, const int Minute = 0) const;
 
@@ -42,6 +45,6 @@ public:
 	void ActionLoadGame() {LoadGame();}
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetCredits)
 	int Credits = 0;
 };

@@ -222,8 +222,6 @@ bool UMainGameInstance::LoadGame()
 		FString SlotName = SaveName;
 		if (UGameplayStatics::SaveGameToSlot(SaveGameData, SlotName, 0))
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Game Loaded!"));
-		else
-			checkNoEntry();
 		
 		return true;
 	}
