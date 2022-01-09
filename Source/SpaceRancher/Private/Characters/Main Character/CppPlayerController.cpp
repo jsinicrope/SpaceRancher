@@ -30,6 +30,21 @@ void ACppPlayerController::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
+void ACppPlayerController::AddCredits(int Amount)
+{
+	Credits += Amount;
+}
+
+bool ACppPlayerController::DeductCredits(int Amount)
+{
+	if (Credits - Amount < 0)
+	{
+		return false;
+	}
+	Credits -= Amount;
+	return true;
+}
+
 void ACppPlayerController::SetTime(const int Hour, const int Minute) const
 {
 	GameInstance->SetTime(Hour, Minute);

@@ -34,13 +34,20 @@ void UComputerBuying::Transfer()
 	{
 		for (int i = 0; i < SelectedAmount; i++)
 		{
-			PC->AddInventoryItem(ActiveTile->Item_Struct);
+			if (PC->DeductCredits(ActiveTile->Item_Struct.CreditValue))
+			{
+				PlayerCharacter->AddInventoryItem(ActiveTile->Item_Struct);
+				MaxAmount -= SelectedAmount;
+				TransferButtonText->SetText(FText::FromString("Bought!"));
+				SelectedAmount = 0;
+				UpdateMaxAmount();
+				UpdateSelectedAmountText();
+			}
+			else
+			{
+				TransferButtonText->SetText(FText::FromString("Not enough Credits available"));
+			}
 		}
-		MaxAmount -= SelectedAmount;
-		TransferButtonText->SetText(FText::FromString("Bought!"));
 		TimeSinceTransfer = 0.0f;
-		UpdateMaxAmount();
-		SelectedAmount = 0;
-		UpdateSelectedAmountText();
 	}
 }

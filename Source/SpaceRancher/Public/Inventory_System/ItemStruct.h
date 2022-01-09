@@ -41,6 +41,11 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bSelectable = false;
 
+	/** The Price of this item
+	 * This is a temporary value and will be removed once an economy simulation is implemented */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int CreditValue = 1;
+
 	FItem_Struct()
 	{
 		Name = FString("");

@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Inventory_System/ItemBase.h"
 #include "Inventory_System/ItemStruct.h"
+#include "Characters/Main Character/CppPlayerController.h"
 #include "TradingTab.generated.h"
 
 UCLASS()
@@ -22,7 +23,10 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
-	class AMyCharacter* PC;
+	class AMyCharacter* PlayerCharacter;
+
+	UPROPERTY(BlueprintReadOnly)
+	class ACppPlayerController* PC;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UTileView* ItemTiles;

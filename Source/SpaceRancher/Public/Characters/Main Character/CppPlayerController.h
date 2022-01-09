@@ -33,6 +33,12 @@ public:
 	UFUNCTION(BlueprintGetter)
 	int GetCredits() const {return Credits;}
 
+	UFUNCTION(BlueprintCallable)
+	void AddCredits(int Amount);
+
+	UFUNCTION(BlueprintCallable)
+	bool DeductCredits(int Amount);
+
 	UFUNCTION(Exec)
 	void SetTime(const int Hour, const int Minute = 0) const;
 

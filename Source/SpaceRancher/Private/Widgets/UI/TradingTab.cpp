@@ -31,8 +31,9 @@ void UTradingTab::NativeOnInitialized()
 	DecreaseSelectedAmountButton->OnPressed.AddDynamic(this, &UTradingTab::DecreaseSelectedAmount);
 	TransferButton->OnPressed.AddDynamic(this, &UTradingTab::Transfer);
 
-	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-
+	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
+	PlayerCharacter = Cast<AMyCharacter>(PC->GetPawn());
+	
 	SetAwaitingSelection();
 }
 
@@ -77,9 +78,9 @@ void UTradingTab::DecreaseSelectedAmount()
 
 void UTradingTab::UpdateMaxAmount()
 {
-	if (PC && ActiveTile)
+	if (PlayerCharacter && ActiveTile)
 	{
-		MaxAmount = PC->GetInventoryComp()->GetNumMultipleItems(ActiveTile->Item_Struct.Name);
+		MaxAmount = PlayerCharacter->GetInventoryComp()->GetNumMultipleItems(ActiveTile->Item_Struct.Name);
 	}
 }
 
