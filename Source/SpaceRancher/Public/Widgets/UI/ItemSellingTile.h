@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
 	class UBorder* TileBorder;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
+	class UTextBlock* CreditValue;
+
 	UFUNCTION()
 	void SetWidgets() const;
 

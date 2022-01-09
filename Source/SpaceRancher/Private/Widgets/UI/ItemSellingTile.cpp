@@ -14,6 +14,7 @@ void UItemSellingTile::NativeOnInitialized()
 	ItemName = Cast<UTextBlock>(GetWidgetFromName(FName("ItemName")));
 	ItemDescription = Cast<UTextBlock>(GetWidgetFromName(FName("ItemDescription")));
 	TileBorder = Cast<UBorder>(GetWidgetFromName(FName("Border")));
+	CreditValue = Cast<UTextBlock>(GetWidgetFromName(FName("CreditValue")));
 }
 
 void UItemSellingTile::SetWidgets() const
@@ -23,6 +24,7 @@ void UItemSellingTile::SetWidgets() const
 		ItemDisplay->SetBrushFromTexture(RepresentedItem->Item_Struct.Thumbnail);
 		ItemName->SetText(FText::FromString(RepresentedItem->Item_Struct.Name));
 		ItemDescription->SetText(FText::FromString(RepresentedItem->Item_Struct.Details));
+		CreditValue->SetText(FText::FromString(FString("Credit Value: ") + FString::FromInt(RepresentedItem->Item_Struct.CreditValue)));
 	}
 }
 

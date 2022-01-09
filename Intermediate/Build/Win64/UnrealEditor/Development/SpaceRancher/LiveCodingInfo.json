@@ -38,9 +38,12 @@
 			"ItemSelectionSegment.cpp.obj",
 			"NeededItemPopUp.cpp.obj",
 			"ItemStructTileView.cpp.obj",
+			"ComputerBuying.cpp.obj",
 			"ComputerScreen.cpp.obj",
+			"ComputerSelling.cpp.obj",
 			"FoodCookerTimer.cpp.obj",
 			"ItemSellingTile.cpp.obj",
+			"TradingTab.cpp.obj",
 			"MainGameInstance.cpp.obj",
 			"ActorRecord.cpp.obj",
 			"ActorSaveArchive.cpp.obj",
@@ -48,10 +51,7 @@
 			"Saveable.cpp.obj",
 			"SpawnerMeshInstance.cpp.obj",
 			"SpawnerVolume.cpp.obj",
-			"SpaceRancher.cpp.obj",
-			"ComputerBuying.cpp.obj",
-			"ComputerSelling.cpp.obj",
-			"TradingTab.cpp.obj"
+			"SpaceRancher.cpp.obj"
 		],
 		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
