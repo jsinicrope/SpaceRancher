@@ -97,7 +97,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratableHealth))
 		{
-			Health = fmin(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
+			Health = fmin(MaxHealth, Health + HealthRegenRate * DeltaTime);
 		}
 	}
 
@@ -113,7 +113,7 @@ void AMyCharacter::Tick(float DeltaTime)
 			// Regen Stamina
 			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
 			{
-				Stamina = fmin(MaxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
+				Stamina = fmin(MaxStamina, Stamina + StaminaRegenRate * DeltaTime);
 			}
 		}
 	}
@@ -125,8 +125,7 @@ void AMyCharacter::Tick(float DeltaTime)
 
 	// Call Pop Up for Interaction if Interactable actor is hit
 	{
-		bInteractableInRange = CheckForInteractable();
-		if (bInteractableInRange && !SelectedItem.ItemClass->ImplementsInterface(UEquippable::StaticClass()))
+		if (CheckForInteractable() && !SelectedItem.ItemClass->ImplementsInterface(UEquippable::StaticClass()))
 		{
 			HUDController->ShowInteractPopUp();
 		}
@@ -172,6 +171,8 @@ void AMyCharacter::Tick(float DeltaTime)
 			bPlayerDead = false;
 		}
 	}
+
+	CurrentVelocity = GetCharacterMovement()->Velocity;
 }
 
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -263,7 +264,6 @@ bool AMyCharacter::GetIsPlayerDead()
 void AMyCharacter::Save()
 {
 	UMainSaveGame* SaveData = GameInstance->GetSaveGameData();
-	CurrentVelocity = GetCharacterMovement()->Velocity;
 	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 
 	FActorRecord PlayerRecord(this);

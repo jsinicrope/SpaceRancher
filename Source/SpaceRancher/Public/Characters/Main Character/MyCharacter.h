@@ -26,78 +26,98 @@ protected:
 	virtual void BeginPlay() override;
 
 	// Health
+
+	// The actual current health of the character
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetHealth, SaveGame, Category="Health")
 	float Health = 100.0f;
 
+	// The maximum health of the player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxHealth, Category="Health")
 	float MaxHealth = 100.0f;
 
+	// How much health is regenerated every second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
-	float HealthRegenPerSecond = 10.0f;
+	float HealthRegenRate = 10.0f;
 
+	// How much health can be regenerated through the HealthRegenRate
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float MaxRegeneratableHealth = 100.0f;
 
+	// Time before health gets regenerated after the player gets damage
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Health")
 	float TimeToHealthRegen = 3.0f;
 
+	/** Whether the player is dead
+	 * Internal use only recommended */
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	bool bPlayerDead = false;
 
-	// Set to true if player is damaged
+	// Set to true if player is damaged 
 	UPROPERTY(BlueprintReadOnly, Category="Health")
 	bool bDamaged = false;
 
 	// Stamina
+
+	// The actual current health of the player
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetStamina, SaveGame, Category="Stamina")
 	float Stamina = 100.0f;
-	
+
+	// The maximum amount of stamina
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetMaxStamina, Category="Stamina")
 	float MaxStamina = 100.0f;
 
+	// How much Stamina is regenerated every second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
-	float StaminaRegenPerSecond = 20.0f;
-	
+	float StaminaRegenRate = 20.0f;
+
+	// How much stamina can be regenerated through the StaminaRegenRate
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stamina")
 	float StaminaLossRunning = 50.0f;
 
+	// Time before stamina gets regenerated after the player used stamina
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Stamina")
 	float TimeToStaminaRegen = 2.0f;
 	
 	// Movement
+
+	// The horizontal look turn rate speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float BaseTurnAtRate = 45.0f;
 
+	// The vertical look turn rate speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float BaseLookUpAtRate = 45.0f;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float WalkSpeed = 600.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float SprintSpeed = 1000.0f;
-
+	
+	/** True when the player is actively sprinting
+	 * When this is true, stamina will be drained at the StaminaLossRunning rate*/
 	UPROPERTY(BlueprintReadOnly, Category="Movement")
 	bool bSprinting = false;
 
 	UPROPERTY(BlueprintReadOnly, SaveGame, Category="Movement")
 	FVector CurrentVelocity;
 
+	/** The time since the player started falling
+	 * Used to calculate fall damage */
 	UPROPERTY(BlueprintReadOnly, SaveGame, Category="Movement")
 	float FallingTime = 0.0f;
-	
+
+	// The amount of fall damage
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float FallDamageFactor = 2.0f;
 
+	// The minimum speed which the character has to be, before it gets damaged
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement")
 	float MinFallDamageVelocity = 5.0f;
 
 	// Interaction
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
 	float InteractDistance = 250.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
-	bool bInteractableInRange = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame, Category="Respawn")
 	FVector RespawnPoint;
@@ -111,6 +131,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="ItemSelection")
 	bool bItemSelectionOpen = false;
 
+	// The item that is currently selected from the radial menu
 	UPROPERTY(BlueprintReadOnly, Category="ItemSelection")
 	FItem_Struct SelectedItem;
 
@@ -140,7 +161,8 @@ protected:
 	//Variables hidden in Editor
 	UPROPERTY(BlueprintReadOnly)
 	ACppPlayerController* PC;
-	
+
+	// INTERNAL use only; Used for RemoveWidgetFromViewport
 	UPROPERTY(SaveGame)
 	FTimerHandle TimerHandler;
 
@@ -252,9 +274,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	bool GetIsPlayerDead();
 
+	/* Handles the saving of the character state
+	 * Calling is handled from the MainGameInstance */
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void Save();
 
+	/** Handles the loading of the character state
+	 * Calling is handled from the MainGameInstance */
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void Load();
 
@@ -279,21 +305,25 @@ public:
 	UFUNCTION(BlueprintCallable, Category="ItemSelection")
 	void CloseRadialMenu();
 
+	// Returns the item currently selected in the radial menu
 	UFUNCTION(BlueprintGetter)
 	FItem_Struct GetSelectedItem() const	{return SelectedItem;}
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	void RemoveWidgetFromViewport();
 
+	/** Returns the position of the immediate viewpoint of the player
+	 * Returns a null vector if the player is not looking at any object */
 	UFUNCTION(BlueprintCallable)
 	FVector GetViewPoint();
 
 	UFUNCTION(BlueprintCallable)
 	FVector GetViewForwardVector() const;
 
+	// Returns true if an item with the IInteractInterface was hit
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	bool CheckForInteractable();
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	FHitResult LineTraceFromView(float Distance);
 

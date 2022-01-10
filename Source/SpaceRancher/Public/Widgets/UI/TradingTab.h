@@ -64,12 +64,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UItemStructTileView* ActiveTile;
 
+	// Selected amount to sell of the currently selected item
 	UPROPERTY(BlueprintReadOnly)
 	int SelectedAmount = 0;
 
+	// The max selectable amount for the currently selected item
 	UPROPERTY(BlueprintReadOnly)
 	int MaxAmount = 0;
 
+	/** The time since the Displayed state button (TransferButtonText) was changed
+	 * Used for changing the text back to it's intended state after the user has interacted with the button */
 	UPROPERTY()
 	float TimeSinceTransfer = 0.0f;
 
@@ -91,16 +95,21 @@ protected:
 	UFUNCTION()
 	virtual void UpdateMaxAmount();
 
+	// A virtual function implemented in it's respective subclasses
 	UFUNCTION(BlueprintCallable)
 	virtual void Transfer() {}
 
+	// Updates the representation for whatever item is selected
 	UFUNCTION(BlueprintCallable)
 	virtual void UpdateActiveTile(UObject* NewObject);
 
+	/** Adds an item to the list of items that can be selected
+	 * Function does NOT call UpdateActiveTile, this has to be done manually */
 	UFUNCTION(BlueprintCallable)
 	virtual void AddItemToList(FItem_Struct ItemStruct);
 
 public:
+	// Called when the object is finished initializing and adds and sets all tiles to a list of given items that should be represented
 	UFUNCTION(BlueprintCallable)
 	virtual void SetTiles(TArray<TSubclassOf<AItemBase>> Items);
 };

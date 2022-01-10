@@ -37,7 +37,7 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bValidItem = false;
 
-	// Whether the item should appear in the radial menu if when it's in the players inventory
+	// Whether the item should appear in the radial menu when it's in the players inventory
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bSelectable = false;
 
@@ -55,8 +55,9 @@ struct SPACERANCHER_API FItem_Struct : public FTableRowBase
 		bSelectable = false;
 	}
 
+	// Compares Name, ItemClass and bValidItem to determine equality
 	bool operator==(const FItem_Struct& Struct) const
 	{
-		return Name == Struct.Name;
+		return Name == Struct.Name && bValidItem == Struct.bValidItem && ItemClass == Struct.ItemClass;
 	}
 };

@@ -12,9 +12,9 @@ void UFunds::NativeOnInitialized()
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
 }
 
-void UFunds::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+void UFunds::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
 {
-	Super::NativeTick(MyGeometry, InDeltaTime);
+	Super::NativeTick(MyGeometry, DeltaTime);
 
 	AvailableFunds->SetText(FText::FromString(FString::FromInt(PC->GetCredits())));
 }

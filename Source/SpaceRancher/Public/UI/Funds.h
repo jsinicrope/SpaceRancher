@@ -12,7 +12,7 @@ class SPACERANCHER_API UFunds : public UUserWidget
 	GENERATED_BODY()
 
 	virtual void NativeOnInitialized() override;
-	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
