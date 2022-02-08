@@ -64,7 +64,7 @@ bool AItemBase::Collect_Implementation(bool bAddToInventory)
 	if (!CurrentlyCollectible) { return false; }
 	
 	bool ItemAdded = false;
-	if (bAddToInventory && bInventoryAddable)
+	if (bAddToInventory && bInventoryAddable && !RequiredItem)
 	{
 		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
 	}

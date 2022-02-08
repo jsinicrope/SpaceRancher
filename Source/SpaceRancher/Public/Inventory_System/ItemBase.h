@@ -39,6 +39,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AItemBase> RequiredItem = nullptr;
 
+	// Optionally adds the Item to the players inventory, then destroys it if successful or if no adding was required
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool Collect(bool bAddToInventory = true);
 	

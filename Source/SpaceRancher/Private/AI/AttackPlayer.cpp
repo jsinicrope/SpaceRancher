@@ -9,7 +9,7 @@
 #include "AI/NPC.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-UAttackPlayer::UAttackPlayer(const FObjectInitializer& objectInitializer)  : Super(objectInitializer)
+UAttackPlayer::UAttackPlayer(const FObjectInitializer& ObjectInitializer)  : Super(ObjectInitializer)
 {
 	bNotifyTick = true;
 }

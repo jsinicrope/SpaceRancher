@@ -33,13 +33,6 @@ EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& Owne
 
 FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Enemy, APawn* Entity) const 
 {
-	UNavigationSystemV1* NavSys = UNavigationSystemV1::GetCurrent(GetWorld());
-	if (!NavSys)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("No Nav mesh found"));
-		return FVector();
-	}
-
 	const FVector PlayerLocation = Enemy->GetActorLocation();
 	const FVector EntityLocation = Entity->GetActorLocation();
 	const float XLocationDelta = PlayerLocation.X - EntityLocation.X;

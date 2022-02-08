@@ -15,7 +15,7 @@ class SPACERANCHER_API UAttackPlayer : public UBTTaskNode
 
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	
-	UAttackPlayer(const FObjectInitializer& objectInitializer);
+	UAttackPlayer(const FObjectInitializer& ObjectInitializer);
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

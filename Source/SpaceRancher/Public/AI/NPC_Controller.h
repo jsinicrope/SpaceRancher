@@ -39,7 +39,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UAISenseConfig_Sight* SightConfig;
 	
-
+	// Called when a hostile Pawn was Detected
 	UFUNCTION()
 	void OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus);
 };
+	

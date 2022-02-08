@@ -22,6 +22,8 @@ public:
 	// This function is called when the PrimaryAffect Interface function is called
 	virtual bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime);
 
+	virtual bool Collect_Implementation(bool bAddToInventory) override;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMesh;
@@ -38,6 +40,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	bool bAffected;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bHandCollectible = false;
 
 	// Whether the actor gets collected when it's destroyed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

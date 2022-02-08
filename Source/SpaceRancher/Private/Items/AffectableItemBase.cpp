@@ -5,6 +5,8 @@
 #include "DrawDebugHelpers.h"
 #include "Interfaces/Equippable.h"
 #include "Items/Harvester.h"
+#include "Characters/Main Character/CppPlayerController.h"
+#include "Characters/Main Character/MyCharacter.h"
 
 AAffectableItemBase::AAffectableItemBase()
 {
@@ -38,11 +40,26 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 			Effector->SetCollectDeactivated(true);
 			IEquippable::Execute_Deactivated(Effector);
 			AffectedTime = 0.0f;
-			if (bOnlyDestructible)
-				Destroy();
-			else
-				Collect();
+			
+			if (bOnlyDestructible) { Destroy(); }
+			
+			else { Collect(true); }
 		}
+		return true;
+	}
+	return false;
+}
+
+bool AAffectableItemBase::Collect_Implementation(bool bAddToInventory)
+{
+	bool ItemAdded = false;
+	if (bAddToInventory && bInventoryAddable && bHandCollectible)
+	{
+		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
+	}
+	if (ItemAdded || !bAddToInventory)
+	{
+		this->Destroy();
 		return true;
 	}
 	return false;

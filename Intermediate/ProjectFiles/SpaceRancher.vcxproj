@@ -830,6 +830,7 @@
     </ClCompile>
     <ClInclude Include="..\..\Plugins\Developer\RiderLink\Source\RiderShaderInfoDump\RiderShaderInfoDump.h" />
     <None Include="..\..\Source\SpaceRancher\SpaceRancher.Build.cs" />
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\HarvestResource.cpp" />
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\RockSheep.cpp" />
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interfaces\Attackable.cpp" />
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interfaces\HarvesterAffectable.cpp">
@@ -908,6 +909,7 @@
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\HarvestResource.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\RockSheep.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\Attackable.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\Equippable.h" />
