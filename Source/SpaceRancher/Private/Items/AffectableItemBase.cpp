@@ -2,7 +2,8 @@
 
 
 #include "Items/AffectableItemBase.h"
-#include "Inventory_System/Equippable.h"
+#include "DrawDebugHelpers.h"
+#include "Interfaces/Equippable.h"
 #include "Items/Harvester.h"
 
 AAffectableItemBase::AAffectableItemBase()
@@ -53,4 +54,6 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 	bAffected = true;
 	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
 	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
+	
+	// DrawDebugLine(GetWorld(), HitPoint, AttractionPoint, FColor::Red, false, 0.1f, 0, 8);
 }

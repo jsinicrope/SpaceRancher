@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "NiagaraComponent.h"
 #include "Items/HarvesterAttachmentBase.h"
-#include "Inventory_System/Equippable.h"
+#include "Interfaces/Equippable.h"
 #include "Inventory_System/ItemBase.h"
 #include "Harvester.generated.h"
 

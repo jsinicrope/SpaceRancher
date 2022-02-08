@@ -38,7 +38,7 @@ protected:
 	
 private:
 	UPROPERTY()
-	class AMyCharacter* Player = nullptr;
+	ACharacter* Enemy = nullptr;
 
 	UPROPERTY()
 	float TimeSinceLastAttack = AttackSpeed;

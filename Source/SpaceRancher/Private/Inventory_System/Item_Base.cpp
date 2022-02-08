@@ -61,6 +61,8 @@ void AItemBase::PostLoadActor_Implementation()
 
 bool AItemBase::Collect_Implementation(bool bAddToInventory)
 {
+	if (!CurrentlyCollectible) { return false; }
+	
 	bool ItemAdded = false;
 	if (bAddToInventory && bInventoryAddable)
 	{

@@ -11,26 +11,27 @@
 
 URunAwayFromPlayer::URunAwayFromPlayer()
 {
-
+	
 }
 
 EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
-
+	
+	APawn* Enemy = Cast<APawn>(Blackboard->GetValueAsObject(FName("TargetActor")));
 	const auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
 
-	const FVector NewTargetPosition = GetRunAwayPoint(ControlledPawn);
+	const FVector NewTargetPosition = GetRunAwayPoint(Enemy, ControlledPawn);
 
 	Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
 
-	ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
 	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
 
 	return EBTNodeResult::Succeeded;
 }
 
-FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Entity)
+FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Enemy, APawn* Entity) const 
 {
 	UNavigationSystemV1* NavSys = UNavigationSystemV1::GetCurrent(GetWorld());
 	if (!NavSys)
@@ -39,7 +40,7 @@ FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Entity)
 		return FVector();
 	}
 
-	const FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	const FVector PlayerLocation = Enemy->GetActorLocation();
 	const FVector EntityLocation = Entity->GetActorLocation();
 	const float XLocationDelta = PlayerLocation.X - EntityLocation.X;
 	const float YLocationDelta = PlayerLocation.Y - EntityLocation.Y;
@@ -48,16 +49,16 @@ FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Entity)
 	const float Rotation = FMath::RadiansToDegrees(FMath::Atan2(YLocationDelta, XLocationDelta)) - (180.0f + FMath::RandRange(-DirectionalNoiseDeg, DirectionalNoiseDeg));
 	
 	// Add noise for more random run direction
-	FRotator RunDirection(0, Rotation, 0);
-	float RunAwayDistance = FMath::RandRange(MinNewDistance, MaxNewDistance);
+	const FRotator RunDirection(0, Rotation, 0);
+	const float RunAwayDistance = FMath::RandRange(MinNewDistance, MaxNewDistance);
 	FVector NewLocation = UKismetMathLibrary::GetForwardVector(RunDirection) * RunAwayDistance;
 	
 	NewLocation += EntityLocation;
 	
 	// Debugging line
-	FVector ReprLocation = NewLocation;
-	ReprLocation.Z = EntityLocation.Z;
+	FVector RepresentedLocation = NewLocation;
+	RepresentedLocation.Z = EntityLocation.Z;
 
-	UKismetSystemLibrary::DrawDebugLine(GetWorld(), EntityLocation, ReprLocation, FColor::Blue, 1.0f, 12.3333f);
+	UKismetSystemLibrary::DrawDebugLine(GetWorld(), EntityLocation, RepresentedLocation, FColor::Blue, 1.0f, 12.3333f);
 	return NewLocation;
 }

@@ -6,8 +6,9 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
-ANPC_Controller::ANPC_Controller(const FObjectInitializer& ObjectInitializer)
+ANPC_Controller::ANPC_Controller(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIPerception"));
 	SetPerceptionComponent(*AIPerceptionComponent);
 
@@ -42,4 +43,5 @@ void ANPC_Controller::OnPawnDetected(AActor* UpdatedActor, struct FAIStimulus St
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString("Player seen!"));
 	GetBlackboardComponent()->SetValueAsBool(FName("CanSeePlayer"), Stimulus.WasSuccessfullySensed());
+	GetBlackboardComponent()->SetValueAsObject(FName("TargetActor"), UpdatedActor);
 }

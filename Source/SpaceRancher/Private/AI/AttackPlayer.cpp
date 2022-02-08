@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Actor.h"
 #include "AI/NPC.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 UAttackPlayer::UAttackPlayer(const FObjectInitializer& objectInitializer)  : Super(objectInitializer)
 {
@@ -15,18 +16,23 @@ UAttackPlayer::UAttackPlayer(const FObjectInitializer& objectInitializer)  : Sup
 
 EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	Player = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	Enemy = Cast<ACharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(FName("TargetActor")));
+	if (!Enemy || !Enemy->GetClass()->ImplementsInterface(UAttackable::StaticClass()))
+	{
+		OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName("TargetActor"), nullptr);
+		return EBTNodeResult::Aborted;
+	}
 	
-	if (Player->GetIsPlayerDead())
+	if (IAttackable::Execute_WasKilled(Enemy))
 	{
 		return EBTNodeResult::Succeeded;
 	}
 	
-	FVector PlayerLocation = Player->GetActorLocation();
+	const FVector PlayerLocation = IAttackable::Execute_GetCharacter(Enemy)->GetActorLocation();
 	AAIController* EntityController = OwnerComp.GetAIOwner();
-	FVector EntityLocation = EntityController->GetPawn()->GetActorLocation();
+	const FVector EntityLocation = EntityController->GetPawn()->GetActorLocation();
 	const float Distance = FVector::Dist(PlayerLocation, EntityLocation);
-	ACharacter* EntityCharacter = Cast<ACharacter>(EntityController->GetPawn());
+	const ACharacter* EntityCharacter = Cast<ACharacter>(EntityController->GetPawn());
 
 	if (Distance >= AttackRange)
 	{
@@ -37,10 +43,10 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 	{
 		if (TimeSinceLastAttack >= AttackSpeed)
 		{
-			Player->DamagePlayer(Damage);
+			IAttackable::Execute_Damage(Enemy, Damage);
 			TimeSinceLastAttack = 0.0f;
 
-			if (Player->GetIsPlayerDead())
+			if (IAttackable::Execute_WasKilled(Enemy))
 			{
 				return EBTNodeResult::Succeeded;
 			}
@@ -59,6 +65,7 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		}
 	}
 	
+	UKismetSystemLibrary::DrawDebugLine(GetWorld(), EntityLocation, FVector(PlayerLocation.X, PlayerLocation.Y, EntityLocation.Z), FColor::Red, 0.1f, 6.0f);
 	return EBTNodeResult::InProgress;
 }
 

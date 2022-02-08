@@ -4,19 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/Attackable.h"
 #include "NPC.generated.h"
 
 UCLASS()
-class SPACERANCHER_API ANPC : public ACharacter
+class SPACERANCHER_API ANPC : public ACharacter, public IAttackable
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ANPC();
+	
+	bool WasKilled_Implementation() override { return bNPCAlive; }
+	void Damage_Implementation(float Damage) override { DamageActor(Damage); }
+	ACharacter* GetCharacter_Implementation() override { return this; }
+	
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Health
@@ -97,4 +101,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void KillPlayer();
+
+	UFUNCTION(BlueprintCallable)
+	void DamageActor(float Damage);
 };

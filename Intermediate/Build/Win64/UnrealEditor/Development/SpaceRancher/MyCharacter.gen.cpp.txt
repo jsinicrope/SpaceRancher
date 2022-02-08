@@ -121,7 +121,7 @@ E:\UE_5.0EA\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
 E:\UE_5.0EA\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
 E:\UE_5.0EA\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\DataTable.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ItemStruct.generated.h
-E:\SpaceRancher\Source\SpaceRancher\Public\Interactables/InteractInterface.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interfaces/InteractInterface.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\InteractInterface.generated.h
 E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/Saveable.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Saveable.generated.h
@@ -143,4 +143,6 @@ E:\SpaceRancher\Source\SpaceRancher\Public\World/Saves/ActorRecord.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\ActorRecord.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainSaveGame.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MainGameInstance.generated.h
+E:\SpaceRancher\Source\SpaceRancher\Public\Interfaces/Attackable.h
+E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\Attackable.generated.h
 E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Inc\SpaceRancher\MyCharacter.generated.h

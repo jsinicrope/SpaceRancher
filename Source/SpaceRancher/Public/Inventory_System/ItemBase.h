@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Inventory_System/ItemStruct.h"
-#include "Interactables/InteractInterface.h"
+#include "Interfaces/InteractInterface.h"
 #include "World/Saves/Saveable.h"
 #include "ItemBase.generated.h"
 
@@ -31,6 +31,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bInventoryAddable = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CurrentlyCollectible = true;
 
 	// A required item to collect the item. Empty if none is needed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

@@ -21,7 +21,7 @@ void ASpawnerVolume::BeginPlay()
 	{
 		SpawnObjects();
 	}
-	
+
 	SetActorTickEnabled(false);
 	if (bCanRespawn)
 	{
@@ -64,14 +64,8 @@ void ASpawnerVolume::PostLoadActor_Implementation()
 void ASpawnerVolume::SetCanRespawn(const bool bValue)
 {
 	bCanRespawn = bValue;
-	if (bCanRespawn)
-	{
-		SetActorTickEnabled(true);
-	}
-	else
-	{
-		SetActorTickEnabled(false);
-	}
+	if (bCanRespawn) SetActorTickEnabled(true);
+	else SetActorTickEnabled(false);
 }
 
 void ASpawnerVolume::Tick(float DeltaSeconds)

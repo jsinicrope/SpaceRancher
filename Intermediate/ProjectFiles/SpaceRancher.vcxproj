@@ -830,12 +830,90 @@
     </ClCompile>
     <ClInclude Include="..\..\Plugins\Developer\RiderLink\Source\RiderShaderInfoDump\RiderShaderInfoDump.h" />
     <None Include="..\..\Source\SpaceRancher\SpaceRancher.Build.cs" />
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\Funds.cpp" />
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\RockSheep.cpp" />
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interfaces\Attackable.cpp" />
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interfaces\HarvesterAffectable.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc142.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Items\Gem.cpp" />
     <ClCompile Include="..\..\Source\SpaceRancher\SpaceRancher.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\Funds.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\RockSheep.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\Attackable.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\Equippable.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\HarvesterAffectable.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interfaces\InteractInterface.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Items\Gem.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\SpaceRancher.h" />
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\AttackPlayer.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
@@ -878,10 +956,6 @@
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\FoodCooker.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\HarvesterAffectable.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
@@ -950,6 +1024,10 @@
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\CMainHUD.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\Funds.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0EA\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h;$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
@@ -1040,13 +1118,10 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Components\SpawnerComponent.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\Computer.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\FoodCooker.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\HarvesterAffectable.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\InteractInterface.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\Plant.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\PlantPot.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\PlayerBed.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\ProgressibleObject.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\Equippable.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\InventoryComponent.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\InventorySlotWidget.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\InventoryTrashSlot.h" />
@@ -1060,6 +1135,7 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Items\HarvesterAttachments.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\Clock.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\CMainHUD.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\Funds.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\HealthAndStaminaBar.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\HUDSetting.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\ItemSelectionHUD.h" />

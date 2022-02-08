@@ -19,7 +19,7 @@ public:
 
 protected:
 	UFUNCTION(BlueprintCallable)
-	FVector GetRunAwayPoint(APawn* Entity);
+	FVector GetRunAwayPoint(APawn* Enemy, APawn* Entity) const;
 
 	UPROPERTY(EditAnywhere)
 	FBlackboardKeySelector TargetVector;

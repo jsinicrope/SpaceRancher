@@ -1,3 +1,3 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Interactables/HarvesterAffectable.h"
+#include "Interfaces/HarvesterAffectable.h"

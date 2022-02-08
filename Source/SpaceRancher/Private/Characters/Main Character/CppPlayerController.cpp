@@ -23,6 +23,12 @@ void ACppPlayerController::BeginPlay()
 	
 	PlayerCharacter = Cast<AMyCharacter>(GetPawn());
 	GameInstance = Cast<UMainGameInstance>(GetWorld()->GetGameInstance());
+
+#if !WITH_EDITOR
+	LoadGame();
+#endif
+
+	SaveGame();
 }
 
 void ACppPlayerController::Tick(float DeltaSeconds)

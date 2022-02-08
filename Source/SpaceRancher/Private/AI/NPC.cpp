@@ -3,22 +3,18 @@
 #include "AI/NPC.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-// Sets default values
 ANPC::ANPC()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
-// Called when the game starts or when spawned
 void ANPC::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-// Called every frame
 void ANPC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -121,4 +117,14 @@ void ANPC::StopSprint()
 void ANPC::KillPlayer()
 {
 	bNPCAlive = false;
+}
+
+void ANPC::DamageActor(float Damage)
+{
+	Health = FMath::Max(Health - Damage, 0.0f);
+
+	if (Health <= 0.0f)
+	{
+		KillPlayer();
+	}
 }

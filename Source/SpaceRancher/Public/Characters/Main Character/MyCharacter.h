@@ -7,10 +7,11 @@
 #include "World/MainGameInstance.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "Engine/EngineTypes.h"
+#include "Interfaces/Attackable.h"
 #include "MyCharacter.generated.h"
 
 UCLASS(HideCategories=("Actor Tick"))
-class SPACERANCHER_API AMyCharacter : public ACharacter
+class SPACERANCHER_API AMyCharacter : public ACharacter, public IAttackable
 {
 	GENERATED_BODY()
 
@@ -21,6 +22,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	
+	bool WasKilled_Implementation() override { return bPlayerDead; }
+	void Damage_Implementation(float Damage) override { DamagePlayer(Damage); }
+	ACharacter* GetCharacter_Implementation() override { return this; }
 
 protected:
 	virtual void BeginPlay() override;

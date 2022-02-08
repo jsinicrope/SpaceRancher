@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Items/Harvester.h"
-#include "Interactables/HarvesterAffectable.h"
+#include "Interfaces/HarvesterAffectable.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Particles/ParticleSystemComponent.h"

@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "Perception/AIPerceptionTypes.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "NPC_Controller.generated.h"
 
 UCLASS()

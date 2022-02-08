@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Harvester.h"
-#include "Interactables/HarvesterAffectable.h"
+#include "Interfaces/HarvesterAffectable.h"
 #include "Inventory_System/ItemBase.h"
 #include "AffectableItemBase.generated.h"
 
