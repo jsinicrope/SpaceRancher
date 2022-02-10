@@ -15,6 +15,8 @@ class SPACERANCHER_API AAffectableItemBase : public AItemBase, public IHarvester
 
 public:
 	AAffectableItemBase();
+
+	virtual void BeginPlay() override;
 	
 	virtual void PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime) override final;
 	virtual void EndPrimaryAffect_Implementation(AHarvester* Effector) override;

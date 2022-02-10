@@ -16,6 +16,12 @@ AAffectableItemBase::AAffectableItemBase()
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponentDissolving"));
 	NiagaraComponent->SetupAttachment(StaticMesh);
 	NiagaraComponent->SetAutoActivate(false);
+	NiagaraComponent->Deactivate();
+}
+
+void AAffectableItemBase::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 void AAffectableItemBase::PrimaryAffect_Implementation(AHarvester* Effector, float DeltaAffectedTime)
@@ -43,7 +49,13 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 			
 			if (bOnlyDestructible) { Destroy(); }
 			
-			else { Collect(true); }
+			else
+			{
+				if (bInventoryAddable)
+				{
+					if (PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure)) { Destroy(); }
+				}
+			}
 		}
 		return true;
 	}
@@ -53,7 +65,7 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 bool AAffectableItemBase::Collect_Implementation(bool bAddToInventory)
 {
 	bool ItemAdded = false;
-	if (bAddToInventory && bInventoryAddable && bHandCollectible)
+	if (bAddToInventory && bInventoryAddable && !RequiredItem && bHandCollectible)
 	{
 		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
 	}
@@ -69,8 +81,9 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 {
 	NiagaraComponent->Activate();
 	bAffected = true;
-	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint - NiagaraComponent->GetComponentLocation());
-	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint - NiagaraComponent->GetComponentLocation());
+	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint);
+	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint);
+	NiagaraComponent->SetVariableVec3(FName("ActorScale"), GetActorScale3D());
 	
 	// DrawDebugLine(GetWorld(), HitPoint, AttractionPoint, FColor::Red, false, 0.1f, 0, 8);
 }
