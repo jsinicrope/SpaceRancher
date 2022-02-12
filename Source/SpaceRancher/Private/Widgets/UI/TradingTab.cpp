@@ -32,7 +32,8 @@ void UTradingTab::NativeOnInitialized()
 	TransferButton->OnPressed.AddDynamic(this, &UTradingTab::Transfer);
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
-	PlayerCharacter = Cast<AMyCharacter>(PC->GetPawn());
+	
+	if (PC) { PlayerCharacter = Cast<AMyCharacter>(PC->GetPawn()); }
 	
 	SetAwaitingSelection();
 }

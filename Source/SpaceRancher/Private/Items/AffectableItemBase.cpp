@@ -83,4 +83,5 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint);
 	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint);
 	NiagaraComponent->SetVariableVec3(FName("ActorScale"), GetActorScale3D());
+	NiagaraComponent->SetVariableQuat(FName("ActorRotation"), GetActorRotation().Quaternion());
 }
