@@ -13,8 +13,6 @@ class SPACERANCHER_API URunAwayFromPlayer : public UBTTaskNode
 	GENERATED_BODY()
 
 public:
-	URunAwayFromPlayer();
-
 	inline virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 protected:
@@ -22,7 +20,10 @@ protected:
 	FVector GetRunAwayPoint(APawn* Enemy, APawn* Entity) const;
 
 	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector TargetVector;
+	FBlackboardKeySelector TargetActor;
+	
+	UPROPERTY(EditAnywhere)
+	FBlackboardKeySelector TargetPosition;
 
 	UPROPERTY(EditAnywhere)
 	float RunAwaySpeed = 450.0f;

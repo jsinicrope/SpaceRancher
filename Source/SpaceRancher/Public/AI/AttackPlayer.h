@@ -18,6 +18,9 @@ class SPACERANCHER_API UAttackPlayer : public UBTTaskNode
 	UAttackPlayer(const FObjectInitializer& ObjectInitializer);
 	
 protected:
+	UPROPERTY(EditAnywhere)
+	FBlackboardKeySelector TargetActor;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AttackRange = 50.0f;
 
@@ -34,7 +37,7 @@ protected:
 	bool bFailOnLowHealth = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin="0", ClampMax="1", EditCondition="bFailOnLowHealth"))
-	float PercentLowHealth;
+	float LowHealthPercentage;
 	
 private:
 	UPROPERTY()

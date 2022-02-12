@@ -2,7 +2,6 @@
 
 #include "Items/Gem.h"
 
-
 AGem::AGem()
 {
 	PrimaryActorTick.bCanEverTick = true;

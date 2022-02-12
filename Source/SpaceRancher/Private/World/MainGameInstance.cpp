@@ -12,8 +12,8 @@ void UMainGameInstance::Init()
 
 	Super::Init();
 
-	GetSaveGame();
 	SetTime(InitialStartGameTime.X, InitialStartGameTime.Y);
+	GetSaveGame();
 }
 
 bool UMainGameInstance::Tick(float DeltaSeconds)
@@ -76,10 +76,10 @@ void UMainGameInstance::AccelerateTime(const int Hour, const int Minute, const f
 
 bool UMainGameInstance::GetSaveGame()
 {
-	const FString SlotName = SaveName;
-	if (UGameplayStatics::DoesSaveGameExist(SlotName, 0))
-	{
-		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SlotName, 0));
+	 const FString SlotName = SaveName;
+	 if (UGameplayStatics::DoesSaveGameExist(SaveName, 0))
+	 {
+	 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveName, 0));
 		return true;
 	}
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));

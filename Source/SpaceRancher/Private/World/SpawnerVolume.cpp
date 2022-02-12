@@ -21,12 +21,9 @@ void ASpawnerVolume::BeginPlay()
 	{
 		SpawnObjects();
 	}
-
+	
 	SetActorTickEnabled(false);
-	if (bCanRespawn)
-	{
-		SetActorTickEnabled(true);
-	}
+	SetActorTickEnabled(bCanRespawn);
 }
 
 void ASpawnerVolume::BeginDestroy()
@@ -262,10 +259,7 @@ void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 
 void ASpawnerVolume::SpawnObjects()
 {
-	SpawnPoints.Empty();
-	SpawnRotation.Empty();
 	DeleteAllObjects();
-	if (Meshes.Num() >= 1)	PrepareMeshInstancing();
 	AddObjects();
 }
 
@@ -278,6 +272,8 @@ void ASpawnerVolume::AddObjects(int Amount)
 {
 	SpawnPoints.Empty();
 	SpawnRotation.Empty();
+
+	if (Meshes.Num() >= 1)	{ PrepareMeshInstancing(); }
 	
 	switch (SpawnState)
 	{

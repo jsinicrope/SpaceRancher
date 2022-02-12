@@ -80,7 +80,7 @@ public:
 	bool GetIsDay();
 
 	UFUNCTION(BlueprintGetter)
-	UMainSaveGame* GetSaveGameData() const {return SaveGameData;}
+	UMainSaveGame* GetSaveGameData() const { return SaveGameData; }
 	
 	UFUNCTION(Exec)
 	void SetTime(const int Hour, const int Minute);

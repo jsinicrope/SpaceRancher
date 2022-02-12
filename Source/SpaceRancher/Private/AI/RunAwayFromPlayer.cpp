@@ -9,21 +9,17 @@
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
 
-URunAwayFromPlayer::URunAwayFromPlayer()
-{
-	
-}
 
 EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
 	
-	APawn* Enemy = Cast<APawn>(Blackboard->GetValueAsObject(FName("TargetActor")));
+	APawn* Enemy = Cast<APawn>(Blackboard->GetValueAsObject(TargetActor.SelectedKeyName));
 	const auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
 
 	const FVector NewTargetPosition = GetRunAwayPoint(Enemy, ControlledPawn);
 
-	Blackboard->SetValueAsVector(TargetVector.SelectedKeyName, NewTargetPosition);
+	Blackboard->SetValueAsVector(TargetPosition.SelectedKeyName, NewTargetPosition);
 
 	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
 	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;

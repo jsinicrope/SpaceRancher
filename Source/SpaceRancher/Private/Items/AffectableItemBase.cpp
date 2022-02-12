@@ -2,7 +2,6 @@
 
 
 #include "Items/AffectableItemBase.h"
-#include "DrawDebugHelpers.h"
 #include "Interfaces/Equippable.h"
 #include "Items/Harvester.h"
 #include "Characters/Main Character/CppPlayerController.h"
@@ -84,6 +83,4 @@ void AAffectableItemBase::SetNiagaraComponentValues(const FVector& AttractionPoi
 	NiagaraComponent->SetVariableVec3(FName("AttractionPoint"), AttractionPoint);
 	NiagaraComponent->SetVariableVec3(FName("HitPoint"), HitPoint);
 	NiagaraComponent->SetVariableVec3(FName("ActorScale"), GetActorScale3D());
-	
-	// DrawDebugLine(GetWorld(), HitPoint, AttractionPoint, FColor::Red, false, 0.1f, 0, 8);
 }

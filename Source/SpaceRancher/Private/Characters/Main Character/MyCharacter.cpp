@@ -263,19 +263,26 @@ bool AMyCharacter::GetIsPlayerDead()
 
 void AMyCharacter::Save()
 {
+	// The GameInstance might not be initialized, since this function is called before BeginPlay
+	GameInstance = GameInstance ? GameInstance : Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	
 	UMainSaveGame* SaveData = GameInstance->GetSaveGameData();
-	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
-
+	
 	FActorRecord PlayerRecord(this);
 	FMemoryWriter MemoryWriterPlayer(PlayerRecord.Data, true);
 	FActorSaveArchive PlayerAr(MemoryWriterPlayer, false);
 	MemoryWriterPlayer.SetIsSaving(true);
 	Serialize(PlayerAr);
-	GameInstance->GetSaveGameData()->PlayerCharacterData = PlayerRecord;
+	
+	SaveData->PlayerCharacterData = PlayerRecord;
+	SaveData->Player_Inventory_Array_Columns = InventoryComp->Inventory_Array_Columns;
 }
 
 void AMyCharacter::Load()
 {
+	// The GameInstance might not be initialized, since this function is called before BeginPlay
+	GameInstance = GameInstance ? GameInstance : Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	
 	UMainSaveGame* SaveData = GameInstance->GetSaveGameData();
 	InventoryComp->Inventory_Array_Columns = SaveData->Player_Inventory_Array_Columns;
 

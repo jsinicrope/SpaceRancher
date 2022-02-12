@@ -16,10 +16,10 @@ UAttackPlayer::UAttackPlayer(const FObjectInitializer& ObjectInitializer)  : Sup
 
 EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	Enemy = Cast<ACharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(FName("TargetActor")));
+	Enemy = Cast<ACharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(TargetActor.SelectedKeyName));
 	if (!Enemy || !Enemy->GetClass()->ImplementsInterface(UAttackable::StaticClass()))
 	{
-		OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName("TargetActor"), nullptr);
+		OwnerComp.GetBlackboardComponent()->SetValueAsObject(TargetActor.SelectedKeyName, nullptr);
 		return EBTNodeResult::Aborted;
 	}
 	
@@ -59,7 +59,7 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 		const float EntityHealth = Entity->GetHealth();
 		
-		if (EntityHealth <= EntityHealth * PercentLowHealth)
+		if (EntityHealth <= EntityHealth * LowHealthPercentage)
 		{
 			return EBTNodeResult::Failed;
 		}

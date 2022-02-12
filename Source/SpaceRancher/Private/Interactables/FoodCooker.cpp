@@ -31,10 +31,10 @@ void AFoodCooker::BeginPlay()
 
 	PC = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	
-	//Binding our float track to our UpdateTimelineComp Function's output
+	// Binding our float track to our UpdateTimelineComp Function's output
 	UpdateFunctionFloat.BindDynamic(this, &AFoodCooker::UpdateTimelineComp);
 
-	//If we have a float curve, bind it's graph to our update function
+	// If we have a float curve, bind it's graph to our update function
 	if (DoorTimelineFloatCurve)
 	{
 		DoorTimelineComponent->AddInterpFloat(DoorTimelineFloatCurve, UpdateFunctionFloat);
@@ -61,7 +61,16 @@ void AFoodCooker::Tick(float DeltaTime)
 
 void AFoodCooker::Interact_Implementation()
 {
-	
+	if (bDoorOpen)
+	{
+		DoorTimelineComponent->Reverse();
+		bDoorOpen = false;
+	}
+	else
+	{
+		DoorTimelineComponent->Play();
+		bDoorOpen = true;
+	}
 }
 
 bool AFoodCooker::ItemInteract_Implementation(FItem_Struct EquippedItem)

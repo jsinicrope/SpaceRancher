@@ -44,7 +44,7 @@ protected:
 	bool bAffected;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bHandCollectible = false;
+	bool bHandCollectible = true;
 
 	// Whether the actor gets collected when it's destroyed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

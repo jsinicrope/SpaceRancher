@@ -17,19 +17,12 @@ class SPACERANCHER_API AMyCharacter : public ACharacter, public IAttackable
 
 public:
 	AMyCharacter();
-
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
-	bool WasKilled_Implementation() override { return bPlayerDead; }
-	void Damage_Implementation(float Damage) override { DamagePlayer(Damage); }
-	ACharacter* GetCharacter_Implementation() override { return this; }
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+	
 
 protected:
-	virtual void BeginPlay() override;
-
 	// Health
 
 	// The actual current health of the character
@@ -227,6 +220,13 @@ protected:
 	
 	UFUNCTION(BlueprintNativeEvent)
 	void OnSelectedItemChanged(FItem_Struct &Item);
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	
+	virtual bool WasKilled_Implementation() override { return bPlayerDead; }
+	virtual void Damage_Implementation(float Damage) override { DamagePlayer(Damage); }
+	virtual ACharacter* GetCharacter_Implementation() override { return this; }
 	
 public:
 	// Functions
