@@ -4,27 +4,31 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/AIControllable.h"
 #include "Interfaces/Attackable.h"
 #include "NPC.generated.h"
 
 UCLASS()
-class SPACERANCHER_API ANPC : public ACharacter, public IAttackable
+class SPACERANCHER_API ANPC : public ACharacter, public IAttackable, public IAIControllable
 {
 	GENERATED_BODY()
 
 public:
 	ANPC();
 	
-	bool WasKilled_Implementation() override { return bNPCAlive; }
-	void Damage_Implementation(float Damage) override { DamageActor(Damage); }
-	ACharacter* GetCharacter_Implementation() override { return this; }
+	virtual bool WasKilled_Implementation() override { return bNPCAlive; }
+	virtual void Damage_Implementation(float Damage) override { DamageActor(Damage); }
+	virtual ACharacter* GetCharacter_Implementation() override { return this; }
+
+	virtual FAIPawnState GetAIPawnState_Implementation() override;
+	virtual void SetAIPawnState_Implementation(const FAIPawnState AIPawnState) override;
 	
 
 protected:
 	virtual void BeginPlay() override;
-
+	
 	// Health
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter="GetHealth", Category="Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	float Health = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")

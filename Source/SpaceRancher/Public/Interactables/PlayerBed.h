@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/InteractInterface.h"
+#include "Interfaces/Interactable.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "PlayerBed.generated.h"
 

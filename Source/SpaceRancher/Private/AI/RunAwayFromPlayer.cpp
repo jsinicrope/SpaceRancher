@@ -4,11 +4,9 @@
 #include "GameFramework/Actor.h"
 #include "AI/NPC_Controller.h"
 #include "Kismet/GameplayStatics.h"
-#include "NavigationSystem.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
-
 
 EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {

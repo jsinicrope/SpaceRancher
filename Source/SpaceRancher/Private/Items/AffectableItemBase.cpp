@@ -64,7 +64,7 @@ bool AAffectableItemBase::PrimaryAffectImpl(AHarvester* Effector, float DeltaAff
 bool AAffectableItemBase::Collect_Implementation(bool bAddToInventory)
 {
 	bool ItemAdded = false;
-	if (bAddToInventory && bInventoryAddable && !RequiredItem && bHandCollectible)
+	if (bAddToInventory && bInventoryAddable && (!RequiredItem || bHandCollectible))
 	{
 		ItemAdded = PC->GetPlayerCharacter()->AddInventoryItem(Main_Item_Structure);
 	}

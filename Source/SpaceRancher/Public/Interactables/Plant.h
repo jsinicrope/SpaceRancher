@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "NiagaraComponent.h"
 #include "Items/AffectableItemBase.h"
-#include "Items/HarvesterAttachments.h"
 #include "Plant.generated.h"
 
 UCLASS()

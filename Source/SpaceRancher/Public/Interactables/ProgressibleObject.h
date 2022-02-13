@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/InteractInterface.h"
+#include "Interfaces/Interactable.h"
 #include "World/Saves/Saveable.h"
 #include "ProgressibleObject.generated.h"
 

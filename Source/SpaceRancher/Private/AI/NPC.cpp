@@ -6,7 +6,17 @@
 ANPC::ANPC()
 {
 	PrimaryActorTick.bCanEverTick = true;
+}
 
+FAIPawnState ANPC::GetAIPawnState_Implementation()
+{
+	return FAIPawnState(Health, Stamina);
+}
+
+void ANPC::SetAIPawnState_Implementation(const FAIPawnState AIPawnState)
+{
+	Health = AIPawnState.Health;
+	Stamina = AIPawnState.Stamina;
 }
 
 void ANPC::BeginPlay()

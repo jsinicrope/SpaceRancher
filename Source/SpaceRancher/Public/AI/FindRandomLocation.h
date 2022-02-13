@@ -12,7 +12,7 @@ class SPACERANCHER_API UFindRandomLocation : public UBTTaskNode
 	GENERATED_BODY()
 	
 public:
-	inline virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

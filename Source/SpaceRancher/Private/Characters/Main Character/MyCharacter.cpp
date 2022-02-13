@@ -5,7 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/WidgetInteractionComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Interfaces/InteractInterface.h"
+#include "Interfaces/Interactable.h"
 #include "Inventory_System/ItemPickUpWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SceneCaptureComponent2D.h"

@@ -16,7 +16,7 @@ enum class ESpawnState : uint8
 };
 
 
-UCLASS(HideCategories=(Collision, HLOD, Navigation))
+UCLASS(HideCategories=(Collision, HLOD, Navigation), NotBlueprintable)
 class SPACERANCHER_API ASpawnerVolume : public AVolume, public ISaveable
 {
 	GENERATED_BODY()

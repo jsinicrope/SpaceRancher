@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Inventory_System/ItemStruct.h"
-#include "Interfaces/InteractInterface.h"
+#include "Interfaces/Interactable.h"
 #include "World/Saves/Saveable.h"
 #include "ItemBase.generated.h"
 

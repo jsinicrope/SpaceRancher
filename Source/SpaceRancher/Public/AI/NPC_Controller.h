@@ -22,7 +22,7 @@ public:
     UBehaviorTree* BehaviorTree;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
-    class UAIPerceptionComponent* AIPerceptionComponent = nullptr;
+    UAIPerceptionComponent* AIPerceptionComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AISightRadius = 1500.0f;

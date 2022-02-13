@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/TimelineComponent.h"
-#include "Interfaces/InteractInterface.h"
+#include "Interfaces/Interactable.h"
 #include "FoodCooker.generated.h"
 
 UCLASS()
