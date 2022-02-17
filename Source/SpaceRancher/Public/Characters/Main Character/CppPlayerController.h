@@ -26,7 +26,7 @@ protected:
 	class UMainGameInstance* GameInstance;
 	
 public:
-	AMyCharacter* GetPlayerCharacter() const {return PlayerCharacter;}
+	AMyCharacter* GetPlayerCharacter() const { return PlayerCharacter; }
 
 	UMainGameInstance* GetMainGameInstance() const {return GameInstance;}
 

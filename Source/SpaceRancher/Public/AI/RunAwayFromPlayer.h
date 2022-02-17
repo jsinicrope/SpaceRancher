@@ -8,7 +8,7 @@
 #include "RunAwayFromPlayer.generated.h"
 
 UCLASS()
-class SPACERANCHER_API URunAwayFromPlayer : public UBTTaskNode
+class SPACERANCHER_API URunAwayFromPlayer final : public UBTTaskNode
 {
 	GENERATED_BODY()
 

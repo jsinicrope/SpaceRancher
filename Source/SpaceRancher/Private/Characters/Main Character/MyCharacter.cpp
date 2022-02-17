@@ -369,9 +369,7 @@ void AMyCharacter::PlayerStopSprint()
 
 bool AMyCharacter::AddInventoryItem(FItem_Struct &Item_Struct)
 {
-	const bool bAddSuccessful = InventoryComp->AddItem(Item_Struct);
-
-	if (bAddSuccessful)
+	if (InventoryComp->AddItem(Item_Struct))
 	{
 		HUDController->ItemPickUpWidget->UpdateWidget(Item_Struct.Thumbnail, Item_Struct.Name);
 
@@ -381,8 +379,9 @@ bool AMyCharacter::AddInventoryItem(FItem_Struct &Item_Struct)
 		HUDController->ItemPickUpWidget->AddToViewport();
 		WidgetToRemove = HUDController->ItemPickUpWidget;
 		GetWorldTimerManager().SetTimer(TimerHandler, this, &AMyCharacter::RemoveWidgetFromViewport, 2.0f, false, 2.0f);
+		return true;
 	}
-	return bAddSuccessful;
+	return false;
 }
 
 FItem_Struct AMyCharacter::RemoveInventoryItem(FItem_Struct &Item)

@@ -72,7 +72,7 @@ protected:
 	float TimeToAccelerate = 0.0f;
 
 	/** @returns false if no save game is available */
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	bool GetSaveGame();
 
 public:

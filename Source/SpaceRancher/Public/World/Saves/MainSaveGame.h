@@ -17,7 +17,7 @@ public:
 	UMainSaveGame();
 
 	UPROPERTY()
-	float InGameTime;
+	float InGameTime = 10.0f;
 
 	UPROPERTY()
 	TArray<FItemRows> Player_Inventory_Array_Columns;
@@ -27,4 +27,7 @@ public:
 
 	UPROPERTY()
 	TArray<FActorRecord> Data;
+
+	UFUNCTION()
+	bool CheckComplete() const;
 };

@@ -7,7 +7,7 @@
 #include "FindRandomLocation.generated.h"
 
 UCLASS()
-class SPACERANCHER_API UFindRandomLocation : public UBTTaskNode
+class SPACERANCHER_API UFindRandomLocation final : public UBTTaskNode
 {
 	GENERATED_BODY()
 	

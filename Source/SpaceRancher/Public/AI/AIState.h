@@ -7,7 +7,7 @@
 #include "AIState.generated.h"
 
 UENUM(BlueprintType, meta=(DisplayName="BehaviourState"))
-enum class EAIBehaviourState : uint8
+enum class EAIBehaviorState : uint8
 {
 	Passive			UMETA(DisplayName="Passive"),
 	Aggressive		UMETA(DisplayName="Aggressive"),
@@ -50,11 +50,11 @@ struct SPACERANCHER_API FAIControllerState : public FTableRowBase
 
 	// BehaviourState of the AI Controller
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EAIBehaviourState BehaviourState;
+	EAIBehaviorState BehaviorState;
 
-	explicit FAIControllerState(const FAIPawnState AIPawnState = FAIPawnState(), const EAIBehaviourState BehaviourState = EAIBehaviourState::Passive)
+	explicit FAIControllerState(const FAIPawnState AIPawnState = FAIPawnState(), const EAIBehaviorState BehaviourState = EAIBehaviorState::Passive)
 	{
 		this->PawnState = AIPawnState;
-		this->BehaviourState = BehaviourState;
+		this->BehaviorState = BehaviourState;
 	}
 };

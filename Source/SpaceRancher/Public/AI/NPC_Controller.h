@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "AIState.h"
 #include "Perception/AIPerceptionTypes.h"
 #include "NPC_Controller.generated.h"
 
@@ -42,5 +43,11 @@ public:
 	// Called when a hostile Pawn was Detected
 	UFUNCTION()
 	void OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus);
+
+	UFUNCTION(BlueprintCallable, BlueprintGetter)
+	FAIControllerState GetAIControllerState() { return AIControllerState; }
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetAIControllerState)
+	FAIControllerState AIControllerState;
 };
-	

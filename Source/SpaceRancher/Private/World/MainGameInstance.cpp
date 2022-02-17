@@ -13,7 +13,6 @@ void UMainGameInstance::Init()
 	Super::Init();
 
 	SetTime(InitialStartGameTime.X, InitialStartGameTime.Y);
-	GetSaveGame();
 }
 
 bool UMainGameInstance::Tick(float DeltaSeconds)
@@ -76,11 +75,11 @@ void UMainGameInstance::AccelerateTime(const int Hour, const int Minute, const f
 
 bool UMainGameInstance::GetSaveGame()
 {
-	 const FString SlotName = SaveName;
-	 if (UGameplayStatics::DoesSaveGameExist(SaveName, 0))
-	 {
-	 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveName, 0));
-		return true;
+	const FString SlotName = SaveName;
+	if (UGameplayStatics::DoesSaveGameExist(SaveName, 0))
+	{
+		SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveName, 0));
+		return SaveGameData->CheckComplete();
 	}
 	SaveGameData = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
 	return false;
@@ -151,6 +150,7 @@ bool UMainGameInstance::LoadGame()
 	{
 		AMyCharacter* PCharacter = Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 		PCharacter->Load();
+		
 		GameMinutes = SaveGameData->InGameTime;
 
 		// De-Serialize Actors
