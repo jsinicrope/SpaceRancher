@@ -18,6 +18,8 @@ public:
     ANPC_Controller(const FObjectInitializer& ObjectInitializer);
 
     virtual void BeginPlay() override;
+	virtual void OnPossess(APawn* InPawn) override;
+	virtual void OnUnPossess() override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     UBehaviorTree* BehaviorTree;

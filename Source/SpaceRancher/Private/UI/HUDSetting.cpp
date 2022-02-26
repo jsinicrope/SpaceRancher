@@ -11,7 +11,7 @@
 
 UHUDSetting::UHUDSetting()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UHUDSetting::BeginPlay()

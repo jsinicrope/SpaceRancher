@@ -46,7 +46,7 @@ protected:
 	FIntPoint Sunset = FIntPoint(7, 00);
 
 	// Whether the game state is considered as day time or not(night time)
-	UPROPERTY(SaveGame, BlueprintReadOnly, BlueprintGetter=GetIsDay, Category="Time")
+	UPROPERTY(SaveGame, BlueprintReadOnly, BlueprintGetter=IsDay, Category="Time")
 	bool bIsDay;
 
 	// Hour/Minute
@@ -77,7 +77,7 @@ protected:
 
 public:
 	UFUNCTION(BlueprintGetter)
-	bool GetIsDay();
+	bool IsDay();
 
 	UFUNCTION(BlueprintGetter)
 	UMainSaveGame* GetSaveGameData() const { return SaveGameData; }
@@ -99,6 +99,15 @@ public:
 
 	UFUNCTION(Exec)
 	void DeleteActiveSave() const;
+
+	UFUNCTION(BlueprintCallable)
+	void LoadMainMenu() const;
+
+	UFUNCTION(BlueprintCallable)
+	void PauseGame() const;
+
+	UFUNCTION(BlueprintCallable)
+	void UnPauseGame() const;
 	
 private:
 	UPROPERTY()
@@ -106,4 +115,7 @@ private:
 
 	UPROPERTY()
 	AActor* SaveActor;
+
+	UPROPERTY()
+	FName MainMenuLevelName = FName("MainMenuLevel");
 };

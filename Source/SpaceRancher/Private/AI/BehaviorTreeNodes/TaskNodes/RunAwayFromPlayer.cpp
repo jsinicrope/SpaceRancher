@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AI/RunAwayFromPlayer.h"
+#include "AI/BehaviorTreeNodes/TaskNodes/RunAwayFromPlayer.h"
+#include "NavigationSystem.h"
 #include "GameFramework/Actor.h"
 #include "AI/NPC_Controller.h"
 #include "Kismet/GameplayStatics.h"
@@ -8,24 +9,37 @@
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
 
-EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+
+void URunAwayFromPlayer::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
-	
-	APawn* Enemy = Cast<APawn>(Blackboard->GetValueAsObject(TargetActor.SelectedKeyName));
-	const auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
-
-	const FVector NewTargetPosition = GetRunAwayPoint(Enemy, ControlledPawn);
-
-	Blackboard->SetValueAsVector(TargetPosition.SelectedKeyName, NewTargetPosition);
-
-	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
-	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
-
-	return EBTNodeResult::Succeeded;
+	ExecuteTask(OwnerComp, NodeMemory);
 }
 
-FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Enemy, APawn* Entity) const 
+EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	const UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
+	
+	APawn* Enemy = Cast<APawn>(Blackboard->GetValueAsObject(TargetActor.SelectedKeyName));
+	AAIController* EntityController = OwnerComp.GetAIOwner();
+	APawn* ControlledPawn = EntityController->GetPawn();
+	const ACharacter* EntityCharacter = Cast<ACharacter>(ControlledPawn);
+	const FVector EntityPosition = EntityCharacter->GetActorLocation();
+
+	TargetPosition = TargetPosition.IsZero() ? GetRunAwayPoint(Enemy, ControlledPawn) : TargetPosition;
+
+	const float Distance = FVector::Distance(EntityPosition, TargetPosition);
+	if (Distance <= AcceptableRadius)
+	{
+		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+		return EBTNodeResult::Succeeded;
+	}
+	
+	EntityController->MoveToLocation(TargetPosition);
+	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
+	return EBTNodeResult::InProgress;
+}
+
+FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Enemy, APawn* Entity) const
 {
 	const FVector PlayerLocation = Enemy->GetActorLocation();
 	const FVector EntityLocation = Entity->GetActorLocation();
@@ -43,9 +57,11 @@ FVector URunAwayFromPlayer::GetRunAwayPoint(APawn* Enemy, APawn* Entity) const
 	NewLocation += EntityLocation;
 	
 	// Debugging line
+#if WITH_EDITOR
 	FVector RepresentedLocation = NewLocation;
 	RepresentedLocation.Z = EntityLocation.Z;
 
 	UKismetSystemLibrary::DrawDebugLine(GetWorld(), EntityLocation, RepresentedLocation, FColor::Blue, 1.0f, 12.3333f);
+#endif
 	return NewLocation;
 }

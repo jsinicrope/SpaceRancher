@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "World/SpawnerVolume.h"
-
+#include "BehaviorTree/BehaviorTree.h"
+#include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Components/BrushComponent.h"
+#include "Components/InstancedStaticMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "World/SpawnerMeshInstance.h"
@@ -239,6 +241,23 @@ AActor* ASpawnerVolume::SpawnActor(FVector SpawnPoint, FRotator Rotation)
 	return NewActor;
 }
 
+APawn* ASpawnerVolume::SpawnAIEntity(FVector SpawnPoint, FRotator Rotation)
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	
+	if (!bAlignToGround)
+	{
+		Rotation.Roll = FMath::RandRange(0.0f, ActorsRandomXRotation);
+		Rotation.Pitch = FMath::RandRange(0.0f, ActorsRandomYRotation);
+	}
+	
+	const int RandActor = FMath::RandRange(0, AIEntityClasses.Num() - 1);
+	checkf(AIEntityClasses[RandActor], TEXT("AIEntityClasses Array in SpawnerVolume Object has empty field"));
+
+	return GetWorld()->SpawnActor<APawn>(AIEntityClasses[RandActor], SpawnPoint, Rotation, SpawnParams);
+}
+
 void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 {
 	FTransform Spawn = FTransform();
@@ -254,7 +273,7 @@ void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 	Spawn.SetScale3D(RandomScale);
 
 	const int RandMesh = FMath::RandRange(0, Meshes.Num() - 1);
-	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstanceWorldSpace(Spawn);
+	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstance(Spawn, true);
 }
 
 void ASpawnerVolume::SpawnObjects()
@@ -300,45 +319,43 @@ void ASpawnerVolume::AddObjects(int Amount)
 		{
 			ActorRotation.Yaw += FMath::RandRange(0.0f, 360.0f); 
 		}
-
-		int CanUseMesh = 0;
-		int CanUseActors = 0;
-		if (Meshes.Num() >= 1 && bUseMeshes)	CanUseMesh = 1;
-		if (ActorClasses.Num() >= 1 && bUseActors)	CanUseActors = 1; 
 		
-		const int Spawner = CanUseMesh && CanUseActors ? 2 : 1;
-
-		// Determine whether to spawn an actor or mesh if both are used
-		if (Spawner == 2)
+		bool* Spawnable = new bool[3];
+		Spawnable[0] = Meshes.Num() >= 1 && bUseMeshes;
+		Spawnable[1] = ActorClasses.Num() >= 1 && bUseActors;
+		Spawnable[2] = AIEntityClasses.Num() >= 1 && bUseAIEntities;
+		
+		// Determine whether to spawn an actor, AI or mesh if multiple are available
+		constexpr int MaxVal = 2;
+		bool bNotSpawnable = true;
+		for (int j = 0; j < MaxVal + 1; j++)
 		{
-			const int Switch = FMath::RandRange(0, 1);
-			if (Switch == 0)
-			{
-				SpawnMesh(SpawnPoint, ActorRotation);
-			}
-			else
-			{
-				AActor * NewActor = SpawnActor(SpawnPoint, ActorRotation);
-				if (NewActor != nullptr)
-				{
-					SpawnedActors.Add(NewActor);
-				}
-			}
+			if (Spawnable[j]) { bNotSpawnable = false; }
 		}
-		else if (Spawner == 1)
+		if (bNotSpawnable) { return; }
+		
+		int Switch = FMath::RandRange(0, MaxVal);
+		for (int j = 0; j < (MaxVal + 1); j++)
 		{
-			if (CanUseMesh)
+			if (Spawnable[Switch])	break;
+			Switch = (Switch + 1) > 2 ? 0 : (Switch + 1);
+		}
+		switch (Switch)
+		{
+		case 0:
 			{
 				SpawnMesh(SpawnPoint, ActorRotation);
-			}
-			else if (CanUseActors)
+			} break;
+		case 1:
 			{
-				AActor * NewActor = SpawnActor(SpawnPoint, ActorRotation);
-				if (NewActor != nullptr)
-				{
-					SpawnedActors.Add(NewActor);
-				}
-			}
+				AActor* NewActor = SpawnActor(SpawnPoint, ActorRotation);
+				if (NewActor)	SpawnedActors.Add(NewActor);
+			} break;
+		default:
+			{
+				APawn* NewAI = SpawnAIEntity(SpawnPoint, ActorRotation);
+				if (NewAI)	SpawnedAI.Add(NewAI);
+			} break;
 		}
 	}
 }
@@ -348,18 +365,17 @@ void ASpawnerVolume::VerifyActiveActors()
 	SpawnedObjects = 0;
 	for (int i = 0; i < SpawnedActors.Num(); i++)
 	{
-		if (IsValid(SpawnedActors[i]))
-		{
-			SpawnedObjects++;
-		}
+		SpawnedObjects += IsValid(SpawnedActors[i]) ? 1 : 0;
+	}
+
+	for (int i = 0; i < SpawnedAI.Num(); i++)
+	{
+		SpawnedObjects += IsValid(SpawnedAI[i]) ? 1 : 0;
 	}
 	
 	for (int i = 0; i < InstancedMeshes.Num(); i++)
 	{
-		if (IsValid(InstancedMeshes[i]))
-		{
-			SpawnedObjects++;
-		}
+		SpawnedObjects += IsValid(InstancedMeshes[i]) ? 1 : 0;
 	}
 }
 
@@ -381,29 +397,32 @@ void ASpawnerVolume::DeleteAllObjects()
 {
 	for (int i = 0; i < SpawnedActors.Num(); i++)
 	{
-		if (SpawnedActors[i])
-		{
-			SpawnedActors[i]->Destroy();
-		}
+		if (SpawnedActors[i])	{ SpawnedActors[i]->Destroy(); }
 	}
 
 	for (int i = 0; i < InstancedMeshes.Num(); i++)
 	{
-		if (InstancedMeshes[i])
-		{
-			InstancedMeshes[i]->Destroy();
-		}
+		if (InstancedMeshes[i])	{ InstancedMeshes[i]->Destroy(); }
+	}
+
+	for (int i = 0; i < SpawnedAI.Num(); i++)
+	{
+		if (SpawnedAI[i])	{ SpawnedAI[i]->Destroy(); }
 	}
 
 	for (int i = 0; i < SpawnedActors.Num(); i++)
 	{
-		if (!SpawnedActors[i]) {SpawnedActors.RemoveAt(i, 1, true);}
-		
+		if (!SpawnedActors[i])	{ SpawnedActors.RemoveAt(i, 1, true); }
 	}
 
 	for (int i = 0; i < InstancedMeshes.Num(); i++)
 	{
-		if (!InstancedMeshes[i]) {InstancedMeshes.RemoveAt(i, 1, true);}
+		if (!InstancedMeshes[i])	{ InstancedMeshes.RemoveAt(i, 1, true); }
+	}
+
+	for (int i = 0; i < SpawnedAI.Num(); i++)
+	{
+		if (!SpawnedAI[i]) { SpawnedAI.RemoveAt(i, 1, true); }
 	}
 	
 	SpawnedObjects = 0;

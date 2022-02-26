@@ -23,7 +23,6 @@ public:
 
 	// This function is called when the PrimaryAffect Interface function is called
 	virtual bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime);
-
 	virtual bool Collect_Implementation(bool bAddToInventory) override;
 
 protected:

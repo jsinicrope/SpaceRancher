@@ -63,6 +63,8 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!GetController()) { return; }
 	
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 
@@ -75,7 +77,9 @@ void AMyCharacter::BeginPlay()
 	checkf(MiniMapCapture, TEXT("MiniMap Camera not set to SceneCapture2D in Player Character"));
 	MiniMapCapture->GetCaptureComponent2D()->OrthoWidth = DefaultMiniMapSize;
 	MiniMapCapture->GetCaptureComponent2D()->HiddenActors.Add(this);
+	MiniMapCapture->GetCaptureComponent2D()->bCaptureEveryFrame = false;
 	ZoomMiniMap(ZoomLevel);
+	bMiniMapActive ? ActivateMiniMap() : DeactivateMiniMap();
 	
 	RespawnPoint = GetActorLocation();
 	RespawnViewDirection = GetControlRotation();
@@ -243,22 +247,19 @@ void AMyCharacter::KillPlayer()
 
 void AMyCharacter::RespawnPlayer()
 {
-	PC->LoadGame();
+	GameInstance->LoadGame();
 }
 
-void AMyCharacter::DamagePlayer(float Damage)
+bool AMyCharacter::DamagePlayer(float Damage)
 {
 	Health = FMath::Max(Health - Damage, 0.0f);
 
 	if (Health <= 0.0f)
 	{
 		KillPlayer();
+		return true;
 	}
-}
-
-bool AMyCharacter::GetIsPlayerDead()
-{
-	return bPlayerDead;
+	return false;
 }
 
 void AMyCharacter::Save()
@@ -297,6 +298,12 @@ void AMyCharacter::Load()
 	GetWorld()->GetFirstPlayerController()->GetPawn()->TeleportTo(SpawnLocation, RespawnViewDirection, false, true);
 	GetWorld()->GetFirstPlayerController()->SetControlRotation(SpawnRotation);
 	GetCharacterMovement()->Velocity = CurrentVelocity;
+
+	bMiniMapActive ? ActivateMiniMap() : DeactivateMiniMap();
+
+#if WITH_EDITOR
+	Health = MaxHealth;
+#endif
 }
 
 void AMyCharacter::MoveForward(float Value)
@@ -335,11 +342,13 @@ void AMyCharacter::TurnAtRate(float Value)
 
 void AMyCharacter::ZoomMiniMap(const int Level)
 {
+	if (bMiniMapActive) return;
+	
 	ZoomLevel = Level < 0 ? 0 : Level;
 	ZoomLevel = Level > MaxZoomLevel ? MaxZoomLevel : ZoomLevel;
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::FromInt(ZoomLevel));
 	MiniMapCapture->GetCaptureComponent2D()->OrthoWidth = DefaultMiniMapSize + ZoomLevel * ZoomSize;
-	MiniMapCapture->GetCaptureComponent2D()->CaptureScene(); 
+	MiniMapCapture->GetCaptureComponent2D()->CaptureScene();
 }
 
 void AMyCharacter::ZoomMiniMapIn()
@@ -350,6 +359,25 @@ void AMyCharacter::ZoomMiniMapIn()
 void AMyCharacter::ZoomMiniMapOut()
 {
 	ZoomMiniMap(ZoomLevel + 1);
+}
+
+void AMyCharacter::DeactivateMiniMap()
+{
+	HUDController->MiniMap->RemoveFromParent();
+	MiniMapCapture->GetCaptureComponent2D()->bCaptureOnMovement = false;
+	MiniMapCapture->GetCaptureComponent2D()->Deactivate();
+	bMiniMapActive = false;
+}
+
+void AMyCharacter::ActivateMiniMap()
+{
+	if (!HUDController->MiniMap->IsInViewport())
+	{
+		HUDController->MiniMap->AddToViewport();
+	}
+	MiniMapCapture->GetCaptureComponent2D()->Activate();
+	MiniMapCapture->GetCaptureComponent2D()->bCaptureOnMovement = true;
+	bMiniMapActive = true;
 }
 
 void AMyCharacter::PlayerStartSprint()

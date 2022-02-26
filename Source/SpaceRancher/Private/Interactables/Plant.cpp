@@ -33,7 +33,7 @@ void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	PlantStateAgeMinutes += GameInstance->GetIsDay() ? DeltaTime : DeltaTime * NightGrowthSpeed;
+	PlantStateAgeMinutes += GameInstance->IsDay() ? DeltaTime : DeltaTime * NightGrowthSpeed;
 	
 	if (PlantStateAgeMinutes >= TimePerStage * 60.0f)
 	{

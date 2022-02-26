@@ -16,9 +16,8 @@ class SPACERANCHER_API ANPC : public ACharacter, public IAttackable, public IAIC
 public:
 	ANPC();
 	
-	virtual bool WasKilled_Implementation() override { return bNPCAlive; }
-	virtual void Damage_Implementation(float Damage) override { DamageActor(Damage); }
-	virtual ACharacter* GetCharacter_Implementation() override { return this; }
+	virtual bool Damage_Implementation(float Damage) override { return DamageActor(Damage); }
+	virtual UClass* GetCharacter_Implementation() override { return GetClass(); }
 
 	virtual FAIPawnState GetAIPawnState_Implementation() override;
 	virtual void SetAIPawnState_Implementation(const FAIPawnState AIPawnState) override;
@@ -45,9 +44,6 @@ protected:
 
 	UPROPERTY()
 	float HealthLastTick = Health;
-
-	UPROPERTY(BlueprintReadOnly, Category="Health", meta=(DisplayName="Is NPC Alive"))
-	bool bNPCAlive = true;
 
 	// Stamina
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stamina")
@@ -95,7 +91,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintGetter)
-	float GetHealth();
+	float GetHealth() const { return Health; }
 	
 	UFUNCTION(BlueprintCallable)
 	void StartSprint();
@@ -107,5 +103,5 @@ public:
 	void KillPlayer();
 
 	UFUNCTION(BlueprintCallable)
-	void DamageActor(float Damage);
+	bool DamageActor(float Damage);
 };
