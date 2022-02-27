@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "World/SpawnerVolume.h"
-
 #include "Components/BrushComponent.h"
+#include "Components/InstancedStaticMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "World/SpawnerMeshInstance.h"
@@ -254,7 +254,7 @@ void ASpawnerVolume::SpawnMesh(FVector SpawnPoint, FRotator Rotation)
 	Spawn.SetScale3D(RandomScale);
 
 	const int RandMesh = FMath::RandRange(0, Meshes.Num() - 1);
-	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstanceWorldSpace(Spawn);
+	InstancedMeshes[RandMesh]->InstancedStaticMeshComponent->AddInstance(Spawn, true);
 }
 
 void ASpawnerVolume::SpawnObjects()

@@ -29,7 +29,7 @@ public:
 	int Day;
 
 protected:
-	FDelegateHandle TickDelegateHandle;
+	FTSTicker::FDelegateHandle TickDelegateHandle;
 
 	UPROPERTY(SaveGame, BlueprintReadOnly, Category="Time")
 	float GameMinutes = 0.0f;

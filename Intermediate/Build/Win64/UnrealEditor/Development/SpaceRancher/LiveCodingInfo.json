@@ -3,10 +3,13 @@
 	{
 		"Module.SpaceRancher.cpp.obj": [
 			"AttackPlayer.cpp.obj",
+			"CompareAIState.cpp.obj",
+			"FindRandomLocation.cpp.obj",
 			"HarvestResource.cpp.obj",
 			"NPC.cpp.obj",
 			"NPC_Controller.cpp.obj",
 			"RockSheep.cpp.obj",
+			"RunAwayFromPlayer.cpp.obj",
 			"Zebos.cpp.obj",
 			"ZebosController.cpp.obj",
 			"CppPlayerController.cpp.obj",
@@ -18,8 +21,6 @@
 			"PlantPot.cpp.obj",
 			"PlayerBed.cpp.obj",
 			"ProgressibleObject.cpp.obj",
-			"Attackable.cpp.obj",
-			"HarvesterAffectable.cpp.obj",
 			"Equippable.cpp.obj",
 			"InventoryComponent.cpp.obj",
 			"InventorySlotWidget.cpp.obj",
@@ -47,24 +48,25 @@
 			"FoodCookerTimer.cpp.obj",
 			"ItemSellingTile.cpp.obj",
 			"TradingTab.cpp.obj",
-			"MainGameInstance.cpp.obj",
 			"ActorRecord.cpp.obj",
 			"ActorSaveArchive.cpp.obj",
 			"MainSaveGame.cpp.obj",
 			"Saveable.cpp.obj",
-			"SpawnerMeshInstance.cpp.obj",
-			"SpawnerVolume.cpp.obj",
 			"SpaceRancher.cpp.obj",
-			"FindRandomLocation.cpp.obj",
-			"RunAwayFromPlayer.cpp.obj"
+			"MainGameInstance.cpp.obj",
+			"SpawnerMeshInstance.cpp.obj",
+			"SpawnerVolume.cpp.obj"
 		],
-		"Module.SpaceRancher.gen.1_of_3.cpp.obj": [
+		"Module.SpaceRancher.gen.1_of_4.cpp.obj": [
 			"ActorRecord.gen.cpp.obj",
 			"AffectableItemBase.gen.cpp.obj",
+			"AIControllable.gen.cpp.obj",
+			"AIState.gen.cpp.obj",
 			"Attackable.gen.cpp.obj",
 			"AttackPlayer.gen.cpp.obj",
 			"Clock.gen.cpp.obj",
 			"CMainHUD.gen.cpp.obj",
+			"CompareAIState.gen.cpp.obj",
 			"Computer.gen.cpp.obj",
 			"ComputerBuying.gen.cpp.obj",
 			"ComputerScreen.gen.cpp.obj",
@@ -81,12 +83,12 @@
 			"HarvesterAttachmentBase.gen.cpp.obj",
 			"HarvesterAttachments.gen.cpp.obj",
 			"HarvestResource.gen.cpp.obj",
-			"HealthAndStaminaBar.gen.cpp.obj",
-			"HUDSetting.gen.cpp.obj",
-			"InteractInterface.gen.cpp.obj",
-			"InventoryComponent.gen.cpp.obj"
+			"HealthAndStaminaBar.gen.cpp.obj"
 		],
-		"Module.SpaceRancher.gen.2_of_3.cpp.obj": [
+		"Module.SpaceRancher.gen.2_of_4.cpp.obj": [
+			"HUDSetting.gen.cpp.obj",
+			"Interactable.gen.cpp.obj",
+			"InventoryComponent.gen.cpp.obj",
 			"InventorySlotWidget.gen.cpp.obj",
 			"InventoryTrashSlot.gen.cpp.obj",
 			"InventoryWindow.gen.cpp.obj",
@@ -98,10 +100,9 @@
 			"ItemStruct.gen.cpp.obj",
 			"ItemStructTileView.gen.cpp.obj",
 			"MainGameInstance.gen.cpp.obj",
-			"MainSaveGame.gen.cpp.obj",
-			"MyCharacter.gen.cpp.obj"
+			"MainSaveGame.gen.cpp.obj"
 		],
-		"Module.SpaceRancher.gen.3_of_3.cpp.obj": [
+		"Module.SpaceRancher.gen.3_of_4.cpp.obj": [
 			"NeededItemPopUp.gen.cpp.obj",
 			"NPC.gen.cpp.obj",
 			"NPC_Controller.gen.cpp.obj",
@@ -114,12 +115,15 @@
 			"Saveable.gen.cpp.obj",
 			"SpawnerComponent.gen.cpp.obj",
 			"SpawnerMeshInstance.gen.cpp.obj",
+			"MyCharacter.gen.cpp.obj",
+			"SpaceRancher.init.gen.cpp.obj"
+		],
+		"Module.SpaceRancher.gen.4_of_4.cpp.obj": [
 			"SpawnerVolume.gen.cpp.obj",
 			"TradingTab.gen.cpp.obj",
 			"WidgetDragOperation.gen.cpp.obj",
 			"Zebos.gen.cpp.obj",
-			"ZebosController.gen.cpp.obj",
-			"SpaceRancher.init.gen.cpp.obj"
+			"ZebosController.gen.cpp.obj"
 		]
 	}
 }

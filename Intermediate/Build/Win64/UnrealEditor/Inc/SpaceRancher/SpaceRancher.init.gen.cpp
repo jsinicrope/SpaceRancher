@@ -5,31 +5,25 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#ifdef _MSC_VER
-#pragma warning (push)
-#pragma warning (disable : 4883)
-#endif
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
-	UPackage* Z_Construct_UPackage__Script_SpaceRancher()
+	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_SpaceRancher;
+	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_SpaceRancher()
 	{
-		static UPackage* ReturnPackage = nullptr;
-		if (!ReturnPackage)
+		if (!Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton)
 		{
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/SpaceRancher",
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xD8469B0D,
-				0xDB204C0A,
+				0x976457C0,
+				0xFFA770EB,
 				METADATA_PARAMS(nullptr, 0)
 			};
-			UECodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);
+			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton, PackageParams);
 		}
-		return ReturnPackage;
+		return Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton;
 	}
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_SpaceRancher(Z_Construct_UPackage__Script_SpaceRancher, TEXT("/Script/SpaceRancher"), Z_Registration_Info_UPackage__Script_SpaceRancher, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x976457C0, 0xFFA770EB));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
-#ifdef _MSC_VER
-#pragma warning (pop)
-#endif
