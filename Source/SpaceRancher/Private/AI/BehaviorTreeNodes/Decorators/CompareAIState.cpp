@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AI/CompareAIState.h"
+#include "AI/BehaviorTreeNodes/Decorators/CompareAIState.h"
 #include "AI/AIState.h"
 #include "AI/NPC_Controller.h"
 

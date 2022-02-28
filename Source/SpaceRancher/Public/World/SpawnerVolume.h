@@ -7,6 +7,7 @@
 #include "Saves/Saveable.h"
 #include "SpawnerVolume.generated.h"
 
+
 UENUM(BlueprintType, meta=(DisplayName="SpawnState"))
 enum class ESpawnState : uint8
 {
@@ -16,7 +17,7 @@ enum class ESpawnState : uint8
 };
 
 
-UCLASS(HideCategories=(Collision, HLOD, Navigation), NotBlueprintable)
+UCLASS(HideCategories=(Collision, HLOD, LOD, Navigation, WorldPartition, Cooking, Actor), NotBlueprintable)
 class SPACERANCHER_API ASpawnerVolume : public AVolume, public ISaveable
 {
 	GENERATED_BODY()
@@ -37,14 +38,16 @@ public:
 	
 protected:
 	// Actors
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors")
 	bool bUseActors = true;
 	
 	// Classes to spawn
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(DisplayThumbnail="true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(DisplayThumbnail="true", AllowAbstract="false"))
 	TArray<TSubclassOf<AActor>> ActorClasses;
-
-	// Variational properties for meshes
+	
+	// Variational properties for actors
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(ClampMin=0.1f, ClampMax=10.0f))
 	float ActorsMinScale = 1.0f;
 
@@ -57,7 +60,18 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Actors", meta=(ClampMin=0.0f, ClampMax=360.0f))
 	float ActorsRandomYRotation = 0.0f;
 
+	
+	// AI Entities
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|AI Entities")
+	bool bUseAIEntities = false;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|AI Entities", meta=(DisplayThumbnail="true"))
+	TArray<TSubclassOf<APawn>> AIEntityClasses;
+
+	
 	// Meshes
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Meshes")
 	bool bUseMeshes = true;
 	
@@ -66,6 +80,7 @@ protected:
 	TArray<UStaticMesh*> Meshes;
 
 	// Variational properties for meshes
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner|Meshes", meta=(ClampMin=0.1f, ClampMax=10.0f))
 	float MeshesMinScale = 1.0f;
 
@@ -80,12 +95,15 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Spawner")
 	bool bAlignToGround = false;
+
+	UPROPERTY()
+	TArray<AActor*> SpawnedActors;
+
+	UPROPERTY()
+	TArray<APawn*> SpawnedAI;
 	
 	UPROPERTY()
 	TArray<class ASpawnerMeshInstance*> InstancedMeshes;
-	
-	UPROPERTY()
-	TArray<AActor*> SpawnedActors;
 
 	UPROPERTY(SaveGame)
 	int SpawnedObjects = 0;
@@ -180,6 +198,9 @@ protected:
 	UFUNCTION()
 	AActor* SpawnActor(FVector SpawnPoint, FRotator Rotation);
 
+	UFUNCTION()
+	APawn* SpawnAIEntity(FVector SpawnPoint, FRotator Rotation);
+	
 	UFUNCTION()
 	void SpawnMesh(FVector SpawnPoint, FRotator Rotation);
 	

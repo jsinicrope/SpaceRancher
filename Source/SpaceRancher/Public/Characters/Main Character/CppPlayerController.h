@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GenericTeamAgentInterface.h"
 #include "GameFramework/PlayerController.h"
 #include "CppPlayerController.generated.h"
 
 UCLASS()
-class SPACERANCHER_API ACppPlayerController : public APlayerController
+class SPACERANCHER_API ACppPlayerController : public APlayerController, public  FGenericTeamId
 {
 	GENERATED_BODY()
 
@@ -48,7 +49,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Saving")
 	bool LoadGame();
 
-	void ActionLoadGame() {LoadGame();}
+	void ActionLoadGame() { LoadGame(); }
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetCredits)

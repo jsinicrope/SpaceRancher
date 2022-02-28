@@ -7,7 +7,7 @@
 #include "AttackPlayer.generated.h"
 
 UCLASS()
-class SPACERANCHER_API UAttackPlayer : public UBTTaskNode
+class SPACERANCHER_API UAttackPlayer final : public UBTTaskNode
 {
 	GENERATED_BODY()
 
@@ -20,9 +20,12 @@ class SPACERANCHER_API UAttackPlayer : public UBTTaskNode
 protected:
 	UPROPERTY(EditAnywhere)
 	FBlackboardKeySelector TargetActor;
+
+	UPROPERTY(EditAnywhere)
+	FBlackboardKeySelector CanSeeTarget;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AttackRange = 50.0f;
+	float AttackRange = 75.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Damage = 35.0f;

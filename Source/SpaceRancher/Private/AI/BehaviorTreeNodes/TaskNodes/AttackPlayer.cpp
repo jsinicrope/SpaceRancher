@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AI/AttackPlayer.h"
+#include "AI/BehaviorTreeNodes/TaskNodes/AttackPlayer.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "AIController.h"
 #include "Characters/Main Character/MyCharacter.h"
@@ -20,15 +20,12 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 	if (!Enemy || !Enemy->GetClass()->ImplementsInterface(UAttackable::StaticClass()))
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsObject(TargetActor.SelectedKeyName, nullptr);
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(CanSeeTarget.SelectedKeyName, false);
+		FinishLatentAbort(OwnerComp);
 		return EBTNodeResult::Aborted;
 	}
 	
-	if (IAttackable::Execute_WasKilled(Enemy))
-	{
-		return EBTNodeResult::Succeeded;
-	}
-	
-	const FVector PlayerLocation = IAttackable::Execute_GetCharacter(Enemy)->GetActorLocation();
+	const FVector PlayerLocation = Enemy->GetActorLocation();
 	AAIController* EntityController = OwnerComp.GetAIOwner();
 	const FVector EntityLocation = EntityController->GetPawn()->GetActorLocation();
 	const float Distance = FVector::Dist(PlayerLocation, EntityLocation);
@@ -43,11 +40,11 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 	{
 		if (TimeSinceLastAttack >= AttackSpeed)
 		{
-			IAttackable::Execute_Damage(Enemy, Damage);
 			TimeSinceLastAttack = 0.0f;
-
-			if (IAttackable::Execute_WasKilled(Enemy))
+			if (IAttackable::Execute_Damage(Enemy, Damage))
 			{
+				FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+				OwnerComp.GetBlackboardComponent()->SetValueAsBool(CanSeeTarget.SelectedKeyName, false);
 				return EBTNodeResult::Succeeded;
 			}
 		}
@@ -55,12 +52,13 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 	if (bFailOnLowHealth)
 	{
-		ANPC* Entity = Cast<ANPC>(EntityController->GetPawn());
+		const ANPC* Entity = Cast<ANPC>(EntityController->GetPawn());
 
 		const float EntityHealth = Entity->GetHealth();
 		
 		if (EntityHealth <= EntityHealth * LowHealthPercentage)
 		{
+			FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
 			return EBTNodeResult::Failed;
 		}
 	}
@@ -71,9 +69,6 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 void UAttackPlayer::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	Super::TickTask(OwnerComp, NodeMemory, DeltaSeconds);
-
 	TimeSinceLastAttack += DeltaSeconds;
-
 	ExecuteTask(OwnerComp, NodeMemory);
 }

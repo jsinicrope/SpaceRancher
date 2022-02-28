@@ -18,11 +18,8 @@ class SPACERANCHER_API IAttackable
 	
 public:
 	UFUNCTION(BlueprintNativeEvent)
-	bool WasKilled();
+	bool Damage(float Damage);
 
 	UFUNCTION(BlueprintNativeEvent)
-	void Damage(float Damage);
-
-	UFUNCTION(BlueprintNativeEvent)
-	ACharacter* GetCharacter();
+	UClass* GetCharacter();
 };

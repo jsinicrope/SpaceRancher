@@ -22,7 +22,6 @@ void ANPC::SetAIPawnState_Implementation(const FAIPawnState AIPawnState)
 void ANPC::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void ANPC::Tick(float DeltaTime)
@@ -32,81 +31,63 @@ void ANPC::Tick(float DeltaTime)
 	ElapsedDamageTime += DeltaTime;
 	ElapsedStaminaDrainTime += DeltaTime;
 
+	// Handle Health Regeneration
+	if (HealthLastTick < Health)
+		ElapsedDamageTime = 0.0f;
+
+	HealthLastTick = Health;
+
+	if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratedHealth))
 	{
-		if (HealthLastTick < Health)
-			ElapsedDamageTime = 0.0f;
-
-		HealthLastTick = Health;
-
-		if ((ElapsedDamageTime >= TimeToHealthRegen) && (Health < MaxRegeneratedHealth))
-		{
-			Health = fmin(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
-		}
+		Health = fmin(MaxHealth, Health + HealthRegenPerSecond * DeltaTime);
 	}
 	
 	// Drain Stamina if Sprinting and not in Air after 'TimeToStaminaRegen'
+	if (GetCharacterMovement()->IsMovingOnGround())
 	{
-		if (GetCharacterMovement()->IsMovingOnGround())
+		if (bSprinting)
 		{
-			if (bSprinting)
-			{
-				Stamina -= StaminaLossRunning * DeltaTime;
-				ElapsedStaminaDrainTime = 0.0f;
-			}
-			// Regen Stamina
-			else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
-				Stamina = fmin(MaxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
+			Stamina -= StaminaLossRunning * DeltaTime;
+			ElapsedStaminaDrainTime = 0.0f;
 		}
+		// Regen Stamina
+		else if (ElapsedStaminaDrainTime >= TimeToStaminaRegen)
+			Stamina = fmin(MaxStamina, Stamina + StaminaRegenPerSecond * DeltaTime);
 	}
+	
+	if (Stamina <= 0)
+		StopSprint();
 
-	{
-		if (Stamina <= 0)
-			StopSprint();
-	}
-
+	
 	// Check for Fall Damage
+	if (GetCharacterMovement()->IsFalling())
 	{
-		if (GetCharacterMovement()->IsFalling())
+		if (GetCharacterMovement()->GetLastUpdateVelocity().Z < 0.0f)
 		{
-			if (GetCharacterMovement()->GetLastUpdateVelocity().Z < 0.0f)
-			{
-				FallingTime += DeltaTime;
-			}
+			FallingTime += DeltaTime;
 		}
+	}
 
-		if (!GetCharacterMovement()->IsFalling() && FallingTime > 0.0f)
+	else if (!GetCharacterMovement()->IsFalling() && FallingTime > 0.0f)
+	{
+		// Calculate Landing Velocity
+		// 2 * acceleration * delta time = velocity
+		// 9.81 average gravity acceleration; should be same in engine
+		const float FallSpeed = 9.81 * FallingTime;
+
+		FallingTime = 0.0f;
+
+		if (FallSpeed >= MinFallDamageVelocity)
 		{
-			// Calculate Landing Velocity
-			// 2 * acceleration * delta time = velocity
-			// 9.81 average gravity acceleration; should be same in engine
-			const float FallSpeed = 9.81 * FallingTime;
-
-			FallingTime = 0.0f;
-
-			if (FallSpeed >= MinFallDamageVelocity)
-			{
-				Health -= (FallSpeed - MinFallDamageVelocity) * FallDamageFactor;
-			}
+			Health -= (FallSpeed - MinFallDamageVelocity) * FallDamageFactor;
 		}
 	}
 
 	// Kill NPC if Health 0
+	if (Health <= 0.0f)
 	{
-		if (Health <= 0.0f)
-		{
-			KillPlayer();
-		}
-		else
-		{
-			bNPCAlive = true;
-		}
+		KillPlayer();
 	}
-
-}
-
-float ANPC::GetHealth()
-{
-	return Health;
 }
 
 void ANPC::StartSprint()
@@ -126,15 +107,17 @@ void ANPC::StopSprint()
 
 void ANPC::KillPlayer()
 {
-	bNPCAlive = false;
+	Destroy();
 }
 
-void ANPC::DamageActor(float Damage)
+bool ANPC::DamageActor(float Damage)
 {
 	Health = FMath::Max(Health - Damage, 0.0f);
 
 	if (Health <= 0.0f)
 	{
 		KillPlayer();
+		return true;
 	}
+	return false;
 }

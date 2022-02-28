@@ -4,7 +4,6 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Interfaces/AIControllable.h"
-#include "Interfaces/AIControllable.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
@@ -37,22 +36,36 @@ void ANPC_Controller::BeginPlay()
 	AIPerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &ANPC_Controller::OnPawnDetected);
 	if (BehaviorTree != nullptr)
 	{
-		RunBehaviorTree(Cast<UBehaviorTree>(BehaviorTree));
+		RunBehaviorTree(BehaviorTree);
 		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("BehaviorTree started"));
 	}
 	AIPerceptionComponent->Activate();
+}
+
+void ANPC_Controller::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
 
 	if (!GetPawn()->GetClass()->ImplementsInterface(UAIControllable::StaticClass()))
 	{
 		UE_LOG(LogTemp, Fatal, TEXT("AI using NPC_Controller doesn't implement IAIControllable Interface"));
 		UE_DEBUG_BREAK();
 	}
+	
 	AIControllerState.PawnState = IAIControllable::Execute_GetAIPawnState(GetPawn());
+}
+
+void ANPC_Controller::OnUnPossess()
+{
+	Super::OnUnPossess();
+	
+	Destroy();
 }
 
 void ANPC_Controller::OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString("Player seen!"));
-	GetBlackboardComponent()->SetValueAsBool(FName("CanSeePlayer"), Stimulus.WasSuccessfullySensed());
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString("Pawn detected"));
+	GetBlackboardComponent()->SetValueAsBool(FName("CanSeeTarget"), Stimulus.WasSuccessfullySensed());
 	GetBlackboardComponent()->SetValueAsObject(FName("TargetActor"), UpdatedActor);
+	AIControllerState.PawnState = IAIControllable::Execute_GetAIPawnState(GetPawn());
 }

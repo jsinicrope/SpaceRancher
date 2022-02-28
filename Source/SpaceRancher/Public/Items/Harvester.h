@@ -10,7 +10,8 @@
 #include "Harvester.generated.h"
 
 enum class EHarvesterAttachmentType : uint8;
-UCLASS()
+
+UCLASS(HideCategories=(Input))
 class SPACERANCHER_API AHarvester : public AItemBase, public IEquippable
 {
 	GENERATED_BODY()
@@ -41,7 +42,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* Attachment;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, NoClear)
 	TSubclassOf<AHarvesterAttachmentBase> ActiveAttachment;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

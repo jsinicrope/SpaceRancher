@@ -4,7 +4,7 @@
 #include "Inventory_System/InventoryComponent.h"
 #include "Characters/Main Character/MyCharacter.h"
 
-ACppPlayerController::ACppPlayerController(const FObjectInitializer& ObjectInitializer) :Super(ObjectInitializer)
+ACppPlayerController::ACppPlayerController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 }
 

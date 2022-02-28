@@ -20,7 +20,6 @@ public:
 	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	
 
 protected:
 	// Health
@@ -150,6 +149,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MiniMap")
 	float ZoomSize = 512.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, SaveGame, Category="MiniMap")
+	bool bMiniMapActive = true;
+
 	UPROPERTY()
 	UUserWidget* WidgetToRemove;
 
@@ -224,9 +226,8 @@ protected:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	
-	virtual bool WasKilled_Implementation() override { return bPlayerDead; }
-	virtual void Damage_Implementation(float Damage) override { DamagePlayer(Damage); }
-	virtual ACharacter* GetCharacter_Implementation() override { return this; }
+	virtual bool Damage_Implementation(float Damage) override { return DamagePlayer(Damage); }
+	virtual UClass* GetCharacter_Implementation() override { return GetClass(); }
 	
 public:
 	// Functions
@@ -257,6 +258,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="MiniMap")
 	void ZoomMiniMapOut();
+
+	UFUNCTION(BlueprintCallable, Category="MiniMap")
+	void DeactivateMiniMap();
+
+	UFUNCTION(BlueprintCallable, Category="MiniMap")
+	void ActivateMiniMap();
 	
 	UFUNCTION(BlueprintCallable, Category = "Custom Functions")
 	void PlayerStartSprint();
@@ -268,7 +275,7 @@ public:
 	void PlayerInteract();
 
 	UFUNCTION(BlueprintCallable, Category="Health")
-	void DamagePlayer(float Damage);
+	bool DamagePlayer(float Damage);
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 	void KillPlayer();
@@ -277,7 +284,7 @@ public:
 	void RespawnPlayer();
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-	bool GetIsPlayerDead();
+	bool GetIsPlayerDead() const { return bPlayerDead; }
 
 	/* Handles the saving of the character state
 	 * Calling is handled from the MainGameInstance */

@@ -6,7 +6,7 @@
 #include "Engine/StaticMeshActor.h"
 #include "SpawnerMeshInstance.generated.h"
 
-UCLASS()
+UCLASS(NotBlueprintable)
 class SPACERANCHER_API ASpawnerMeshInstance : public AStaticMeshActor
 {
 	GENERATED_BODY()
