@@ -62,17 +62,31 @@ public:
 	UFUNCTION(BlueprintGetter)
 	UInventoryWindow* GetInventoryWindow() const {return InventoryWindow;}
 
+	/* Add Item to the inventory
+	 * returns true if successful, else false */
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool AddItem(AItemBase* Item, const int Row = 0, const int Column = 0);
+	
 	/** Overloaded function
 	 * Add Item to the inventory
 	 * returns true if successful, else false */
 	bool AddItem(const FItem_Struct &Item_Struct, int Row = 0, int Column = 0);
 
 	bool AddItemByIndex(const FItem_Struct &Item_Struct, int Index);
-
-	/* Add Item to the inventory
-	 * returns true if successful, else false */
+	
+	/* Adds a given Item and removes one if necessary
+	 * * @return The Removed Item */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItem(AItemBase* Item, const int Row = 0, const int Column = 0);
+	FItem_Struct ForceAddItem(const AItemBase* Item, const int Row = -1, const int Column = -1);
+
+	/* Adds an item to the first free position
+	 * Adds the item to the first inventory slot if no other is free
+	 * @return The Removed Item */
+	FItem_Struct ForceAddItem(const FItem_Struct& Item);
+
+	/* Adds an item at the given position and removes currently at that slot
+	* @return The Removed Item */
+	FItem_Struct ForceAddItem(const FItem_Struct& Item, const int Row, const int Column); 
 
 	/** Returns and removes an item from the inventory at given position
 	 * return an invalid item if no item is at given position */
@@ -83,11 +97,14 @@ public:
 
 	// Returns and removes first item that matches the given item
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItem(const FItem_Struct &Item);
+	FItem_Struct RemoveItem(const FItem_Struct& Item);
 
 	// Returns and removes first item that matches the given item name
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItemByName(FString ItemName);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	FItem_Struct Emplace(FItem_Struct& OutItem, FItem_Struct& InItem);
 
 	// Call to toggle inventory state (open/closed)
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -107,20 +124,20 @@ public:
 	bool GetInventoryOpen();
 
 	// Updates the visual representation of the inventory
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void UpdateInventory();
 
 	// Sorts the inventory lexicographically
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool SortInventory();
 
-	UFUNCTION(BlueprintCallable)
-	int GetNumMultipleItems(FString ItemName);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	int GetOccurrences(FString ItemName);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	TArray<FItem_Struct> GetUniqueSelectables();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool Contains(const FItem_Struct &Item);
 	
 protected:

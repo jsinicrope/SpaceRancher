@@ -26,7 +26,7 @@ public:
 	APlantPot();
 
 	virtual void Interact_Implementation() override;
-	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
+	virtual bool ItemInteract_Implementation(const FItem_Struct& EquippedItem) override;
 	virtual bool PreSaveActor_Implementation() override;
 	virtual bool PreLoadActor_Implementation() override;
 	virtual void PostSaveActor_Implementation() override;

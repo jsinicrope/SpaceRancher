@@ -4,7 +4,6 @@
 #include "Components/WidgetComponent.h"
 #include "Widgets/UI/FoodCookerTimer.h"
 #include "Components/SpawnerComponent.h"
-#include "Inventory_System/ItemBase.h"
 #include "Characters/Main Character/MyCharacter.h"
 
 AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
@@ -23,6 +22,12 @@ AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	CookerGrill->SetupAttachment(CookerFrame);
 	TimerWidget->SetupAttachment(CookerFrame);
 	SpawnerComponent->SetupAttachment(CookerGrill);
+
+	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
+	AddOwnedComponent(Inventory);
+
+	Inventory->Rows = 1;
+	Inventory->Columns = 1;
 }
 
 void AFoodCooker::BeginPlay()
@@ -66,6 +71,10 @@ void AFoodCooker::Interact_Implementation()
 		DoorTimelineComponent->Reverse();
 		bDoorOpen = false;
 	}
+	else if (bCookingQueued)
+	{
+		StartCooking();
+	}
 	else
 	{
 		DoorTimelineComponent->Play();
@@ -73,29 +82,22 @@ void AFoodCooker::Interact_Implementation()
 	}
 }
 
-bool AFoodCooker::ItemInteract_Implementation(FItem_Struct EquippedItem)
+bool AFoodCooker::ItemInteract_Implementation(const FItem_Struct& EquippedItem)
 {
-	if (EquippedItem.ItemClass == RequiredItem)
+	if (bDoorOpen)
 	{
-		if (bDoorOpen)
+		if (EquippedItem.ItemClass == RequiredItem)
 		{
-			QueueCooking();
+			Inventory->ForceAddItem(EquippedItem);
 			DoorTimelineComponent->Reverse();
 			bDoorOpen = false;
+			QueueCooking();
+			return true;
 		}
-		else
+		if (bCookingQueued)
 		{
-			if (bCookingQueued)
-			{
-				StartCooking();
-			}
-			else
-			{
-				DoorTimelineComponent->Play();
-				bDoorOpen = true;
-			}
+			StartCooking();
 		}
-		return true;
 	}
 	return false;
 }
@@ -122,9 +124,10 @@ void AFoodCooker::EndCooking()
 	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, TEXT("Finished cooking!"));
 	bCookingQueued = false;
 	bCooking = false;
-	SpawnerComponent->Spawn();
+	SpawnerComponent->Spawn(OutputItem);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void AFoodCooker::UpdateTimelineComp(const float Output)
 {
 	// Create and set our Door's new relative location based on the output from our Timeline Curve

@@ -81,7 +81,7 @@ void UTradingTab::UpdateMaxAmount()
 {
 	if (PlayerCharacter && ActiveTile)
 	{
-		MaxAmount = PlayerCharacter->GetInventoryComp()->GetNumMultipleItems(ActiveTile->Item_Struct.Name);
+		MaxAmount = PlayerCharacter->GetInventoryComp()->GetOccurrences(ActiveTile->Item_Struct.Name);
 	}
 }
 

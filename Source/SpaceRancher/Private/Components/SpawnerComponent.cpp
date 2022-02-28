@@ -28,10 +28,7 @@ void USpawnerComponent::SetSpawner(TSubclassOf<AActor> NewSpawnable)
 
 AActor* USpawnerComponent::Spawn()
 {
-	if (!Spawnable)
-	{
-		return nullptr;
-	}
+	if (!Spawnable) { return nullptr; }
 	
 	const FVector SpawnLocation = GetComponentLocation();
 	const FRotator SpawnRotation = GetComponentRotation();
@@ -39,6 +36,13 @@ AActor* USpawnerComponent::Spawn()
 	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	SpawnedObject = GetWorld()->SpawnActor<AActor>(Spawnable, SpawnLocation, SpawnRotation, SpawnParameters);
 	return SpawnedObject;
+}
+
+AActor* USpawnerComponent::Spawn(UClass* Object)
+{
+	if (Object)
+		Spawnable = Object;
+	return Spawn();
 }
 
 bool USpawnerComponent::DestroySpawned()

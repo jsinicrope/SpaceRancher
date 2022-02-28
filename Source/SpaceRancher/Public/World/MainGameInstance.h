@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "World/Saves/MainSaveGame.h"
-#include "Delegates/IDelegateInstance.h"
 #include "MainGameInstance.generated.h"
 
 #define REAL_TO_GAME_TIME_FACTOR 48.0f

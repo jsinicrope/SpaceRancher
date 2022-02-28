@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/TimelineComponent.h"
 #include "Interfaces/Interactable.h"
+#include "Inventory_System/InventoryComponent.h"
 #include "FoodCooker.generated.h"
 
 UCLASS()
@@ -21,7 +22,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	virtual void Interact_Implementation() override;
-	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
+	virtual bool ItemInteract_Implementation(const FItem_Struct& EquippedItem) override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -49,7 +50,10 @@ protected:
 	class UFoodCookerTimer* CookerTimer;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
-	TSubclassOf<class AItemBase> RequiredItem = nullptr;
+	TSubclassOf<AItemBase> RequiredItem = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cooking")
+	TSubclassOf<AItemBase> OutputItem = nullptr;
 
 	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bDoorOpen = false;
@@ -66,8 +70,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly, AdvancedDisplay, Category="Cooking")
 	bool bCooking = false;
 
+	UPROPERTY(EditAnywhere)
+	UInventoryComponent* Inventory;
+
 	UPROPERTY()
-	class AMyCharacter* PC;
+	AMyCharacter* PC;
 
 	UFUNCTION(BlueprintCallable)
 	void QueueCooking();
@@ -84,10 +91,10 @@ public:
 	UCurveFloat* DoorTimelineFloatCurve;
 
 private:
-	//Float Track Signature to handle our update track event
+	// Float Track Signature to handle our update track event
 	FOnTimelineFloat UpdateFunctionFloat;
 
-	//Function which updates our Door's relative location with the timeline graph
+	// Function which updates our Door's relative location with the timeline graph
 	UFUNCTION()
 	void UpdateTimelineComp(const float Output);
 };

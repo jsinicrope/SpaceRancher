@@ -60,7 +60,7 @@ void AProgressibleObject::Interact_Implementation()
 	}
 }
 
-bool AProgressibleObject::ItemInteract_Implementation(FItem_Struct EquippedItem)
+bool AProgressibleObject::ItemInteract_Implementation(const FItem_Struct& EquippedItem)
 {
 	if (RequiredAmount == 0)
 	{

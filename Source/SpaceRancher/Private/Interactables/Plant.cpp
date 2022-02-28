@@ -50,7 +50,7 @@ void APlant::Interact_Implementation()
 	}
 }
 
-bool APlant::ItemInteract_Implementation(FItem_Struct EquippedItem)
+bool APlant::ItemInteract_Implementation(const FItem_Struct& EquippedItem)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Interacted with Plant"));
 	return false;

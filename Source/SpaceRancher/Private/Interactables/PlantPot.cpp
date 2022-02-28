@@ -32,7 +32,7 @@ void APlantPot::Interact_Implementation()
 	DestroyAllPlants();
 }
 
-bool APlantPot::ItemInteract_Implementation(FItem_Struct EquippedItem)
+bool APlantPot::ItemInteract_Implementation(const FItem_Struct& EquippedItem)
 {
 	APlant* ItemPlant = Cast<APlant>(EquippedItem.ItemClass->GetDefaultObject());
 	if (ItemPlant)

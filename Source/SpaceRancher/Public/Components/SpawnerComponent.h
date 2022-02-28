@@ -30,6 +30,8 @@ public:
 	void SetSpawner(TSubclassOf<AActor> NewSpawnable);
 
 	UFUNCTION(BlueprintCallable)
+	AActor* Spawn(UClass* Object);
+
 	AActor* Spawn();
 
 	UFUNCTION(BlueprintCallable)

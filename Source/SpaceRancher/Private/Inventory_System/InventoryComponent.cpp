@@ -81,6 +81,44 @@ bool UInventoryComponent::AddItemByIndex(const FItem_Struct &Item_Struct, int In
 	return AddItem(Item_Struct, Row, Column);
 }
 
+FItem_Struct UInventoryComponent::ForceAddItem(const AItemBase* Item, const int Row, const int Column)
+{
+	if (Row && Column == -1)
+	{
+		return ForceAddItem(Item->Main_Item_Structure);
+	}
+	return ForceAddItem(Item->Main_Item_Structure, Row, Column);
+}
+
+FItem_Struct UInventoryComponent::ForceAddItem(const FItem_Struct& Item)
+{
+	FItem_Struct OutItem;
+	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
+	{
+		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
+		{
+			if (!Inventory_Array_Columns[i].Row_Items[j].bValidItem)
+			{
+				OutItem = Inventory_Array_Columns[i].Row_Items[j];
+				Inventory_Array_Columns[i].Row_Items[j] = Item;
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item added to Inventory"));
+				return OutItem;
+			}
+		}
+	}
+
+	OutItem = ForceAddItem(Item, 0, 0);
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item added to Inventory"));
+	return OutItem;
+}
+
+FItem_Struct UInventoryComponent::ForceAddItem(const FItem_Struct& Item, const int Row, const int Column)
+{
+	FItem_Struct OutItem = Inventory_Array_Columns[Row].Row_Items[Column];
+	Inventory_Array_Columns[Row].Row_Items[Column] = Item;
+	return OutItem;
+}
+
 bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Column)
 {
 	return AddItem(Item->Main_Item_Structure, Row, Column);
@@ -138,6 +176,17 @@ FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
 		}
 	}
 	return EmptyItem;
+}
+
+FItem_Struct UInventoryComponent::Emplace(FItem_Struct& OutItem, FItem_Struct& InItem)
+{
+	FItem_Struct RemovedItem = RemoveItemByName(OutItem.Name);
+	if (RemovedItem.bValidItem)
+	{
+		AddItem(InItem);
+		return RemovedItem;
+	}
+	return RemovedItem;
 }
 
 void UInventoryComponent::ToggleInventory()
@@ -200,7 +249,6 @@ void UInventoryComponent::UpdateInventory()
 bool UInventoryComponent::SortInventory()
 {
 	// Move Inventory to 2D for easier modification
-	// Store values as pointers
 	Items.Empty();
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
 	{
@@ -215,7 +263,6 @@ bool UInventoryComponent::SortInventory()
 	Algo::SortBy(Items, &FItem_Struct::bValidItem, TGreater<>());
 	
 	// Move Inventory from 2D back to it's intended shape
-	// Read pointer values to inventory
 	int index = 0;
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
 	{
@@ -230,7 +277,7 @@ bool UInventoryComponent::SortInventory()
 	return true;
 }
 
-int UInventoryComponent::GetNumMultipleItems(FString ItemName)
+int UInventoryComponent::GetOccurrences(FString ItemName)
 {
 	int Amount = 0;
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)

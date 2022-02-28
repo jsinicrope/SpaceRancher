@@ -16,7 +16,7 @@ public:
 	APlant();
 	
 	virtual void Interact_Implementation() override;
-	virtual bool ItemInteract_Implementation(FItem_Struct EquippedItem) override;
+	virtual bool ItemInteract_Implementation(const FItem_Struct& EquippedItem) override;
 	virtual bool PrimaryAffectImpl(AHarvester* Effector, float DeltaAffectedTime) override;
 	virtual bool PreSaveActor_Implementation() override;
 	virtual bool PreLoadActor_Implementation() override;
