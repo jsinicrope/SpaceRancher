@@ -62,7 +62,7 @@ void ANPC_Controller::OnUnPossess()
 	Destroy();
 }
 
-void ANPC_Controller::OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus)
+void ANPC_Controller::OnPawnDetected(AActor* UpdatedActor, const FAIStimulus Stimulus)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString("Pawn detected"));
 	GetBlackboardComponent()->SetValueAsBool(FName("CanSeeTarget"), Stimulus.WasSuccessfullySensed());

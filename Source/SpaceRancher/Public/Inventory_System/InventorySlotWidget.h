@@ -6,7 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/ItemBase.h"
 #include "InventorySlotWidget.generated.h"
 
 UCLASS()

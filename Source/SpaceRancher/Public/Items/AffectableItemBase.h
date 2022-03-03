@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Harvester.h"
 #include "Interfaces/HarvesterAffectable.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/ItemBase.h"
 #include "AffectableItemBase.generated.h"
 
 UCLASS()

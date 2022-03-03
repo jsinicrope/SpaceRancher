@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "AI/RockSheep.h"
-#include "Items/AffectableItemBase.h"
+#include "Items/Gem.h"
 
 ARockSheep::ARockSheep()
 {
@@ -17,23 +17,19 @@ ARockSheep::ARockSheep()
 void ARockSheep::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (BackAttachment)
-	{
-		GemSpawner->SetChildActorClass(BackAttachment);
-		GemSpawner->CreateChildActor();
-		MoveIgnoreActorAdd(GemSpawner->GetChildActor());
-		Item = Cast<AAffectableItemBase>(GemSpawner->GetChildActor());
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, FString("No item set as BackAttachment for Entity Rock Sheep: ") + GetName());
-	}
+	
+	SetActorTickEnabled(false);
 }
 
 void ARockSheep::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	ItemTimeToRespawn -= DeltaTime;
+	if (ItemTimeToRespawn <= 0)
+	{
+		SpawnItem();
+	}
 }
 
 void ARockSheep::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -44,4 +40,31 @@ void ARockSheep::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void ARockSheep::SetItemState(bool Collectible) const
 {
 	Item->CurrentlyCollectible = Collectible;
+}
+
+void ARockSheep::ItemDestroyed(AActor* Actor)
+{
+	Item = nullptr;
+	ItemTimeToRespawn = ItemRespawnTime;
+	SetActorTickEnabled(true);
+	OnItemDestroyed.ExecuteIfBound();
+}
+
+// TODO Add animation for spawning (simple, like growing/scaling the item in size)
+bool ARockSheep::SpawnItem()
+{
+	if (BackAttachment)
+	{
+		GemSpawner->SetChildActorClass(BackAttachment);
+		GemSpawner->CreateChildActor();
+		MoveIgnoreActorAdd(GemSpawner->GetChildActor());
+		Item = Cast<AGem>(GemSpawner->GetChildActor());
+		Item->OnDestroyed.AddDynamic(this, &ARockSheep::ItemDestroyed);
+		
+		SetActorTickEnabled(false);
+		OnItemSpawned.ExecuteIfBound();
+		return true;
+	}
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, FString("No item set as BackAttachment for Entity Rock Sheep: ") + GetName());
+	return false;
 }

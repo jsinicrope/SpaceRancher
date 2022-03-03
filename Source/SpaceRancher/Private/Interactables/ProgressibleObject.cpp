@@ -5,17 +5,14 @@
 #include "UI/NeededItemPopUp.h"
 #include "Components/Image.h"
 #include "Characters/Main Character/MyCharacter.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/ItemBase.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-// Sets default values
 AProgressibleObject::AProgressibleObject()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-// Called when the game starts or when spawned
 void AProgressibleObject::BeginPlay()
 {
 	Super::BeginPlay();

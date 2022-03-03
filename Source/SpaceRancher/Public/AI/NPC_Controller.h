@@ -14,18 +14,24 @@ class SPACERANCHER_API ANPC_Controller : public AAIController
 	GENERATED_BODY()
 
 public:
-
-    ANPC_Controller(const FObjectInitializer& ObjectInitializer);
-
+	ANPC_Controller(const FObjectInitializer& ObjectInitializer);
+	
     virtual void BeginPlay() override;
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    UBehaviorTree* BehaviorTree;
+	UFUNCTION(BlueprintCallable, BlueprintGetter)
+	FAIControllerState GetAIControllerState() { return AIControllerState; }
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
-    UAIPerceptionComponent* AIPerceptionComponent = nullptr;
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetAIControllerState)
+	FAIControllerState AIControllerState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBehaviorTree* BehaviorTree;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Perception")
+	UAIPerceptionComponent* AIPerceptionComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float AISightRadius = 1500.0f;
@@ -41,15 +47,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UAISenseConfig_Sight* SightConfig;
-	
+
 	// Called when a hostile Pawn was Detected
 	UFUNCTION()
-	void OnPawnDetected(AActor* UpdatedActor, FAIStimulus Stimulus);
-
-	UFUNCTION(BlueprintCallable, BlueprintGetter)
-	FAIControllerState GetAIControllerState() { return AIControllerState; }
-
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetAIControllerState)
-	FAIControllerState AIControllerState;
+	void OnPawnDetected(AActor* UpdatedActor, const FAIStimulus Stimulus);
 };

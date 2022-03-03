@@ -17,7 +17,7 @@ AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(Ob
 	TimerWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("TimerWidget"));
 	SpawnerComponent = CreateDefaultSubobject<USpawnerComponent>(TEXT("SpawnerComponent"));
 	
-	CookerFrame->SetupAttachment(RootComponent);
+	RootComponent = CookerFrame;
 	CookerDoor->SetupAttachment(CookerFrame);
 	CookerGrill->SetupAttachment(CookerFrame);
 	TimerWidget->SetupAttachment(CookerFrame);

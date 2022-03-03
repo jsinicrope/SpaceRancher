@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "World/MainGameInstance.h"
+
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "World/Saves/ActorSaveArchive.h"
 #include "Kismet/GameplayStatics.h"
@@ -85,7 +87,7 @@ bool UMainGameInstance::GetSaveGame()
 	return false;
 }
 
-bool UMainGameInstance::GetIsDay()
+bool UMainGameInstance::IsDay()
 {
 	return bIsDay = Sunrise.X * 60 + Sunrise.Y <= GameMinutes && GameMinutes <= Sunset.X * 60 + Sunset.Y ? 1 : 0;
 }
@@ -232,4 +234,22 @@ bool UMainGameInstance::LoadGame()
 void UMainGameInstance::DeleteActiveSave() const
 {
 	UGameplayStatics::DeleteGameInSlot(SaveName, 0);
+}
+
+void UMainGameInstance::LoadMainMenu() const
+{
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	PlayerController->bShowMouseCursor = true;
+	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController);
+	UGameplayStatics::OpenLevel(GetWorld(), FName("MainMenuLevel"));
+}
+
+void UMainGameInstance::UnPauseGame() const
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
+}
+
+void UMainGameInstance::PauseGame() const
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }

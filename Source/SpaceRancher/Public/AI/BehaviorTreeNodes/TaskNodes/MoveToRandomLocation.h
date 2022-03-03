@@ -12,6 +12,8 @@ class SPACERANCHER_API UMoveToRandomLocation final : public UBTTaskNode
 	GENERATED_BODY()
 	
 public:
+	UMoveToRandomLocation();
+	
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	inline virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 

@@ -32,6 +32,12 @@
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
     <Filter Include="Plugins">
       <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
     </Filter>
@@ -1403,18 +1409,6 @@
     <Filter Include="Source\SpaceRancher\Private\AI">
       <UniqueIdentifier>{5707F310-3D12-3200-8CDE-23EFE24CC133}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\AttackPlayer.cpp">
-      <Filter>Source\SpaceRancher\Private\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\CompareAIState.cpp">
-      <Filter>Source\SpaceRancher\Private\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\FindRandomLocation.cpp">
-      <Filter>Source\SpaceRancher\Private\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\HarvestResource.cpp">
-      <Filter>Source\SpaceRancher\Private\AI</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\NPC.cpp">
       <Filter>Source\SpaceRancher\Private\AI</Filter>
     </ClCompile>
@@ -1424,8 +1418,32 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\RockSheep.cpp">
       <Filter>Source\SpaceRancher\Private\AI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\RunAwayFromPlayer.cpp">
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\RockSheepController.cpp">
       <Filter>Source\SpaceRancher\Private\AI</Filter>
+    </ClCompile>
+    <Filter Include="Source\SpaceRancher\Private\AI\BehaviorTreeNodes">
+      <UniqueIdentifier>{58068A0E-3E7B-3D6B-BD05-D695861FB969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Private\AI\BehaviorTreeNodes\Decorators">
+      <UniqueIdentifier>{68AC1514-3F75-30CA-B3A5-0D47C276BF59}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\BehaviorTreeNodes\Decorators\CompareAIState.cpp">
+      <Filter>Source\SpaceRancher\Private\AI\BehaviorTreeNodes\Decorators</Filter>
+    </ClCompile>
+    <Filter Include="Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes">
+      <UniqueIdentifier>{E9345602-E408-3D84-AD7B-54FCAB6A1CE5}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes\AttackPlayer.cpp">
+      <Filter>Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes\HarvestResource.cpp">
+      <Filter>Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes\MoveToRandomLocation.cpp">
+      <Filter>Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes\RunAwayFromPlayer.cpp">
+      <Filter>Source\SpaceRancher\Private\AI\BehaviorTreeNodes\TaskNodes</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Characters">
       <UniqueIdentifier>{26A2297C-89E7-3257-8CC6-A6C65224F260}</UniqueIdentifier>
@@ -1496,9 +1514,6 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Inventory_System\ItemPickUpWidget.cpp">
       <Filter>Source\SpaceRancher\Private\Inventory_System</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Inventory_System\Item_Base.cpp">
-      <Filter>Source\SpaceRancher\Private\Inventory_System</Filter>
-    </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Items">
       <UniqueIdentifier>{DAB10573-2240-3EB0-A279-44E8B2D29776}</UniqueIdentifier>
     </Filter>
@@ -1515,6 +1530,9 @@
       <Filter>Source\SpaceRancher\Private\Items</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Items\HarvesterAttachments.cpp">
+      <Filter>Source\SpaceRancher\Private\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Items\Item_Base.cpp">
       <Filter>Source\SpaceRancher\Private\Items</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\UI">
@@ -1542,6 +1560,9 @@
       <Filter>Source\SpaceRancher\Private\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\NeededItemPopUp.cpp">
+      <Filter>Source\SpaceRancher\Private\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\UI\PauseMenu.cpp">
       <Filter>Source\SpaceRancher\Private\UI</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Widgets">
@@ -1577,6 +1598,9 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameInstance.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameState.cpp">
+      <Filter>Source\SpaceRancher\Private\World</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawnerMeshInstance.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
@@ -1607,18 +1631,6 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\AIState.h">
       <Filter>Source\SpaceRancher\Public\AI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\AttackPlayer.h">
-      <Filter>Source\SpaceRancher\Public\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\CompareAIState.h">
-      <Filter>Source\SpaceRancher\Public\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\FindRandomLocation.h">
-      <Filter>Source\SpaceRancher\Public\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\HarvestResource.h">
-      <Filter>Source\SpaceRancher\Public\AI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\NPC.h">
       <Filter>Source\SpaceRancher\Public\AI</Filter>
     </ClInclude>
@@ -1628,8 +1640,32 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\RockSheep.h">
       <Filter>Source\SpaceRancher\Public\AI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\RunAwayFromPlayer.h">
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\RockSheepController.h">
       <Filter>Source\SpaceRancher\Public\AI</Filter>
+    </ClInclude>
+    <Filter Include="Source\SpaceRancher\Public\AI\BehaviorTreeNodes">
+      <UniqueIdentifier>{C5E1B962-284F-3D3B-89AD-D0AF6AB2611A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\SpaceRancher\Public\AI\BehaviorTreeNodes\Decorators">
+      <UniqueIdentifier>{DBBB2BDF-25EC-3BE3-937C-FD5060B40C87}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\BehaviorTreeNodes\Decorators\CompareAIState.h">
+      <Filter>Source\SpaceRancher\Public\AI\BehaviorTreeNodes\Decorators</Filter>
+    </ClInclude>
+    <Filter Include="Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes">
+      <UniqueIdentifier>{9BFBCF8A-6F88-39DD-992F-6A73752DC954}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes\AttackPlayer.h">
+      <Filter>Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes\HarvestResource.h">
+      <Filter>Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes\MoveToRandomLocation.h">
+      <Filter>Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes\RunAwayFromPlayer.h">
+      <Filter>Source\SpaceRancher\Public\AI\BehaviorTreeNodes\TaskNodes</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Characters">
       <UniqueIdentifier>{4A4B375C-05BB-3E6E-824E-DC0B79A5580C}</UniqueIdentifier>
@@ -1712,9 +1748,6 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\InventoryWindow.h">
       <Filter>Source\SpaceRancher\Public\Inventory_System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\ItemBase.h">
-      <Filter>Source\SpaceRancher\Public\Inventory_System</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Inventory_System\ItemPickUpWidget.h">
       <Filter>Source\SpaceRancher\Public\Inventory_System</Filter>
     </ClInclude>
@@ -1737,6 +1770,9 @@
       <Filter>Source\SpaceRancher\Public\Items</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Items\HarvesterAttachments.h">
+      <Filter>Source\SpaceRancher\Public\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Items\ItemBase.h">
       <Filter>Source\SpaceRancher\Public\Items</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\UI">
@@ -1764,6 +1800,9 @@
       <Filter>Source\SpaceRancher\Public\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\NeededItemPopUp.h">
+      <Filter>Source\SpaceRancher\Public\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\PauseMenu.h">
       <Filter>Source\SpaceRancher\Public\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\WidgetDragOperation.h">
@@ -1800,6 +1839,9 @@
       <UniqueIdentifier>{45EFB955-81F4-3075-AB6A-C0006B8EBF7D}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameInstance.h">
+      <Filter>Source\SpaceRancher\Public\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameState.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h">

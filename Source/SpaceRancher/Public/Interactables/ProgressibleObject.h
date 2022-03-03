@@ -14,7 +14,6 @@ class SPACERANCHER_API AProgressibleObject : public AActor, public IInteractInte
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AProgressibleObject();
 
 	virtual void Interact_Implementation() override;
@@ -25,7 +24,6 @@ public:
 	virtual bool PreSaveActor_Implementation() override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:

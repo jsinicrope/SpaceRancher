@@ -6,7 +6,7 @@
 #include "NiagaraComponent.h"
 #include "Items/HarvesterAttachmentBase.h"
 #include "Interfaces/Equippable.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/ItemBase.h"
 #include "Harvester.generated.h"
 
 enum class EHarvesterAttachmentType : uint8;

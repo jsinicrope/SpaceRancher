@@ -159,7 +159,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_GET_PROPERTY(FFloatProperty,Z_Param_Damage);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->DamagePlayer(Z_Param_Damage);
+		*(bool*)Z_Param__Result=P_THIS->DamagePlayer(Z_Param_Damage);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execPlayerInteract)
@@ -181,6 +181,20 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->PlayerStartSprint();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execActivateMiniMap)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ActivateMiniMap();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMyCharacter::execDeactivateMiniMap)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->DeactivateMiniMap();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMyCharacter::execZoomMiniMapOut)
@@ -305,10 +319,12 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 	{
 		UClass* Class = AMyCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ActivateMiniMap", &AMyCharacter::execActivateMiniMap },
 			{ "AddInventoryItem", &AMyCharacter::execAddInventoryItem },
 			{ "CheckForInteractable", &AMyCharacter::execCheckForInteractable },
 			{ "CloseRadialMenu", &AMyCharacter::execCloseRadialMenu },
 			{ "DamagePlayer", &AMyCharacter::execDamagePlayer },
+			{ "DeactivateMiniMap", &AMyCharacter::execDeactivateMiniMap },
 			{ "GetHealth", &AMyCharacter::execGetHealth },
 			{ "GetHUDController", &AMyCharacter::execGetHUDController },
 			{ "GetInventoryComp", &AMyCharacter::execGetInventoryComp },
@@ -342,6 +358,29 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 			{ "ZoomMiniMapOut", &AMyCharacter::execZoomMiniMapOut },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics::Function_MetaDataParams[] = {
+		{ "Category", "MiniMap" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "ActivateMiniMap", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_ActivateMiniMap()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_ActivateMiniMap_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AMyCharacter_AddInventoryItem_Statics
 	{
@@ -455,8 +494,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		struct MyCharacter_eventDamagePlayer_Parms
 		{
 			float Damage;
+			bool ReturnValue;
 		};
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -464,8 +506,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCharacter_eventDamagePlayer_Parms, Damage), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((MyCharacter_eventDamagePlayer_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MyCharacter_eventDamagePlayer_Parms), &Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::Function_MetaDataParams[] = {
@@ -480,6 +528,29 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_DamagePlayer_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics::Function_MetaDataParams[] = {
+		{ "Category", "MiniMap" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "DeactivateMiniMap", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -630,7 +701,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetIsPlayerDead", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::MyCharacter_eventGetIsPlayerDead_Parms), Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCharacter, nullptr, "GetIsPlayerDead", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::MyCharacter_eventGetIsPlayerDead_Parms), Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -1543,6 +1614,11 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_ZoomSize;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bMiniMapActive_MetaData[];
+#endif
+		static void NewProp_bMiniMapActive_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bMiniMapActive;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_WidgetToRemove_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_WidgetToRemove;
@@ -1620,14 +1696,16 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_SpaceRancher,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMyCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMyCharacter_ActivateMiniMap, "ActivateMiniMap" }, // 1363907737
 		{ &Z_Construct_UFunction_AMyCharacter_AddInventoryItem, "AddInventoryItem" }, // 4246670200
 		{ &Z_Construct_UFunction_AMyCharacter_CheckForInteractable, "CheckForInteractable" }, // 3479303827
 		{ &Z_Construct_UFunction_AMyCharacter_CloseRadialMenu, "CloseRadialMenu" }, // 1088152400
-		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1934627565
+		{ &Z_Construct_UFunction_AMyCharacter_DamagePlayer, "DamagePlayer" }, // 1399257311
+		{ &Z_Construct_UFunction_AMyCharacter_DeactivateMiniMap, "DeactivateMiniMap" }, // 1672211175
 		{ &Z_Construct_UFunction_AMyCharacter_GetHealth, "GetHealth" }, // 1103377602
 		{ &Z_Construct_UFunction_AMyCharacter_GetHUDController, "GetHUDController" }, // 2129051869
 		{ &Z_Construct_UFunction_AMyCharacter_GetInventoryComp, "GetInventoryComp" }, // 2063641185
-		{ &Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead, "GetIsPlayerDead" }, // 210451911
+		{ &Z_Construct_UFunction_AMyCharacter_GetIsPlayerDead, "GetIsPlayerDead" }, // 3687266797
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxHealth, "GetMaxHealth" }, // 2036852767
 		{ &Z_Construct_UFunction_AMyCharacter_GetMaxStamina, "GetMaxStamina" }, // 4153899800
 		{ &Z_Construct_UFunction_AMyCharacter_GetSelectedItem, "GetSelectedItem" }, // 1273239412
@@ -1956,6 +2034,17 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize = { "ZoomSize", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCharacter, ZoomSize), METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive_MetaData[] = {
+		{ "Category", "MiniMap" },
+		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive_SetBit(void* Obj)
+	{
+		((AMyCharacter*)Obj)->bMiniMapActive = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive = { "bMiniMapActive", nullptr, (EPropertyFlags)0x0020080001000015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AMyCharacter), &Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive_SetBit, METADATA_PARAMS(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCharacter_Statics::NewProp_WidgetToRemove_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Characters/Main Character/MyCharacter.h" },
@@ -2119,6 +2208,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_MaxZoomLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_ZoomSize,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_bMiniMapActive,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_WidgetToRemove,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_GameInstance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_PC,
@@ -2138,7 +2228,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCharacter_Statics::NewProp_HUDController,
 	};
 		const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_AMyCharacter_Statics::InterfaceParams[] = {
-			{ Z_Construct_UClass_UAttackable_NoRegister, (int32)VTABLE_OFFSET(AMyCharacter, IAttackable), false },  // 2091031084
+			{ Z_Construct_UClass_UAttackable_NoRegister, (int32)VTABLE_OFFSET(AMyCharacter, IAttackable), false },  // 3316679721
 		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMyCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMyCharacter>::IsAbstract,
@@ -2176,9 +2266,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 1232725964U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 768473452U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_445836384(TEXT("/Script/SpaceRancher"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_391069060(TEXT("/Script/SpaceRancher"),
 		Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

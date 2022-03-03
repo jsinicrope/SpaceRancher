@@ -33,7 +33,13 @@ EBTNodeResult::Type UAttackPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 	if (Distance >= AttackRange)
 	{
-		EntityController->MoveToLocation(PlayerLocation);
+		// The Target might be outside a Navigation Mesh
+		if (EntityController->MoveToActor(Enemy) == EPathFollowingRequestResult::Failed)
+		{
+			OwnerComp.GetBlackboardComponent()->SetValueAsObject(TargetActor.SelectedKeyName, nullptr);
+			FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
+			return EBTNodeResult::Failed;
+		}
 		EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 	}
 	else

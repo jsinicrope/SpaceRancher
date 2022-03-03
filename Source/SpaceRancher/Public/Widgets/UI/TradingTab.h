@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Inventory_System/ItemBase.h"
+#include "Items/ItemBase.h"
 #include "Inventory_System/ItemStruct.h"
 #include "Characters/Main Character/CppPlayerController.h"
 #include "TradingTab.generated.h"

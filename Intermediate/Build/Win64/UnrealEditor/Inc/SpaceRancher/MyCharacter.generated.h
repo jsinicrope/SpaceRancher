@@ -44,6 +44,8 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execActivateMiniMap); \
+	DECLARE_FUNCTION(execDeactivateMiniMap); \
 	DECLARE_FUNCTION(execZoomMiniMapOut); \
 	DECLARE_FUNCTION(execZoomMiniMapIn); \
 	DECLARE_FUNCTION(execZoomMiniMap); \
@@ -86,6 +88,8 @@ class UInventoryComponent;
 	DECLARE_FUNCTION(execPlayerInteract); \
 	DECLARE_FUNCTION(execPlayerStopSprint); \
 	DECLARE_FUNCTION(execPlayerStartSprint); \
+	DECLARE_FUNCTION(execActivateMiniMap); \
+	DECLARE_FUNCTION(execDeactivateMiniMap); \
 	DECLARE_FUNCTION(execZoomMiniMapOut); \
 	DECLARE_FUNCTION(execZoomMiniMapIn); \
 	DECLARE_FUNCTION(execZoomMiniMap); \

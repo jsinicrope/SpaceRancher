@@ -13,6 +13,8 @@ class SPACERANCHER_API URunAwayFromPlayer final : public UBTTaskNode
 	GENERATED_BODY()
 
 public:
+	URunAwayFromPlayer();
+	
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	inline virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 

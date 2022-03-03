@@ -10,6 +10,11 @@
 #include "Kismet/KismetMathLibrary.h"
 
 
+URunAwayFromPlayer::URunAwayFromPlayer()
+{
+	bNotifyTick = true;
+}
+
 void URunAwayFromPlayer::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	ExecuteTask(OwnerComp, NodeMemory);
@@ -28,13 +33,21 @@ EBTNodeResult::Type URunAwayFromPlayer::ExecuteTask(UBehaviorTreeComponent& Owne
 	TargetPosition = TargetPosition.IsZero() ? GetRunAwayPoint(Enemy, ControlledPawn) : TargetPosition;
 
 	const float Distance = FVector::Distance(EntityPosition, TargetPosition);
-	if (Distance <= AcceptableRadius)
+	if (Distance <= AcceptableRadius + 25.0f)
 	{
 		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+		TargetPosition = FVector::ZeroVector;
 		return EBTNodeResult::Succeeded;
 	}
+
+	// Fail Task if there is no valid location to escape to
+	if (EntityController->MoveToLocation(TargetPosition) == EPathFollowingRequestResult::Type::Failed)
+	{
+		TargetPosition = FVector::ZeroVector;
+		FinishLatentTask(OwnerComp,EBTNodeResult::Failed);
+		return EBTNodeResult::Failed;
+	}
 	
-	EntityController->MoveToLocation(TargetPosition);
 	EntityCharacter->GetCharacterMovement()->MaxWalkSpeed = RunAwaySpeed;
 	return EBTNodeResult::InProgress;
 }
