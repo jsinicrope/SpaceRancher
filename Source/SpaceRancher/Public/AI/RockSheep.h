@@ -2,13 +2,15 @@
 
 #include "CoreMinimal.h"
 #include "AI/NPC.h"
+#include "Interfaces/Interactable.h"
+#include "Items/ItemBase.h"
 #include "RockSheep.generated.h"
 
 DECLARE_DYNAMIC_DELEGATE(FOnItemDestroyed);
 DECLARE_DYNAMIC_DELEGATE(FOnItemSpawned);
 
 UCLASS()
-class SPACERANCHER_API ARockSheep : public ANPC
+class SPACERANCHER_API ARockSheep : public ANPC, public IInteractInterface
 {
 	GENERATED_BODY()
 	
@@ -18,7 +20,9 @@ public:
 	ARockSheep();
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	virtual void Interact_Implementation() override;
+	virtual bool ItemInteract_Implementation(const FItem_Struct& EquippedItem) override;
 
 	FOnItemDestroyed OnItemDestroyed;
 	FOnItemSpawned OnItemSpawned;
@@ -36,8 +40,15 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	class AGem* Item;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, SaveGame, BlueprintReadWrite)
 	float ItemRespawnTime = 90.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<TSubclassOf<AItemBase>> TamingItems;
+
+	/* Currently only used to determine the amount of TamingItems needed to tame */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ClampMin="1"))
+	int TamingDifficulty = 2;
 
 	UFUNCTION()
 	void SetItemState(bool Collectible) const;
@@ -47,6 +58,9 @@ protected:
 
 	UFUNCTION()
 	bool SpawnItem();
+
+	UFUNCTION(BlueprintCallable)
+	void SetAIControllerState(const EAIBehaviorState& NewState) const;
 
 private:
 	UPROPERTY()

@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Interactables/Plant.h"
 #include "Interfaces/Interactable.h"
+#include "Interactables/PlayerBuildable.h"
 #include "World/Saves/Saveable.h"
 #include "PlantPot.generated.h"
 
@@ -17,8 +17,8 @@ enum class EPlantSpawnState : uint8
 };
 
 
-UCLASS()
-class SPACERANCHER_API APlantPot : public AActor, public IInteractInterface, public ISaveable
+UCLASS(Abstract, HideCategories=("Actor Tick"))
+class SPACERANCHER_API APlantPot : public APlayerBuildable, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()
 	

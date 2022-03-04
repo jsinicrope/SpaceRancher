@@ -233,10 +233,6 @@ void AMyCharacter::PlayerInteract()
 			}
 		}
 	}
-	else
-	{
-		ToggleInventory();
-	}
 }
 
 void AMyCharacter::KillPlayer()
@@ -412,13 +408,12 @@ bool AMyCharacter::AddInventoryItem(FItem_Struct &Item_Struct)
 	return false;
 }
 
-FItem_Struct AMyCharacter::RemoveInventoryItem(FItem_Struct &Item)
+FItem_Struct AMyCharacter::RemoveInventoryItem(const FItem_Struct &Item) const
 {
-	FItem_Struct RemovedItem = InventoryComp->RemoveItem(Item);
-	return RemovedItem;
+	return InventoryComp->RemoveItem(Item);
 }
 
-FItem_Struct AMyCharacter::RemoveInventoryItemByName(FString ItemName)
+FItem_Struct AMyCharacter::RemoveInventoryItemByName(FString ItemName) const
 {
 	FItem_Struct RemovedItem = InventoryComp->RemoveItemByName(ItemName);
 	return RemovedItem;

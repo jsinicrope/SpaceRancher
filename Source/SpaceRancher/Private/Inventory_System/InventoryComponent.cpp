@@ -74,7 +74,43 @@ bool UInventoryComponent::AddItem(const FItem_Struct &Item_Struct, int Row, int 
 	return false;
 }
 
-bool UInventoryComponent::AddItemByIndex(const FItem_Struct &Item_Struct, int Index)
+bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Column)
+{
+	return AddItem(Item->Main_Item_Structure, Row, Column);
+}
+
+bool UInventoryComponent::AddItems(const TArray<FItem_Struct> Item_Structs)
+{
+	const int ItemsToAdd = Item_Structs.Num();
+	int* Indices = new int[ItemsToAdd];
+	int CurrentIndex = 0;
+	bool bSuccess = false;
+	for (int i = 0; i < Columns; i++)
+	{
+		for (int j = 0; j < Rows; j++)
+		{
+			if (!Inventory_Array_Columns[i].Row_Items[j].bValidItem)
+			{
+				if (CurrentIndex > ItemsToAdd)	bSuccess = true;
+				Inventory_Array_Columns[i].Row_Items[j] = Item_Structs[CurrentIndex];
+				Indices[CurrentIndex] = j * Columns + i;
+				CurrentIndex++;
+			}
+		}
+	}
+	
+	if (!bSuccess)
+	{
+		for (int i = 0; i <= CurrentIndex; i++)
+		{
+			RemoveItemByIndex(i);
+		}
+	}
+	
+	return bSuccess;
+}
+
+bool UInventoryComponent::AddItemByIndex(const FItem_Struct &Item_Struct, const int Index)
 {
 	const int Row = Index % Columns;
 	const int Column = Index / Columns;
@@ -119,12 +155,7 @@ FItem_Struct UInventoryComponent::ForceAddItem(const FItem_Struct& Item, const i
 	return OutItem;
 }
 
-bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Column)
-{
-	return AddItem(Item->Main_Item_Structure, Row, Column);
-}
-
-FItem_Struct UInventoryComponent::RemoveItemFromPosition(int Row, int Column)
+FItem_Struct UInventoryComponent::RemoveItemByIndex(const int Row, const int Column)
 {
 	FItem_Struct Item = Inventory_Array_Columns[Column].Row_Items[Row];
 	const FItem_Struct EmptyItem;
@@ -133,11 +164,11 @@ FItem_Struct UInventoryComponent::RemoveItemFromPosition(int Row, int Column)
 	return Item;
 }
 
-FItem_Struct UInventoryComponent::RemoveItemFromPosition(const int Index)
+FItem_Struct UInventoryComponent::RemoveItemByIndex(const int Index)
 {
 	const int Row = Index % Columns;
 	const int Column = Index / Columns;
-	return RemoveItemFromPosition(Row, Column);
+	return RemoveItemByIndex(Row, Column);
 }
 
 FItem_Struct UInventoryComponent::RemoveItem(const FItem_Struct &Item)
@@ -159,7 +190,73 @@ FItem_Struct UInventoryComponent::RemoveItem(const FItem_Struct &Item)
 	return EmptyItem;
 }
 
-FItem_Struct UInventoryComponent::RemoveItemByName(FString ItemName)
+TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<FString>& ItemNames, bool& bSucceeded)
+{
+	bSucceeded = false;
+	const int ItemsToRemove = ItemNames.Num();
+	int* Indices = new int[ItemsToRemove];
+	TArray<FItem_Struct> RemovedItems;
+	int NumRemovedItems = 0;
+	for (int Index = 0; Index < ItemsToRemove; Index++)
+	{
+		bool bItemRemoved = false;
+		for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)
+		{
+			for (int j = Inventory_Array_Columns[i].Row_Items.Num() - 1; j >= 0; j--)
+			{
+				if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(ItemNames[Index]))
+				{
+					RemovedItems[NumRemovedItems] = Inventory_Array_Columns[i].Row_Items[j];
+					Inventory_Array_Columns[i].Row_Items[j] = FItem_Struct();
+					Indices[NumRemovedItems] = j * Columns + i;
+					bItemRemoved = true;
+					bSucceeded = true;
+					NumRemovedItems++;
+					GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item removed from Inventory"));
+				}
+			}
+		}
+		if (!bItemRemoved)
+		{
+			bSucceeded = false;
+			break;
+		}
+	}
+
+	if (!bSucceeded)
+	{
+		for (int i = 0; i < NumRemovedItems; i++)
+		{
+			AddItemByIndex(RemovedItems[i], Indices[i]);
+		}
+	}
+	
+	bAutoSort ? SortInventory() : 0;
+
+	return RemovedItems;
+}
+
+TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<FItem_Struct>& Items, bool& bSucceeded)
+{
+	TArray<FString> ItemNames;
+	for (int i = 0; i < Items.Num(); i++)
+	{
+		ItemNames[i] = Items[i].Name;
+	}
+	return RemoveItems(ItemNames, bSucceeded);
+}
+
+TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<AItemBase*>& Items, bool& bSucceeded)
+{
+	TArray<FString> ItemNames;
+	for (int i = 0; i < Items.Num(); i++)
+	{
+		ItemNames[i] = Items[i]->Main_Item_Structure.Name;
+	}
+	return RemoveItems(ItemNames, bSucceeded);
+}
+
+FItem_Struct UInventoryComponent::RemoveItemByName(const FString ItemName)
 {
 	FItem_Struct EmptyItem;
 	for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)
@@ -241,7 +338,7 @@ bool UInventoryComponent::GetInventoryOpen()
 	return bInventoryOpen;
 }
 
-void UInventoryComponent::UpdateInventory()
+void UInventoryComponent::UpdateInventory() const
 {
 	InventoryWindow->UpdateInventory();
 }
@@ -249,7 +346,7 @@ void UInventoryComponent::UpdateInventory()
 bool UInventoryComponent::SortInventory()
 {
 	// Move Inventory to 2D for easier modification
-	Items.Empty();
+	TArray<FItem_Struct> Items;
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
 	{
 		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
@@ -263,13 +360,13 @@ bool UInventoryComponent::SortInventory()
 	Algo::SortBy(Items, &FItem_Struct::bValidItem, TGreater<>());
 	
 	// Move Inventory from 2D back to it's intended shape
-	int index = 0;
+	int Index = 0;
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)
 	{
 		for (int j = 0; j < Inventory_Array_Columns[i].Row_Items.Num(); j++)
 		{
-			Inventory_Array_Columns[i].Row_Items[j] = Items[index];
-			index++;
+			Inventory_Array_Columns[i].Row_Items[j] = Items[Index];
+			Index++;
 		}
 	}
 
@@ -277,7 +374,7 @@ bool UInventoryComponent::SortInventory()
 	return true;
 }
 
-int UInventoryComponent::GetOccurrences(FString ItemName)
+int UInventoryComponent::GetOccurrences(const FString ItemName)
 {
 	int Amount = 0;
 	for (int i = 0; i < Inventory_Array_Columns.Num(); i++)

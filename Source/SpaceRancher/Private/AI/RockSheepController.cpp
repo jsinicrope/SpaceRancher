@@ -5,7 +5,7 @@
 
 ARockSheepController::ARockSheepController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	AIControllerState.BehaviorState = EAIBehaviorState::Passive;
+	SetAIControllerState(EAIBehaviorState::Passive);
 }
 
 void ARockSheepController::BeginPlay()
@@ -39,10 +39,10 @@ void ARockSheepController::OnUnPossess()
 
 void ARockSheepController::OnItemAttached()
 {
-	AIControllerState.BehaviorState = EAIBehaviorState::Aggressive;
+	SetAIControllerState(EAIBehaviorState::Aggressive);
 }
 
 void ARockSheepController::OnItemRemoved()
 {
-	AIControllerState.BehaviorState = EAIBehaviorState::Passive;
+	SetAIControllerState(EAIBehaviorState::Passive);
 }

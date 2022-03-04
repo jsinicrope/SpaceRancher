@@ -72,7 +72,7 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 		
 		if (Inventory == InventorySlot->InventoryWindow->Inventory)
 		{
-			const FItem_Struct Item = Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex);
+			const FItem_Struct Item = Inventory->RemoveItemByIndex(InventorySlot->SlotIndex);
 			Inventory->AddItem(Item);
 			UpdateInventory();
 			return true;
@@ -80,7 +80,7 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 		
 		if (Inventory->AddItem(InventorySlot->SlotContent))
 		{
-			InventorySlot->InventoryWindow->Inventory->RemoveItemFromPosition(InventorySlot->SlotIndex);
+			InventorySlot->InventoryWindow->Inventory->RemoveItemByIndex(InventorySlot->SlotIndex);
 			
 			InventorySlot->SetVisibility(ESlateVisibility::Visible);
 			InventorySlot->InventoryWindow->UpdateInventory();
@@ -98,7 +98,7 @@ bool UInventoryWindow::NativeOnDrop(const FGeometry& InGeometry, const FDragDrop
 
 		for (int i = 0; i < InventoryWindow->Inventory->ItemSlots && i < Inventory->ItemSlots; i++)
 		{
-			const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemFromPosition(i);
+			const FItem_Struct Item = InventoryWindow->Inventory->RemoveItemByIndex(i);
 			if (Item.bValidItem && !Inventory->AddItem(Item))
 			{
 				InventoryWindow->Inventory->AddItemByIndex(Item, i);
@@ -152,8 +152,8 @@ void UInventoryWindow::SortInventory()
 
 bool UInventoryWindow::SwitchSlots(const UInventorySlotWidget* FirstSlot, const UInventorySlotWidget* SecondSlot)
 {
-	const FItem_Struct FirstItem = Inventory->RemoveItemFromPosition(FirstSlot->SlotIndex);
-	const FItem_Struct SecondItem = Inventory->RemoveItemFromPosition(SecondSlot->SlotIndex);
+	const FItem_Struct FirstItem = Inventory->RemoveItemByIndex(FirstSlot->SlotIndex);
+	const FItem_Struct SecondItem = Inventory->RemoveItemByIndex(SecondSlot->SlotIndex);
 	Inventory->AddItemByIndex(FirstItem, SecondSlot->SlotIndex);
 	Inventory->AddItemByIndex(SecondItem, FirstSlot->SlotIndex);
 	

@@ -300,10 +300,10 @@ public:
 	bool AddInventoryItem(FItem_Struct &Item_Struct);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveInventoryItem(FItem_Struct &Item);
+	FItem_Struct RemoveInventoryItem(const FItem_Struct &Item) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveInventoryItemByName(FString ItemName);
+	FItem_Struct RemoveInventoryItemByName(FString ItemName) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ToggleInventory();

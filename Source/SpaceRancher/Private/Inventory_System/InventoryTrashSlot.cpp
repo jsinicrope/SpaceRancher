@@ -35,7 +35,7 @@ bool UInventoryTrashSlot::NativeOnDrop(const FGeometry& InGeometry, const FDragD
 		const UInventorySlotWidget* InventorySlotWidget = Cast<UInventorySlotWidget>(DragOperation->WidgetReference);
 		if (InventorySlotWidget->InventoryWindow != InventoryWindow)	{ return false; }
 		
-		SlotContent = InventorySlotWidget->InventoryWindow->Inventory->RemoveItemFromPosition(InventorySlotWidget->SlotIndex);
+		SlotContent = InventorySlotWidget->InventoryWindow->Inventory->RemoveItemByIndex(InventorySlotWidget->SlotIndex);
 
 		ImageThumbnail->SetBrushTintColor(FSlateColor(FLinearColor(1, 1, 1, 1)));
 		ImageThumbnail->SetBrushFromTexture(SlotContent.Thumbnail);

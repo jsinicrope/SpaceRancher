@@ -1601,10 +1601,16 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameState.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\World\PlayerBuildable.cpp">
+      <Filter>Source\SpaceRancher\Private\World</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawnerMeshInstance.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawnerVolume.cpp">
+      <Filter>Source\SpaceRancher\Private\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawningArea.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\World\Saves">
@@ -1844,10 +1850,16 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameState.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\World\PlayerBuildable.h">
+      <Filter>Source\SpaceRancher\Public\World</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerVolume.h">
+      <Filter>Source\SpaceRancher\Public\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawningArea.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\World\Saves">

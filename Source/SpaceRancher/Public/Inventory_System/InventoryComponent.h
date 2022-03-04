@@ -16,12 +16,12 @@ struct FItemRows
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FItem_Struct> Row_Items;
 
-	FItemRows(const int NewRows = 5);
+	explicit FItemRows(const int NewRows = 5);
 };
 
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class SPACERANCHER_API UInventoryComponent : public UActorComponent
+class SPACERANCHER_API UInventoryComponent final : public UActorComponent
 {
 	GENERATED_BODY()
 	
@@ -55,7 +55,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditFixedSize, AdvancedDisplay, Category = "Inventory")
 	TArray<FItemRows> Inventory_Array_Columns;
 
-    // The position the widget is spawned at when opened
+	// The position the widget is spawned at when opened
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory", AdvancedDisplay)
 	FVector2D WidgetPosition = FVector2D(600, 225);
 
@@ -72,7 +72,12 @@ public:
 	 * returns true if successful, else false */
 	bool AddItem(const FItem_Struct &Item_Struct, int Row = 0, int Column = 0);
 
-	bool AddItemByIndex(const FItem_Struct &Item_Struct, int Index);
+	/* Adds all items given to the inventory if possible
+	 * Doesn't add any if they don't fit */
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool AddItems(const TArray<FItem_Struct> Item_Structs);
+
+	bool AddItemByIndex(const FItem_Struct &Item_Struct, const int Index);
 	
 	/* Adds a given Item and removes one if necessary
 	 * * @return The Removed Item */
@@ -91,17 +96,25 @@ public:
 	/** Returns and removes an item from the inventory at given position
 	 * return an invalid item if no item is at given position */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemFromPosition(int Row, int Column);
+	FItem_Struct RemoveItemByIndex(const int Row, const int Column);
 
-	FItem_Struct RemoveItemFromPosition(const int Index);
+	FItem_Struct RemoveItemByIndex(const int Index);
 
 	// Returns and removes first item that matches the given item
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct RemoveItem(const FItem_Struct& Item);
 
+	/* Removes an instance for every items given
+	 * Doesn't remove any if it can't remove all items in the list */
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	TArray<FItem_Struct> RemoveItems(const TArray<FString>& ItemNames, bool& bSucceeded);
+
+	TArray<FItem_Struct> RemoveItems(const TArray<FItem_Struct>& Items, bool& bSucceeded);
+	TArray<FItem_Struct> RemoveItems(const TArray<AItemBase*>& Items, bool&bSucceeded);
+
 	// Returns and removes first item that matches the given item name
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	FItem_Struct RemoveItemByName(FString ItemName);
+	FItem_Struct RemoveItemByName(const FString ItemName);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	FItem_Struct Emplace(FItem_Struct& OutItem, FItem_Struct& InItem);
@@ -125,14 +138,14 @@ public:
 
 	// Updates the visual representation of the inventory
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void UpdateInventory();
+	void UpdateInventory() const;
 
 	// Sorts the inventory lexicographically
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool SortInventory();
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	int GetOccurrences(FString ItemName);
+	int GetOccurrences(const FString ItemName);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	TArray<FItem_Struct> GetUniqueSelectables();
@@ -148,17 +161,14 @@ protected:
 	TSubclassOf<UInventorySlotWidget> InventorySlotWidgetClass;
 	
 	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryWindow, AdvancedDisplay, Category = "Inventory")
-	class UInventoryWindow* InventoryWindow;
+	UInventoryWindow* InventoryWindow;
 
 	// If the inventory is open or not
 	UPROPERTY(BlueprintReadOnly, BlueprintGetter=GetInventoryOpen, AdvancedDisplay, Category = "Inventory")
 	bool bInventoryOpen = false;
 
 	UPROPERTY()
-	TArray<FItem_Struct> Items;
-
-	UPROPERTY()
-	class ACppPlayerController* PC;
+	ACppPlayerController* PC;
 
 	UPROPERTY()
 	class AMyCharacter* Player;

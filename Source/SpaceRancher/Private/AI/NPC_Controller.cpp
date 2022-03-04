@@ -69,3 +69,9 @@ void ANPC_Controller::OnPawnDetected(AActor* UpdatedActor, const FAIStimulus Sti
 	GetBlackboardComponent()->SetValueAsObject(FName("TargetActor"), UpdatedActor);
 	AIControllerState.PawnState = IAIControllable::Execute_GetAIPawnState(GetPawn());
 }
+
+FAIControllerState ANPC_Controller::GetAIControllerState()
+{
+	AIControllerState.PawnState = IAIControllable::Execute_GetAIPawnState(GetPawn());
+	return AIControllerState;
+}

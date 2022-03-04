@@ -63,8 +63,8 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 		}
 		else
 		{
-			const FItem_Struct FirstItem = InventoryWindow->Inventory->RemoveItemFromPosition(SlotIndex);
-			const FItem_Struct SecondItem = TempSwitchSlot->InventoryWindow->Inventory->RemoveItemFromPosition(TempSwitchSlot->SlotIndex);
+			const FItem_Struct FirstItem = InventoryWindow->Inventory->RemoveItemByIndex(SlotIndex);
+			const FItem_Struct SecondItem = TempSwitchSlot->InventoryWindow->Inventory->RemoveItemByIndex(TempSwitchSlot->SlotIndex);
 
 			InventoryWindow->Inventory->AddItemByIndex(SecondItem, SlotIndex);
 			TempSwitchSlot->InventoryWindow->Inventory->AddItemByIndex(FirstItem, TempSwitchSlot->SlotIndex);

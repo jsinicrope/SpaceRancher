@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "AI/RockSheep.h"
+
+#include "AI/RockSheepController.h"
 #include "Items/Gem.h"
 
 ARockSheep::ARockSheep()
@@ -32,9 +34,24 @@ void ARockSheep::Tick(float DeltaTime)
 	}
 }
 
-void ARockSheep::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ARockSheep::Interact_Implementation()
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	IInteractInterface::Interact_Implementation();
+
+#if WITH_EDITOR
+	DamageActor(30.0f);
+#endif
+}
+
+bool ARockSheep::ItemInteract_Implementation(const FItem_Struct& EquippedItem)
+{
+	if (TamingItems.Contains(EquippedItem.ItemClass))
+	{
+		TamingDifficulty -= 1;
+		if (TamingDifficulty <= 0)	{ SetAIControllerState(EAIBehaviorState::Tamed); }
+		return true;
+	}
+	return false;
 }
 
 void ARockSheep::SetItemState(bool Collectible) const
@@ -67,4 +84,10 @@ bool ARockSheep::SpawnItem()
 	}
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, FString("No item set as BackAttachment for Entity Rock Sheep: ") + GetName());
 	return false;
+}
+
+void ARockSheep::SetAIControllerState(const EAIBehaviorState& NewState) const
+{
+	ARockSheepController* RockSheepController = Cast<ARockSheepController>(Controller);
+	RockSheepController->SetAIControllerState(NewState);
 }

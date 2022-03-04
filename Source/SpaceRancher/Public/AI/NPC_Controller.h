@@ -12,7 +12,7 @@ UCLASS()
 class SPACERANCHER_API ANPC_Controller : public AAIController
 {
 	GENERATED_BODY()
-
+	
 public:
 	ANPC_Controller(const FObjectInitializer& ObjectInitializer);
 	
@@ -21,12 +21,14 @@ public:
 	virtual void OnUnPossess() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintGetter)
-	FAIControllerState GetAIControllerState() { return AIControllerState; }
+	FAIControllerState GetAIControllerState();
 
+	UFUNCTION(BlueprintCallable)
+	void SetAIControllerState(FAIControllerState& NewState)	{ AIControllerState = NewState; }
+
+	void SetAIControllerState(const EAIBehaviorState& NewState)	{ AIControllerState.BehaviorState = NewState; }
+	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintGetter=GetAIControllerState)
-	FAIControllerState AIControllerState;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UBehaviorTree* BehaviorTree;
 
@@ -51,4 +53,8 @@ protected:
 	// Called when a hostile Pawn was Detected
 	UFUNCTION()
 	void OnPawnDetected(AActor* UpdatedActor, const FAIStimulus Stimulus);
+
+private:
+	UPROPERTY(BlueprintGetter=GetAIControllerState, BlueprintSetter=SetAIControllerState)
+	FAIControllerState AIControllerState;
 };
