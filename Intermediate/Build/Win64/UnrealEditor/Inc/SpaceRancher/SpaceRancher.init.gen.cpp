@@ -23,13 +23,13 @@ void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xFC6D8281,
-				0x18557A3C,
+				0x27770B6A,
+				0x7CFD466F,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_SpaceRancher(Z_Construct_UPackage__Script_SpaceRancher, TEXT("/Script/SpaceRancher"), Z_Registration_Info_UPackage__Script_SpaceRancher, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xFC6D8281, 0x18557A3C));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_SpaceRancher(Z_Construct_UPackage__Script_SpaceRancher, TEXT("/Script/SpaceRancher"), Z_Registration_Info_UPackage__Script_SpaceRancher, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x27770B6A, 0x7CFD466F));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

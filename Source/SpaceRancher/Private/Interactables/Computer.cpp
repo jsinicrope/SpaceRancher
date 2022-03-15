@@ -3,8 +3,8 @@
 #include "Interactables/Computer.h"
 #include "Components/WidgetComponent.h"
 #include "Characters/Main Character/MyCharacter.h"
-#include "Widgets/UI/ComputerScreen.h"
-#include "Widgets/UI/ComputerBuying.h"
+#include "Widgets/ComputerHUDs/TradeTerminal/ComputerScreen.h"
+#include "Widgets/ComputerHUDs/TradeTerminal/ComputerBuying.h"
 
 AComputer::AComputer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -12,8 +12,7 @@ AComputer::AComputer(const FObjectInitializer& ObjectInitializer) : Super(Object
 
 	ComputerMesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("ComputerMesh"));
 	Screen = CreateDefaultSubobject<UWidgetComponent>(TEXT("Screen"));
-	
-	ComputerMesh->SetupAttachment(RootComponent);
+	SetRootComponent(ComputerMesh);
 	Screen->SetupAttachment(ComputerMesh);
 }
 

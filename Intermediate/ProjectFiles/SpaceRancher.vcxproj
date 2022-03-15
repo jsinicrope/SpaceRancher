@@ -973,6 +973,581 @@
       <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
       <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.cpp" />
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerBuying.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerScreen.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerSelling.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\FoodCookerTimer.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ItemSellingTile.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ItemStructTileView.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\TradingTab.cpp">
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</BrowseInformationFile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>Default</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <ForcedIncludeFiles>E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;E:\SpaceRancher\Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleDependenciesFile>
+      <ModuleOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <Optimization>MaxSpeed</Optimization>
+      <ObjectFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\SpaceRancher.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <XMLDocumentationFileName>E:\SpaceRancher\Intermediate\ProjectFiles\..\Build\Unused\</XMLDocumentationFileName>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <AdditionalOptions>/std:c++17 /Yu"E:\SpaceRancher\Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
+      <AdditionalIncludeDirectories>;E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\SpaceRancher.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
@@ -980,6 +1555,15 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\BuildablesPriceStruct.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\PlayerBuildable.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerBuying.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerScreen.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerSelling.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\FoodCookerTimer.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ItemSellingTile.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ItemStructTileView.h" />
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\TradingTab.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\SpaceRancher.h" />
     <ClCompile Include="..\..\Source\SpaceRancher\Private\AI\NPC.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
@@ -1186,41 +1770,6 @@
       <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
       <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ItemStructTileView.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerBuying.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerScreen.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerSelling.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\FoodCookerTimer.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ItemSellingTile.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\TradingTab.cpp">
-      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
-      <AdditionalOptions>$(AdditionalOptions) /Yu"$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"</AdditionalOptions>
-    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameInstance.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);E:\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source\Win64;E:\UE_5.0\Engine\Source\ThirdParty\LibTiff\Source;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;E:\UE_5.0\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Intermediate\Build\Win64\SpaceRancherEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h;$(SolutionDir)Intermediate\Build\Win64\UnrealEditor\Development\SpaceRancher\Definitions.SpaceRancher.h</ForcedIncludeFiles>
@@ -1309,13 +1858,6 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\NeededItemPopUp.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\PauseMenu.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\UI\WidgetDragOperation.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ItemStructTileView.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerBuying.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerScreen.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerSelling.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\FoodCookerTimer.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ItemSellingTile.h" />
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\TradingTab.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameInstance.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameState.h" />
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h" />

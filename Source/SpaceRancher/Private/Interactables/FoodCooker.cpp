@@ -2,7 +2,7 @@
 
 #include "Interactables/FoodCooker.h"
 #include "Components/WidgetComponent.h"
-#include "Widgets/UI/FoodCookerTimer.h"
+#include "Widgets/ComputerHUDs/TradeTerminal/FoodCookerTimer.h"
 #include "Components/SpawnerComponent.h"
 #include "Characters/Main Character/MyCharacter.h"
 

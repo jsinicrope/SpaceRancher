@@ -69,7 +69,7 @@ void AMyCharacter::BeginPlay()
 	GameInstance = Cast<UMainGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 
 	PC = Cast<ACppPlayerController>(GetWorld()->GetFirstPlayerController());
-
+	
 	// Setup the MiniMap Camera capturing
 	MiniMapCamera->SetRelativeLocation(FVector(0, 0, 10000));
 	MiniMapCamera->SetRelativeRotation(FRotator(270, 0, 0));
@@ -222,6 +222,7 @@ void AMyCharacter::PlayerInteract()
 				{
 					if (IInteractInterface::Execute_ItemInteract(Actor, SelectedItem))
 					{
+						// ReSharper disable once CppExpressionWithoutSideEffects
 						RemoveInventoryItem(SelectedItem);
 						UpdateSelectedItem();
 					}
@@ -452,21 +453,25 @@ void AMyCharacter::CloseRadialMenu()
 
 void AMyCharacter::PrimaryActionPressed_Implementation()
 {
-	WidgetInteractionComponent->PressPointerKey(FKey(FName("LeftMouseButton")));
-	
 	if (HeldItem)
 	{
 		IEquippable::Execute_Activated(HeldItem);
+	}
+	else
+	{
+		WidgetInteractionComponent->PressPointerKey(FKey(FName("LeftMouseButton")));
 	}
 }
 
 void AMyCharacter::PrimaryActionReleased_Implementation()
 {
-	WidgetInteractionComponent->ReleasePointerKey(FKey(FName("LeftMouseButton")));
-
 	if (HeldItem)
 	{
 		IEquippable::Execute_Deactivated(HeldItem);
+	}
+	else
+	{
+		WidgetInteractionComponent->ReleasePointerKey(FKey(FName("LeftMouseButton")));
 	}
 }
 
