@@ -83,13 +83,13 @@ public:
 	bool SetNewPlant(class APlant* NewPlant, bool bSpawnPlants = false, int AmountOfPlants = 20);
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Content", meta=(DisplayThumbnail="true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Planter|Planting", meta=(DisplayThumbnail="true"))
 	class TSubclassOf<APlant> DefaultPlant;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")
+	UPROPERTY(BlueprintReadOnly, Category = "Planter|Planting")
 	class APlant* Plant;
 
 	//Cast property to used Plant Class for use
-	UPROPERTY(BlueprintReadOnly, Category = "Planter|Content")
+	UPROPERTY(BlueprintReadOnly, Category = "Planter|Planting")
 	TArray<AActor*> PlantedPlants;
 };

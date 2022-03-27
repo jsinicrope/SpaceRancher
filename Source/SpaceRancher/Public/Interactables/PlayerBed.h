@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "PlayerBuildable.h"
 #include "Interfaces/Interactable.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "PlayerBed.generated.h"
 
 UCLASS()
-class SPACERANCHER_API APlayerBed : public AActor, public IInteractInterface
+class SPACERANCHER_API APlayerBed : public APlayerBuildable, public IInteractInterface
 {
 	GENERATED_BODY()
 	

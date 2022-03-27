@@ -7,7 +7,7 @@
 #include "Items/ItemBase.h"
 #include "HarvesterAttachmentBase.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class SPACERANCHER_API AHarvesterAttachmentBase : public AItemBase
 {
 	GENERATED_BODY()

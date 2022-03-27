@@ -4,7 +4,6 @@
 #include "Components/WidgetComponent.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Widgets/ComputerHUDs/TradeTerminal/ComputerScreen.h"
-#include "Widgets/ComputerHUDs/TradeTerminal/ComputerBuying.h"
 
 AComputer::AComputer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -24,8 +23,6 @@ void AComputer::BeginPlay()
 	ScreenWidget = Cast<UComputerScreen>(Screen->GetWidget());
 	ScreenWidget->SetOwningComputer(this);
 	ScreenWidget->SetSellingTabActive();
-
-	ScreenWidget->BuyingTab->SetMaxStock(MaxBuyStock);
 }
 
 void AComputer::Tick(float DeltaTime)

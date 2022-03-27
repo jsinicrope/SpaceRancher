@@ -21,7 +21,7 @@ void UInventoryWindow::NativeOnInitialized()
 	InventoryGrid = Cast<UGridPanel>(GetWidgetFromName(FName("InventoryGrid")));
 	CloseInventoryButton = Cast<UButton>(GetWidgetFromName(FName("CloseInventoryButton")));
 	TrashSlot = Cast<UInventoryTrashSlot>(GetWidgetFromName(FName("TrashSlot")));
-
+	
 	if (TrashSlot)
 	{
 		TrashSlot->InventoryWindow = this;
@@ -116,7 +116,7 @@ void UInventoryWindow::SetVariables(UInventoryComponent* InventoryComp, TSubclas
 {
 	Inventory = InventoryComp;
 	InventorySlotWidgetClass = InventorySlotWidgetClassIn;
-	AMyCharacter* Player =  Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	const AMyCharacter* Player =  Cast<AMyCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	if (Player)
 	{
 		PlayerHUD = Player->GetHUDController();

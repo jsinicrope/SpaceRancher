@@ -5,19 +5,24 @@
 #include "CoreMinimal.h"
 #include "PlayerBuildable.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/Interactable.h"
+#include "Widgets/ComputerHUDs/SpawningPlatform/SpawningTerminalWindow.h"
 #include "SpawningArea.generated.h"
 
 UCLASS()
-class SPACERANCHER_API ASpawningArea : public AActor, public IInteractInterface
+class SPACERANCHER_API ASpawningArea final : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	ASpawningArea();
 	virtual void Tick(float DeltaTime) override;
-	virtual void Interact_Implementation() override;
 
+	UFUNCTION(BlueprintCallable)
+	bool RequestBuyWithCredits(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass);
+
+	UFUNCTION(BlueprintCallable)
+	bool RequestBuyWithMaterials(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass);
+	
 protected:
 	virtual void BeginPlay() override;
 
@@ -28,14 +33,33 @@ protected:
 	UStaticMeshComponent* Terminal;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UWidgetComponent* Screen;
+
+	UPROPERTY(BlueprintReadWrite)
+	USpawningTerminalWindow* ScreenWidget;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TSubclassOf<APlayerBuildable>> Buildables;
 
 	UPROPERTY(BlueprintReadOnly)
 	APlayerBuildable* BuiltObject;
 
-	UFUNCTION(BlueprintCallable)
-	void Spawn();
+	UPROPERTY(BlueprintReadOnly)
+	class AMyCharacter* PlayerCharacter;
+	
+	UFUNCTION()
+	void UpdateScreenWidgets();
 
+	/** Whether an object can be spawned
+	 * If something is already spawned, nothing else can be spawned */
+	UFUNCTION(BlueprintCallable)
+	bool CanSpawn() const { return !BuiltObject; }
+	
+	// Spawns the passed Object
+	UFUNCTION(BlueprintCallable)
+	void Spawn(const TSubclassOf<APlayerBuildable>& BuildableClass);
+
+	// Destroys the currently built object
 	UFUNCTION(BlueprintCallable)
 	void Destruct();
 };

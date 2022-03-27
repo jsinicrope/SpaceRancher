@@ -1475,6 +1475,9 @@
     <Filter Include="Source\SpaceRancher\Private\Interactables">
       <UniqueIdentifier>{9344F345-46A2-3C9B-82BB-E842E3FCD1A3}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\BuildablesPriceStruct.cpp">
+      <Filter>Source\SpaceRancher\Private\Interactables</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\Computer.cpp">
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
     </ClCompile>
@@ -1490,7 +1493,13 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\PlayerBed.cpp">
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\PlayerBuildable.cpp">
+      <Filter>Source\SpaceRancher\Private\Interactables</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\ProgressibleObject.cpp">
+      <Filter>Source\SpaceRancher\Private\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\SpawningArea.cpp">
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\Inventory_System">
@@ -1568,29 +1577,41 @@
     <Filter Include="Source\SpaceRancher\Private\Widgets">
       <UniqueIdentifier>{97FBF85F-DA87-3882-B279-019F4E622240}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ItemStructTileView.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets</Filter>
-    </ClCompile>
-    <Filter Include="Source\SpaceRancher\Private\Widgets\UI">
-      <UniqueIdentifier>{814D78EB-7D58-3EFD-AEC6-C293C1FE3DD3}</UniqueIdentifier>
+    <Filter Include="Source\SpaceRancher\Private\Widgets\ComputerHUDs">
+      <UniqueIdentifier>{95B0FD42-5429-37A4-AEE6-8BBB2F41ED0D}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerBuying.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <Filter Include="Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform">
+      <UniqueIdentifier>{6784A090-1BCC-3198-947D-13934082399A}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerScreen.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ComputerSelling.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <Filter Include="Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal">
+      <UniqueIdentifier>{5C33EA45-884B-341F-9A1B-C142C7250200}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerBuying.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\FoodCookerTimer.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerScreen.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\ItemSellingTile.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ComputerSelling.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\UI\TradingTab.cpp">
-      <Filter>Source\SpaceRancher\Private\Widgets\UI</Filter>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\FoodCookerTimer.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ItemSellingTile.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\ItemStructTileView.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal\TradingTab.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\World">
       <UniqueIdentifier>{5B7E9B0D-CCEA-3F30-B752-9707663C3953}</UniqueIdentifier>
@@ -1601,16 +1622,10 @@
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\MainGameState.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\World\PlayerBuildable.cpp">
-      <Filter>Source\SpaceRancher\Private\World</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawnerMeshInstance.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawnerVolume.cpp">
-      <Filter>Source\SpaceRancher\Private\World</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\World\SpawningArea.cpp">
       <Filter>Source\SpaceRancher\Private\World</Filter>
     </ClCompile>
     <Filter Include="Source\SpaceRancher\Private\World\Saves">
@@ -1703,6 +1718,9 @@
     <Filter Include="Source\SpaceRancher\Public\Interactables">
       <UniqueIdentifier>{A49BF6E1-FD8A-361E-A093-07C60C6277C9}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\BuildablesPriceStruct.h">
+      <Filter>Source\SpaceRancher\Public\Interactables</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\Computer.h">
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
     </ClInclude>
@@ -1718,7 +1736,13 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\PlayerBed.h">
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\PlayerBuildable.h">
+      <Filter>Source\SpaceRancher\Public\Interactables</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\ProgressibleObject.h">
+      <Filter>Source\SpaceRancher\Public\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\SpawningArea.h">
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\Interfaces">
@@ -1817,29 +1841,41 @@
     <Filter Include="Source\SpaceRancher\Public\Widgets">
       <UniqueIdentifier>{351F27B5-92B0-3D2E-B874-5F660CA086B1}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ItemStructTileView.h">
-      <Filter>Source\SpaceRancher\Public\Widgets</Filter>
-    </ClInclude>
-    <Filter Include="Source\SpaceRancher\Public\Widgets\UI">
-      <UniqueIdentifier>{A12447BA-7D67-304C-9DD6-BE6E41E021E0}</UniqueIdentifier>
+    <Filter Include="Source\SpaceRancher\Public\Widgets\ComputerHUDs">
+      <UniqueIdentifier>{0E8B70BE-A1BB-362E-9E58-1676AC97C3D8}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerBuying.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <Filter Include="Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform">
+      <UniqueIdentifier>{AE859C6F-90C9-39F3-9A69-5EEF86361259}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerScreen.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ComputerSelling.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <Filter Include="Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal">
+      <UniqueIdentifier>{1305CB5D-6E31-3536-86A5-5009AA190B07}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerBuying.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\FoodCookerTimer.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerScreen.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\ItemSellingTile.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ComputerSelling.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\UI\TradingTab.h">
-      <Filter>Source\SpaceRancher\Public\Widgets\UI</Filter>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\FoodCookerTimer.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ItemSellingTile.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\ItemStructTileView.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal\TradingTab.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\TradeTerminal</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\World">
       <UniqueIdentifier>{45EFB955-81F4-3075-AB6A-C0006B8EBF7D}</UniqueIdentifier>
@@ -1850,16 +1886,10 @@
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\MainGameState.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\World\PlayerBuildable.h">
-      <Filter>Source\SpaceRancher\Public\World</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerMeshInstance.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawnerVolume.h">
-      <Filter>Source\SpaceRancher\Public\World</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\World\SpawningArea.h">
       <Filter>Source\SpaceRancher\Public\World</Filter>
     </ClInclude>
     <Filter Include="Source\SpaceRancher\Public\World\Saves">

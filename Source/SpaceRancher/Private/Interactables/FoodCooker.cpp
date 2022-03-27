@@ -6,11 +6,11 @@
 #include "Components/SpawnerComponent.h"
 #include "Characters/Main Character/MyCharacter.h"
 
-AFoodCooker::AFoodCooker(const FObjectInitializer &ObjectInitializer) : Super(ObjectInitializer)
+AFoodCooker::AFoodCooker()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	CookerFrame = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("CookerFrame"));
+	CookerFrame = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerFrame"));
 	CookerGrill = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerGrill"));
 	CookerDoor = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CookerDoor"));
 	DoorTimelineComponent = CreateDefaultSubobject<UTimelineComponent>(TEXT("DoorTimelineComponent"));

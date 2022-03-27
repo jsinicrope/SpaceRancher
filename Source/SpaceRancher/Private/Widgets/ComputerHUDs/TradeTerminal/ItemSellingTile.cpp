@@ -21,10 +21,11 @@ void UItemSellingTile::SetWidgets() const
 {
 	if (RepresentedItem)
 	{
-		ItemDisplay->SetBrushFromTexture(RepresentedItem->Item_Struct.Thumbnail);
-		ItemName->SetText(FText::FromString(RepresentedItem->Item_Struct.Name));
-		ItemDescription->SetText(FText::FromString(RepresentedItem->Item_Struct.Details));
-		CreditValue->SetText(FText::FromString(FString("Credit Value: ") + FString::FromInt(RepresentedItem->Item_Struct.CreditValue)));
+		const FItem_Struct Item_Struct = RepresentedItem->Item.Item->GetDefaultObject<AItemBase>()->Main_Item_Structure;
+		ItemDisplay->SetBrushFromTexture(Item_Struct.Thumbnail);
+		ItemName->SetText(FText::FromString(Item_Struct.Name));
+		ItemDescription->SetText(FText::FromString(Item_Struct.Details));
+		CreditValue->SetText(FText::FromString(FString("Credit Value: ") + FString::FromInt(Item_Struct.CreditValue)));
 	}
 }
 

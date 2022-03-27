@@ -11,7 +11,7 @@
 
 enum class EHarvesterAttachmentType : uint8;
 
-UCLASS(HideCategories=(Input))
+UCLASS(Abstract, HideCategories=(Input))
 class SPACERANCHER_API AHarvester : public AItemBase, public IEquippable
 {
 	GENERATED_BODY()

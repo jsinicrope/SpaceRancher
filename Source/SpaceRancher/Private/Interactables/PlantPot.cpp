@@ -172,13 +172,13 @@ void APlantPot::DestroyAllPlants()
 	Plant = nullptr;
 }
 
-bool APlantPot::SetNewPlant(class APlant* NewPlant, bool bSpawnPlants, int AmountOfPlants)
+bool APlantPot::SetNewPlant(APlant* NewPlant, bool bSpawnPlants, int AmountOfPlants)
 {
 	if (!Plant)
 	{
 		Plant = NewPlant;
-		Width -= Plant->GetBottomStemThickness();
-		Length -= Plant->GetBottomStemThickness();
+		Width -= Plant->GetBottomStemThickness() * GetActorScale3D().X;
+		Length -= Plant->GetBottomStemThickness() * GetActorScale3D().Y;
 		
 		if (bSpawnPlants)
 		{

@@ -8,7 +8,7 @@
 #include "Items/ItemBase.h"
 #include "AffectableItemBase.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class SPACERANCHER_API AAffectableItemBase : public AItemBase, public IHarvesterAffectable
 {
 	GENERATED_BODY()

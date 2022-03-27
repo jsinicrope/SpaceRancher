@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Widgets/ComputerHUDs/TradeTerminal/TradingTab.h"
+#include "Characters/Main Character/CppPlayerController.h"
 #include "Characters/Main Character/MyCharacter.h"
 #include "Widgets/ComputerHUDs/TradeTerminal/ItemStructTileView.h"
 #include "Components/Button.h"
@@ -81,7 +82,7 @@ void UTradingTab::UpdateMaxAmount()
 {
 	if (PlayerCharacter && ActiveTile)
 	{
-		MaxAmount = PlayerCharacter->GetInventoryComp()->GetOccurrences(ActiveTile->Item_Struct.Name);
+		MaxAmount = PlayerCharacter->GetInventoryComp()->GetOccurrences(ActiveTile->Item.Item->GetDefaultObject<AItemBase>()->Main_Item_Structure.Name);
 	}
 }
 
@@ -90,28 +91,26 @@ void UTradingTab::UpdateActiveTile(UObject* NewObject)
 	SetSelectionSet();
 	
 	ActiveTile = Cast<UItemStructTileView>(NewObject);
-	DisplayedItemImage->SetBrushFromTexture(ActiveTile->Item_Struct.Thumbnail);
-	DisplayedItemName->SetText(FText::FromString(ActiveTile->Item_Struct.Name));
-	DisplayedItemInfo->SetText(FText::FromString(ActiveTile->Item_Struct.Details));
+	const FItem_Struct Item_Struct = ActiveTile->Item.Item->GetDefaultObject<AItemBase>()->Main_Item_Structure;
+	DisplayedItemImage->SetBrushFromTexture(Item_Struct.Thumbnail);
+	DisplayedItemName->SetText(FText::FromString(Item_Struct.Name));
+	DisplayedItemInfo->SetText(FText::FromString(Item_Struct.Details));
 	
 	UpdateSelectedAmountText();
 }
 
-void UTradingTab::AddItemToList(FItem_Struct ItemStruct)
+void UTradingTab::AddItemToList(FTradeables& ItemStruct)
 {
 	UItemStructTileView* ItemObject = NewObject<UItemStructTileView>();
-	ItemObject->Item_Struct = ItemStruct;
+	ItemObject->Item = ItemStruct;
 	ItemTiles->AddItem(ItemObject);
 }
 
-void UTradingTab::SetTiles(TArray<TSubclassOf<AItemBase>> Items)
+void UTradingTab::SetTiles(TArray<FTradeables> Items)
 {
 	ItemTiles->ReleaseSlateResources(true);
 	for (int i = 0; i < Items.Num(); i++)
 	{
-		if (Items[i])
-		{
-			AddItemToList(Cast<AItemBase>(Items[i]->ClassDefaultObject)->Main_Item_Structure);
-		}
+			AddItemToList(Items[i]);
 	}
 }

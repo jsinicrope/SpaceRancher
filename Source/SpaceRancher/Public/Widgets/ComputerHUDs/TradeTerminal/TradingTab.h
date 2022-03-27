@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Interactables/Computer.h"
 #include "Items/ItemBase.h"
 #include "Inventory_System/ItemStruct.h"
-#include "Characters/Main Character/CppPlayerController.h"
 #include "TradingTab.generated.h"
 
 UCLASS()
@@ -106,10 +106,10 @@ protected:
 	/** Adds an item to the list of items that can be selected
 	 * Function does NOT call UpdateActiveTile, this has to be done manually */
 	UFUNCTION(BlueprintCallable)
-	virtual void AddItemToList(FItem_Struct ItemStruct);
+	virtual void AddItemToList(FTradeables& ItemStruct);
 
 public:
 	// Called when the object is finished initializing and adds and sets all tiles to a list of given items that should be represented
 	UFUNCTION(BlueprintCallable)
-	virtual void SetTiles(TArray<TSubclassOf<AItemBase>> Items);
+	virtual void SetTiles(TArray<FTradeables> Items);
 };

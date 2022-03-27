@@ -20,10 +20,10 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	
 protected:
-	UPROPERTY(EditAnywhere, BLueprintReadWrite)
+	UPROPERTY(BLueprintReadWrite)
 	class AMyCharacter* PlayerCharacter;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite)
 	class UMainGameInstance* GameInstance;
 	
 public:

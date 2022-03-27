@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Widgets/ComputerHUDs/TradeTerminal/ComputerBuying.h"
+#include "Characters/Main Character/CppPlayerController.h"
 #include "Widgets/ComputerHUDs/TradeTerminal/ItemStructTileView.h"
 #include "Characters/Main Character/MyCharacter.h"
 
@@ -13,8 +14,6 @@ void UComputerBuying::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
-	UpdateSelectedAmountText();
-
 	TimeSinceTransfer += InDeltaTime;
 	if (TimeSinceTransfer >= 2.0f)
 	{
@@ -24,7 +23,7 @@ void UComputerBuying::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 void UComputerBuying::UpdateMaxAmount()
 {
-	
+	MaxAmount = ActiveTile->Item.StockAmount;
 }
 
 void UComputerBuying::Transfer()
@@ -34,9 +33,9 @@ void UComputerBuying::Transfer()
 		const int Amount = SelectedAmount;
 		for (int i = 0; i < Amount; i++)
 		{
-			if (PC->DeductCredits(ActiveTile->Item_Struct.CreditValue))
+			if (PC->DeductCredits(ActiveTile->Item.Item->GetDefaultObject<AItemBase>()->Main_Item_Structure.CreditValue))
 			{
-				if (!PlayerCharacter->AddInventoryItem(ActiveTile->Item_Struct))
+				if (!PlayerCharacter->AddInventoryItem(ActiveTile->Item.Item->GetDefaultObject<AItemBase>()->Main_Item_Structure))
 					break;
 				SelectedAmount--;
 				MaxAmount--;

@@ -67,15 +67,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool AddItem(AItemBase* Item, const int Row = 0, const int Column = 0);
 	
-	/** Overloaded function
-	 * Add Item to the inventory
-	 * returns true if successful, else false */
 	bool AddItem(const FItem_Struct &Item_Struct, int Row = 0, int Column = 0);
 
 	/* Adds all items given to the inventory if possible
 	 * Doesn't add any if they don't fit */
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	bool AddItems(const TArray<FItem_Struct> Item_Structs);
+	bool AddItems(const TArray<FItem_Struct>& Item_Structs);
+
+	bool AddItems(const TArray<AItemBase*>& Items);
+	bool AddItems(const TArray<TSubclassOf<AItemBase>>& Items);
 
 	bool AddItemByIndex(const FItem_Struct &Item_Struct, const int Index);
 	
@@ -110,7 +110,8 @@ public:
 	TArray<FItem_Struct> RemoveItems(const TArray<FString>& ItemNames, bool& bSucceeded);
 
 	TArray<FItem_Struct> RemoveItems(const TArray<FItem_Struct>& Items, bool& bSucceeded);
-	TArray<FItem_Struct> RemoveItems(const TArray<AItemBase*>& Items, bool&bSucceeded);
+	TArray<FItem_Struct> RemoveItems(const TArray<AItemBase*>& Items, bool& bSucceeded);
+	TArray<FItem_Struct> RemoveItems(const TArray<TSubclassOf<AItemBase>>& Items, bool& bSucceeded);
 
 	// Returns and removes first item that matches the given item name
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

@@ -6,17 +6,37 @@
 #include "Blueprint/UserWidget.h"
 #include "SpawningTerminalWindow.generated.h"
 
-class UTileView;
+class ASpawningArea;
+class APlayerBuildable;
+struct FBuildablePriceStruct;
 
 UCLASS()
-class SPACERANCHER_API USpawningTerminalWindow : public UUserWidget
+class SPACERANCHER_API USpawningTerminalWindow final : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public:
-	virtual void NativeConstruct() override;
+	virtual void NativeOnInitialized() override;
 
+	UFUNCTION(BlueprintCallable)
+	void AddItems(const TArray<class UBuildableDisplayStruct*>& Items);
+
+	UFUNCTION(BlueprintSetter)
+	void SetOwningTerminal(ASpawningArea* Owner) { OwningTerminal = Owner; }
+
+	UFUNCTION(BlueprintCallable)
+	bool RequestBuyWithCredits(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass) const;
+
+	UFUNCTION(BlueprintCallable)
+	bool RequestBuyWithMaterials(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass) const;
+	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(BindWidget))
-	UTileView* TileView;
+	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
+	class UScrollBox* ItemsScrollBox;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class USpawnableMainTile> ListEntryMainTileClass;
+
+	UPROPERTY(BlueprintSetter=SetOwningTerminal)
+	ASpawningArea* OwningTerminal;
 };

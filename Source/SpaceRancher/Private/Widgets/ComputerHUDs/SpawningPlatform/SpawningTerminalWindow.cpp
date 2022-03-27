@@ -2,11 +2,35 @@
 
 
 #include "Widgets/ComputerHUDs/SpawningPlatform//SpawningTerminalWindow.h"
-#include "Components/TileView.h"
+#include "Widgets/ComputerHUDs/SpawningPlatform/BuildableDisplayStruct.h"
+#include "Widgets/ComputerHUDs/SpawningPlatform/SpawnableMainTile.h"
+#include "Components/ScrollBox.h"
+#include "Interactables/SpawningArea.h"
 
-void USpawningTerminalWindow::NativeConstruct()
+void USpawningTerminalWindow::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	ItemsScrollBox = Cast<UScrollBox>(GetWidgetFromName(FName("ItemsScrollBox")));
 
-	TileView = Cast<UTileView>(GetWidgetFromName(FName("TileView")));
+	Super::NativeOnInitialized();
+}
+
+void USpawningTerminalWindow::AddItems(const TArray<UBuildableDisplayStruct*>& Items)
+{
+	for (UBuildableDisplayStruct* Item : Items)
+	{
+		USpawnableMainTile* Tile = CreateWidget<USpawnableMainTile>(GetWorld(), ListEntryMainTileClass);
+		Tile->SetOwningTerminalWindow(this);
+		Tile->SetListObject(Item);
+		ItemsScrollBox->AddChild(Tile);
+	}
+}
+
+bool USpawningTerminalWindow::RequestBuyWithCredits(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass) const
+{
+	return OwningTerminal->RequestBuyWithCredits(ItemPrice, BuildableClass);
+}
+
+bool USpawningTerminalWindow::RequestBuyWithMaterials(FBuildablePriceStruct& ItemPrice, TSubclassOf<APlayerBuildable>& BuildableClass) const
+{
+	return OwningTerminal->RequestBuyWithMaterials(ItemPrice, BuildableClass);
 }

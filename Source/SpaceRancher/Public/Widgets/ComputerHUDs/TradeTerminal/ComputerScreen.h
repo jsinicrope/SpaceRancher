@@ -47,5 +47,5 @@ public:
 	void SetOwningComputer(class AComputer* Computer) {OwningComputer = Computer;}
 
 	UFUNCTION(BlueprintGetter)
-	class AComputer* GetOwningComputer() const { return OwningComputer; }
+	AComputer* GetOwningComputer() const { return OwningComputer; }
 };

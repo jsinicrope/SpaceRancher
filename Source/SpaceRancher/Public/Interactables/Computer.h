@@ -7,6 +7,18 @@
 #include "Items/ItemBase.h"
 #include "Computer.generated.h"
 
+USTRUCT()
+struct SPACERANCHER_API FTradeables : public FTableRowBase
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<AItemBase> Item;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int StockAmount;
+};
+
 UCLASS()
 class SPACERANCHER_API AComputer : public AActor
 {
@@ -24,24 +36,21 @@ protected:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintGetter=GetSellableItems, BlueprintReadWrite, Category="Selling")
-	TArray<TSubclassOf<AItemBase>> SellableItems;
+	TArray<FTradeables> SellableItems;
 
 	UPROPERTY(EditAnywhere, BlueprintGetter=GetSellableItems, BlueprintReadWrite, Category="Buying")
-	TArray<TSubclassOf<AItemBase>> BuyableItems;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Buying")
-	int MaxBuyStock = 12;
+	TArray<FTradeables> BuyableItems;
 
 	UFUNCTION(BlueprintGetter)
-	TArray<TSubclassOf<AItemBase>> GetSellableItems() const	{ return SellableItems;}
+	TArray<FTradeables> GetSellableItems() const	{ return SellableItems;}
 
 	UFUNCTION(BlueprintGetter)
-	TArray<TSubclassOf<AItemBase>> GetBuyableItems() const	{ return BuyableItems;}
+	TArray<FTradeables> GetBuyableItems() const	{ return BuyableItems;}
 
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UStaticMeshComponent* ComputerMesh;
+	UStaticMeshComponent* ComputerMesh;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UWidgetComponent* Screen;

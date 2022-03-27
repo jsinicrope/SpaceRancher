@@ -79,7 +79,7 @@ bool UInventoryComponent::AddItem(AItemBase* Item, const int Row, const int Colu
 	return AddItem(Item->Main_Item_Structure, Row, Column);
 }
 
-bool UInventoryComponent::AddItems(const TArray<FItem_Struct> Item_Structs)
+bool UInventoryComponent::AddItems(const TArray<FItem_Struct>& Item_Structs)
 {
 	const int ItemsToAdd = Item_Structs.Num();
 	int* Indices = new int[ItemsToAdd];
@@ -108,6 +108,26 @@ bool UInventoryComponent::AddItems(const TArray<FItem_Struct> Item_Structs)
 	}
 	
 	return bSuccess;
+}
+
+bool UInventoryComponent::AddItems(const TArray<AItemBase*>& Items)
+{
+	TArray<FItem_Struct> Item_Structs;
+	for (const AItemBase* Item : Items)
+	{
+		Item_Structs.Add(Item->Main_Item_Structure);
+	}
+	return AddItems(Item_Structs);
+}
+
+bool UInventoryComponent::AddItems(const TArray<TSubclassOf<AItemBase>>& Items)
+{
+	TArray<FItem_Struct> Item_Structs;
+	for (const TSubclassOf<AItemBase> Item : Items)
+	{
+		Item_Structs.Add(Item->GetDefaultObject<AItemBase>()->Main_Item_Structure);
+	}
+	return AddItems(Item_Structs);
 }
 
 bool UInventoryComponent::AddItemByIndex(const FItem_Struct &Item_Struct, const int Index)
@@ -157,9 +177,9 @@ FItem_Struct UInventoryComponent::ForceAddItem(const FItem_Struct& Item, const i
 
 FItem_Struct UInventoryComponent::RemoveItemByIndex(const int Row, const int Column)
 {
-	FItem_Struct Item = Inventory_Array_Columns[Column].Row_Items[Row];
+	FItem_Struct Item = Inventory_Array_Columns[Row].Row_Items[Column];
 	const FItem_Struct EmptyItem;
-	Inventory_Array_Columns[Column].Row_Items[Row] = EmptyItem;
+	Inventory_Array_Columns[Row].Row_Items[Column] = EmptyItem;
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, TEXT("Item removed from Inventory"));
 	return Item;
 }
@@ -196,19 +216,22 @@ TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<FString>& Ite
 	const int ItemsToRemove = ItemNames.Num();
 	int* Indices = new int[ItemsToRemove];
 	TArray<FItem_Struct> RemovedItems;
+	RemovedItems.SetNum(ItemsToRemove);
 	int NumRemovedItems = 0;
+
 	for (int Index = 0; Index < ItemsToRemove; Index++)
 	{
 		bool bItemRemoved = false;
-		for (int i = Inventory_Array_Columns.Num() - 1; i >= 0; i--)
+		
+		for (int i = Inventory_Array_Columns.Num() - 1; i >= 0 && !bItemRemoved; i--)
 		{
-			for (int j = Inventory_Array_Columns[i].Row_Items.Num() - 1; j >= 0; j--)
+			for (int j = Inventory_Array_Columns[i].Row_Items.Num() - 1; j >= 0 && !bItemRemoved; j--)
 			{
 				if (Inventory_Array_Columns[i].Row_Items[j].Name.Equals(ItemNames[Index]))
 				{
-					RemovedItems[NumRemovedItems] = Inventory_Array_Columns[i].Row_Items[j];
-					Inventory_Array_Columns[i].Row_Items[j] = FItem_Struct();
-					Indices[NumRemovedItems] = j * Columns + i;
+					// Remove Item from Position function should be called
+					RemovedItems[NumRemovedItems] = RemoveItemByIndex(i, j);
+					Indices[NumRemovedItems] = i * Columns + j;
 					bItemRemoved = true;
 					bSucceeded = true;
 					NumRemovedItems++;
@@ -216,13 +239,14 @@ TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<FString>& Ite
 				}
 			}
 		}
+
 		if (!bItemRemoved)
 		{
 			bSucceeded = false;
 			break;
 		}
 	}
-
+	
 	if (!bSucceeded)
 	{
 		for (int i = 0; i < NumRemovedItems; i++)
@@ -241,7 +265,7 @@ TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<FItem_Struct>
 	TArray<FString> ItemNames;
 	for (int i = 0; i < Items.Num(); i++)
 	{
-		ItemNames[i] = Items[i].Name;
+		ItemNames.Add(Items[i].Name);
 	}
 	return RemoveItems(ItemNames, bSucceeded);
 }
@@ -251,7 +275,17 @@ TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<AItemBase*>& 
 	TArray<FString> ItemNames;
 	for (int i = 0; i < Items.Num(); i++)
 	{
-		ItemNames[i] = Items[i]->Main_Item_Structure.Name;
+		ItemNames.Add(Items[i]->Main_Item_Structure.Name);
+	}
+	return RemoveItems(ItemNames, bSucceeded);
+}
+
+TArray<FItem_Struct> UInventoryComponent::RemoveItems(const TArray<TSubclassOf<AItemBase>>& Items, bool& bSucceeded)
+{
+	TArray<FString> ItemNames;
+	for (int i = 0; i < Items.Num(); i++)
+	{
+		ItemNames.Add(Items[i]->GetDefaultObject<AItemBase>()->Main_Item_Structure.Name);
 	}
 	return RemoveItems(ItemNames, bSucceeded);
 }

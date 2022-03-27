@@ -7,7 +7,7 @@
 #include "Items/AffectableItemBase.h"
 #include "Plant.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class SPACERANCHER_API APlant : public AAffectableItemBase
 {
 	GENERATED_BODY()

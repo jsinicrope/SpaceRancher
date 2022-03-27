@@ -3,20 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "PlayerBuildable.h"
 #include "Components/TimelineComponent.h"
 #include "Interfaces/Interactable.h"
 #include "Inventory_System/InventoryComponent.h"
 #include "FoodCooker.generated.h"
 
 UCLASS()
-class SPACERANCHER_API AFoodCooker : public AActor, public IInteractInterface
+class SPACERANCHER_API AFoodCooker : public APlayerBuildable, public IInteractInterface
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFoodCooker(const FObjectInitializer &ObjectInitializer);
+	AFoodCooker();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

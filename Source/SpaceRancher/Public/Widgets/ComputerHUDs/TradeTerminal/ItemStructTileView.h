@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Interactables/Computer.h"
 #include "Inventory_System/ItemStruct.h"
 #include "ItemStructTileView.generated.h"
 
@@ -15,5 +16,5 @@ public:
 	UItemStructTileView();
 	
 	UPROPERTY()
-	FItem_Struct Item_Struct;
+	FTradeables Item;
 };

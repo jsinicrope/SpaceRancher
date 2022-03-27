@@ -9,7 +9,7 @@
 #include "World/Saves/Saveable.h"
 #include "ItemBase.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class SPACERANCHER_API AItemBase : public AActor, public IInteractInterface, public ISaveable
 {
 	GENERATED_BODY()

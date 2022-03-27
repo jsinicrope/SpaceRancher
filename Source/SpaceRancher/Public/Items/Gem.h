@@ -6,7 +6,7 @@
 #include "AffectableItemBase.h"
 #include "Gem.generated.h"
 
-UCLASS()
+UCLASS(Abstract)
 class SPACERANCHER_API AGem : public AAffectableItemBase
 {
 	GENERATED_BODY()
