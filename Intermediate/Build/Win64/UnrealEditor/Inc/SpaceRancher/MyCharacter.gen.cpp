@@ -2274,9 +2274,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 310457430U) },
+		{ Z_Construct_UClass_AMyCharacter, AMyCharacter::StaticClass, TEXT("AMyCharacter"), &Z_Registration_Info_UClass_AMyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCharacter), 2109114730U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_3749849077(TEXT("/Script/SpaceRancher"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_4132757483(TEXT("/Script/SpaceRancher"),
 		Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_SpaceRancher_Source_SpaceRancher_Public_Characters_Main_Character_MyCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -23,7 +23,7 @@ void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x0BDAD54B,
+				0x1FBB6F8C,
 				0xE553C0FC,
 				METADATA_PARAMS(nullptr, 0)
 			};
@@ -31,5 +31,5 @@ void EmptyLinkFunctionForGeneratedCodeSpaceRancher_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_SpaceRancher.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_SpaceRancher(Z_Construct_UPackage__Script_SpaceRancher, TEXT("/Script/SpaceRancher"), Z_Registration_Info_UPackage__Script_SpaceRancher, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x0BDAD54B, 0xE553C0FC));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_SpaceRancher(Z_Construct_UPackage__Script_SpaceRancher, TEXT("/Script/SpaceRancher"), Z_Registration_Info_UPackage__Script_SpaceRancher, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x1FBB6F8C, 0xE553C0FC));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
