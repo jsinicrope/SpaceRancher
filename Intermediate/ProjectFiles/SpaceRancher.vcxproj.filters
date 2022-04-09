@@ -1379,18 +1379,6 @@
     <None Include="..\..\Plugins\Developer\RiderLink\Source\RiderLoggingExtension\Private\RiderOutputDevice.hpp">
       <Filter>Plugins\Developer\RiderLink\Source\RiderLoggingExtension\Private</Filter>
     </None>
-    <Filter Include="Plugins\Developer\RiderLink\Source\RiderShaderInfoDump">
-      <UniqueIdentifier>{7C2F739D-F111-37D3-9931-2C290E388E95}</UniqueIdentifier>
-    </Filter>
-    <None Include="..\..\Plugins\Developer\RiderLink\Source\RiderShaderInfoDump\RiderShaderInfoDump.Build.cs">
-      <Filter>Plugins\Developer\RiderLink\Source\RiderShaderInfoDump</Filter>
-    </None>
-    <ClCompile Include="..\..\Plugins\Developer\RiderLink\Source\RiderShaderInfoDump\RiderShaderInfoDump.cpp">
-      <Filter>Plugins\Developer\RiderLink\Source\RiderShaderInfoDump</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Plugins\Developer\RiderLink\Source\RiderShaderInfoDump\RiderShaderInfoDump.h">
-      <Filter>Plugins\Developer\RiderLink\Source\RiderShaderInfoDump</Filter>
-    </ClInclude>
     <Filter Include="Source\SpaceRancher">
       <UniqueIdentifier>{2B01A4A0-EF00-3012-8855-54D798125CCF}</UniqueIdentifier>
     </Filter>
@@ -1475,9 +1463,6 @@
     <Filter Include="Source\SpaceRancher\Private\Interactables">
       <UniqueIdentifier>{9344F345-46A2-3C9B-82BB-E842E3FCD1A3}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\BuildablesPriceStruct.cpp">
-      <Filter>Source\SpaceRancher\Private\Interactables</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Interactables\Computer.cpp">
       <Filter>Source\SpaceRancher\Private\Interactables</Filter>
     </ClCompile>
@@ -1583,7 +1568,16 @@
     <Filter Include="Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform">
       <UniqueIdentifier>{6784A090-1BCC-3198-947D-13934082399A}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.cpp">
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnableInfoTile.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnableMainTile.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnablePriceTile.cpp">
+      <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawnablePriceTileSegment.cpp">
       <Filter>Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SpaceRancher\Private\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.cpp">
@@ -1718,9 +1712,6 @@
     <Filter Include="Source\SpaceRancher\Public\Interactables">
       <UniqueIdentifier>{A49BF6E1-FD8A-361E-A093-07C60C6277C9}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\BuildablesPriceStruct.h">
-      <Filter>Source\SpaceRancher\Public\Interactables</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Interactables\Computer.h">
       <Filter>Source\SpaceRancher\Public\Interactables</Filter>
     </ClInclude>
@@ -1847,7 +1838,19 @@
     <Filter Include="Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform">
       <UniqueIdentifier>{AE859C6F-90C9-39F3-9A69-5EEF86361259}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnableTile.h">
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\BuildableDisplayStruct.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnableInfoTile.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnableMainTile.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnablePriceTile.h">
+      <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawnablePriceTileSegment.h">
       <Filter>Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SpaceRancher\Public\Widgets\ComputerHUDs\SpawningPlatform\SpawningTerminalWindow.h">
